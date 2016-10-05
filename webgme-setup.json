@@ -1,4 +1,13 @@
 {
-  "components": {},
-  "dependencies": {}
+  "components": {
+    "plugins": {
+      "FamilyTransformation": {
+        "src": "src/plugins/FamilyTransformation",
+        "test": "test/plugins/FamilyTransformation"
+      }
+    }
+  },
+  "dependencies": {
+    "plugins": {}
+  }
 }
