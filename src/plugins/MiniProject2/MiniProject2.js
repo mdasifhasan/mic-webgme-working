@@ -75,17 +75,19 @@ define([
 
         self.loadNodeMap(self.rootNode)
             .then(function (nodes) {
-                self.logger.info(Object.keys(nodes));
-                //self.printRandomly(nodes);
-                self.buildMetaInfo(self.rootNode, nodes);
-                self.result.setSuccess(true);
+                //self.buildMetaInfo(self.rootNode, nodes);
+                var jsonModel = self.buildTree(self.rootNode, nodes);
+                //self.result.setSuccess(true);
                 var metaNodeInfoJson = JSON.stringify(self.metaNodeInfo, null, 4);
+                var tree = JSON.stringify(jsonModel, null, 2);
+                self.logger.info(tree);
                 artifact = self.blobClient.createArtifact('data');
-                self.logger.info(metaNodeInfoJson);
-                return artifact.addFile('metaNodeInfo.json', metaNodeInfoJson);
+                //self.logger.info(metaNodeInfoJson);
+                return artifact.addFile('metaNodeInfo.json', tree);
                 //callback(null, self.result);
             })
             .then(function (fileHash) {
+
                 self.result.addArtifact(fileHash);
                 return artifact.save();
             })
@@ -101,7 +103,8 @@ define([
                 callback(err, self.result);
             });
 
-        MiniProject2.prototype.buildMetaInfo = function (root, nodes, indent) {
+
+        MiniProject2.prototype.buildTree = function (root, nodes) {
             var self = this,
                 childrenPaths,
                 childNode,
@@ -116,21 +119,100 @@ define([
                 dst,
                 baseNode,
                 connectStr = '';
-            indent = indent || '';
             childrenPaths = self.core.getChildrenPaths(root);
 
             // detecting if it is a meta node
-
-
             name = self.core.getAttribute(root, 'name');
-            var path = self.core.getPath(root);
-
-
             metaNode = self.getMetaType(root);
-
             baseNode = self.core.getPointerPath(root, 'base');
-            self.logger.info("baseNodePath: ", baseNode);
-            if( baseNode !== null) {
+            if (baseNode !== null) {
+                baseNode = self.core.getAttribute(nodes[baseNode], 'name');
+            }
+            else
+                baseNode = "null";
+            metaPath = self.core.getPath(metaNode);
+            myPath = self.core.getPath(root);
+            isMetaNode = (metaPath === myPath);
+            //self.logger.info(name,metaPath,myPath, "isMeta", (metaPath === myPath));
+
+            // checking if it is a connection node
+            src = self.core.getPointerPath(root, 'src');
+            dst = self.core.getPointerPath(root, 'dst');
+            if (src && dst) {
+                isConnection = true;
+                src = nodes[src];
+                dst = nodes[dst];
+                src = self.core.getAttribute(src, "name");
+                dst = self.core.getAttribute(dst, "name");
+                connectStr = src + " --> " + dst;
+            }
+            //self.logger.info(indent, "isMeta", isMetaNode, "isConnection", isConnection, self.core.getAttribute(root, 'name'), 'has', childrenPaths.length, "children.", connectStr)
+
+            var jsonModel = {};
+            jsonModel.name = name;
+            //jsonModel.metaType = self.core.getAttribute(metaNode, 'name');
+            jsonModel.isMeta = isMetaNode;
+
+
+            if (isMetaNode) {
+                self.metaNodeInfo.push({
+                    name: name,
+                    path: myPath,
+                    nbrOfChildren: childrenPaths.length,
+                    base: baseNode
+                });
+            }
+
+
+            if (isConnection) {
+                //jsonModel.guard = self.core.getAttribute(root, "guard");
+                var attributeNames = self.core.getAttributeNames(root);
+                for (var i = 0; i < attributeNames.length; i++) {
+                    jsonModel[attributeNames[i]] = self.core.getAttribute(root, attributeNames[i]);
+                }
+                jsonModel.src = src;
+
+                jsonModel.dst = dst;
+            }
+            else {
+                var attributeNames = self.core.getAttributeNames(root);
+                for (var i = 0; i < attributeNames.length; i++) {
+                    jsonModel[attributeNames[i]] = self.core.getAttribute(root, attributeNames[i]);
+                }
+                jsonModel.children = {};
+                for (i = 0; i < childrenPaths.length; i++) {
+                    childNode = nodes[childrenPaths[i]];
+                    var cm = self.buildTree(childNode, nodes);
+                    jsonModel.children[childrenPaths[i].substr(myPath.length + 1)] = cm;
+                }
+            }
+
+            return jsonModel;
+        };
+
+
+        MiniProject2.prototype.buildMetaInfo = function (root, nodes) {
+            var self = this,
+                childrenPaths,
+                childNode,
+                i,
+                isMetaNode,
+                metaNode,
+                metaPath,
+                myPath,
+                name,
+                isConnection = false,
+                src,
+                dst,
+                baseNode,
+                connectStr = '';
+            childrenPaths = self.core.getChildrenPaths(root);
+
+            // detecting if it is a meta node
+            name = self.core.getAttribute(root, 'name');
+            metaNode = self.getMetaType(root);
+            baseNode = self.core.getPointerPath(root, 'base');
+            if (baseNode !== null) {
                 baseNode = self.core.getAttribute(nodes[baseNode], 'name');
             }
             else
@@ -162,13 +244,18 @@ define([
                         connection: connectStr
                     });
                 else
-                    self.metaNodeInfo.push({name: name, path: myPath, nbrOfChildren: childrenPaths.length, base: baseNode});
+                    self.metaNodeInfo.push({
+                        name: name,
+                        path: myPath,
+                        nbrOfChildren: childrenPaths.length,
+                        base: baseNode
+                    });
             }
             for (i = 0; i < childrenPaths.length; i++) {
                 childNode = nodes[childrenPaths[i]];
-                self.buildMetaInfo(childNode, nodes, indent + '  ');
+                self.buildMetaInfo(childNode, nodes);
             }
-        }
+        };
     };
 
     return MiniProject2;
