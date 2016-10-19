@@ -4,6 +4,18 @@
       "FamilyTransformation": {
         "src": "src/plugins/FamilyTransformation",
         "test": "test/plugins/FamilyTransformation"
+      },
+      "FSMCodeGenerator": {
+        "src": "src/plugins/FSMCodeGenerator",
+        "test": "test/plugins/FSMCodeGenerator"
+      },
+      "TutorialPlugin": {
+        "src": "src/plugins/TutorialPlugin",
+        "test": "test/plugins/TutorialPlugin"
+      },
+      "MiniProject2": {
+        "src": "src/plugins/MiniProject2",
+        "test": "test/plugins/MiniProject2"
       }
     }
   },
