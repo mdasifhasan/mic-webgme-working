@@ -1,0 +1,1581 @@
+{
+    "name": "Root",
+    "children": {
+        "0": {
+            "name": "Library for Course",
+            "isMeta": false,
+            "metaType": "Folder",
+            "children": {
+                "p": {
+                    "name": "Quiz",
+                    "isMeta": false,
+                    "metaType": "Folder",
+                    "children": {
+                        "9": {
+                            "name": "Trial Counter",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "Y": {
+                                    "name": "Count Up To",
+                                    "isMeta": false,
+                                    "metaType": "Param Number",
+                                    "Value": 0,
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Continue",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "x": {
+                                    "name": "On UP",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "A": {
+                            "name": "Input Text",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "c": {
+                                    "name": "Input Text",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Enter Text",
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Flow Out",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "T": {
+                            "name": "Fill In The Gaps",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "R": {
+                                    "name": "Right Answer",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "b": {
+                                    "name": "Wrong Answer",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "X": {
+                                    "name": "ParamString",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Sample Text with ___ Gap!",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "I": {
+                            "name": "Clear Text Resource",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "R": {
+                                    "name": "Flow Out",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "b": {
+                            "name": "Text Resource",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "1": {
+                                    "name": "Next",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Prev",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "c": {
+                                    "name": "ParamString",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Sample Text",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "d": {
+                            "name": "MCQ",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "0": {
+                                    "name": "Option 3",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Option 3",
+                                    "children": {}
+                                },
+                                "Z": {
+                                    "name": "Option 4",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Option 4",
+                                    "children": {}
+                                },
+                                "n": {
+                                    "name": "Correct Answer",
+                                    "isMeta": false,
+                                    "metaType": "Param Number",
+                                    "Value": 0,
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Right Answer",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "J": {
+                                    "name": "Wrong Answer",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "p": {
+                                    "name": "Option 1",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Option 1",
+                                    "children": {}
+                                },
+                                "w": {
+                                    "name": "Option 2",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Option 2",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "6": {
+            "name": "Sample Quiz",
+            "isMeta": false,
+            "metaType": "Compound",
+            "children": {
+                "6": {
+                    "name": "Flow",
+                    "isMeta": false,
+                    "metaType": "Flow",
+                    "src": "Flow Out",
+                    "dst": "Flow In"
+                },
+                "7": {
+                    "name": "Welcome",
+                    "isMeta": false,
+                    "metaType": "Compound",
+                    "children": {
+                        "5": {
+                            "name": "Join",
+                            "isMeta": false,
+                            "metaType": "Join",
+                            "children": {
+                                "R": {
+                                    "name": "Flow Out",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "q": {
+                            "name": "Flow Out",
+                            "isMeta": false,
+                            "metaType": "Flow Out",
+                            "children": {}
+                        },
+                        "r": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Next",
+                            "dst": "Flow In"
+                        },
+                        "d": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Flow Out",
+                            "dst": "Flow In"
+                        },
+                        "S": {
+                            "name": "Text Resource",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "1": {
+                                    "name": "Next",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "c": {
+                                    "name": "ParamString",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Welcome to the Quiz!",
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Prev",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "a": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Flow In",
+                            "dst": "Flow In"
+                        },
+                        "A": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Flow Out",
+                            "dst": "Flow Out"
+                        },
+                        "s": {
+                            "name": "Parallel",
+                            "isMeta": false,
+                            "metaType": "Parallel",
+                            "children": {
+                                "R": {
+                                    "name": "Flow Out",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "P": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Next",
+                            "dst": "Flow In"
+                        },
+                        "f": {
+                            "name": "Text Resource",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "1": {
+                                    "name": "Next",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Prev",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "c": {
+                                    "name": "ParamString",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Sample Text",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "M": {
+                            "name": "Input Text",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "c": {
+                                    "name": "Input Text",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Enter Text",
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Flow Out",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "I": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Flow Out",
+                            "dst": "Flow In"
+                        },
+                        "c": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Flow Out",
+                            "dst": "Flow In"
+                        },
+                        "Z": {
+                            "name": "Flow In",
+                            "isMeta": false,
+                            "metaType": "Flow In",
+                            "children": {}
+                        }
+                    }
+                },
+                "q": {
+                    "name": "Success",
+                    "isMeta": false,
+                    "metaType": "Flow Out",
+                    "children": {}
+                },
+                "S": {
+                    "name": "Flow",
+                    "isMeta": false,
+                    "metaType": "Flow",
+                    "src": "Success",
+                    "dst": "Success"
+                },
+                "v": {
+                    "name": "Flow",
+                    "isMeta": false,
+                    "metaType": "Flow",
+                    "src": "Fail",
+                    "dst": "Fail"
+                },
+                "e": {
+                    "name": "Flow",
+                    "isMeta": false,
+                    "metaType": "Flow",
+                    "src": "Flow Out",
+                    "dst": "Flow In"
+                },
+                "Z": {
+                    "name": "Flow In",
+                    "isMeta": false,
+                    "metaType": "Flow In",
+                    "children": {}
+                },
+                "h": {
+                    "name": "Flow",
+                    "isMeta": false,
+                    "metaType": "Flow",
+                    "src": "Flow In",
+                    "dst": "Flow In"
+                },
+                "r": {
+                    "name": "Segment 1",
+                    "isMeta": false,
+                    "metaType": "Compound",
+                    "children": {
+                        "0": {
+                            "name": "MCQ",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "0": {
+                                    "name": "Option 3",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Option 3",
+                                    "children": {}
+                                },
+                                "Z": {
+                                    "name": "Option 4",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Option 4",
+                                    "children": {}
+                                },
+                                "n": {
+                                    "name": "Correct Answer",
+                                    "isMeta": false,
+                                    "metaType": "Param Number",
+                                    "Value": 0,
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Right Answer",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "J": {
+                                    "name": "Wrong Answer",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "p": {
+                                    "name": "Option 1",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Option 1",
+                                    "children": {}
+                                },
+                                "w": {
+                                    "name": "Option 2",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Option 2",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "5": {
+                            "name": "Parallel",
+                            "isMeta": false,
+                            "metaType": "Parallel",
+                            "children": {
+                                "R": {
+                                    "name": "Flow Out",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "6": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Next",
+                            "dst": "Flow In"
+                        },
+                        "8": {
+                            "name": "Parallel",
+                            "isMeta": false,
+                            "metaType": "Parallel",
+                            "children": {
+                                "R": {
+                                    "name": "Flow Out",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "G": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Flow Out",
+                            "dst": "Flow In"
+                        },
+                        "q": {
+                            "name": "Flow Out",
+                            "isMeta": false,
+                            "metaType": "Flow Out",
+                            "children": {}
+                        },
+                        "X": {
+                            "name": "Join",
+                            "isMeta": false,
+                            "metaType": "Join",
+                            "children": {
+                                "R": {
+                                    "name": "Flow Out",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "D": {
+                            "name": "Join",
+                            "isMeta": false,
+                            "metaType": "Join",
+                            "children": {
+                                "R": {
+                                    "name": "Flow Out",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "l": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Flow Out",
+                            "dst": "Flow Out"
+                        },
+                        "K": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Flow Out",
+                            "dst": "Flow Out"
+                        },
+                        "N": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Flow In",
+                            "dst": "Flow In"
+                        },
+                        "h": {
+                            "name": "Text Resource",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "1": {
+                                    "name": "Next",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "c": {
+                                    "name": "ParamString",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "You may search on internet if you do not know the answer.",
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Prev",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "f": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Flow Out",
+                            "dst": "Flow In"
+                        },
+                        "B": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Flow Out",
+                            "dst": "Flow In"
+                        },
+                        "n": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Right Answer",
+                            "dst": "Flow In"
+                        },
+                        "z": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Next",
+                            "dst": "Flow In"
+                        },
+                        "Z": {
+                            "name": "Flow In",
+                            "isMeta": false,
+                            "metaType": "Flow In",
+                            "children": {}
+                        },
+                        "s": {
+                            "name": "Text Resource",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "1": {
+                                    "name": "Next",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "c": {
+                                    "name": "ParamString",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "It is also known as the Music City!",
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Prev",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "b": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Wrong Answer",
+                            "dst": "Flow In"
+                        },
+                        "i": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Flow Out",
+                            "dst": "Flow In"
+                        }
+                    }
+                },
+                "y": {
+                    "name": "Segment 2",
+                    "isMeta": false,
+                    "metaType": "Compound",
+                    "children": {
+                        "5": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Next",
+                            "dst": "Flow Out"
+                        },
+                        "6": {
+                            "name": "Fill In The Gaps",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "R": {
+                                    "name": "Right Answer",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "b": {
+                                    "name": "Wrong Answer",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "X": {
+                                    "name": "ParamString",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Sample Text with ___ Gap!",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "t": {
+                            "name": "Text Resource",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "1": {
+                                    "name": "Next",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Prev",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "c": {
+                                    "name": "ParamString",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Sample Text",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "xN": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Right Answer",
+                            "dst": "Flow In"
+                        },
+                        "i": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Flow In",
+                            "dst": "Flow In"
+                        },
+                        "V": {
+                            "name": "MCQ",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "0": {
+                                    "name": "Option 3",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Option 3",
+                                    "children": {}
+                                },
+                                "Z": {
+                                    "name": "Option 4",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Option 4",
+                                    "children": {}
+                                },
+                                "n": {
+                                    "name": "Correct Answer",
+                                    "isMeta": false,
+                                    "metaType": "Param Number",
+                                    "Value": 0,
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Right Answer",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "J": {
+                                    "name": "Wrong Answer",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "p": {
+                                    "name": "Option 1",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Option 1",
+                                    "children": {}
+                                },
+                                "w": {
+                                    "name": "Option 2",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Option 2",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "x": {
+                            "name": "Text Resource",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "1": {
+                                    "name": "Next",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Prev",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "c": {
+                                    "name": "ParamString",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Sample Text",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "M": {
+                            "name": "Text Resource",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "1": {
+                                    "name": "Next",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Prev",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "c": {
+                                    "name": "ParamString",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Sample Text",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "a": {
+                            "name": "Text Resource",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "1": {
+                                    "name": "Next",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Prev",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "c": {
+                                    "name": "ParamString",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Sample Text",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "l": {
+                            "name": "Text Resource",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "1": {
+                                    "name": "Next",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Prev",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "c": {
+                                    "name": "ParamString",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Sample Text",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "A": {
+                            "name": "Text Resource",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "1": {
+                                    "name": "Next",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Prev",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "c": {
+                                    "name": "ParamString",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Sample Text",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "w": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Wrong Answer",
+                            "dst": "Flow In"
+                        },
+                        "F": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Wrong Answer",
+                            "dst": "Flow In"
+                        },
+                        "g": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Next",
+                            "dst": "Flow In"
+                        },
+                        "P": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Next",
+                            "dst": "Flow In"
+                        },
+                        "lE": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Prev",
+                            "dst": "Flow In"
+                        },
+                        "D": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Prev",
+                            "dst": "Flow In"
+                        },
+                        "s": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Next",
+                            "dst": "Flow In"
+                        },
+                        "z": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Right Answer",
+                            "dst": "Flow In"
+                        },
+                        "j": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Next",
+                            "dst": "Flow In"
+                        },
+                        "R": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Prev",
+                            "dst": "Flow In"
+                        },
+                        "h": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Next",
+                            "dst": "Flow In"
+                        },
+                        "q": {
+                            "name": "Flow Out",
+                            "isMeta": false,
+                            "metaType": "Flow Out",
+                            "children": {}
+                        },
+                        "Z": {
+                            "name": "Flow In",
+                            "isMeta": false,
+                            "metaType": "Flow In",
+                            "children": {}
+                        }
+                    }
+                },
+                "w": {
+                    "name": "Flow",
+                    "isMeta": false,
+                    "metaType": "Flow",
+                    "src": "Flow Out",
+                    "dst": "Flow In"
+                },
+                "N": {
+                    "name": "Segment 3",
+                    "isMeta": false,
+                    "metaType": "Compound",
+                    "children": {
+                        "7": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Right Answer",
+                            "dst": "Success"
+                        },
+                        "F": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Wrong Answer",
+                            "dst": "Flow In"
+                        },
+                        "E": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Continue",
+                            "dst": "Flow In"
+                        },
+                        "V": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "On UP",
+                            "dst": "Fail"
+                        },
+                        "A": {
+                            "name": "MCQ",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "0": {
+                                    "name": "Option 3",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Option 3",
+                                    "children": {}
+                                },
+                                "Z": {
+                                    "name": "Option 4",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Option 4",
+                                    "children": {}
+                                },
+                                "n": {
+                                    "name": "Correct Answer",
+                                    "isMeta": false,
+                                    "metaType": "Param Number",
+                                    "Value": 0,
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Right Answer",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "J": {
+                                    "name": "Wrong Answer",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "p": {
+                                    "name": "Option 1",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Option 1",
+                                    "children": {}
+                                },
+                                "w": {
+                                    "name": "Option 2",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Option 2",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "H": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Flow In",
+                            "dst": "Flow In"
+                        },
+                        "z": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Continue",
+                            "dst": "Flow In"
+                        },
+                        "k": {
+                            "name": "Fill In The Gaps",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "R": {
+                                    "name": "Right Answer",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "b": {
+                                    "name": "Wrong Answer",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "X": {
+                                    "name": "ParamString",
+                                    "isMeta": false,
+                                    "metaType": "ParamString",
+                                    "Value": "Sample Text with ___ Gap!",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "I": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Right Answer",
+                            "dst": "Flow In"
+                        },
+                        "t": {
+                            "name": "Trial Counter",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "Y": {
+                                    "name": "Count Up To",
+                                    "isMeta": false,
+                                    "metaType": "Param Number",
+                                    "Value": 3,
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Continue",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "x": {
+                                    "name": "On UP",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "K": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "Wrong Answer",
+                            "dst": "Flow In"
+                        },
+                        "n": {
+                            "name": "Fail",
+                            "isMeta": false,
+                            "metaType": "Flow Out",
+                            "children": {}
+                        },
+                        "q": {
+                            "name": "Success",
+                            "isMeta": false,
+                            "metaType": "Flow Out",
+                            "children": {}
+                        },
+                        "O": {
+                            "name": "Flow",
+                            "isMeta": false,
+                            "metaType": "Flow",
+                            "src": "On UP",
+                            "dst": "Fail"
+                        },
+                        "N": {
+                            "name": "Trial Counter",
+                            "isMeta": false,
+                            "metaType": "Primitive",
+                            "children": {
+                                "Y": {
+                                    "name": "Count Up To",
+                                    "isMeta": false,
+                                    "metaType": "Param Number",
+                                    "Value": 3,
+                                    "children": {}
+                                },
+                                "R": {
+                                    "name": "Continue",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "x": {
+                                    "name": "On UP",
+                                    "isMeta": false,
+                                    "metaType": "Flow Out",
+                                    "children": {}
+                                },
+                                "T": {
+                                    "name": "Flow In",
+                                    "isMeta": false,
+                                    "metaType": "Flow In",
+                                    "children": {}
+                                }
+                            }
+                        },
+                        "Z": {
+                            "name": "Flow In",
+                            "isMeta": false,
+                            "metaType": "Flow In",
+                            "children": {}
+                        }
+                    }
+                },
+                "U": {
+                    "name": "Fail",
+                    "isMeta": false,
+                    "metaType": "Flow Out",
+                    "children": {}
+                }
+            }
+        },
+        "-1": {
+            "name": "FCO",
+            "isMeta": true,
+            "metaType": "FCO",
+            "children": {}
+        },
+        "J": {
+            "name": "Folder",
+            "isMeta": true,
+            "metaType": "Folder",
+            "children": {}
+        },
+        "-2": {
+            "name": "Language",
+            "isMeta": true,
+            "metaType": "Language",
+            "children": {
+                "q": {
+                    "name": "Parallel",
+                    "isMeta": true,
+                    "metaType": "Parallel",
+                    "children": {
+                        "R": {
+                            "name": "Flow Out",
+                            "isMeta": false,
+                            "metaType": "Flow Out",
+                            "children": {}
+                        },
+                        "T": {
+                            "name": "Flow In",
+                            "isMeta": false,
+                            "metaType": "Flow In",
+                            "children": {}
+                        }
+                    }
+                },
+                "i": {
+                    "name": "ParamString",
+                    "isMeta": true,
+                    "metaType": "ParamString",
+                    "Value": "Sample Text",
+                    "children": {}
+                },
+                "e": {
+                    "name": "Param Number",
+                    "isMeta": true,
+                    "metaType": "Param Number",
+                    "Value": 0,
+                    "children": {}
+                },
+                "a": {
+                    "name": "Flow Param String",
+                    "isMeta": true,
+                    "metaType": "Flow Param String",
+                    "children": {}
+                },
+                "m": {
+                    "name": "Join",
+                    "isMeta": true,
+                    "metaType": "Join",
+                    "children": {
+                        "R": {
+                            "name": "Flow Out",
+                            "isMeta": false,
+                            "metaType": "Flow Out",
+                            "children": {}
+                        },
+                        "T": {
+                            "name": "Flow In",
+                            "isMeta": false,
+                            "metaType": "Flow In",
+                            "children": {}
+                        }
+                    }
+                },
+                "-16": {
+                    "name": "Flow In",
+                    "isMeta": true,
+                    "metaType": "Flow In",
+                    "children": {}
+                },
+                "-17": {
+                    "name": "Flow Out",
+                    "isMeta": true,
+                    "metaType": "Flow Out",
+                    "children": {}
+                },
+                "-7": {
+                    "name": "TaskBase",
+                    "isMeta": true,
+                    "metaType": "TaskBase",
+                    "children": {}
+                },
+                "-13": {
+                    "name": "Flow Param Number",
+                    "isMeta": true,
+                    "metaType": "Flow Param Number",
+                    "children": {}
+                },
+                "-8": {
+                    "name": "Port",
+                    "isMeta": true,
+                    "metaType": "Port",
+                    "children": {}
+                },
+                "-14": {
+                    "name": "Compound",
+                    "isMeta": true,
+                    "metaType": "Compound",
+                    "children": {
+                        "q": {
+                            "name": "Flow Out",
+                            "isMeta": false,
+                            "metaType": "Flow Out",
+                            "children": {}
+                        },
+                        "Z": {
+                            "name": "Flow In",
+                            "isMeta": false,
+                            "metaType": "Flow In",
+                            "children": {}
+                        }
+                    }
+                },
+                "-15": {
+                    "name": "Primitive",
+                    "isMeta": true,
+                    "metaType": "Primitive",
+                    "children": {
+                        "R": {
+                            "name": "Flow Out",
+                            "isMeta": false,
+                            "metaType": "Flow Out",
+                            "children": {}
+                        },
+                        "T": {
+                            "name": "Flow In",
+                            "isMeta": false,
+                            "metaType": "Flow In",
+                            "children": {}
+                        }
+                    }
+                },
+                "-12": {
+                    "name": "Param",
+                    "isMeta": true,
+                    "metaType": "Param",
+                    "children": {}
+                },
+                "-9": {
+                    "name": "Flow",
+                    "isMeta": true,
+                    "metaType": "Flow",
+                    "children": {}
+                }
+            }
+        }
+    }
+}

@@ -8,101 +8,92 @@
  */
 
 define([
-    'plugin/PluginConfig',
-    'text!./metadata.json',
-    'plugin/PluginBase'
-], function (PluginConfig,
-             pluginMetadata,
-             PluginBase) {
-    'use strict';
+        'plugin/PluginConfig',
+        'text!./metadata.json',
+        'plugin/PluginBase',
+        'q'
+    ], function (PluginConfig,
+                 pluginMetadata,
+                 PluginBase,
+                 Q) {
+        'use strict';
 
-    pluginMetadata = JSON.parse(pluginMetadata);
+        pluginMetadata = JSON.parse(pluginMetadata);
 
-    /**
-     * Initializes a new instance of MiniProject2.
-     * @class
-     * @augments {PluginBase}
-     * @classdesc This class represents the plugin MiniProject2.
-     * @constructor
-     */
-    var MiniProject2 = function () {
-        // Call base class' constructor.
-        PluginBase.call(this);
-        this.pluginMetadata = pluginMetadata;
-    };
-
-    /**
-     * Metadata associated with the plugin. Contains id, name, version, description, icon, configStructue etc.
-     * This is also available at the instance at this.pluginMetadata.
-     * @type {object}
-     */
-    MiniProject2.metadata = pluginMetadata;
-
-    // Prototypical inheritance from PluginBase.
-    MiniProject2.prototype = Object.create(PluginBase.prototype);
-    MiniProject2.prototype.constructor = MiniProject2;
-
-    /**
-     * Main function for the plugin to execute. This will perform the execution.
-     * Notes:
-     * - Always log with the provided logger.[error,warning,info,debug].
-     * - Do NOT put any user interaction logic UI, etc. inside this method.
-     * - callback always has to be called even if error happened.
-     *
-     * @param {function(string, plugin.PluginResult)} callback - the result callback
-     */
-    MiniProject2.prototype.main = function (callback) {
-        // Use self to access core, project, result, logger etc from PluginBase.
-        // These are all instantiated at this point.
-        var self = this,
-            nodeObject,
-            artifact;
-
-        MiniProject2.prototype.loadNodeMap = function (node) {
-            var self = this;
-            return self.core.loadSubTree(node)
-                .then(function (nodeArr) {
-                    var nodes = {},
-                        i;
-                    for (i = 0; i < nodeArr.length; i += 1) {
-                        nodes[self.core.getPath(nodeArr[i])] = nodeArr[i];
-                    }
-
-                    return nodes;
-                });
+        /**
+         * Initializes a new instance of MiniProject2.
+         * @class
+         * @augments {PluginBase}
+         * @classdesc This class represents the plugin MiniProject2.
+         * @constructor
+         */
+        var MiniProject2 = function () {
+            // Call base class' constructor.
+            PluginBase.call(this);
+            this.pluginMetadata = pluginMetadata;
         };
-        self.metaNodeInfo = [];
 
-        self.loadNodeMap(self.rootNode)
-            .then(function (nodes) {
-                //self.buildMetaInfo(self.rootNode, nodes);
-                var jsonModel = self.buildTree(self.rootNode, nodes);
-                //self.result.setSuccess(true);
-                var metaNodeInfoJson = JSON.stringify(self.metaNodeInfo, null, 4);
-                var tree = JSON.stringify(jsonModel, null, 2);
-                self.logger.info(tree);
-                artifact = self.blobClient.createArtifact('data');
-                //self.logger.info(metaNodeInfoJson);
-                return artifact.addFile('metaNodeInfo.json', tree);
-                //callback(null, self.result);
-            })
-            .then(function (fileHash) {
+        /**
+         * Metadata associated with the plugin. Contains id, name, version, description, icon, configStructue etc.
+         * This is also available at the instance at this.pluginMetadata.
+         * @type {object}
+         */
+        MiniProject2.metadata = pluginMetadata;
 
-                self.result.addArtifact(fileHash);
-                return artifact.save();
-            })
-            .then(function (artifactHash) {
-                self.result.addArtifact(artifactHash);
-                self.result.setSuccess(true);
-                callback(null, self.result);
-            })
-            .catch(function (err) {
-                // (3)
-                self.logger.error(err.stack);
-                // Result success is false at invocation.
-                callback(err, self.result);
-            });
+        // Prototypical inheritance from PluginBase.
+        MiniProject2.prototype = Object.create(PluginBase.prototype);
+        MiniProject2.prototype.constructor = MiniProject2;
 
+        /**
+         * Main function for the plugin to execute. This will perform the execution.
+         * Notes:
+         * - Always log with the provided logger.[error,warning,info,debug].
+         * - Do NOT put any user interaction logic UI, etc. inside this method.
+         * - callback always has to be called even if error happened.
+         *
+         * @param {function(string, plugin.PluginResult)} callback - the result callback
+         */
+        MiniProject2.prototype.main = function (callback) {
+            // Use self to access core, project, result, logger etc from PluginBase.
+            // These are all instantiated at this point.
+            var self = this,
+                nodeObject,
+                artifact;
+
+            MiniProject2.prototype.loadNodeMap = function (node) {
+                var self = this;
+                return self.core.loadSubTree(node)
+                    .then(function (nodeArr) {
+                        var nodes = {},
+                            i;
+                        for (i = 0; i < nodeArr.length; i += 1) {
+                            nodes[self.core.getPath(nodeArr[i])] = nodeArr[i];
+                        }
+
+                        return nodes;
+                    });
+            };
+            self.metaNodeInfo = [];
+
+
+            self.loadNodeMap(self.rootNode)
+                .then(function (nodes) {
+                    var jsonModel = self.buildTree(self.rootNode, nodes);
+                    self.logger.info(JSON.stringify(jsonModel, null, 4));
+                    return self.generateArtifact(jsonModel, self.metaNodeInfo);
+                })
+                .then(function (artifactHash) {
+                    self.result.addArtifact(artifactHash);
+                    self.result.setSuccess(true);
+                    callback(null, self.result);
+                })
+                .catch(function (err) {
+                    // Result s
+                    // uccess is false at invocation.
+                    self.logger.error(err.stack);
+                    callback(err, self.result);
+                });
+        }
 
         MiniProject2.prototype.buildTree = function (root, nodes) {
             var self = this,
@@ -124,6 +115,7 @@ define([
             // detecting if it is a meta node
             name = self.core.getAttribute(root, 'name');
             metaNode = self.getMetaType(root);
+
             baseNode = self.core.getPointerPath(root, 'base');
             if (baseNode !== null) {
                 baseNode = self.core.getAttribute(nodes[baseNode], 'name');
@@ -150,17 +142,28 @@ define([
 
             var jsonModel = {};
             jsonModel.name = name;
-            //jsonModel.metaType = self.core.getAttribute(metaNode, 'name');
-            jsonModel.isMeta = isMetaNode;
+            // jsonModel.metaType = self.core.getAttribute(metaNode, 'name');
+            //jsonModel.metaType = self.core.getAttribute(nodes[metaPath], 'name');
+            var mn = self.core.getBaseType(root);
+            var isRoot = false;
+            var nameMetaType = "";
+            if (mn)
+                nameMetaType = self.core.getAttribute(mn, 'name');
+            else
+                isRoot = true;
 
+            if (!isRoot) {
+                jsonModel.isMeta = isMetaNode;
+                jsonModel.metaType = nameMetaType;
 
-            if (isMetaNode) {
-                self.metaNodeInfo.push({
-                    name: name,
-                    path: myPath,
-                    nbrOfChildren: childrenPaths.length,
-                    base: baseNode
-                });
+                if (isMetaNode) {
+                    self.metaNodeInfo.push({
+                        name: name,
+                        path: myPath,
+                        nbrOfChildren: childrenPaths.length,
+                        base: baseNode
+                    });
+                }
             }
 
 
@@ -183,7 +186,9 @@ define([
                 for (i = 0; i < childrenPaths.length; i++) {
                     childNode = nodes[childrenPaths[i]];
                     var cm = self.buildTree(childNode, nodes);
-                    jsonModel.children[childrenPaths[i].substr(myPath.length + 1)] = cm;
+                    var relPath = self.core.getRelid(childNode);
+                    // jsonModel.children[childrenPaths[i].substr(myPath.length + 1)] = cm;
+                    jsonModel.children[relPath] = cm;
                 }
             }
 
@@ -191,72 +196,37 @@ define([
         };
 
 
-        MiniProject2.prototype.buildMetaInfo = function (root, nodes) {
+        MiniProject2.prototype.generateArtifact = function (tree, meta) {
             var self = this,
-                childrenPaths,
-                childNode,
-                i,
-                isMetaNode,
-                metaNode,
-                metaPath,
-                myPath,
-                name,
-                isConnection = false,
-                src,
-                dst,
-                baseNode,
-                connectStr = '';
-            childrenPaths = self.core.getChildrenPaths(root);
+                deferred = Q.defer(),
+                language,
+                artifact,
+                filesToAdd = {},
+                codeFileName,
+                batchFileName;
 
-            // detecting if it is a meta node
-            name = self.core.getAttribute(root, 'name');
-            metaNode = self.getMetaType(root);
-            baseNode = self.core.getPointerPath(root, 'base');
-            if (baseNode !== null) {
-                baseNode = self.core.getAttribute(nodes[baseNode], 'name');
-            }
-            else
-                baseNode = "null";
-            metaPath = self.core.getPath(metaNode);
-            myPath = self.core.getPath(root);
-            isMetaNode = (metaPath === myPath);
-            //self.logger.info(name,metaPath,myPath, "isMeta", (metaPath === myPath));
+            artifact = self.blobClient.createArtifact('project-data');
+            filesToAdd['tree.json'] = JSON.stringify(tree, null, 4);
+            filesToAdd['meta.json'] = JSON.stringify(meta, null, 4);
 
-            // checking if it is a connection node
-            src = self.core.getPointerPath(root, 'src');
-            dst = self.core.getPointerPath(root, 'dst');
-            if (src && dst) {
-                isConnection = true;
-                src = nodes[src];
-                dst = nodes[dst];
-                src = self.core.getAttribute(src, "name");
-                dst = self.core.getAttribute(dst, "name");
-                connectStr = src + " --> " + dst;
-            }
-            //self.logger.info(indent, "isMeta", isMetaNode, "isConnection", isConnection, self.core.getAttribute(root, 'name'), 'has', childrenPaths.length, "children.", connectStr)
+            artifact.addFiles(filesToAdd, function (err) {
+                if (err) {
+                    deferred.reject(new Error(err));
+                    return;
+                }
+                self.blobClient.saveAllArtifacts(function (err, hashes) {
+                    if (err) {
+                        deferred.reject(new Error(err));
+                        return;
+                    }
 
-            if (isMetaNode) {
-                if (isConnection)
-                    self.metaNodeInfo.push({
-                        name: name,
-                        path: myPath,
-                        nbrOfChildren: childrenPaths.length,
-                        connection: connectStr
-                    });
-                else
-                    self.metaNodeInfo.push({
-                        name: name,
-                        path: myPath,
-                        nbrOfChildren: childrenPaths.length,
-                        base: baseNode
-                    });
-            }
-            for (i = 0; i < childrenPaths.length; i++) {
-                childNode = nodes[childrenPaths[i]];
-                self.buildMetaInfo(childNode, nodes);
-            }
+                    deferred.resolve(hashes[0]);
+                });
+            });
+
+            return deferred.promise;
         };
-    };
 
-    return MiniProject2;
-});
+        return MiniProject2;
+    }
+);

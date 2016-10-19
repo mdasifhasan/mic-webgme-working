@@ -40,8 +40,8 @@
       <file leaf-file-name="FSMCodeGenerator.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/plugins/FSMCodeGenerator/FSMCodeGenerator.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-823">
-              <caret line="78" column="44" selection-start-line="78" selection-start-column="44" selection-end-line="78" selection-end-column="44" />
+            <state relative-caret-position="435">
+              <caret line="176" column="0" selection-start-line="154" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -52,8 +52,8 @@
       <file leaf-file-name="TutorialPlugin.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/plugins/TutorialPlugin/TutorialPlugin.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+            <state relative-caret-position="255">
+              <caret line="79" column="44" selection-start-line="79" selection-start-column="44" selection-end-line="79" selection-end-column="44" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#2120#2527#0" expanded="false" />
@@ -65,10 +65,14 @@
       <file leaf-file-name="MiniProject2.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/plugins/MiniProject2/MiniProject2.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="174" column="36" selection-start-line="174" selection-start-column="36" selection-end-line="174" selection-end-column="36" />
+            <state relative-caret-position="318">
+              <caret line="156" column="50" selection-start-line="156" selection-start-column="50" selection-end-line="156" selection-end-column="50" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
+                <element signature="e#653#868#0" expanded="false" />
+                <element signature="e#1060#1290#0" expanded="false" />
+                <element signature="e#1531#1976#0" expanded="false" />
+                <element signature="e#2328#2779#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -83,8 +87,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/plugins/FamilyTransformation/FamilyTransformation.js" />
-        <option value="$PROJECT_DIR$/src/plugins/TutorialPlugin/TutorialPlugin.js" />
         <option value="$PROJECT_DIR$/src/plugins/FSMCodeGenerator/FSMCodeGenerator.js" />
+        <option value="$PROJECT_DIR$/src/plugins/TutorialPlugin/TutorialPlugin.js" />
         <option value="$PROJECT_DIR$/src/plugins/MiniProject2/MiniProject2.js" />
       </list>
     </option>
@@ -211,12 +215,12 @@
       <workItem from="1475616273361" duration="2361000" />
       <workItem from="1475788648254" duration="3586000" />
       <workItem from="1476219487137" duration="5691000" />
-      <workItem from="1476821648283" duration="10364000" />
+      <workItem from="1476821648283" duration="12606000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22002000" />
+    <option name="totallyTimeSpent" value="24244000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -348,6 +352,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -369,10 +374,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/plugins/FSMCodeGenerator/FSMCodeGenerator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="176" column="0" selection-start-line="154" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/plugins/TutorialPlugin/TutorialPlugin.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state relative-caret-position="255">
+          <caret line="79" column="44" selection-start-line="79" selection-start-column="44" selection-end-line="79" selection-end-column="44" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#2120#2527#0" expanded="false" />
@@ -380,22 +395,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/plugins/FSMCodeGenerator/FSMCodeGenerator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-823">
-          <caret line="78" column="44" selection-start-line="78" selection-start-column="44" selection-end-line="78" selection-end-column="44" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/plugins/MiniProject2/MiniProject2.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="174" column="36" selection-start-line="174" selection-start-column="36" selection-end-line="174" selection-end-column="36" />
+        <state relative-caret-position="318">
+          <caret line="156" column="50" selection-start-line="156" selection-start-column="50" selection-end-line="156" selection-end-column="50" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="e#653#868#0" expanded="false" />
+            <element signature="e#1060#1290#0" expanded="false" />
+            <element signature="e#1531#1976#0" expanded="false" />
+            <element signature="e#2328#2779#0" expanded="false" />
           </folding>
         </state>
       </provider>

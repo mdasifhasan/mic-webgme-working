@@ -1,0 +1,104 @@
+[
+    {
+        "name": "FCO",
+        "path": "/-1",
+        "nbrOfChildren": 0,
+        "base": "null"
+    },
+    {
+        "name": "Folder",
+        "path": "/J",
+        "nbrOfChildren": 0,
+        "base": "FCO"
+    },
+    {
+        "name": "Language",
+        "path": "/-2",
+        "nbrOfChildren": 14,
+        "base": "FCO"
+    },
+    {
+        "name": "Parallel",
+        "path": "/-2/q",
+        "nbrOfChildren": 2,
+        "base": "Primitive"
+    },
+    {
+        "name": "ParamString",
+        "path": "/-2/i",
+        "nbrOfChildren": 0,
+        "base": "Param"
+    },
+    {
+        "name": "Param Number",
+        "path": "/-2/e",
+        "nbrOfChildren": 0,
+        "base": "Param"
+    },
+    {
+        "name": "Flow Param String",
+        "path": "/-2/a",
+        "nbrOfChildren": 0,
+        "base": "FCO"
+    },
+    {
+        "name": "Join",
+        "path": "/-2/m",
+        "nbrOfChildren": 2,
+        "base": "Primitive"
+    },
+    {
+        "name": "Flow In",
+        "path": "/-2/-16",
+        "nbrOfChildren": 0,
+        "base": "Port"
+    },
+    {
+        "name": "Flow Out",
+        "path": "/-2/-17",
+        "nbrOfChildren": 0,
+        "base": "Port"
+    },
+    {
+        "name": "TaskBase",
+        "path": "/-2/-7",
+        "nbrOfChildren": 0,
+        "base": "FCO"
+    },
+    {
+        "name": "Flow Param Number",
+        "path": "/-2/-13",
+        "nbrOfChildren": 0,
+        "base": "FCO"
+    },
+    {
+        "name": "Port",
+        "path": "/-2/-8",
+        "nbrOfChildren": 0,
+        "base": "FCO"
+    },
+    {
+        "name": "Compound",
+        "path": "/-2/-14",
+        "nbrOfChildren": 2,
+        "base": "TaskBase"
+    },
+    {
+        "name": "Primitive",
+        "path": "/-2/-15",
+        "nbrOfChildren": 2,
+        "base": "TaskBase"
+    },
+    {
+        "name": "Param",
+        "path": "/-2/-12",
+        "nbrOfChildren": 0,
+        "base": "FCO"
+    },
+    {
+        "name": "Flow",
+        "path": "/-2/-9",
+        "nbrOfChildren": 0,
+        "base": "FCO"
+    }
+]
