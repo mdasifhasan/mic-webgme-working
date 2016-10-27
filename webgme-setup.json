@@ -17,9 +17,15 @@
         "src": "src/plugins/MiniProject2",
         "test": "test/plugins/MiniProject2"
       }
+    },
+    "decorators": {
+      "TestDecorator": {
+        "src": "src/decorators/TestDecorator"
+      }
     }
   },
   "dependencies": {
-    "plugins": {}
+    "plugins": {},
+    "decorators": {}
   }
 }
