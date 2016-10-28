@@ -33,7 +33,7 @@ define([
         this.logger.debug('TestDecorator ctor');
 
         this.$resultIndicator = $('<span>', {
-            text:'Will indicate result'
+            text:'<<interface>>'
         });
 
         this.$runPluginBtn = $('<button>',{
@@ -57,7 +57,9 @@ define([
         ModelDecoratorDiagramDesignerWidget.prototype.on_addTo.apply(this, arguments);
 
         this.$el.append(this.$resultIndicator);
-        this.$el.append(this.$runPluginBtn);
+        // this.$el.append(this.$runPluginBtn);
+
+
         this._matchType(client, nodeObj);
     };
 
