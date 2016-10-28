@@ -22,10 +22,20 @@
       "TestDecorator": {
         "src": "src/decorators/TestDecorator"
       }
+    },
+    "visualizers": {
+      "TestViz": {
+        "src": "panels/TestViz/TestVizPanel",
+        "title": "TestViz",
+        "panel": "src/visualizers/panels/TestViz",
+        "secondary": false,
+        "widget": "src/visualizers/widgets/TestViz"
+      }
     }
   },
   "dependencies": {
     "plugins": {},
-    "decorators": {}
+    "decorators": {},
+    "visualizers": {}
   }
 }

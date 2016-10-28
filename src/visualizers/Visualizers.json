@@ -1,0 +1,8 @@
+[
+  {
+    "id": "TestViz",
+    "title": "TestViz",
+    "panel": "panels/TestViz/TestVizPanel",
+    "DEBUG_ONLY": false
+  }
+]
