@@ -61,7 +61,7 @@ Agent.prototype.sayHello = function () {
 };
 
 Agent.prototype.update = function () {
-    //console.log("Updating " + this.name);
+    console.log("Updating " + this.name);
     var i;
     var toBeRemoved = [];
     for (var key in this.signals) {
@@ -69,7 +69,7 @@ Agent.prototype.update = function () {
         for (i = 0; i < a.length; i++) {
             if (a[i].trigger()) {
                 console.log(key, ' - finished course: ', a[i].name);
-                toBeRemoved.add({signal: key, course: a[i]});
+                toBeRemoved.push({signal: key, course: a[i]});
             }
         }
     }
@@ -88,7 +88,7 @@ var Course = function (name, childs, action) {
     this.name = name;
     this.next = 0;
     this.action = action;
-    this.childs = childs | [];
+    this.childs = childs === null ? [] : childs;
     this.pre = [];
     this.post = [];
     this.isChildsFinsihed = false;
@@ -107,39 +107,42 @@ Course.prototype.trigger = function () {
     if (!this.isPreFinished) {
         if (this.runCourseList(this.pre))
             this.isPreFinished = true;
-    } else {
+    }
+    if (this.isPreFinished) {
         while (!this.isChildsFinsihed) {
             if (this.next < this.childs.length) {
+                console.log("triggering childs");
                 if (this.childs[this.next].trigger()) {
+                    console.log("child finished: ", this.childs[this.next].name);
                     this.next++;
-                    if (this.next === childs.length) {
-                        this.isChildsFinsihed = true;
-                    } else {
-                        this.isChildsFinsihed = false;
-                        break;
-                    }
-                }
+                } else
+                    break;
+            } else {
+                this.isChildsFinsihed = true;
+                break;
             }
         }
 
-        if (this.isChildsFinsihed) {
-            if (this.action.trigger()) {
+        if (this.isChildsFinsihed && !this.isSelfFinished) {
+            if (this.action === null || this.action.trigger()) {
                 this.isSelfFinished = true;
             } else
                 this.isSelfFinished = false;
         }
-        if (this.isSelfFinished)
+        if (this.isSelfFinished && !this.isPostFinished) {
             if (this.runCourseList(this.post)) {
                 this.isPostFinished = true;
                 this.isFinished = true;
+
             }
+        }
     }
     return this.isFinished;
 };
 
 Course.prototype.runCourseList = function (courseList) {
     var i,
-        toBeRemoved;
+        toBeRemoved = [];
     for (i = 0; i < courseList.length; i++) {
         if (courseList[i].trigger()) {
             toBeRemoved.push(courseList[i]);

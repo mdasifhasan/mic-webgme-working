@@ -20,6 +20,8 @@ var scoreText;
 
 function create() {
     sim.update();
+    sim.update();
+    sim.update();
 }
 
 function update() {
