@@ -19,11 +19,11 @@ var score = 0;
 var scoreText;
 
 function create() {
-
+    sim.update();
 }
 
 function update() {
-    sim.update();
+
 
 
 }

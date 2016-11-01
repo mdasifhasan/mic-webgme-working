@@ -14,7 +14,7 @@ Simulation.prototype.addAgent = function (agent) {
 }
 
 Simulation.prototype.removeAgent = function (agent) {
-    this.agents.splice(this.queue.indexOf(agent), 1);
+    this.agents.splice(this.agents.indexOf(agent), 1);
 }
 
 Simulation.prototype.update = function () {
@@ -31,8 +31,29 @@ Simulation.prototype.update = function () {
 var Agent = function (name) {
     this.name = name;
     this.courses = [];
+    this.signals = {};
 };
 
+Agent.prototype.addCourse = function (course) {
+    console.log("adding" + this.name);
+    this.courses.push(course);
+};
+
+Agent.prototype.subscribeSignal = function (signal, course) {
+    if (!(signal in this.signals))
+        this.signals[signal] = [];
+    this.signals[signal].push(course);
+};
+
+Agent.prototype.unsubscribeSignal = function (signal, course) {
+    if (signal in this.signals) {
+        var a = this.signals[signal];
+        a.splice(a.indexOf(course), 1);
+        if (a.length === 0) {
+            delete this.signals[signal];
+        }
+    }
+};
 
 Agent.prototype.sayHello = function () {
     console.log("Hello, I'm " + this.name);
@@ -40,22 +61,22 @@ Agent.prototype.sayHello = function () {
 
 Agent.prototype.update = function () {
     //console.log("Updating " + this.name);
-    var i = 0;
-    for (; i < this.courses.length; i++) {
-        if (this.courses[i] !== null) {
-            while (!this.courses[i].isFinished && !this.courses[i].isWait) {
-                this.courses[i].trigger();
+    var i;
+    var toBeRemoved = [];
+    for (var key in this.signals) {
+        var a = this.signals[key];
+        for (i = 0; i < a.length; i++) {
+            if (a[i].trigger()) {
+                console.log(key, ' - finished course: ', a[i].name);
+                toBeRemoved.add({signal: key, course: a[i]});
             }
         }
     }
+    for (i = 0; i < toBeRemoved.length; i++) {
+        console.log(key, ' - unsubscribe course: ', a[i].name);
+        this.unsubscribeSignal(toBeRemoved[i].signal, toBeRemoved[i].course);
+    }
 };
-
-
-Agent.prototype.addCourse = function (course) {
-    console.log("adding" + this.name);
-    this.courses.push(course);
-};
-
 
 
 // ************ Course ************  //
@@ -65,7 +86,7 @@ Agent.prototype.addCourse = function (course) {
 var Course = function (name, childs, action) {
     this.name = name;
     //this.next = childs === null? null : childs.length === 0? null : childs[0];
-    this.next = null;
+    this.next = 0;
     this.action = action;
     this.isFinished = false;
     this.isWait = false;
@@ -88,9 +109,9 @@ Course.prototype.trigger = function () {
 
         this.isWait = false;
         if (this.next !== null) {
-            if (this.next.action === null){
+            if (this.next.action === null) {
                 this.isWait = this.next.action(this.next);
-                if(this.next === this && !this.isWait && !this.isFinished){
+                if (this.next === this && !this.isWait && !this.isFinished) {
                     this.isFinished = true;
                 }
             }
