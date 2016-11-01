@@ -55,6 +55,7 @@ Agent.prototype.unsubscribeSignal = function (signal, course) {
     }
 };
 
+
 Agent.prototype.sayHello = function () {
     console.log("Hello, I'm " + this.name);
 };
@@ -85,41 +86,71 @@ Agent.prototype.update = function () {
 // start line and multiple outgoing lines
 var Course = function (name, childs, action) {
     this.name = name;
-    //this.next = childs === null? null : childs.length === 0? null : childs[0];
     this.next = 0;
     this.action = action;
-    this.isFinished = false;
-    this.isWait = false;
     this.childs = childs | [];
-    this.currentIndex = -1;
+    this.pre = [];
+    this.post = [];
+    this.isChildsFinsihed = false;
+    this.isFinished = false;
+    this.isPreFinished = false;
+    this.isPostFinished = false;
+    this.isSelfFinished = false;
 };
 
 Course.prototype.trigger = function () {
     console.log("triggering course: ", this.name);
-    // run childs one by one, when all the childs are finished then run itself
-    if (this.isFinished !== false) {
-        if (this.childs === null || this.childs.length === 0) {
-            this.next = this;
-        } else if (this.childs.length > this.currentIndex + 1) {
-            this.currentIndex++;
-            this.next = this.childs[this.currentIndex];
-        } else {
-            this.next = this;
-        }
+    // run pre first, run childs one by one, when all the childs are finished then run itself
 
-        this.isWait = false;
-        if (this.next !== null) {
-            if (this.next.action === null) {
-                this.isWait = this.next.action(this.next);
-                if (this.next === this && !this.isWait && !this.isFinished) {
-                    this.isFinished = true;
+    if (this.isFinished)
+        return true;
+    if (!this.isPreFinished) {
+        if (this.runCourseList(this.pre))
+            this.isPreFinished = true;
+    } else {
+        while (!this.isChildsFinsihed) {
+            if (this.next < this.childs.length) {
+                if (this.childs[this.next].trigger()) {
+                    this.next++;
+                    if (this.next === childs.length) {
+                        this.isChildsFinsihed = true;
+                    } else {
+                        this.isChildsFinsihed = false;
+                        break;
+                    }
                 }
             }
         }
+
+        if (this.isChildsFinsihed) {
+            if (this.action.trigger()) {
+                this.isSelfFinished = true;
+            } else
+                this.isSelfFinished = false;
+        }
+        if (this.isSelfFinished)
+            if (this.runCourseList(this.post)) {
+                this.isPostFinished = true;
+                this.isFinished = true;
+            }
     }
+    return this.isFinished;
 };
 
-Course.prototype.finish = function () {
-    console.log("Course ", name, " is finished");
-    this.isFinished = true;
+Course.prototype.runCourseList = function (courseList) {
+    var i,
+        toBeRemoved;
+    for (i = 0; i < courseList.length; i++) {
+        if (courseList[i].trigger()) {
+            toBeRemoved.push(courseList[i]);
+        }
+    }
+    for (i = 0; i < toBeRemoved.length; i++) {
+        console.log('Removing course', toBeRemoved[i].name, 'from pre of ', this.name)
+        courseList.splice(courseList.indexOf(toBeRemoved[i]), 1);
+    }
+    if (courseList.length == 0)
+        return true;
+    else
+        return false;
 }
