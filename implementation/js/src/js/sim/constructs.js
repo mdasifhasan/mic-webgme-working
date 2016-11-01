@@ -1,6 +1,9 @@
 /**
  * Created by AH on 10/30/2016.
  */
+
+
+// ************ Simulation ************  //
 var Simulation = function (name) {
     this.name = name;
     this.agents = [];
@@ -20,6 +23,10 @@ Simulation.prototype.update = function () {
         this.agents[i].update();
     }
 };
+
+
+// ************ Agent ************  //
+
 
 var Agent = function (name) {
     this.name = name;
@@ -49,6 +56,9 @@ Agent.prototype.addCourse = function (course) {
     this.courses.push(course);
 };
 
+
+
+// ************ Course ************  //
 
 // this need to be changed to be implementing multiple types of
 // start line and multiple outgoing lines
