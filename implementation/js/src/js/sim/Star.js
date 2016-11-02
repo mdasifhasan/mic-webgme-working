@@ -4,8 +4,8 @@
 addStarAgent = function (sim) {
     var star = new Agent("Star");
 
-    var starCreate = new Course("star create", OnStarCreate, null);
-    var starUpdate = new Course("star update", OnStarUpdate, null);
+    var starCreate = new Course("star create", null, OnStarCreate);
+    var starUpdate = new Course("star update", null, OnStarUpdate);
     var childs = [starCreate, starUpdate];
     var starCourse = new Course("star course", childs, null);
 
@@ -31,7 +31,6 @@ addStarAgent = function (sim) {
 
 
     var OnStarUpdate = function (course) {
-        course.finish();
         return true;
     };
 

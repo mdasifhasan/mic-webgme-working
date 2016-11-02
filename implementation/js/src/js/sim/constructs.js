@@ -34,6 +34,7 @@ var Agent = function (name) {
     this.name = name;
     this.courses = [];
     this.signals = {};
+    this.fired = [];
 };
 
 Agent.prototype.addCourse = function (course) {
@@ -58,6 +59,12 @@ Agent.prototype.unsubscribeSignal = function (signal, course) {
 };
 
 
+Agent.prototype.fireSignal = function (signal) {
+    if (!(signal in this.fired))
+        if (signal in this.signals)
+            this.fired[signal] = this.signals[signal];
+};
+
 Agent.prototype.sayHello = function () {
     console.log("Hello, I'm " + this.name);
 };
@@ -66,8 +73,9 @@ Agent.prototype.update = function () {
     console.log("Updating " + this.name);
     var i;
     var toBeRemoved = [];
-    for (var key in this.signals) {
-        var a = this.signals[key];
+    var k = 0;
+    for (var key in this.fired) {
+        var a = this.fired[key];
         for (i = 0; i < a.length; i++) {
             if (a[i].trigger()) {
                 console.log(key, ' - finished course: ', a[i].name);
@@ -77,10 +85,18 @@ Agent.prototype.update = function () {
     }
     for (i = 0; i < toBeRemoved.length; i++) {
         console.log(key, ' - unsubscribe course: ', a[i].name);
-        this.unsubscribeSignal(toBeRemoved[i].signal, toBeRemoved[i].course);
+        var signal = toBeRemoved[i].signal;
+        var course = toBeRemoved[i].course;
+        if (signal in this.fired) {
+            var l = this.fired[signal];
+            l.splice(l.indexOf(course), 1);
+            if (l.length === 0) {
+                delete this.fired[signal];
+            }
+        }
     }
-    console.log("agent signals length: ", Object.keys(this.signals).length);
-    if(Object.keys(this.signals).length === 0)
+    console.log("agent fired signals length: ", Object.keys(this.signals).length);
+    if (Object.keys(this.fired).length === 0)
         return true;
     else
         return false;
@@ -169,18 +185,18 @@ Course.prototype.runCourseList = function (courseList) {
         return false;
 };
 
-Course.prototype.subscribePreCourse = function(course){
+Course.prototype.subscribePreCourse = function (course) {
     this.pre.push(course);
 };
 
-Course.prototype.unsubscribePreCourse = function(course){
+Course.prototype.unsubscribePreCourse = function (course) {
     this.pre.splice(this.pre.indexOf(course), 1);
 };
 
-Course.prototype.subscribePostCourse = function(course){
+Course.prototype.subscribePostCourse = function (course) {
     this.post.push(course);
 };
 
-Course.prototype.unsubscribePostCourse = function(course){
+Course.prototype.unsubscribePostCourse = function (course) {
     this.post.splice(this.post.indexOf(course), 1);
 };

@@ -18,7 +18,7 @@ var stars;
 var score = 0;
 var scoreText;
 
-function create() {
+function createTest() {
     var count = 0;
     while(count < 30){
         count++;
@@ -27,6 +27,11 @@ function create() {
             break;
     }
     console.log("simulation finished- ", count)
+}
+
+
+function create() {
+
 }
 
 function update() {
