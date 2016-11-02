@@ -20,10 +20,10 @@ var scoreText;
 
 function createTest() {
     var count = 0;
-    while(count < 30){
+    while (count < 30) {
         count++;
         console.log(count, " updating simulation - ", count)
-        if(sim.update())
+        if (sim.update())
             break;
     }
     console.log("simulation finished- ", count)
@@ -31,11 +31,11 @@ function createTest() {
 
 
 function create() {
-
+    SimAgent.fireSignal("create");
+    while (!sim.update())
+        continue;
 }
 
 function update() {
-
-
 
 }

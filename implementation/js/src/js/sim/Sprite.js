@@ -6,9 +6,13 @@ addSprite = function (sim, name, x, y, imageName) {
         enablePhysics = false,
         scaleX = 1,
         scaleY = 1,
-        immovable = false;
+        immovable = false,
+        gravityY = 300,
+        bounceY = .5;
+
     var OnCreate = function () {
     };
+
     OnCreate.prototype.trigger = function (course) {
         // The player and its settings
         var a;
@@ -22,6 +26,9 @@ addSprite = function (sim, name, x, y, imageName) {
 
         a.scale.setTo(this.scaleX, this.scaleY);
         a.body.immovable = this.immovable;
+        a.body.gravity.y = gravityY;
+        a.body.bounce.y = bounceY;
+
         return true;
     };
 

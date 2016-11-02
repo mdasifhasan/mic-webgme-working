@@ -6,22 +6,23 @@
 // ************ Simulation ************  //
 var Simulation = function (name) {
     this.name = name;
-    this.agents = [];
+    this.agents = {};
 };
 
 Simulation.prototype.addAgent = function (agent) {
-    this.agents.push(agent);
+    this.agents[agent.name] = agent;
 }
 
 Simulation.prototype.removeAgent = function (agent) {
-    this.agents.splice(this.agents.indexOf(agent), 1);
+    if (agent.name in this.agents)
+        delete this.agents[agent.name];
 }
 
 Simulation.prototype.update = function () {
     var i;
     var isFinished = true;
-    for (i = 0; i < this.agents.length; i++) {
-        isFinished = this.agents[i].update();
+    for (var a in this.agents) {
+        isFinished = this.agents[a].update();
     }
     return isFinished;
 };
@@ -38,8 +39,14 @@ var Agent = function (name) {
 };
 
 Agent.prototype.addCourse = function (course) {
-    console.log("adding" + this.name);
-    this.courses.push(course);
+    console.log("adding", course.name, "to", this.name);
+    this.courses[course.name] = course;
+};
+
+Agent.prototype.removeCourse = function (course) {
+    console.log("removing", this.name, "from", this.name);
+    if (course.name in this.courses)
+        delete this.courses[course.name];
 };
 
 Agent.prototype.subscribeSignal = function (signal, course) {
@@ -57,7 +64,6 @@ Agent.prototype.unsubscribeSignal = function (signal, course) {
         }
     }
 };
-
 
 Agent.prototype.fireSignal = function (signal) {
     if (!(signal in this.fired))
@@ -95,7 +101,7 @@ Agent.prototype.update = function () {
             }
         }
     }
-    console.log("agent fired signals length: ", Object.keys(this.signals).length);
+    console.log(this.name, ": fired signals length: ", Object.keys(this.fired).length);
     if (Object.keys(this.fired).length === 0)
         return true;
     else
