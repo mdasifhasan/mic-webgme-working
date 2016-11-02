@@ -19,9 +19,11 @@ Simulation.prototype.removeAgent = function (agent) {
 
 Simulation.prototype.update = function () {
     var i;
+    var isFinished = true;
     for (i = 0; i < this.agents.length; i++) {
-        this.agents[i].update();
+        isFinished = this.agents[i].update();
     }
+    return isFinished;
 };
 
 
@@ -77,6 +79,11 @@ Agent.prototype.update = function () {
         console.log(key, ' - unsubscribe course: ', a[i].name);
         this.unsubscribeSignal(toBeRemoved[i].signal, toBeRemoved[i].course);
     }
+    console.log("agent signals length: ", Object.keys(this.signals).length);
+    if(Object.keys(this.signals).length === 0)
+        return true;
+    else
+        return false;
 };
 
 
@@ -101,39 +108,43 @@ var Course = function (name, childs, action) {
 Course.prototype.trigger = function () {
     console.log("triggering course: ", this.name);
     // run pre first, run childs one by one, when all the childs are finished then run itself
-
     if (this.isFinished)
         return true;
     if (!this.isPreFinished) {
-        if (this.runCourseList(this.pre))
+        console.log(this.name, "triggering pre courses.");
+        if (this.runCourseList(this.pre)) {
             this.isPreFinished = true;
+            console.log(this.name, "pre courses are finished.");
+        }
     }
     if (this.isPreFinished) {
+        console.log(this.name, " triggering child courses");
         while (!this.isChildsFinsihed) {
             if (this.next < this.childs.length) {
-                console.log("triggering childs");
                 if (this.childs[this.next].trigger()) {
-                    console.log("child finished: ", this.childs[this.next].name);
+                    console.log(this.name, "child finished: ", this.childs[this.next].name);
                     this.next++;
                 } else
                     break;
             } else {
+                console.log(this.name, "all child courses are finished.");
                 this.isChildsFinsihed = true;
                 break;
             }
         }
-
         if (this.isChildsFinsihed && !this.isSelfFinished) {
-            if (this.action === null || this.action.trigger()) {
+            console.log(this.name, "trigger course of self.");
+            if (this.action === null || this.action.trigger(this)) {
                 this.isSelfFinished = true;
             } else
                 this.isSelfFinished = false;
         }
         if (this.isSelfFinished && !this.isPostFinished) {
+            console.log(this.name, "triggering post courses.");
             if (this.runCourseList(this.post)) {
+                console.log(this.name, "post courses are finished.");
                 this.isPostFinished = true;
                 this.isFinished = true;
-
             }
         }
     }
@@ -156,4 +167,20 @@ Course.prototype.runCourseList = function (courseList) {
         return true;
     else
         return false;
-}
+};
+
+Course.prototype.subscribePreCourse = function(course){
+    this.pre.push(course);
+};
+
+Course.prototype.unsubscribePreCourse = function(course){
+    this.pre.splice(this.pre.indexOf(course), 1);
+};
+
+Course.prototype.subscribePostCourse = function(course){
+    this.post.push(course);
+};
+
+Course.prototype.unsubscribePostCourse = function(course){
+    this.post.splice(this.post.indexOf(course), 1);
+};

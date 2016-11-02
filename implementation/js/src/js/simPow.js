@@ -19,9 +19,14 @@ var score = 0;
 var scoreText;
 
 function create() {
-    sim.update();
-    sim.update();
-    sim.update();
+    var count = 0;
+    while(count < 30){
+        count++;
+        console.log(count, " updating simulation - ", count)
+        if(sim.update())
+            break;
+    }
+    console.log("simulation finished- ", count)
 }
 
 function update() {
