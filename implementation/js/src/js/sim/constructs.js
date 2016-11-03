@@ -33,7 +33,7 @@ Simulation.prototype.update = function () {
 
 var Agent = function (name) {
     this.name = name;
-    this.courses = [];
+    this.courses = {};
     this.signals = {};
     this.fired = [];
 };
@@ -205,4 +205,53 @@ Course.prototype.subscribePostCourse = function (course) {
 
 Course.prototype.unsubscribePostCourse = function (course) {
     this.post.splice(this.post.indexOf(course), 1);
+};
+
+
+// ************ Fields ************  //
+var Field = function (name) {
+    this.childs = {};
+    this.interfaces = {};
+};
+
+Field.prototype.addChild = function (field) {
+    this.childs[field.name] = field;
+    return this;
+};
+
+Field.prototype.removeChild = function (field) {
+    delete this.childs[field.name];
+    return this;
+};
+
+Field.prototype.addInterface = function (name, interface) {
+    this.interfaces[name] = interface;
+    return this;
+};
+
+Field.prototype.removeInterface = function (name) {
+    delete this.childs[name];
+    return this;
+};
+
+Field.prototype.subscribeToInterface = function (name, fn) {
+    if (!(name in this.interfaces))
+        return;
+    this.interfaces[name].push(fn);
+    return this;
+};
+
+Field.prototype.unsubscribeFromInterface = function (name, fn) {
+    if (!(name in this.interfaces))
+        return;
+    this.interfaces[name].splice(this.interfaces[name].indexOf(fn), 1);
+    return this;
+};
+
+Field.prototype.triggerAction = function (name, fn, args) {
+    if (!(name in this.interfaces))
+        return;
+    var i;
+    for(i = 0; i < this.interfaces[name].length; i++)
+        this.interfaces[name][i].apply(null, arg);
 };
