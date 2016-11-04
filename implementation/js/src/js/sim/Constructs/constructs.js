@@ -7,6 +7,8 @@
 var Simulation = function (name) {
     this.name = name;
     this.agents = {};
+    RegisterFields();
+    RegisterAgents();
 };
 
 Simulation.prototype.addAgent = function (agent) {
@@ -209,6 +211,7 @@ Course.prototype.unsubscribePostCourse = function (course) {
 
 
 // ************ Fields ************  //
+
 var Field = function (name) {
     this.childs = {};
     this.interfaces = {};
@@ -222,6 +225,12 @@ Field.prototype.addChild = function (field) {
 Field.prototype.removeChild = function (field) {
     delete this.childs[field.name];
     return this;
+};
+
+Field.prototype.getChild = function (name) {
+    if(name in this.childs)
+        return this.childs[field.name];
+    return null;
 };
 
 Field.prototype.addInterface = function (name, interface) {
@@ -255,3 +264,21 @@ Field.prototype.triggerAction = function (name, fn, args) {
     for(i = 0; i < this.interfaces[name].length; i++)
         this.interfaces[name][i].apply(null, arg);
 };
+
+
+var Fields = function (name) {
+};
+
+Fields.root = new Field("root");
+Fields.register = function (field) {
+    Fields.root.addChild(field);
+};
+
+Fields.unregister = function (field) {
+    Fields.root.removeChild(field);
+};
+
+Fields.getField = function (name) {
+    return Fields.root.getChild(name);
+};
+

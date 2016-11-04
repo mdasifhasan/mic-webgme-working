@@ -4,6 +4,7 @@
 
 var sim = new Simulation("Game Simulation");
 
+
 var SimAgent = new Agent("sim");
 sim.addAgent(SimAgent);
 
