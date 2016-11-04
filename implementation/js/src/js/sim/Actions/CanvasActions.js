@@ -20,26 +20,27 @@ var addGroup = function (groupName, dataGroup) {
         Groups[dataGroup.name] = dataGroup.value;
     }
     a.a(0);
+    return true;
 };
 
 
-var createSprite = function (data) {
+var createSprite = function (dataSprite) {
     var a;
-    if (data.group === null || data.group.value === null) {
-        a = game.add.sprite(data.x, data.y, data.imageName);
-        if (data.enablePhysics)
+    if (dataSprite.group === null || dataSprite.group.value === null) {
+        a = game.add.sprite(dataSprite.x, dataSprite.y, dataSprite.imageName);
+        if (dataSprite.enablePhysics)
             game.physics.arcade.enable(a);
     }
     else
-        data.group.value.create(data.x, data.y, data.imageName);
+        dataSprite.group.value.create(dataSprite.x, dataSprite.y, dataSprite.imageName);
 
-    a.scale.setTo(data.scaleX, data.scaleY);
-    a.body.immovable = data.immovable;
-    a.body.gravity.x = data.gravityX;
-    a.body.gravity.y = data.gravityY;
-    a.body.bounce.y = data.bounceY;
-    a.body.bounce.y = data.bounceY;
+    a.scale.setTo(dataSprite.scaleX, dataSprite.scaleY);
+    a.body.immovable = dataSprite.immovable;
+    a.body.gravity.x = dataSprite.gravityX;
+    a.body.gravity.y = dataSprite.gravityY;
+    a.body.bounce.y = dataSprite.bounceY;
+    a.body.bounce.y = dataSprite.bounceY;
 
     console.log("create sprite");
     return true;
-}
+};

@@ -275,7 +275,7 @@ Field.prototype.removeInterface = function (name) {
 
 Field.prototype.subscribeToInterface = function (name, fn) {
     if (!(name in this.interfaces))
-        this.addInterface(name, null);
+        this.addInterface(name);
     this.interfaces[name].push(fn);
     return this;
 };
@@ -291,7 +291,7 @@ Field.prototype.triggerAction = function (name, args) {
     console.log("Firing field action: ", name);
     if (!(name in this.interfaces))
         return;
-    console.log("Found field action: ", this.interfaces[name]);
+    console.log("Found field action: ", this.interfaces[name], " would Call with args:", args);
     var i;
     for (i = 0; i < this.interfaces[name].length; i++)
         this.interfaces[name][i].apply(null, args);
