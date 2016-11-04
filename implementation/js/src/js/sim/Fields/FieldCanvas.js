@@ -7,6 +7,7 @@ FieldCanvas.createInstance = function (parent) {
     var canvas = new Field("Canvas");
     parent.addChild(canvas);
     FieldCanvas.FieldGroup.createInstance(canvas);
+    console.log("checking if field is successfully registered: ", Fields.root.getChild("Canvas"));
 };
 
 FieldCanvas.FieldGroup = new function () {};

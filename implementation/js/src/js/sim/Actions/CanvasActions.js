@@ -6,22 +6,32 @@ var CanvasActions = function () {
 };
 
 CanvasActions.register = function () {
-    Fields.root.getChild("Canvas").getChild("Group").addInterface("addGroup", addGroup);
+    Fields.root.getChild("Canvas").subscribeToInterface("createSprite", createSprite);
+    Fields.root.getChild("Canvas").getChild("Group").subscribeToInterface("addGroup", addGroup);
 };
 
-var addGroup = function (dataGroup) {
-    dataGroup.value = game.add.group();
+var Groups = {};
+var addGroup = function (groupName, dataGroup) {
+    console.log("Field Action addGroup is called");
+    if (dataGroup in Groups) {
+        dataGroup.value = Groups[dataGroup.name];
+    } else {
+        dataGroup.value = game.add.group();
+        Groups[dataGroup.name] = dataGroup.value;
+    }
+    a.a(0);
 };
+
 
 var createSprite = function (data) {
     var a;
-    if (data.group === null) {
+    if (data.group === null || data.group.value === null) {
         a = game.add.sprite(data.x, data.y, data.imageName);
         if (data.enablePhysics)
-            game.physics.arcade.ensable(a);
+            game.physics.arcade.enable(a);
     }
     else
-        data.group.create(data.x, data.y, data.imageName);
+        data.group.value.create(data.x, data.y, data.imageName);
 
     a.scale.setTo(data.scaleX, data.scaleY);
     a.body.immovable = data.immovable;
@@ -30,5 +40,6 @@ var createSprite = function (data) {
     a.body.bounce.y = data.bounceY;
     a.body.bounce.y = data.bounceY;
 
+    console.log("create sprite");
     return true;
 }

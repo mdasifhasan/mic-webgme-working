@@ -4,8 +4,8 @@
 addCanvas = function (sim) {
     var canvas = new Agent("Canvas");
 
-    var courseCreate = new Course("create", null, null);
-    var courseUpdate = new Course("update", null, null);
+    var courseCreate = new Course(canvas, "create", null, null);
+    var courseUpdate = new Course(canvas, "update", null, null);
 
     canvas.addCourse(courseCreate);
     canvas.addCourse(courseUpdate);

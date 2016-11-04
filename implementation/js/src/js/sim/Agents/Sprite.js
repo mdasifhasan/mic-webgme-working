@@ -1,44 +1,17 @@
 /**
  * Created by AH on 10/31/2016.
  */
-addSprite = function (sim, name, x, y, imageName) {
-    var group = null,
-        enablePhysics = false,
-        scaleX = 1,
-        scaleY = 1,
-        immovable = false,
-        gravityY = 300,
-        bounceY = .5;
+var Sprite = function (name) {
+    Agent.apply(this, [name]);
 
-    var OnCreate = function () {
-    };
+    // init data
+    this.data.dataSprite = new DataSprite();
 
-    OnCreate.prototype.trigger = function (course) {
-        // The player and its settings
-        var a;
-        if (this.group === null) {
-            a = game.add.sprite(this.x, this.y, imageName);
-            if (this.enablePhysics)
-                game.physics.arcade.enable(a);
-        }
-        else
-            this.group.create(x, y, 'ground');
+    // init library courses provided with this agent
+    var createGroup = new Course(this, "createGroup", null, new CreateGroup());
+    this.addCourse(createGroup);
 
-        a.scale.setTo(this.scaleX, this.scaleY);
-        a.body.immovable = this.immovable;
-        a.body.gravity.y = gravityY;
-        a.body.bounce.y = bounceY;
-
-        return true;
-    };
-
-    var a = new Agent(name);
-    var create = new Course("create", null, new OnCreate());
-    a.addCourse(create);
-
-    sim.agents["Canvas"].courses["create"].subscribePostCourse(create);
-    sim.addAgent(a);
-
-    // this should be set to a data of a field
-    return this;
+    var createSprite = new Course(this, "createSprite", null, new CreateSprite());
+    this.addCourse(createSprite);
 };
+inheritsFrom(Sprite, Agent);

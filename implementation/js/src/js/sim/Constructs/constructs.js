@@ -3,12 +3,17 @@
  */
 
 
+var inheritsFrom = function (child, parent) {
+    child.prototype = Object.create(parent.prototype);
+};
+
 // ************ Simulation ************  //
 var Simulation = function (name) {
     this.name = name;
     this.agents = {};
     RegisterFields();
     RegisterAgents();
+    RegisterFieldActions();
 };
 
 Simulation.prototype.addAgent = function (agent) {
@@ -38,6 +43,20 @@ var Agent = function (name) {
     this.courses = {};
     this.signals = {};
     this.fired = [];
+    this.data = {};
+    this.childs = {};
+    console.log("Creating new agent: ", this.name);
+};
+
+Agent.prototype.addChild = function (childAgent) {
+    console.log("adding child ", childAgent.name, "to", this.name);
+    this.childs[childAgent.name] = childAgent;
+};
+
+Agent.prototype.removeChild = function (childAgent) {
+    console.log("removing child ", childAgent.name, "from", this.name);
+    if (childAgent.name in this.childs)
+        delete this.childs[childAgent.name];
 };
 
 Agent.prototype.addCourse = function (course) {
@@ -46,7 +65,7 @@ Agent.prototype.addCourse = function (course) {
 };
 
 Agent.prototype.removeCourse = function (course) {
-    console.log("removing", this.name, "from", this.name);
+    console.log("removing", course.name, "from", this.name);
     if (course.name in this.courses)
         delete this.courses[course.name];
 };
@@ -79,6 +98,15 @@ Agent.prototype.sayHello = function () {
 
 Agent.prototype.update = function () {
     console.log("Updating " + this.name);
+    console.log("Updating this childs of", this.name);
+    var isChildsFinished = true;
+    for (var c in this.childs) {
+        console.log("Updating child " + this.childs[c]);
+        isChildsFinished = isChildsFinished && this.childs[c].update();
+        console.log("isChildsFinished: ", isChildsFinished);
+    }
+    console.log("Finished updating this childs of", this.name);
+
     var i;
     var toBeRemoved = [];
     var k = 0;
@@ -105,7 +133,7 @@ Agent.prototype.update = function () {
     }
     console.log(this.name, ": fired signals length: ", Object.keys(this.fired).length);
     if (Object.keys(this.fired).length === 0)
-        return true;
+        return true && isChildsFinished;
     else
         return false;
 };
@@ -115,7 +143,8 @@ Agent.prototype.update = function () {
 
 // this need to be changed to be implementing multiple types of
 // start line and multiple outgoing lines
-var Course = function (name, childs, action) {
+var Course = function (owner, name, childs, action) {
+    this.owner = owner;
     this.name = name;
     this.next = 0;
     this.action = action;
@@ -213,6 +242,7 @@ Course.prototype.unsubscribePostCourse = function (course) {
 // ************ Fields ************  //
 
 var Field = function (name) {
+    this.name = name;
     this.childs = {};
     this.interfaces = {};
 };
@@ -228,13 +258,13 @@ Field.prototype.removeChild = function (field) {
 };
 
 Field.prototype.getChild = function (name) {
-    if(name in this.childs)
-        return this.childs[field.name];
+    if (name in this.childs)
+        return this.childs[name];
     return null;
 };
 
-Field.prototype.addInterface = function (name, interface) {
-    this.interfaces[name] = interface;
+Field.prototype.addInterface = function (name) {
+    this.interfaces[name] = [];
     return this;
 };
 
@@ -245,7 +275,7 @@ Field.prototype.removeInterface = function (name) {
 
 Field.prototype.subscribeToInterface = function (name, fn) {
     if (!(name in this.interfaces))
-        return;
+        this.addInterface(name, null);
     this.interfaces[name].push(fn);
     return this;
 };
@@ -257,12 +287,14 @@ Field.prototype.unsubscribeFromInterface = function (name, fn) {
     return this;
 };
 
-Field.prototype.triggerAction = function (name, fn, args) {
+Field.prototype.triggerAction = function (name, args) {
+    console.log("Firing field action: ", name);
     if (!(name in this.interfaces))
         return;
+    console.log("Found field action: ", this.interfaces[name]);
     var i;
-    for(i = 0; i < this.interfaces[name].length; i++)
-        this.interfaces[name][i].apply(null, arg);
+    for (i = 0; i < this.interfaces[name].length; i++)
+        this.interfaces[name][i].apply(null, args);
 };
 
 
