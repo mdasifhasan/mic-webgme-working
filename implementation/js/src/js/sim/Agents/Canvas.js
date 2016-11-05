@@ -1,17 +1,34 @@
 /**
  * Created by AH on 10/31/2016.
  */
-addCanvas = function (sim) {
-    var canvas = new Agent("Canvas");
+var Canvas = function (name) {
+    Agent.apply(this, [name]);
 
-    var courseCreate = new Course(canvas, "create", null, null);
-    var courseUpdate = new Course(canvas, "update", null, null);
+    var courseCreate = new Course(this, "create", null, null);
+    var courseUpdate = new Course(this, "update", null, null);
 
-    canvas.addCourse(courseCreate);
-    canvas.addCourse(courseUpdate);
+    this.addCourse(courseCreate);
+    this.addCourse(courseUpdate);
 
-    SimAgent.subscribeSignal("create", courseCreate);
-    SimAgent.subscribeSignal("update", courseUpdate);
+    sim.subscribeSignal("create", this);
+    sim.subscribeSignal("update", this);
 
-    sim.addAgent(canvas);
+    this.subscribeSignal("create", courseCreate);
+    this.subscribeSignal("update", courseUpdate);
 };
+inheritsFrom(Canvas, Agent);
+//
+// addCanvas = function (sim) {
+//     var canvas = new Agent("Canvas");
+//
+//     var courseCreate = new Course(canvas, "create", null, null);
+//     var courseUpdate = new Course(canvas, "update", null, null);
+//
+//     canvas.addCourse(courseCreate);
+//     canvas.addCourse(courseUpdate);
+//
+//     SimAgent.subscribeSignal("create", courseCreate);
+//     SimAgent.subscribeSignal("update", courseUpdate);
+//
+//     sim.addAgent(canvas);
+// };

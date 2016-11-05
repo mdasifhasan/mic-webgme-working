@@ -11,19 +11,43 @@ var inheritsFrom = function (child, parent) {
 var Simulation = function (name) {
     this.name = name;
     this.agents = {};
-    RegisterFields();
-    RegisterAgents();
-    RegisterFieldActions();
+    this.signals = {};
+};
+
+Simulation.prototype.register =function(){
+    RegisterAgents(this);
+    RegisterFields(this);
+    RegisterFieldActions(this);
+};
+
+Simulation.prototype.createSignal = function (signal) {
+    if (signal in this.signals)
+        return;
+    this.signals[signal] = [];
+};
+
+Simulation.prototype.subscribeSignal = function (signal, agent) {
+    if (!(signal in this.signals))
+        this.createSignal(signal);
+    this.signals[signal].push(agent);
+};
+
+Simulation.prototype.fireSignal = function (signal, agent) {
+    if (signal in this.signals) {
+        var i;
+        for (i = 0; i < this.signals[signal].length; i++)
+            this.signals[signal][i].fireSignal(signal);
+    }
 };
 
 Simulation.prototype.addAgent = function (agent) {
     this.agents[agent.name] = agent;
-}
+};
 
 Simulation.prototype.removeAgent = function (agent) {
     if (agent.name in this.agents)
         delete this.agents[agent.name];
-}
+};
 
 Simulation.prototype.update = function () {
     var i;
@@ -98,7 +122,7 @@ Agent.prototype.sayHello = function () {
 
 Agent.prototype.update = function () {
     console.log("Updating " + this.name);
-    console.log("Updating this childs of", this.name);
+    console.log("Updating the childs of", this.name);
     var isChildsFinished = true;
     for (var c in this.childs) {
         console.log("Updating child " + this.childs[c]);
@@ -190,7 +214,7 @@ Course.prototype.trigger = function () {
             if (this.action === null || this.action.trigger(this)) {
                 this.isSelfFinished = true;
                 console.log(this.name, "self execution is finished");
-            } else{
+            } else {
                 this.isSelfFinished = false;
                 console.log(this.name, "self execution is not finished, will continue at next");
             }
@@ -297,7 +321,7 @@ Field.prototype.triggerAction = function (name, args) {
     console.log("Found field action: ", this.interfaces[name], " would Call with args:", args);
     var i,
         res = true;
-    for (i = 0; i < this.interfaces[name].length; i++){
+    for (i = 0; i < this.interfaces[name].length; i++) {
         console.log("calling function: ", this.interfaces[name][i]);
         res = res && this.interfaces[name][i](args);
     }
