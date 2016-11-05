@@ -63,27 +63,27 @@ var Agent = function (name) {
     this.fired = [];
     this.data = {};
     this.childs = {};
-    console.log("Creating new agent: ", this.name);
+    debug.log("Creating new agent: ", this.name);
 };
 
 Agent.prototype.addChild = function (childAgent) {
-    console.log("adding child ", childAgent.name, "to", this.name);
+    debug.log("adding child ", childAgent.name, "to", this.name);
     this.childs[childAgent.name] = childAgent;
 };
 
 Agent.prototype.removeChild = function (childAgent) {
-    console.log("removing child ", childAgent.name, "from", this.name);
+    debug.log("removing child ", childAgent.name, "from", this.name);
     if (childAgent.name in this.childs)
         delete this.childs[childAgent.name];
 };
 
 Agent.prototype.addCourse = function (course) {
-    console.log("adding", course.name, "to", this.name);
+    debug.log("adding", course.name, "to", this.name);
     this.courses[course.name] = course;
 };
 
 Agent.prototype.removeCourse = function (course) {
-    console.log("removing", course.name, "from", this.name);
+    debug.log("removing", course.name, "from", this.name);
     if (course.name in this.courses)
         delete this.courses[course.name];
 };
@@ -107,23 +107,23 @@ Agent.prototype.unsubscribeSignal = function (signal, course) {
 Agent.prototype.fireSignal = function (signal) {
     if (!(signal in this.fired))
         if (signal in this.signals)
-            this.fired[signal] = this.signals[signal];
+            this.fired[signal] = this.signals[signal].slice(0);
 };
 
 Agent.prototype.sayHello = function () {
-    console.log("Hello, I'm " + this.name);
+    debug.log("Hello, I'm " + this.name);
 };
 
 Agent.prototype.update = function () {
-    console.log("Updating " + this.name);
-    console.log("Updating the childs of", this.name);
+    debug.log("Updating " + this.name);
+    debug.log("Updating the childs of", this.name);
     var isChildsFinished = true;
     for (var c in this.childs) {
-        console.log("Updating child " + this.childs[c]);
+        debug.log("Updating child " + this.childs[c]);
         isChildsFinished = isChildsFinished && this.childs[c].update();
-        console.log("isChildsFinished: ", isChildsFinished);
+        debug.log("isChildsFinished: ", isChildsFinished);
     }
-    console.log("Finished updating this childs of", this.name);
+    debug.log("Finished updating this childs of", this.name);
 
     var i;
     var toBeRemoved = [];
@@ -132,13 +132,13 @@ Agent.prototype.update = function () {
         var a = this.fired[key];
         for (i = 0; i < a.length; i++) {
             if (a[i].trigger()) {
-                console.log(key, ' - finished course: ', a[i].name);
+                debug.log(key, ' - finished course: ', a[i].name);
                 toBeRemoved.push({signal: key, course: a[i]});
             }
         }
     }
     for (i = 0; i < toBeRemoved.length; i++) {
-        console.log(key, ' - unsubscribe course: ', a[i].name);
+        debug.log(key, ' - unsubscribe course: ', a[i].name);
         var signal = toBeRemoved[i].signal;
         var course = toBeRemoved[i].course;
         if (signal in this.fired) {
@@ -149,7 +149,7 @@ Agent.prototype.update = function () {
             }
         }
     }
-    console.log(this.name, ": fired signals length: ", Object.keys(this.fired).length);
+    debug.log(this.name, ": fired signals length: ", Object.keys(this.fired).length);
     if (Object.keys(this.fired).length === 0)
         return true && isChildsFinished;
     else
@@ -176,47 +176,56 @@ var Course = function (owner, name, childs, action) {
     this.isSelfFinished = false;
 };
 
+Course.prototype.reset = function () {
+    this.next = 0;
+    this.isChildsFinsihed = false;
+    this.isFinished = false;
+    this.isPreFinished = false;
+    this.isPostFinished = false;
+    this.isSelfFinished = false;
+}
+
 Course.prototype.trigger = function () {
-    console.log("triggering course: ", this.name);
+    debug.log("triggering course: ", this.name);
     // run pre first, run childs one by one, when all the childs are finished then run itself
     if (this.isFinished)
-        return true;
+        this.reset();
     if (!this.isPreFinished) {
-        console.log(this.name, "triggering pre courses.");
+        debug.log(this.name, "triggering pre courses.");
         if (this.runCourseList(this.pre)) {
             this.isPreFinished = true;
-            console.log(this.name, "pre courses are finished.");
+            debug.log(this.name, "pre courses are finished.");
         }
     }
     if (this.isPreFinished) {
-        console.log(this.name, " triggering child courses");
+        debug.log(this.name, " triggering child courses");
         while (!this.isChildsFinsihed) {
             if (this.next < this.childs.length) {
                 if (this.childs[this.next].trigger()) {
-                    console.log(this.name, "child finished: ", this.childs[this.next].name);
+                    debug.log(this.name, "child finished: ", this.childs[this.next].name);
                     this.next++;
                 } else
                     break;
             } else {
-                console.log(this.name, "all child courses are finished.");
+                debug.log(this.name, "all child courses are finished.");
                 this.isChildsFinsihed = true;
                 break;
             }
         }
         if (this.isChildsFinsihed && !this.isSelfFinished) {
-            console.log(this.name, "trigger course of self.");
+            debug.log(this.name, "trigger course of self.");
             if (this.action === null || this.action.trigger(this)) {
                 this.isSelfFinished = true;
-                console.log(this.name, "self execution is finished");
+                debug.log(this.name, "self execution is finished");
             } else {
                 this.isSelfFinished = false;
-                console.log(this.name, "self execution is not finished, will continue at next");
+                debug.log(this.name, "self execution is not finished, will continue at next");
             }
         }
         if (this.isSelfFinished && !this.isPostFinished) {
-            console.log(this.name, "triggering post courses.");
+            debug.log(this.name, "triggering post courses.");
             if (this.runCourseList(this.post)) {
-                console.log(this.name, "post courses are finished.");
+                debug.log(this.name, "post courses are finished.");
                 this.isPostFinished = true;
                 this.isFinished = true;
             }
@@ -227,20 +236,24 @@ Course.prototype.trigger = function () {
 
 Course.prototype.runCourseList = function (courseList) {
     var i,
-        toBeRemoved = [];
+        toBeRemoved = [],
+        isFinished = true;
     for (i = 0; i < courseList.length; i++) {
         if (courseList[i].trigger()) {
-            toBeRemoved.push(courseList[i]);
-        }
+            //toBeRemoved.push(courseList[i]);
+        }else
+            isFinished = false;
     }
     for (i = 0; i < toBeRemoved.length; i++) {
-        console.log('Removing course', toBeRemoved[i].name, 'from pre of ', this.name)
+        debug.log('Removing course', toBeRemoved[i].name, 'from pre of ', this.name)
         courseList.splice(courseList.indexOf(toBeRemoved[i]), 1);
     }
-    if (courseList.length == 0)
-        return true;
-    else
-        return false;
+    // if (courseList.length == 0)
+    //     return true;
+    // else
+    //     return false;
+
+    return isFinished;
 };
 
 Course.prototype.subscribePreCourse = function (course) {
@@ -309,14 +322,14 @@ Field.prototype.unsubscribeFromInterface = function (name, fn) {
 };
 
 Field.prototype.triggerAction = function (name, args) {
-    console.log("Firing field action: ", name);
+    debug.log("Firing field action: ", name);
     if (!(name in this.interfaces))
         return;
-    console.log("Found field action: ", this.interfaces[name], " would Call with args:", args);
+    debug.log("Found field action: ", this.interfaces[name], " would Call with args:", args);
     var i,
         res = true;
     for (i = 0; i < this.interfaces[name].length; i++) {
-        console.log("calling function: ", this.interfaces[name][i]);
+        debug.log("calling function: ", this.interfaces[name][i]);
         res = res && this.interfaces[name][i](args);
     }
     return res;

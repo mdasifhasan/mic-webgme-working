@@ -29,4 +29,5 @@ var DataSprite = function () {
     this.scale.x = 1;
     this.scale.y = 1;
     this.physics = new DataPhysics();
+    this.sprite = null;
 };

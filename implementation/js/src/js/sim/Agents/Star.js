@@ -2,7 +2,7 @@
  * Created by hasanm on 11/4/2016.
  */
 var Star = function (name) {
-    console.log("calling star constructor 1");
+    debug.log("calling star constructor 1");
     Agent.apply(this, [name]);
 
     // child agents

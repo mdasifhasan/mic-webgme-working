@@ -16,7 +16,7 @@ var CreateGroup = function () {
 CreateGroup.prototype.trigger = function (course) {
     var dataSprite = course.owner.data.dataSprite;
     var res = Fields.root.getChild("Canvas").getChild("Group").triggerAction("addGroup", dataSprite.group);
-    console.log("Course CreateGroup is finished :", res);
+    debug.log("Course CreateGroup is finished :", res);
     return res;
 };
 
@@ -34,13 +34,13 @@ var AddCollisionCheck = function () {
 
 AddCollisionCheck.prototype.trigger = function (course) {
     var data = [];
-    data[0] = sim.agents["player"].sprite.data.dataSprite.physics.body;
-    data[1] = sim.agents["star1"].sprite.data.dataSprite.group.value;
+    data[0] = sim.agents["Test Game"].childs["player"].sprite.data.dataSprite.sprite;
+    data[1] = sim.agents["Test Game"].childs["ground"].sprite.data.dataSprite.group.value;
     var res = Fields.root.getChild("Canvas").getChild("Collision").triggerAction("addCollisionCheck", data);
 
     data = [];
-    data[0] = sim.agents["player"].sprite.data.dataSprite.physics.body;
-    data[1] = sim.agents["ground"].sprite.data.dataSprite.group.value;
+    data[0] = sim.agents["Test Game"].childs["star1"].sprite.data.dataSprite.group.value;
+    data[1] = sim.agents["Test Game"].childs["ground"].sprite.data.dataSprite.group.value;
     res = res && Fields.root.getChild("Canvas").getChild("Collision").triggerAction("addCollisionCheck", data);
 
     return res;

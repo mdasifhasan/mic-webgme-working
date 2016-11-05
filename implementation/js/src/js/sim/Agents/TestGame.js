@@ -50,5 +50,9 @@ var TestGame = function (name) {
     this.player.sprite.data.dataSprite.x = 32;
     this.player.sprite.data.dataSprite.y = 450;
     this.addChild(this.player);
+
+    // Collision
+    this.collision = new Collision("collision");
+    this.addChild(this.collision);
 };
 inheritsFrom(TestGame, Agent);

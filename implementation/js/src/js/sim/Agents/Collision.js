@@ -3,12 +3,11 @@
  */
 var Collision = function (name) {
     Agent.apply(this, [name]);
+    var addCollisionCheck = new Course(this, "Add Collision", null, new AddCollisionCheck());
+    this.addCourse(addCollisionCheck);
+    sim.agents["Canvas"].courses["collision"].subscribePostCourse(addCollisionCheck);
 
-    var AddCollisionCheck = new Course(this, "Add Collision", null, AddCollisionCheck);
-    this.addCourse(Check);
-    sim.agents["Canvas"].courses["collision"].subscribePostCourse(Check);
-
-    var Check = new Course(this, "Check collision", null, CheckCollision);
+    var Check = new Course(this, "Check collision", null, new CheckCollision());
     this.addCourse(Check);
     sim.agents["Canvas"].courses["update"].subscribePreCourse(Check);
 };

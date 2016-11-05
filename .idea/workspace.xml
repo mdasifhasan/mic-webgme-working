@@ -6,8 +6,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/implementation/js/src/index.html" afterPath="$PROJECT_DIR$/implementation/js/src/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/implementation/js/src/js/platform.js" afterPath="$PROJECT_DIR$/implementation/js/src/js/platform.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/implementation/js/src/js/sim/Actions/CanvasActions.js" afterPath="$PROJECT_DIR$/implementation/js/src/js/sim/Actions/CanvasActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Canvas.js" afterPath="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Canvas.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Collision.js" afterPath="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Collision.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Star.js" afterPath="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Star.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/TestGame.js" afterPath="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/TestGame.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/implementation/js/src/js/sim/Constructs/constructs.js" afterPath="$PROJECT_DIR$/implementation/js/src/js/sim/Constructs/constructs.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/implementation/js/src/js/sim/CourseActions/CourseActionsCanvas.js" afterPath="$PROJECT_DIR$/implementation/js/src/js/sim/CourseActions/CourseActionsCanvas.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/implementation/js/src/js/sim/Data/DataSprite.js" afterPath="$PROJECT_DIR$/implementation/js/src/js/sim/Data/DataSprite.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/implementation/js/src/js/sim/Fields/FieldCanvas.js" afterPath="$PROJECT_DIR$/implementation/js/src/js/sim/Fields/FieldCanvas.js" />
@@ -36,8 +38,8 @@
       <file leaf-file-name="CanvasActions.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Actions/CanvasActions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
+            <state relative-caret-position="498">
+              <caret line="66" column="26" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
               <folding>
                 <element signature="e#0#38#0" expanded="false" />
               </folding>
@@ -45,11 +47,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="platform.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="platform.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/implementation/js/src/js/platform.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+            <state relative-caret-position="430">
+              <caret line="42" column="19" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="constructs.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Constructs/constructs.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="179" column="0" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -58,8 +70,8 @@
       <file leaf-file-name="Collision.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Collision.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
+            <state relative-caret-position="119">
+              <caret line="9" column="80" selection-start-line="9" selection-start-column="80" selection-end-line="9" selection-end-column="80" />
               <folding>
                 <element signature="e#0#38#0" expanded="false" />
               </folding>
@@ -67,21 +79,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="constructs.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Constructs/constructs.js">
+      <file leaf-file-name="Sprite.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Sprite.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="221">
+              <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
+              <folding>
+                <element signature="e#0#39#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CourseActionsCanvas.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CourseActionsCanvas.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/CourseActions/CourseActionsCanvas.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="99" />
+            <state relative-caret-position="294">
+              <caret line="32" column="2" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="2" />
               <folding>
                 <element signature="e#0#42#0" expanded="false" />
               </folding>
@@ -89,38 +103,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FieldCanvas.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Fields/FieldCanvas.js">
+      <file leaf-file-name="Player.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Player.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-              <folding>
-                <element signature="e#0#38#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RegisterFields.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Registration/RegisterFields.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="4" column="28" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
-              <folding>
-                <element signature="e#0#38#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RegisterActions.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Registration/RegisterActions.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="4" column="23" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#38#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="272">
+              <caret line="16" column="65" selection-start-line="16" selection-start-column="65" selection-end-line="16" selection-end-column="65" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -128,8 +116,8 @@
       <file leaf-file-name="Canvas.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Canvas.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="7" column="53" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="53" />
+            <state relative-caret-position="102">
+              <caret line="8" column="20" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="20" />
               <folding>
                 <element signature="e#0#39#0" expanded="false" />
               </folding>
@@ -140,10 +128,22 @@
       <file leaf-file-name="test.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/implementation/js/src/js/toBeDeleted/test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="94" column="4" selection-start-line="94" selection-start-column="4" selection-end-line="94" selection-end-column="51" />
+            <state relative-caret-position="736">
+              <caret line="94" column="38" selection-start-line="94" selection-start-column="32" selection-end-line="94" selection-end-column="38" />
               <folding>
                 <element signature="e#0#39#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataSprite.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Data/DataSprite.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+              <folding>
+                <element signature="e#0#42#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -189,21 +189,21 @@
         <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Registration/RegisterActions.js" />
         <option value="$PROJECT_DIR$/implementation/js/src/js/sim/toBeDeleted/InheritanceExample.js" />
         <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Sprite.js" />
-        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Star.js" />
         <option value="$PROJECT_DIR$/implementation/js/src/js/sim/toBeDeleted/TestGame.js" />
-        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Constructs/constructs.js" />
-        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Registration/RegisterAgents.js" />
         <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Platform.js" />
+        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Player.js" />
+        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Canvas.js" />
+        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Fields/FieldCanvas.js" />
+        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Star.js" />
         <option value="$PROJECT_DIR$/implementation/js/src/index.html" />
         <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/TestGame.js" />
-        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Player.js" />
-        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Data/DataSprite.js" />
-        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/CourseActions/CourseActionsCanvas.js" />
-        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Canvas.js" />
         <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Collision.js" />
-        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Fields/FieldCanvas.js" />
-        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Actions/CanvasActions.js" />
+        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Registration/RegisterAgents.js" />
+        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Constructs/constructs.js" />
         <option value="$PROJECT_DIR$/implementation/js/src/js/platform.js" />
+        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Data/DataSprite.js" />
+        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Actions/CanvasActions.js" />
+        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/CourseActions/CourseActionsCanvas.js" />
       </list>
     </option>
   </component>
@@ -691,18 +691,18 @@
       <workItem from="1478046310476" duration="19626000" />
       <workItem from="1478145068936" duration="8720000" />
       <workItem from="1478280378659" duration="10350000" />
-      <workItem from="1478302968722" duration="13258000" />
+      <workItem from="1478302968722" duration="17903000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103585000" />
+    <option name="totallyTimeSpent" value="108230000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21156661" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21156661" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32713178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -739,13 +739,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/plugins/MiniProject2/MiniProject2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/plugins/FamilyTransformation/FamilyTransformation.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3434">
@@ -983,97 +976,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Registration/RegisterAgents.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="5" column="3" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#38#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/implementation/js/src/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="40" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Player.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="65" selection-start-line="16" selection-start-column="65" selection-end-line="16" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Sprite.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Star.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#42#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Data/DataSprite.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="13" column="21" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#42#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Platform.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="11" column="55" selection-start-line="11" selection-start-column="46" selection-end-line="11" selection-end-column="55" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Agents/TestGame.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="19" column="32" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#38#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Canvas.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="7" column="53" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Collision.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="26" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#38#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1097,22 +1004,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/CourseActions/CourseActionsCanvas.js">
+    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Star.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="99" />
+        <state relative-caret-position="85">
+          <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
           <folding>
             <element signature="e#0#42#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/toBeDeleted/test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="94" column="4" selection-start-line="94" selection-start-column="4" selection-end-line="94" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1127,29 +1024,133 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Constructs/constructs.js">
+    <entry file="file://$PROJECT_DIR$/implementation/js/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+        <state relative-caret-position="357">
+          <caret line="21" column="42" selection-start-line="21" selection-start-column="42" selection-end-line="21" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Actions/CanvasActions.js">
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="31" column="16" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
+        <state relative-caret-position="205">
+          <caret line="425" column="0" selection-start-line="425" selection-start-column="0" selection-end-line="425" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Agents/TestGame.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
           <folding>
             <element signature="e#0#38#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Registration/RegisterAgents.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#38#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Collision.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="80" selection-start-line="9" selection-start-column="80" selection-end-line="9" selection-end-column="80" />
+          <folding>
+            <element signature="e#0#38#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Canvas.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="20" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#39#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Constructs/constructs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="179" column="0" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/implementation/js/src/js/platform.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        <state relative-caret-position="430">
+          <caret line="42" column="19" selection-start-line="42" selection-start-column="19" selection-end-line="42" selection-end-column="19" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Player.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="65" selection-start-line="16" selection-start-column="65" selection-end-line="16" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/toBeDeleted/test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="736">
+          <caret line="94" column="38" selection-start-line="94" selection-start-column="32" selection-end-line="94" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#39#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Sprite.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#39#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Data/DataSprite.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/Actions/CanvasActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="66" column="26" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#38#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/CourseActions/CourseActionsCanvas.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="32" column="2" selection-start-line="32" selection-start-column="2" selection-end-line="32" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#42#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

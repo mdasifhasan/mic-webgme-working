@@ -5,18 +5,6 @@ var CanvasActions = function () {
 
 };
 
-
-var fnTest = function (a) {
-    console.log("calling fnTest: ", a);
-
-}
-
-var f = [];
-f.push(fnTest);
-for (var i = 0; i < f.length; i++)
-    f[i].apply(null, ["comeon!"]);
-
-
 CanvasActions.register = function () {
     Fields.root.getChild("Canvas").subscribeToInterface("createSprite", createSprite);
     Fields.root.getChild("Canvas").getChild("Group").subscribeToInterface("addGroup", addGroup);
@@ -46,7 +34,7 @@ var addGroup = function (dataGroup) {
     } else {
         dataGroup.value = game.add.group();
         dataGroup.value.enableBody = dataGroup.enablePhysics;
-        console.log("enabling physics for group: ", dataGroup.enablePhysics)
+        debug.log("enabling physics for group: ", dataGroup.enablePhysics)
         Groups[dataGroup.name] = dataGroup.value;
     }
     return true;
@@ -54,7 +42,7 @@ var addGroup = function (dataGroup) {
 
 
 var createSprite = function (dataSprite) {
-    console.log("FieldAction create sprite called with args:", dataSprite);
+    debug.log("FieldAction create sprite called with args:", dataSprite);
     var a;
     if (dataSprite.group === null || dataSprite.group.value === null) {
         a = game.add.sprite(dataSprite.x, dataSprite.y, dataSprite.imageName);
@@ -76,5 +64,6 @@ var createSprite = function (dataSprite) {
         a.body.bounce.y = dataSprite.physics.bounce.y;
         a.body.collideWorldBounds = dataSprite.physics.collideWorldBounds;
     }
+    dataSprite.sprite = a;
     return true;
 };

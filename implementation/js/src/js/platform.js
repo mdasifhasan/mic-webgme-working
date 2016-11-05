@@ -5,6 +5,21 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {preload: preload, create: create, update: update});
 var sim = new Simulation("Game Simulation");
 
+var debug = {};
+debug.log = function(){
+    // console.log(arguments);
+    if(arguments[0] === "_force"){
+        console.log.apply(null, arguments);
+    }
+}
+
+debug.force = function(){
+    console.log.apply(null, arguments);
+}
+
+
+
+
 function preload() {
     game.load.image('sky', 'assets/sky.png');
     game.load.image('ground', 'assets/platform.png');
@@ -28,6 +43,5 @@ function create() {
 function update() {
     sim.fireSignal("update");
     sim.update();
-
-    console.log("me");
+    // debug.force("me");
 }
