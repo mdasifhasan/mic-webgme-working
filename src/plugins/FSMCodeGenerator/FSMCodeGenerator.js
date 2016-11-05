@@ -11,12 +11,15 @@ define([
     'plugin/PluginConfig',
     'text!./metadata.json',
     'plugin/PluginBase',
+    'common/util/ejs',
+    'plugin/FSMCodeGenerator/FSMCodeGenerator/Templates/Templates',
     'q'
-], function (
-    PluginConfig,
-    pluginMetadata,
-    PluginBase,
-    Q) {
+], function (PluginConfig,
+             pluginMetadata,
+             PluginBase,
+             ejs,
+             TEMPLATES,
+             Q) {
     'use strict';
 
     pluginMetadata = JSON.parse(pluginMetadata);
@@ -171,6 +174,30 @@ define([
             timeStamp: (new Date()).toISOString(),
             pluginVersion: self.getVersion()
         }, null, 2);
+
+        for (language in TEMPLATES) {
+            codeFileName = 'FSM-GeneratedCode/' + language + '/Program.' + TEMPLATES[language].extension;
+            batchFileName = 'FSM-GeneratedCode/' + language + '/execute.bat';
+
+            filesToAdd[codeFileName] = ejs.render(TEMPLATES[language].code, {stateMachine: jsonModel});
+            filesToAdd[batchFileName] = ejs.render(TEMPLATES[language].batch, {stateMachine: jsonModel});
+
+        }
+
+        artifact.addFiles(filesToAdd, function (err) {
+            if (err) {
+                deferred.reject(new Error(err));
+                return;
+            }
+            self.blobClient.saveAllArtifacts(function (err, hashes) {
+                if (err) {
+                    deferred.reject(new Error(err));
+                    return;
+                }
+
+                deferred.resolve(hashes[0]);
+            });
+        });
 
         return deferred.promise;
     };
