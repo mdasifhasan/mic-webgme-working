@@ -9,13 +9,15 @@ var Star = function (name) {
     this.sprite = new Sprite("sprite");
     this.addChild(this.sprite);
 
-    // setting the data of its child
+    // setting the data of its own and its child
     this.sprite.data.dataSprite.group.name = "Stars";
     this.sprite.data.dataSprite.imageName = "star";
     this.sprite.data.dataSprite.enablePhysics = true;
     this.sprite.data.dataSprite.group.enablePhysics = true;
     this.sprite.data.dataSprite.physics.bounce.y = 0.7 + Math.random() * 0.2;
-    // setting the courses of its child
+
+
+    // setting the courses of its own and its child
     var childs = [];
     childs.push(this.sprite.courses["createGroup"]);
     childs.push(this.sprite.courses["createSprite"]);
