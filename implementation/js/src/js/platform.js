@@ -12,6 +12,12 @@ function preload() {
     game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
 }
 
+function register(sim) {
+    RegisterAgents(sim);
+    RegisterFields();
+    RegisterFieldActions();
+}
+
 function create() {
     register(sim);
     sim.fireSignal("create");
@@ -19,12 +25,9 @@ function create() {
         continue;
 }
 
-function register(sim) {
-    RegisterAgents(sim);
-    RegisterFields();
-    RegisterFieldActions();
-}
-
 function update() {
+    sim.fireSignal("update");
+    sim.update();
 
+    console.log("me");
 }

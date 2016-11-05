@@ -10,6 +10,8 @@ var DataPhysics = function () {
     this.bounce = {};
     this.bounce.x = 0;
     this.bounce.y = .5;
+    this.collideWorldBounds = false;
+    this.body = null;
 };
 
 var DataGroup = function () {

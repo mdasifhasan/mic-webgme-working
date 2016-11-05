@@ -5,15 +5,19 @@ var Canvas = function (name) {
     Agent.apply(this, [name]);
 
     var courseCreate = new Course(this, "create", null, null);
+    var courseCollision = new Course(this, "collision", null, null);
     var courseUpdate = new Course(this, "update", null, null);
+    var courseCreateParent = new Course(this, "CreateComposite", [courseCreate, courseCollision], null);
 
     this.addCourse(courseCreate);
+    this.addCourse(courseCollision);
+    this.addCourse(courseCreateParent);
     this.addCourse(courseUpdate);
 
     sim.subscribeSignal("create", this);
     sim.subscribeSignal("update", this);
 
-    this.subscribeSignal("create", courseCreate);
+    this.subscribeSignal("create", courseCreateParent);
     this.subscribeSignal("update", courseUpdate);
 };
 inheritsFrom(Canvas, Agent);
