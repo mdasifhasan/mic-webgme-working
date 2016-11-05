@@ -16,6 +16,10 @@
       "MiniProject2": {
         "src": "src/plugins/MiniProject2",
         "test": "test/plugins/MiniProject2"
+      },
+      "JSCodeGenerator": {
+        "src": "src/plugins/JSCodeGenerator",
+        "test": "test/plugins/JSCodeGenerator"
       }
     },
     "decorators": {
