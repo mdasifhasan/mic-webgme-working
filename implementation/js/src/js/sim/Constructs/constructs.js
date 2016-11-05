@@ -189,8 +189,11 @@ Course.prototype.trigger = function () {
             console.log(this.name, "trigger course of self.");
             if (this.action === null || this.action.trigger(this)) {
                 this.isSelfFinished = true;
-            } else
+                console.log(this.name, "self execution is finished");
+            } else{
                 this.isSelfFinished = false;
+                console.log(this.name, "self execution is not finished, will continue at next");
+            }
         }
         if (this.isSelfFinished && !this.isPostFinished) {
             console.log(this.name, "triggering post courses.");
@@ -292,9 +295,13 @@ Field.prototype.triggerAction = function (name, args) {
     if (!(name in this.interfaces))
         return;
     console.log("Found field action: ", this.interfaces[name], " would Call with args:", args);
-    var i;
-    for (i = 0; i < this.interfaces[name].length; i++)
-        this.interfaces[name][i].apply(null, args);
+    var i,
+        res = true;
+    for (i = 0; i < this.interfaces[name].length; i++){
+        console.log("calling function: ", this.interfaces[name][i]);
+        res = res && this.interfaces[name][i](args);
+    }
+    return res;
 };
 
 

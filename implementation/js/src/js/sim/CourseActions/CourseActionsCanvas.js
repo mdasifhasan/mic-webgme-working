@@ -15,8 +15,7 @@ var CreateGroup = function () {
 
 CreateGroup.prototype.trigger = function (course) {
     var dataSprite = course.owner.data.dataSprite;
-    console.log("Course CreateGroup is running, dataSprite: ", dataSprite);
     var res = Fields.root.getChild("Canvas").getChild("Group").triggerAction("addGroup", dataSprite.group);
-    console.log("Course CreateGroup is finished");
+    console.log("Course CreateGroup is finished :", res);
     return res;
 };

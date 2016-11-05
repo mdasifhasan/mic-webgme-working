@@ -15,6 +15,7 @@ var DataPhysics = function () {
 var DataGroup = function () {
     this.name = "default";
     this.value = null;
+    this.enablePhysics = false;
 };
 
 var DataSprite = function () {
@@ -22,7 +23,8 @@ var DataSprite = function () {
     this.y = 0;
     this.imageName = "default";
     this.group = new DataGroup();
-    this.scaleX = 1;
-    this.scaleY = 1;
+    this.scale = {};
+    this.scale.x = 1;
+    this.scale.y = 1;
     this.physics = new DataPhysics();
 };
