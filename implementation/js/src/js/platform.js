@@ -13,10 +13,16 @@ function preload() {
 }
 
 function create() {
-    sim.register();
+    register(sim);
     sim.fireSignal("create");
     while (!sim.update())
         continue;
+}
+
+function register(sim) {
+    RegisterAgents(sim);
+    RegisterFields();
+    RegisterFieldActions();
 }
 
 function update() {

@@ -3,5 +3,5 @@
  */
 var RegisterAgents = function (sim) {
     sim.addAgent(new Canvas("Canvas"))
-    sim.addAgent(new Star("star"));
+    sim.addAgent(new TestGame("Test Game"));
 };

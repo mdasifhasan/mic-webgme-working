@@ -14,12 +14,6 @@ var Simulation = function (name) {
     this.signals = {};
 };
 
-Simulation.prototype.register =function(){
-    RegisterAgents(this);
-    RegisterFields(this);
-    RegisterFieldActions(this);
-};
-
 Simulation.prototype.createSignal = function (signal) {
     if (signal in this.signals)
         return;
