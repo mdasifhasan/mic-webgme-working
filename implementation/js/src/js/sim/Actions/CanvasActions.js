@@ -52,11 +52,12 @@ var createSprite = function (dataSprite) {
 
 
     a.scale.setTo(dataSprite.scale.x, dataSprite.scale.y);
-    a.body.immovable = dataSprite.physics.immovable;
-    a.body.gravity.x = dataSprite.physics.gravity.x;
-    a.body.gravity.y = dataSprite.physics.gravity.y;
-    a.body.bounce.x = dataSprite.physics.bounce.x;
-    a.body.bounce.y = dataSprite.physics.bounce.y;
-
+    if (dataSprite.enablePhysics || dataSprite.group.enablePhysics) {
+        a.body.immovable = dataSprite.physics.immovable;
+        a.body.gravity.x = dataSprite.physics.gravity.x;
+        a.body.gravity.y = dataSprite.physics.gravity.y;
+        a.body.bounce.x = dataSprite.physics.bounce.x;
+        a.body.bounce.y = dataSprite.physics.bounce.y;
+    }
     return true;
 };
