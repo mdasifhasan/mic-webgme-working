@@ -14,8 +14,8 @@ var Canvas = function (name) {
     this.addCourse(courseCreateParent);
     this.addCourse(courseUpdate);
 
-    sim.subscribeSignal("create", this);
-    sim.subscribeSignal("update", this);
+    sim.subscribeSignal("create", this, "create");
+    sim.subscribeSignal("update", this, "update");
 
     this.subscribeSignal("create", courseCreateParent);
     this.subscribeSignal("update", courseUpdate);

@@ -20,17 +20,17 @@ Simulation.prototype.createSignal = function (signal) {
     this.signals[signal] = [];
 };
 
-Simulation.prototype.subscribeSignal = function (signal, agent) {
+Simulation.prototype.subscribeSignal = function (signal, agent, agentSignal) {
     if (!(signal in this.signals))
         this.createSignal(signal);
-    this.signals[signal].push(agent);
+    this.signals[signal].push([agent, agentSignal]);
 };
 
-Simulation.prototype.fireSignal = function (signal, agent) {
+Simulation.prototype.fireSignal = function (signal) {
     if (signal in this.signals) {
         var i;
         for (i = 0; i < this.signals[signal].length; i++)
-            this.signals[signal][i].fireSignal(signal);
+            this.signals[signal][i][0].fireSignal(this.signals[signal][i][1]);
     }
 };
 
