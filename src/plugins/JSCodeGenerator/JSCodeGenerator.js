@@ -128,21 +128,98 @@ define([
         if(nodeSignals !== null)
             self.extractSimSignals(nodes, nodeSignals, jsonModel);
 
+        if(nodeAgents !== null)
+            self.extractAgents(nodes, nodeAgents, jsonModel);
+
         return jsonModel;
     };
+
+    JSCodeGenerator.prototype.extractAgents = function (nodes, nodeAgents, jsonModel) {
+        var self = this;
+        var agents = {};
+        var childrenPaths = self.core.getChildrenPaths(nodeAgents);
+        for (var i = 0; i < childrenPaths.length; i++) {
+            var childNode = nodes[childrenPaths[i]];
+            var cname = self.core.getAttribute(childNode, 'name');
+            if (self.core.isTypeOf(childNode, self.META['Agent'])) {
+                var agent = {};
+                agent.name = cname;
+                agents[cname] = agent;
+                self.extractAgent(nodes, childNode, agent);
+            } else{
+                self.logger.info("Ignoring unexpected model under Agents.");
+            }
+        }
+        if(agents.length !== 0)
+            jsonModel.Agents = agents;
+    };
+
+    JSCodeGenerator.prototype.extractAgent = function (nodes, nodeAgent, agentModel) {
+        var self = this;
+        var agents = [];
+        var childrenPaths = self.core.getChildrenPaths(nodeAgent);
+        self.logger.info("extracting agent, total childrens: ", childrenPaths.length );
+        for (var i = 0; i < childrenPaths.length; i++) {
+            var childNode = nodes[childrenPaths[i]];
+            var cname = self.core.getAttribute(childNode, 'name');
+            if (self.core.isTypeOf(childNode, self.META['Agent Signals'])) {
+                self.extractAgentSignals(nodes, childNode, agentModel);
+            } else{
+                self.logger.info("Ignoring unexpected model under Agents.");
+            }
+        }
+        if(agents.length !== 0)
+            agentModel.Agents = agents;
+    };
+
+
+    JSCodeGenerator.prototype.extractAgentSignals = function (nodes, nodeAgentSignals, agentModel) {
+        var self = this;
+        var AgentSignals = [];
+        var Connections = [];
+        var childrenPaths = self.core.getChildrenPaths(nodeAgentSignals);
+        self.logger.info("extracting agent signals, total childrens: ", childrenPaths.length );
+        for (var i = 0; i < childrenPaths.length; i++) {
+            var childNode = nodes[childrenPaths[i]];
+            var cname = self.core.getAttribute(childNode, 'name');
+            if (self.core.isTypeOf(childNode, self.META['Agent Signal'])) {
+                AgentSignals.push(cname) ;
+            }else if (self.core.isTypeOf(childNode, self.META['connect_signal'])) {
+                var src = self.core.getPointerPath(childNode, 'src');
+                var dst = self.core.getPointerPath(childNode, 'dst');
+                src = nodes[src];
+                dst = nodes[dst];
+                dst = self.core.getPointerPath(dst, 'refer');
+                dst = nodes[dst];
+                src = self.core.getAttribute(src, "name");
+                dst = self.core.getAttribute(dst, "name");
+                var connection = {};
+                connection.AgentSignal = src;
+                connection.SimSignal = dst;
+                Connections.push(connection);
+            }
+            else{
+                self.logger.info("Ignoring unexpected model under Agents.");
+            }
+        }
+        if(AgentSignals.length !== 0)
+            agentModel.AgentSignals = AgentSignals;
+        if(Connections.length !== 0)
+            agentModel.SignalConnections = Connections;
+    };
+
 
     JSCodeGenerator.prototype.extractSimSignals = function (nodes, nodeSignals, jsonModel) {
         var self = this;
         var signalNames = [];
         var childrenPaths = self.core.getChildrenPaths(nodeSignals);
-        self.logger.info("extracting sim signals, total childrens: ", childrenPaths.length );
         for (var i = 0; i < childrenPaths.length; i++) {
             var childNode = nodes[childrenPaths[i]];
             var cname = self.core.getAttribute(childNode, 'name');
             if (self.core.isTypeOf(childNode, self.META['Sim Signal'])) {
                 signalNames.push(self.core.getAttribute(childNode, 'name')) ;
             } else{
-                self.logger.info("Ignoring unexpected model under signals.");
+                self.logger.info("Ignoring unexpected model under Signals.");
             }
         }
         if(signalNames.length !== 0)
