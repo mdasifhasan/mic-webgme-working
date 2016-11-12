@@ -1,0 +1,267 @@
+{
+  "name": "Simulation Example",
+  "Agents": {
+    "Canvas": {
+      "name": "Canvas",
+      "libraryAgents": {
+        "Sprite": {
+          "name": "Sprite",
+          "DataStructure": {
+            "DataSprite": {
+              "image name": "default",
+              "x": 0,
+              "y": 0,
+              "Physics": {
+                "enable physics": false
+              },
+              "Group": {
+                "name": "default",
+                "enable physics": false
+              }
+            }
+          },
+          "Fields": {
+            "Canvas": {
+              "Fields": {
+                "FieldSprites": {
+                  "DataFields": {
+                    "DataSprites": {
+                      "type": "/DataSprite"
+                    }
+                  },
+                  "Actions": {
+                    "CreateSprite": {
+                      "data": [
+                        "/DataSprite"
+                      ],
+                      "signals": [
+                        "Error"
+                      ]
+                    }
+                  },
+                  "Fields": {
+                    "Group": {
+                      "Actions": {
+                        "Create Group": {
+                          "data": [
+                            "/DataSprite/Group"
+                          ],
+                          "signals": [
+                            "Error"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "AgentSignals": [
+        "Add Collision Check"
+      ],
+      "Fields": {
+        "Canvas": {}
+      }
+    },
+    "Error Handler": {
+      "name": "Error Handler",
+      "AgentSignals": [
+        "Critical Error"
+      ]
+    },
+    "Test Game": {
+      "name": "Test Game",
+      "childs": {
+        "Star2": {
+          "name": "Star2",
+          "childs": {
+            "Sprite": {
+              "name": "Sprite",
+              "DataStructure": {
+                "DataSprite": {
+                  "image name": "star",
+                  "x": 400,
+                  "Physics": {
+                    "enable physics": true
+                  },
+                  "Group": {
+                    "enable physics": true,
+                    "name": "stars"
+                  },
+                  "y": 0
+                }
+              },
+              "Fields": {
+                "Canvas": {
+                  "Fields": {
+                    "FieldSprites": {
+                      "DataFields": {
+                        "DataSprites": {
+                          "type": "/DataSprite"
+                        }
+                      },
+                      "Actions": {
+                        "CreateSprite": {
+                          "data": [
+                            "/DataSprite"
+                          ],
+                          "signals": [
+                            "Error"
+                          ]
+                        }
+                      },
+                      "Fields": {
+                        "Group": {
+                          "Actions": {
+                            "Create Group": {
+                              "data": [
+                                "/DataSprite/Group"
+                              ],
+                              "signals": [
+                                "Error"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "Star1": {
+          "name": "Star1",
+          "childs": {
+            "Sprite": {
+              "name": "Sprite",
+              "DataStructure": {
+                "DataSprite": {
+                  "image name": "star",
+                  "x": 100,
+                  "Physics": {
+                    "enable physics": true
+                  },
+                  "Group": {
+                    "enable physics": true,
+                    "name": "stars"
+                  },
+                  "y": 0
+                }
+              },
+              "Fields": {
+                "Canvas": {
+                  "Fields": {
+                    "FieldSprites": {
+                      "DataFields": {
+                        "DataSprites": {
+                          "type": "/DataSprite"
+                        }
+                      },
+                      "Actions": {
+                        "CreateSprite": {
+                          "data": [
+                            "/DataSprite"
+                          ],
+                          "signals": [
+                            "Error"
+                          ]
+                        }
+                      },
+                      "Fields": {
+                        "Group": {
+                          "Actions": {
+                            "Create Group": {
+                              "data": [
+                                "/DataSprite/Group"
+                              ],
+                              "signals": [
+                                "Error"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "libraryAgents": {
+        "Star": {
+          "name": "Star",
+          "childs": {
+            "Sprite": {
+              "name": "Sprite",
+              "DataStructure": {
+                "DataSprite": {
+                  "image name": "star",
+                  "Physics": {
+                    "enable physics": true
+                  },
+                  "Group": {
+                    "enable physics": true,
+                    "name": "stars"
+                  },
+                  "x": 0,
+                  "y": 0
+                }
+              },
+              "Fields": {
+                "Canvas": {
+                  "Fields": {
+                    "FieldSprites": {
+                      "DataFields": {
+                        "DataSprites": {
+                          "type": "/DataSprite"
+                        }
+                      },
+                      "Actions": {
+                        "CreateSprite": {
+                          "data": [
+                            "/DataSprite"
+                          ],
+                          "signals": [
+                            "Error"
+                          ]
+                        }
+                      },
+                      "Fields": {
+                        "Group": {
+                          "Actions": {
+                            "Create Group": {
+                              "data": [
+                                "/DataSprite/Group"
+                              ],
+                              "signals": [
+                                "Error"
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Game Engine": {
+      "name": "Game Engine",
+      "AgentSignals": [
+        "Update",
+        "Create"
+      ]
+    }
+  }
+}
