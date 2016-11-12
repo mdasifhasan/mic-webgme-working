@@ -24,19 +24,20 @@
     <favorites_list name="Projects" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.8190386">
+    <splitter split-orientation="horizontal" split-proportion="0.6107446">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="JSCodeGenerator.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/plugins/JSCodeGenerator/JSCodeGenerator.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="260">
-                  <caret line="168" column="34" selection-start-line="168" selection-start-column="21" selection-end-line="168" selection-end-column="34" />
+                <state relative-caret-position="221">
+                  <caret line="200" column="16" selection-start-line="200" selection-start-column="16" selection-end-line="200" selection-end-column="16" />
                   <folding>
                     <element signature="e#715#912#0" expanded="false" />
-                    <element signature="e#7534#9091#0" expanded="false" />
-                    <element signature="e#10814#11317#0" expanded="false" />
-                    <element signature="e#11391#12967#0" expanded="false" />
+                    <element signature="e#8986#10543#0" expanded="false" />
+                    <element signature="e#10658#11410#0" expanded="false" />
+                    <element signature="e#12255#12758#0" expanded="false" />
+                    <element signature="e#12832#14408#0" expanded="false" />
                   </folding>
                 </state>
               </provider>
@@ -145,8 +146,8 @@
           <file leaf-file-name="MiniProject2.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/plugins/MiniProject2/MiniProject2.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="178">
-                  <caret line="137" column="58" selection-start-line="134" selection-start-column="16" selection-end-line="137" selection-end-column="58" />
+                <state relative-caret-position="127">
+                  <caret line="134" column="16" selection-start-line="134" selection-start-column="16" selection-end-line="134" selection-end-column="33" />
                   <folding />
                 </state>
               </provider>
@@ -172,7 +173,6 @@
       <list>
         <option value="$PROJECT_DIR$/src/plugins/FamilyTransformation/FamilyTransformation.js" />
         <option value="$PROJECT_DIR$/src/plugins/TutorialPlugin/TutorialPlugin.js" />
-        <option value="$PROJECT_DIR$/src/plugins/MiniProject2/MiniProject2.js" />
         <option value="$PROJECT_DIR$/src/decorators/TestDecorator/TestDecorator.js" />
         <option value="$PROJECT_DIR$/src/visualizers/panels/TestViz/TestVizControl.js" />
         <option value="$PROJECT_DIR$/src/decorators/TestDecorator/DiagramDesigner/TestDecorator.DiagramDesignerWidget.js" />
@@ -215,6 +215,7 @@
         <option value="$PROJECT_DIR$/src/visualizers/widgets/TestViz/html/htmlCombined.html" />
         <option value="$PROJECT_DIR$/src/visualizers/widgets/TestViz/TestVizWidget.js" />
         <option value="$PROJECT_DIR$/src/visualizers/widgets/TestViz/template/template.html" />
+        <option value="$PROJECT_DIR$/src/plugins/MiniProject2/MiniProject2.js" />
         <option value="$PROJECT_DIR$/src/plugins/JSCodeGenerator/JSCodeGenerator.js" />
       </list>
     </option>
@@ -263,78 +264,7 @@
     <panes>
       <pane id="Scope" />
       <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Projects" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Projects" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Projects" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Projects" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Projects" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Projects" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Projects" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugins" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Projects" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Projects" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugins" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="JSCodeGenerator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
+        <subPane />
       </pane>
       <pane id="Scratches" />
     </panes>
@@ -446,18 +376,18 @@
       <workItem from="1478372848656" duration="32000" />
       <workItem from="1478389480789" duration="26262000" />
       <workItem from="1478568296077" duration="109000" />
-      <workItem from="1478743115584" duration="15726000" />
+      <workItem from="1478743115584" duration="19262000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="151404000" />
+    <option name="totallyTimeSpent" value="154940000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22327965" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22327965" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32713178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -706,14 +636,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/plugins/JSCodeGenerator/CourseTable.js" />
-    <entry file="file://$PROJECT_DIR$/src/plugins/MiniProject2/MiniProject2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="137" column="58" selection-start-line="134" selection-start-column="16" selection-end-line="137" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/visualizers/Visualizers.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -840,15 +762,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/plugins/MiniProject2/MiniProject2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="134" column="16" selection-start-line="134" selection-start-column="16" selection-end-line="134" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/plugins/JSCodeGenerator/JSCodeGenerator.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="168" column="34" selection-start-line="168" selection-start-column="21" selection-end-line="168" selection-end-column="34" />
+        <state relative-caret-position="221">
+          <caret line="200" column="16" selection-start-line="200" selection-start-column="16" selection-end-line="200" selection-end-column="16" />
           <folding>
             <element signature="e#715#912#0" expanded="false" />
-            <element signature="e#7534#9091#0" expanded="false" />
-            <element signature="e#10814#11317#0" expanded="false" />
-            <element signature="e#11391#12967#0" expanded="false" />
+            <element signature="e#8986#10543#0" expanded="false" />
+            <element signature="e#10658#11410#0" expanded="false" />
+            <element signature="e#12255#12758#0" expanded="false" />
+            <element signature="e#12832#14408#0" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -185,15 +185,56 @@ define([
     };
 
 
-    JSCodeGenerator.prototype.extractFields = function (nodes, nodeFields, agentModel) {
+    JSCodeGenerator.prototype.extractFields = function (nodes, nodeFields, jsonModel) {
         var self = this;
-        var childFields = self.extractChildOfMeta(nodes, "Field", nodeFields, agentModel);
-        if (childFields !== null && childFields.length != 0) {
-            var fields = childFields.map(function (node) {
-                return self.core.getAttribute(node, 'name');
-            });
-            agentModel.fields = fields;
+        var childrenPaths = self.core.getChildrenPaths(nodeFields);
+        for (var i = 0; i < childrenPaths.length; i++) {
+            var childNode = nodes[childrenPaths[i]];
+            var cname = self.core.getAttribute(childNode, 'name');
+            if (self.core.isTypeOf(childNode, self.META['Field'])) {
+                var cfield = {};
+                cfield.name = cname;
+                self.extractFields(nodes, childNode, cfield);
+                if (!("fields" in jsonModel))
+                    jsonModel.fields = [];
+                jsonModel.fields.push(cfield);
+                
+            }
+            else if (self.core.isTypeOf(childNode, self.META['IAction'])) {
+                var iAction = {};
+                iAction.name = cname;
+            }
+            else if (self.core.isTypeOf(childNode, self.META['IData'])) {
+            }
+            else {
+                self.logger.info("Ignoring unexpected model under Agents.");
+            }
         }
+        return jsonModel;
+    };
+
+    JSCodeGenerator.prototype.extractPathAddress = function (nodes, path, metaType) {
+        var pathNames = [];
+        if (path != null) {
+            var node = nodes[path];
+            while (node !== null && (self.core.isTypeOf(childNode, self.META[metaType]))) {
+                var name = self.core.getAttribute(node, 'name');
+                pathNames.push(name);
+                node = self.core.getParent(node);
+            }
+        }
+        else
+            return null;
+        pathNames = pathNames.reverse();
+        var address = pathNames.reduce(function (a, b) {
+            return a + b;
+        }, "");
+        return address;
+    };
+
+
+    JSCodeGenerator.prototype.extractFieldAction = function (nodes, nodeAction, jsonModel) {
+        var self = this;
     };
 
     JSCodeGenerator.prototype.extractCourses = function (nodes, nodeAgentSignals, agentModel) {
@@ -253,7 +294,7 @@ define([
             agentModel.AgentSignals = AgentSignals;
     };
 
-    JSCodeGenerator.prototype.extractChildOfMeta = function (nodes, metaName, holderNode, jsonModel) {
+    JSCodeGenerator.prototype.extractChildOfMeta = function (nodes, metaName, holderNode) {
         var self = this;
         var childNodes = [];
         var childrenPaths = self.core.getChildrenPaths(holderNode);
