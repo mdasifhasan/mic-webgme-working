@@ -291,46 +291,6 @@ define([
     };
 
 
-    JSCodeGenerator.prototype.extractFieldAction = function (nodes, nodeAction, jsonModel) {
-        var self = this;
-    };
-
-    JSCodeGenerator.prototype.extractCourses = function (nodes, nodeAgentSignals, agentModel) {
-        var self = this;
-        var AgentSignals = [];
-        var Connections = [];
-        var childrenPaths = self.core.getChildrenPaths(nodeAgentSignals);
-        self.logger.info("extracting agent signals, total childrens: ", childrenPaths.length);
-        for (var i = 0; i < childrenPaths.length; i++) {
-            var childNode = nodes[childrenPaths[i]];
-            var cname = self.core.getAttribute(childNode, 'name');
-
-            if (self.core.isTypeOf(childNode, self.META['Agent Signal'])) {
-                AgentSignals.push(cname);
-            } else if (self.core.isTypeOf(childNode, self.META['connect_signal'])) {
-                var src = self.core.getPointerPath(childNode, 'src');
-                var dst = self.core.getPointerPath(childNode, 'dst');
-                src = nodes[src];
-                dst = nodes[dst];
-                dst = self.core.getPointerPath(dst, 'refer');
-                dst = nodes[dst];
-                src = self.core.getAttribute(src, "name");
-                dst = self.core.getAttribute(dst, "name");
-                var connection = {};
-                connection.AgentSignal = src;
-                connection.SimSignal = dst;
-                Connections.push(connection);
-            }
-            else {
-                self.logger.info("Ignoring unexpected model under Agents.");
-            }
-        }
-        if (AgentSignals.length !== 0)
-            agentModel.AgentSignals = AgentSignals;
-        if (Connections.length !== 0)
-            agentModel.SignalConnections = Connections;
-    };
-
 
     // done
     JSCodeGenerator.prototype.extractAgentSignals = function (nodes, nodeAgentSignals, agentModel) {
