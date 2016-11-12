@@ -168,6 +168,9 @@ define([
             else if (self.core.isTypeOf(childNode, self.META['Fields'])) {
                 self.extractFields(nodes, childNode, agentModel);
             }
+            else if (self.core.isTypeOf(childNode, self.META['Data Structure'])) {
+                agentModel.DataStructure = self.extractDataStructures(nodes, childNode, agentModel);
+            }
             else if (self.core.isTypeOf(childNode, self.META['library agents'])) {
                 var lagents = self.extractAgents(nodes, childNode);
                 if (lagents.length !== 0)
@@ -235,6 +238,36 @@ define([
             }
         }
         return jsonModel;
+    };
+
+
+    JSCodeGenerator.prototype.extractDataStructures = function (nodes, nodeFields) {
+        var self = this;
+        var childrenPaths = self.core.getChildrenPaths(nodeFields);
+        var DataStructure = {};
+        for (var i = 0; i < childrenPaths.length; i++) {
+            var childNode = nodes[childrenPaths[i]];
+            var cname = self.core.getAttribute(childNode, 'name');
+            if (self.core.isTypeOf(childNode, self.META['Number'])) {
+                DataStructure[cname] = self.core.getAttribute(childNode, 'value');
+            }
+            else if (self.core.isTypeOf(childNode, self.META['Text'])) {
+                DataStructure[cname] = self.core.getAttribute(childNode, 'value');
+            }
+            else if (self.core.isTypeOf(childNode, self.META['Boolean'])) {
+                DataStructure[cname] = self.core.getAttribute(childNode, 'value');
+            }
+            else if (self.core.isTypeOf(childNode, self.META['Object'])) {
+                DataStructure[cname] = self.core.getAttribute(childNode, 'value');
+            }
+            else if (self.core.isTypeOf(childNode, self.META['Data'])) {
+                DataStructure[cname] = self.extractDataStructures(nodes, childNode);
+            }
+            else {
+                self.logger.info("Ignoring unexpected model under Agents.");
+            }
+        }
+        return DataStructure;
     };
 
     JSCodeGenerator.prototype.extractPathAddress = function (nodes, path, metaType) {
