@@ -193,18 +193,42 @@ define([
             var cname = self.core.getAttribute(childNode, 'name');
             if (self.core.isTypeOf(childNode, self.META['Field'])) {
                 var cfield = {};
-                cfield.name = cname;
+                // cfield.name = cname;
                 self.extractFields(nodes, childNode, cfield);
-                if (!("fields" in jsonModel))
-                    jsonModel.fields = [];
-                jsonModel.fields.push(cfield);
-                
+                if (!("Fields" in jsonModel))
+                    jsonModel.Fields = {};
+                jsonModel.Fields[cname] = cfield;
+
             }
             else if (self.core.isTypeOf(childNode, self.META['IAction'])) {
                 var iAction = {};
-                iAction.name = cname;
+                // iAction.name = cname;
+                if (!("Actions" in jsonModel))
+                    jsonModel.Actions = {};
+                jsonModel.Actions[cname] = iAction;
+                var data = self.extractChildOfMeta(nodes, "IData", childNode);
+                var data = data.map(function (node) {
+                    var path = self.core.getPointerPath(node, 'refer');
+                    return self.extractPathAddress(nodes, path, "Data");
+                });
+                iAction.data = data;
+
+                var signals = self.extractChildOfMeta(nodes, "FireSignal", childNode);
+                var signals = signals.map(function (node) {
+                    var name = self.core.getAttribute(node, 'name');
+                    return name;
+                });
+                iAction.signals = signals;
             }
             else if (self.core.isTypeOf(childNode, self.META['IData'])) {
+                var iData = {};
+                if (!("DataFields" in jsonModel))
+                    jsonModel.DataFields = {};
+                jsonModel.DataFields[cname] = iData;
+
+                var path = self.core.getPointerPath(childNode, 'refer');
+                iData.type = self.extractPathAddress(nodes, path, "Data");
+
             }
             else {
                 self.logger.info("Ignoring unexpected model under Agents.");
@@ -214,10 +238,11 @@ define([
     };
 
     JSCodeGenerator.prototype.extractPathAddress = function (nodes, path, metaType) {
+        var self = this;
         var pathNames = [];
         if (path != null) {
             var node = nodes[path];
-            while (node !== null && (self.core.isTypeOf(childNode, self.META[metaType]))) {
+            while (node !== null && (self.core.isTypeOf(node, self.META[metaType]))) {
                 var name = self.core.getAttribute(node, 'name');
                 pathNames.push(name);
                 node = self.core.getParent(node);
@@ -227,7 +252,7 @@ define([
             return null;
         pathNames = pathNames.reverse();
         var address = pathNames.reduce(function (a, b) {
-            return a + b;
+            return a + "/" + b;
         }, "");
         return address;
     };
