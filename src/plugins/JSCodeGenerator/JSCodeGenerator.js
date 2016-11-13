@@ -169,7 +169,10 @@ define([
                 self.extractFields(nodes, childNode, agentModel);
             }
             else if (self.core.isTypeOf(childNode, self.META['Data Structure'])) {
-                agentModel.DataStructure = self.extractDataStructures(nodes, childNode, agentModel);
+                agentModel.DataStructure = self.extractDataStructures(nodes, childNode);
+            }
+            else if (self.core.isTypeOf(childNode, self.META['Courses'])) {
+                agentModel.Courses = self.extractCourses(nodes, childNode);
             }
             else if (self.core.isTypeOf(childNode, self.META['library agents'])) {
                 var lagents = self.extractAgents(nodes, childNode);
@@ -185,6 +188,67 @@ define([
                 self.logger.info("Ignoring unexpected model under Agents.");
             }
         }
+    };
+
+
+
+    JSCodeGenerator.prototype.extractCourses = function (nodes, nodeCourses) {
+        var self = this;
+        var childrenPaths = self.core.getChildrenPaths(nodeCourses);
+        var Courses = {};
+        for (var i = 0; i < childrenPaths.length; i++) {
+            var childNode = nodes[childrenPaths[i]];
+            var cname = self.core.getAttribute(childNode, 'name');
+            if (self.core.isTypeOf(childNode, self.META['Course'])) {
+                Courses[cname+"_NNN"] = self.extractCourse(nodes, childNode);
+            }
+            else {
+                // self.logger.info("Ignoring unexpected model under Agents.");
+            }
+        }
+        return Courses;
+    };
+
+    JSCodeGenerator.prototype.extractCourse = function (nodes, nodeCourse) {
+        var self = this;
+        self.logger.info("checking under course node:" , self.core.getAttribute(nodeCourse, 'name'));
+        var start = self.extractChildOfMeta(nodes, "Start", nodeCourse)[0];
+        start = self.core.getAttribute(start, "name");
+        var end = self.extractChildOfMeta(nodes, "End", nodeCourse)[0];
+        end = self.core.getAttribute(end, "name");
+        // self.logger.info("start:" , self.core.getAttribute(start, 'name'));
+        // self.logger.info("end:" , self.core.getAttribute(end, 'name'));
+        var childrenPaths = self.core.getChildrenPaths(nodeCourse);
+        var Courses = [];
+        var next = {};
+        var size = 0;
+        for (var i = 0; i < childrenPaths.length; i++) {
+            var childNode = nodes[childrenPaths[i]];
+            // var cname = self.core.getAttribute(childNode, 'name');
+            if (self.core.isTypeOf(childNode, self.META['Transition'])) {
+                var src = self.core.getPointerPath(childNode, 'src');
+                var dst = self.core.getPointerPath(childNode, 'dst');
+                src = nodes[src];
+                dst = nodes[dst];
+                src = self.core.getAttribute(src, "name");
+                dst = self.core.getAttribute(dst, "name");
+                next[src] = dst;
+                size++;
+            }
+        }
+        if(size === 0)
+            return [];
+        var n = start;
+        while(true){
+            n = next[n];
+            if(n === null || n === end)
+                break;
+            if(Courses.indexOf(n) > -1)
+                break;
+            // stop when cyclic reference to a course is detected
+            Courses.push(n);
+        }
+        return Courses;
     };
 
 
@@ -297,7 +361,7 @@ define([
         var self = this;
         var AgentSignals = [];
         var childrenPaths = self.core.getChildrenPaths(nodeAgentSignals);
-        self.logger.info("extracting agent signals, total childrens: ", childrenPaths.length);
+        // self.logger.info("extracting agent signals, total childrens: ", childrenPaths.length);
         for (var i = 0; i < childrenPaths.length; i++) {
             var childNode = nodes[childrenPaths[i]];
             var cname = self.core.getAttribute(childNode, 'name');
@@ -305,7 +369,7 @@ define([
                 AgentSignals.push(cname);
             }
             else {
-                self.logger.info("Ignoring unexpected model under Agents.");
+                // self.logger.info("Ignoring unexpected model under Agents.");
             }
         }
         if (AgentSignals.length !== 0)
@@ -317,14 +381,14 @@ define([
         var childNodes = [];
         var childrenPaths = self.core.getChildrenPaths(holderNode);
         var holderName = self.core.getAttribute(holderNode, 'name');
-        self.logger.info("extracting", metaName, ", total childrens: ", childrenPaths.length);
+        // self.logger.info("extracting", metaName, ", total childrens: ", childrenPaths.length);
         for (var i = 0; i < childrenPaths.length; i++) {
             var childNode = nodes[childrenPaths[i]];
             if (self.core.isTypeOf(childNode, self.META[metaName])) {
                 childNodes.push(childNode);
             }
             else {
-                self.logger.info("Ignoring unexpected model under", holderName + ".");
+                // self.logger.info("Ignoring unexpected model under", holderName + ".");
             }
         }
         return childNodes;

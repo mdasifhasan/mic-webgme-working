@@ -1,0 +1,1 @@
+nodemon ./node_modules/webgme/src/bin/run_plugin.js JSCodeGenerator SimPow
