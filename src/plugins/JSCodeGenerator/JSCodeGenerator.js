@@ -176,7 +176,8 @@ define([
                 agentModel.DataStructure = self.extractDataStructures(nodes, childNode);
             }
             else if (self.core.isTypeOf(childNode, self.META['Courses'])) {
-                agentModel.Courses = self.extractCourses(nodes, childNode);
+                // uncomment the following
+                //agentModel.Courses = self.extractCourses(nodes, childNode);
             }
             else if (self.core.isTypeOf(childNode, self.META['Course Actions'])) {
                 agentModel.CourseActions = self.extractCourseActions(nodes, childNode);
@@ -206,7 +207,7 @@ define([
             var childNode = nodes[childrenPaths[i]];
             var cname = self.core.getAttribute(childNode, 'name');
             if (self.core.isTypeOf(childNode, self.META['CourseAction'])) {
-                // courseActions[cname+"_NNN"] = self.extractCourseAction(nodes, childNode);
+                courseActions[cname] = self.extractCourseAction(nodes, childNode);
             }
             else {
                 // self.logger.info("Ignoring unexpected model under Agents.");
@@ -215,46 +216,125 @@ define([
         return courseActions;
     };
 
-    JSCodeGenerator.prototype.extractCourseAction = function (nodes, nodeCourse) {
+    JSCodeGenerator.prototype.extractCourseAction = function (nodes, nodeCourseAction) {
         var self = this;
-        self.logger.info("checking under course node:", self.core.getAttribute(nodeCourse, 'name'));
-        var start = self.extractChildOfMeta(nodes, "Start", nodeCourse)[0];
-        start = self.core.getAttribute(start, "name");
-        var end = self.extractChildOfMeta(nodes, "End", nodeCourse)[0];
-        end = self.core.getAttribute(end, "name");
-        // self.logger.info("start:" , self.core.getAttribute(start, 'name'));
-        // self.logger.info("end:" , self.core.getAttribute(end, 'name'));
-        var childrenPaths = self.core.getChildrenPaths(nodeCourse);
-        var Courses = [];
-        var next = {};
-        var size = 0;
-        for (var i = 0; i < childrenPaths.length; i++) {
-            var childNode = nodes[childrenPaths[i]];
-            // var cname = self.core.getAttribute(childNode, 'name');
-            if (self.core.isTypeOf(childNode, self.META['Transition'])) {
-                var src = self.core.getPointerPath(childNode, 'src');
-                var dst = self.core.getPointerPath(childNode, 'dst');
-                src = nodes[src];
-                dst = nodes[dst];
-                src = self.core.getAttribute(src, "name");
-                dst = self.core.getAttribute(dst, "name");
-                next[src] = dst;
-                size++;
+        var ca = {};
+        var data = self.extractChildOfMeta(nodes, "IData", nodeCourseAction);
+        data = data.map(function (node) {
+            var path = self.core.getPointerPath(node, 'type');
+            path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
+            var j = {};
+            j.name = self.core.getAttribute(node, "name");
+            j.type = path;
+            return j;
+        });
+        if (data.length !== 0)
+            ca.Data = data;
+
+
+        var dataFields = self.extractChildOfMeta(nodes, "IFieldData", nodeCourseAction);
+        dataFields = dataFields.map(function (node) {
+            var path = self.core.getPointerPath(node, 'type');
+            path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
+            var j = {};
+            j.name = self.core.getAttribute(node, "name");
+            j.type = path;
+            return j;
+        });
+        if (dataFields.length !== 0)
+            ca.FieldData = dataFields;
+
+        ca.fieldActions = [];
+
+        var signals = self.extractChildOfMeta(nodes, "CourseActionSignal", nodeCourseAction);
+        var signals = signals.map(function (node) {
+            var name = self.core.getAttribute(node, 'name');
+            return name;
+        });
+        if (signals.length !== 0)
+            ca.CourseActionSignals = signals;
+
+        var start = self.extractChildOfMeta(nodes, "Course Action Start", nodeCourseAction)[0];
+        var nc = start;
+        while (nc !== null) {
+            self.logger.info("nc name:", self.core.getPath(nc));
+            var transition = self.core.getCollectionPaths(nc, 'src');
+            self.logger.info("transition:", transition);
+            if (transition === null || transition.length === 0)
+                break;
+            transition = transition[0];
+            nc = self.core.getPointerPath(nodes[transition], "dst");
+            if (nc !== null) {
+                nc = nodes[nc];
+                if (self.core.isTypeOf(nc, self.META['Course Action End'])) {
+                    break;
+                }
+                nc = self.core.getParent(nc);
+                var s = {};
+                s.name = self.core.getAttribute(nc, "name");
+                if (self.core.isTypeOf(nc, self.META['IAction'])) {
+                    s.type = "IAction";
+
+                    var data = self.extractChildOfMeta(nodes, "IData", nc);
+                    data = data.map(function (node) {
+                        var path = self.core.getPointerPath(node, 'type');
+                        path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
+                        var j = {};
+                        j.name = self.core.getAttribute(node, "name");
+                        j.type = path;
+                        var value = null;
+                        var t = self.core.getCollectionPaths(node, 'dst');
+                        if (t !== null && t.length !== 0) {
+                            t = t[0];
+                            var v = self.core.getPointerPath(nodes[t], "src");
+                            v = nodes[v];
+                            value = self.core.getAttribute(v, 'name');
+                        }
+
+                        if(value === null){
+                            t = self.core.getCollectionPaths(node, 'src');
+                            if (t !== null && t.length !== 0) {
+                                t = t[0];
+                                var v = self.core.getPointerPath(nodes[t], "dst");
+                                v = nodes[v];
+                                value = self.core.getAttribute(v, 'name');
+                            }
+                        }
+
+                        j.value = value;
+                        return j;
+
+                    });
+                    if (data.length !== 0)
+                        s.Data = data;
+
+                    // var dataFields = self.extractChildOfMeta(nodes, "IFieldData", childNode);
+                    // dataFields = dataFields.map(function (node) {
+                    //     var path = self.core.getPointerPath(node, 'type');
+                    //     path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
+                    //     var j = {};
+                    //     j.name = self.core.getAttribute(node, "name");
+                    //     j.type = path;
+                    //     return j;
+                    // });
+                    // if (dataFields.length !== 0)
+                    //     iAction.FieldData = dataFields;
+                    //
+                    // var signals = self.extractChildOfMeta(nodes, "ActionSignal", childNode);
+                    // var signals = signals.map(function (node) {
+                    //     var name = self.core.getAttribute(node, 'name');
+                    //     return name;
+                    // });
+                    // if (signals.length !== 0)
+                    //     iAction.ActionSignals = signals;
+                }
+                ca.fieldActions.push(s);
+                nc = self.extractChildOfMeta(nodes, "End Action", nc)[0];
             }
+            else break;
         }
-        if (size === 0)
-            return [];
-        var n = start;
-        while (true) {
-            n = next[n];
-            if (n === null || n === end)
-                break;
-            if (Courses.indexOf(n) > -1)
-                break;
-            // stop when cyclic reference to a course is detected
-            Courses.push(n);
-        }
-        return Courses;
+
+        return ca;
     };
 
     JSCodeGenerator.prototype.extractSignalPath = function (nodes, s) {
