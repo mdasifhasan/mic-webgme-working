@@ -119,7 +119,11 @@ define([
             var childNode = nodes[childrenPaths[i]];
             if (self.core.isTypeOf(childNode, self.META['Agents'])) {
                 nodeAgents = childNode;
-            } else {
+            }
+            else if (self.core.isTypeOf(childNode, self.META['Fields'])) {
+                self.extractFields(nodes, childNode, jsonModel);
+            }
+            else {
                 self.logger.info("Ignoring unexpected models under simulation.");
             }
         }
@@ -153,7 +157,6 @@ define([
         return agents;
     };
 
-    JSCodeGenerator.prototype.createdAgents = {};
     JSCodeGenerator.prototype.extractAgent = function (nodes, nodeAgent, agentModel) {
         var self = this;
         var childrenPaths = self.core.getChildrenPaths(nodeAgent);
@@ -202,7 +205,7 @@ define([
             var childNode = nodes[childrenPaths[i]];
             var cname = self.core.getAttribute(childNode, 'name');
             if (self.core.isTypeOf(childNode, self.META['CourseAction'])) {
-                courseActions[cname+"_NNN"] = self.extractCourseAction(nodes, childNode);
+                // courseActions[cname+"_NNN"] = self.extractCourseAction(nodes, childNode);
             }
             else {
                 // self.logger.info("Ignoring unexpected model under Agents.");
@@ -213,7 +216,7 @@ define([
 
     JSCodeGenerator.prototype.extractCourseAction = function (nodes, nodeCourse) {
         var self = this;
-        self.logger.info("checking under course node:" , self.core.getAttribute(nodeCourse, 'name'));
+        self.logger.info("checking under course node:", self.core.getAttribute(nodeCourse, 'name'));
         var start = self.extractChildOfMeta(nodes, "Start", nodeCourse)[0];
         start = self.core.getAttribute(start, "name");
         var end = self.extractChildOfMeta(nodes, "End", nodeCourse)[0];
@@ -238,14 +241,14 @@ define([
                 size++;
             }
         }
-        if(size === 0)
+        if (size === 0)
             return [];
         var n = start;
-        while(true){
+        while (true) {
             n = next[n];
-            if(n === null || n === end)
+            if (n === null || n === end)
                 break;
-            if(Courses.indexOf(n) > -1)
+            if (Courses.indexOf(n) > -1)
                 break;
             // stop when cyclic reference to a course is detected
             Courses.push(n);
@@ -273,7 +276,7 @@ define([
 
     JSCodeGenerator.prototype.extractCourse = function (nodes, nodeCourse) {
         var self = this;
-        self.logger.info("checking under course node:" , self.core.getAttribute(nodeCourse, 'name'));
+        self.logger.info("checking under course node:", self.core.getAttribute(nodeCourse, 'name'));
         var start = self.extractChildOfMeta(nodes, "Start", nodeCourse)[0];
         start = self.core.getAttribute(start, "name");
         var end = self.extractChildOfMeta(nodes, "End", nodeCourse)[0];
@@ -298,14 +301,14 @@ define([
                 size++;
             }
         }
-        if(size === 0)
+        if (size === 0)
             return [];
         var n = start;
-        while(true){
+        while (true) {
             n = next[n];
-            if(n === null || n === end)
+            if (n === null || n === end)
                 break;
-            if(Courses.indexOf(n) > -1)
+            if (Courses.indexOf(n) > -1)
                 break;
             // stop when cyclic reference to a course is detected
             Courses.push(n);
@@ -327,7 +330,6 @@ define([
                 if (!("Fields" in jsonModel))
                     jsonModel.Fields = {};
                 jsonModel.Fields[cname] = cfield;
-
             }
             else if (self.core.isTypeOf(childNode, self.META['IAction'])) {
                 var iAction = {};
@@ -336,18 +338,36 @@ define([
                     jsonModel.Actions = {};
                 jsonModel.Actions[cname] = iAction;
                 var data = self.extractChildOfMeta(nodes, "IData", childNode);
-                var data = data.map(function (node) {
-                    var path = self.core.getPointerPath(node, 'refer');
-                    return self.extractPathAddress(nodes, path, "Data");
+                data = data.map(function (node) {
+                    var path = self.core.getPointerPath(node, 'type');
+                    path = self.extractPathAddress(nodes, path, "Data");
+                    var j = {};
+                    j.name = self.core.getAttribute(node, "name");
+                    j.type = path;
+                    return j;
                 });
-                iAction.data = data;
+                if (data.length !== 0)
+                    iAction.Data = data;
 
-                var signals = self.extractChildOfMeta(nodes, "FireSignal", childNode);
+                var dataFields = self.extractChildOfMeta(nodes, "IFieldData", childNode);
+                dataFields = dataFields.map(function (node) {
+                    var path = self.core.getPointerPath(node, 'type');
+                    path = self.extractPathAddress(nodes, path, "Data");
+                    var j = {};
+                    j.name = self.core.getAttribute(node, "name");
+                    j.type = path;
+                    return j;
+                });
+                if (dataFields.length !== 0)
+                    iAction.FieldData = dataFields;
+
+                var signals = self.extractChildOfMeta(nodes, "ActionSignal", childNode);
                 var signals = signals.map(function (node) {
                     var name = self.core.getAttribute(node, 'name');
                     return name;
                 });
-                iAction.signals = signals;
+                if (signals.length !== 0)
+                    iAction.ActionSignals = signals;
             }
             else if (self.core.isTypeOf(childNode, self.META['IData'])) {
                 var iData = {};
@@ -411,11 +431,10 @@ define([
             return null;
         pathNames = pathNames.reverse();
         var address = pathNames.reduce(function (a, b) {
-            return a + "/" + b;
-        }, "");
+            return a + "." + b;
+        }, metaType);
         return address;
     };
-
 
 
     // done
