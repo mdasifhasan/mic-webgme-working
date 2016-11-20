@@ -216,6 +216,29 @@ define([
         return courseActions;
     };
 
+    JSCodeGenerator.prototype.extractValueFromConnection = function(node, nodes) {
+        var self = this;
+        var value = null;
+        var t = self.core.getCollectionPaths(node, 'dst');
+        if (t !== null && t.length !== 0) {
+            t = t[0];
+            var v = self.core.getPointerPath(nodes[t], "src");
+            v = nodes[v];
+            value = self.core.getAttribute(v, 'name');
+        }
+
+        if (value === null) {
+            t = self.core.getCollectionPaths(node, 'src');
+            if (t !== null && t.length !== 0) {
+                t = t[0];
+                var v = self.core.getPointerPath(nodes[t], "dst");
+                v = nodes[v];
+                value = self.core.getAttribute(v, 'name');
+            }
+        }
+        return value;
+    }
+
     JSCodeGenerator.prototype.extractCourseAction = function (nodes, nodeCourseAction) {
         var self = this;
         var ca = {};
@@ -282,51 +305,36 @@ define([
                         var j = {};
                         j.name = self.core.getAttribute(node, "name");
                         j.type = path;
-                        var value = null;
-                        var t = self.core.getCollectionPaths(node, 'dst');
-                        if (t !== null && t.length !== 0) {
-                            t = t[0];
-                            var v = self.core.getPointerPath(nodes[t], "src");
-                            v = nodes[v];
-                            value = self.core.getAttribute(v, 'name');
-                        }
-
-                        if(value === null){
-                            t = self.core.getCollectionPaths(node, 'src');
-                            if (t !== null && t.length !== 0) {
-                                t = t[0];
-                                var v = self.core.getPointerPath(nodes[t], "dst");
-                                v = nodes[v];
-                                value = self.core.getAttribute(v, 'name');
-                            }
-                        }
-
-                        j.value = value;
+                        j.value = self.extractValueFromConnection(node, nodes);
                         return j;
 
                     });
                     if (data.length !== 0)
                         s.Data = data;
 
-                    // var dataFields = self.extractChildOfMeta(nodes, "IFieldData", childNode);
-                    // dataFields = dataFields.map(function (node) {
-                    //     var path = self.core.getPointerPath(node, 'type');
-                    //     path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
-                    //     var j = {};
-                    //     j.name = self.core.getAttribute(node, "name");
-                    //     j.type = path;
-                    //     return j;
-                    // });
-                    // if (dataFields.length !== 0)
-                    //     iAction.FieldData = dataFields;
-                    //
-                    // var signals = self.extractChildOfMeta(nodes, "ActionSignal", childNode);
-                    // var signals = signals.map(function (node) {
-                    //     var name = self.core.getAttribute(node, 'name');
-                    //     return name;
-                    // });
-                    // if (signals.length !== 0)
-                    //     iAction.ActionSignals = signals;
+                    var dataFields = self.extractChildOfMeta(nodes, "IFieldData", nc);
+                    dataFields = dataFields.map(function (node) {
+                        var path = self.core.getPointerPath(node, 'type');
+                        path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
+                        var j = {};
+                        j.name = self.core.getAttribute(node, "name");
+                        j.type = path;
+                        j.value = self.extractValueFromConnection(node, nodes);
+                        return j;
+                    });
+                    if (dataFields.length !== 0)
+                        s.FieldData = dataFields;
+
+
+                    var signals = self.extractChildOfMeta(nodes, "ActionSignal", nc);
+                    var signals = signals.map(function (node) {
+                        var j = {};
+                        j.name = self.core.getAttribute(node, "name");
+                        j.courseActionSignal = self.extractValueFromConnection(node, nodes);
+                        return j;
+                    });
+                    if (signals.length !== 0)
+                        s.ActionSignals = signals;
                 }
                 ca.fieldActions.push(s);
                 nc = self.extractChildOfMeta(nodes, "End Action", nc)[0];
