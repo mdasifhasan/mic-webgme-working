@@ -257,6 +257,22 @@ define([
         return Courses;
     };
 
+    JSCodeGenerator.prototype.extractSignalPath = function (nodes, s) {
+        var self = this;
+        var parent = self.core.getParent(s);
+        var signal = {};
+        if (self.core.isTypeOf(parent, self.META['Field'])) {
+            signal.name = self.core.getAttribute(s, "name");
+            signal.type = "Field";
+            signal.path = self.extractPathAddress(nodes, self.core.getPath(parent),
+                "Field", "Fields");
+        } else {
+            // agents local signal
+            signal.name = self.core.getAttribute(s, "name");
+            signal.type = "local";
+        }
+        return signal;
+    };
 
     JSCodeGenerator.prototype.extractCourses = function (nodes, nodeCourses) {
         var self = this;
@@ -274,26 +290,14 @@ define([
                         var s = self.core.getPointerPath(nodes[p], "src");
                         s = nodes[s];
                         s = nodes[self.core.getPointerPath(s, "refer")];
-                        var parent = self.core.getParent(s);
-                        // s = self.core.getAttribute(parent, "name") + self.core.getAttribute(s, "name");
-                        var signal = {};
-                        if (self.core.isTypeOf(parent, self.META['Field'])) {
-                            signal.name = self.core.getAttribute(s, "name");
-                            signal.type = "Field";
-                            signal.path = self.extractPathAddress(nodes, self.core.getPath(parent),
-                                "Field", "Fields");
-                        } else {
-                            // agents local signal
-                            signal.name = self.core.getAttribute(s, "name");
-                            signal.type = "local";
-                        }
-                        
+                        var signal = self.extractSignalPath(nodes, s);
                         signals.push(signal);
                     });
                 }
 
                 Courses[cname] = {};
-                Courses[cname].childs = c;
+                if (c.length > 0)
+                    Courses[cname].childs = c;
                 if (signals.length > 0)
                     Courses[cname].signals = signals;
             }
@@ -305,6 +309,52 @@ define([
     };
 
     JSCodeGenerator.prototype.extractCourse = function (nodes, nodeCourse) {
+
+        var self = this;
+
+        var start = self.extractChildOfMeta(nodes, "Start", nodeCourse)[0];
+
+        var courses = [];
+        var nc = start;
+        while (nc !== null) {
+            var transition = self.core.getCollectionPaths(nc, 'src');
+            self.logger.info("transition:", transition);
+            if (transition === null || transition.length === 0)
+                break;
+            transition = transition[0];
+            nc = self.core.getPointerPath(nodes[transition], "dst");
+            if (nc !== null) {
+                nc = nodes[nc];
+                var s = {};
+                s.name = self.core.getAttribute(nc, "name");
+                if (!self.core.isTypeOf(nc, self.META['End'])) {
+                    if (self.core.isTypeOf(nc, self.META['FireSignal'])) {
+                        s.type = "FireSignal";
+                        s.isWait = self.core.getAttribute(nc, 'wait');
+                        var path = self.core.getPointerPath(nc, "refer");
+                        var signal = self.extractSignalPath(nodes, nodes[path]);
+                        s.signal = signal;
+                    } else if (self.core.isTypeOf(nc, self.META['WaitForSignal'])) {
+                        s.type = "WaitForSignal";
+                        var path = self.core.getPointerPath(nc, "refer");
+                        var signal = self.extractSignalPath(nodes, nodes[path]);
+                        s.signal = signal;
+                    } else if (self.core.isTypeOf(nc, self.META['Course'])) {
+                        s.type = "Course";
+                        var childs = self.extractCourse(nodes, nc);
+                        if (childs.length > 0)
+                            s.childs = childs;
+                    }
+                    courses.push(s);
+                }
+            }
+            else break;
+        }
+        return courses;
+    };
+
+    JSCodeGenerator.prototype.extractCourseOld = function (nodes, nodeCourse) {
+
         var self = this;
         self.logger.info("checking under course node:", self.core.getAttribute(nodeCourse, 'name'));
         var start = self.extractChildOfMeta(nodes, "Start", nodeCourse)[0];
