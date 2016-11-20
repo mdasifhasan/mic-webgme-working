@@ -123,16 +123,19 @@ define([
             else if (self.core.isTypeOf(childNode, self.META['Fields'])) {
                 self.extractFields(nodes, childNode, jsonModel);
             }
+            else if (self.core.isTypeOf(childNode, self.META['DataTypes'])) {
+                jsonModel.DataTypes = self.extractDataStructures(nodes, childNode);
+            }
             else {
                 self.logger.info("Ignoring unexpected models under simulation.");
             }
         }
 
-        if (nodeAgents !== null) {
-            var agents = self.extractAgents(nodes, nodeAgents);
-            if (agents.length !== 0)
-                jsonModel.Agents = agents;
-        }
+        // if (nodeAgents !== null) {
+        //     var agents = self.extractAgents(nodes, nodeAgents);
+        //     if (agents.length !== 0)
+        //         jsonModel.Agents = agents;
+        // }
 
         return jsonModel;
     };
@@ -167,9 +170,6 @@ define([
             var cname = self.core.getAttribute(childNode, 'name');
             if (self.core.isTypeOf(childNode, self.META['Agent Signals'])) {
                 self.extractAgentSignals(nodes, childNode, agentModel);
-            }
-            else if (self.core.isTypeOf(childNode, self.META['Fields'])) {
-                self.extractFields(nodes, childNode, agentModel);
             }
             else if (self.core.isTypeOf(childNode, self.META['Data Structure'])) {
                 agentModel.DataStructure = self.extractDataStructures(nodes, childNode);
@@ -340,7 +340,7 @@ define([
                 var data = self.extractChildOfMeta(nodes, "IData", childNode);
                 data = data.map(function (node) {
                     var path = self.core.getPointerPath(node, 'type');
-                    path = self.extractPathAddress(nodes, path, "Data");
+                    path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
                     var j = {};
                     j.name = self.core.getAttribute(node, "name");
                     j.type = path;
@@ -352,7 +352,7 @@ define([
                 var dataFields = self.extractChildOfMeta(nodes, "IFieldData", childNode);
                 dataFields = dataFields.map(function (node) {
                     var path = self.core.getPointerPath(node, 'type');
-                    path = self.extractPathAddress(nodes, path, "Data");
+                    path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
                     var j = {};
                     j.name = self.core.getAttribute(node, "name");
                     j.type = path;
@@ -369,14 +369,14 @@ define([
                 if (signals.length !== 0)
                     iAction.ActionSignals = signals;
             }
-            else if (self.core.isTypeOf(childNode, self.META['IData'])) {
+            else if (self.core.isTypeOf(childNode, self.META['FieldData'])) {
                 var iData = {};
-                if (!("DataFields" in jsonModel))
-                    jsonModel.DataFields = {};
-                jsonModel.DataFields[cname] = iData;
+                if (!("FieldData" in jsonModel))
+                    jsonModel.FieldData = {};
+                jsonModel.FieldData[cname] = iData;
 
-                var path = self.core.getPointerPath(childNode, 'refer');
-                iData.type = self.extractPathAddress(nodes, path, "Data");
+                var path = self.core.getPointerPath(childNode, 'type');
+                iData.type = self.extractPathAddress(nodes, path, "Data", "DataTypes");
 
             }
             else {
@@ -394,29 +394,66 @@ define([
         for (var i = 0; i < childrenPaths.length; i++) {
             var childNode = nodes[childrenPaths[i]];
             var cname = self.core.getAttribute(childNode, 'name');
-            if (self.core.isTypeOf(childNode, self.META['Number'])) {
-                DataStructure[cname] = self.core.getAttribute(childNode, 'value');
-            }
-            else if (self.core.isTypeOf(childNode, self.META['Text'])) {
-                DataStructure[cname] = self.core.getAttribute(childNode, 'value');
-            }
-            else if (self.core.isTypeOf(childNode, self.META['Boolean'])) {
-                DataStructure[cname] = self.core.getAttribute(childNode, 'value');
-            }
-            else if (self.core.isTypeOf(childNode, self.META['Object'])) {
-                DataStructure[cname] = self.core.getAttribute(childNode, 'value');
-            }
-            else if (self.core.isTypeOf(childNode, self.META['Data'])) {
-                DataStructure[cname] = self.extractDataStructures(nodes, childNode);
-            }
-            else {
-                self.logger.info("Ignoring unexpected model under Agents.");
-            }
+            DataStructure[cname] = self.extractData(nodes, childNode);
         }
         return DataStructure;
     };
 
-    JSCodeGenerator.prototype.extractPathAddress = function (nodes, path, metaType) {
+    JSCodeGenerator.prototype.extractData = function (nodes, childNode) {
+        var self = this;
+
+        if (self.core.isTypeOf(childNode, self.META['Number'])) {
+            return self.core.getAttribute(childNode, 'value');
+        }
+        else if (self.core.isTypeOf(childNode, self.META['Text'])) {
+            return self.core.getAttribute(childNode, 'value');
+        }
+        else if (self.core.isTypeOf(childNode, self.META['Boolean'])) {
+            return self.core.getAttribute(childNode, 'value');
+        }
+        else if (self.core.isTypeOf(childNode, self.META['Object'])) {
+            var j = {};
+            j.type = self.core.getAttribute(childNode, 'type');
+            j.value = null;
+            return j;
+        }
+        else if (self.core.isTypeOf(childNode, self.META['ReferData'])) {
+            // not implemented yet
+            var j = {};
+            var path = self.core.getPointerPath(childNode, 'type');
+            j.type = self.extractPathAddress(nodes, path, "Data", "DataTypes");
+            return j;
+        }
+        else if (self.core.isTypeOf(childNode, self.META['Dictionary'])) {
+            var t = "KeyValuePair";
+            var pairs = self.extractChildOfMeta(nodes, t, childNode);
+            var j = {};
+            pairs.map(function (node) {
+                // var j = {};
+                var key = self.core.getPointerPath(node, "src");
+                var value = self.core.getPointerPath(node, "dst");
+                key = nodes[key];
+                value = nodes[value];
+                key = self.core.getAttribute(key, "value");
+                // value = self.core.getAttribute(value, "value");
+                value = self.extractData(nodes, value);
+
+                j[key] = value;
+                return 0;
+            });
+            return j;
+        }
+        else if (self.core.isTypeOf(childNode, self.META['Data'])) {
+            return self.extractDataStructures(nodes, childNode);
+        }
+        else {
+            self.logger.info("Ignoring unexpected model under Agents.");
+        }
+    };
+
+    JSCodeGenerator.prototype.extractPathAddress = function (nodes, path, metaType, prefix) {
+        if (prefix === null)
+            prefix = metaType;
         var self = this;
         var pathNames = [];
         if (path != null) {
@@ -432,7 +469,7 @@ define([
         pathNames = pathNames.reverse();
         var address = pathNames.reduce(function (a, b) {
             return a + "." + b;
-        }, metaType);
+        }, prefix);
         return address;
     };
 
