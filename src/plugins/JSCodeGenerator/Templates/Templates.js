@@ -2,15 +2,12 @@
  * @author kecso / https://github.com/kecso
  */
 define([
-    'text!./javascript.bat.ejs',
-    'text!./javascript.generated.js.ejs'
-], function (javascriptBat,
-             javascriptGenerated) {
+    'text!./generated.js.ejs'
+], function (javascriptGenerated) {
     'use strict';
 
     return {
         javascript: {
-            batch: javascriptBat,
             code: javascriptGenerated,
             extension: 'js'
         }

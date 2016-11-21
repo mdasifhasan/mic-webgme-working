@@ -12,8 +12,9 @@ define([
     'text!./metadata.json',
     'plugin/PluginBase',
     'common/util/ejs',
-    'text!./Templates/Templates.js',
+    'plugin/JSCodeGenerator/JSCodeGenerator/Templates/Templates',
     'q'
+
 ], function (PluginConfig,
              pluginMetadata,
              PluginBase,
@@ -827,8 +828,7 @@ define([
             language,
             artifact,
             filesToAdd = {},
-            codeFileName,
-            batchFileName;
+            codeFileName;
 
         artifact = self.blobClient.createArtifact('GeneratedCode');
         filesToAdd['sim.json'] = JSON.stringify(jsonModel, null, 2);
@@ -840,14 +840,11 @@ define([
             pluginVersion: self.getVersion()
         }, null, 2);
 
-        // for (language in TEMPLATES) {
-        //     codeFileName = 'FSM-GeneratedCode/' + language + '/Program.' + TEMPLATES[language].extension;
-        //     batchFileName = 'FSM-GeneratedCode/' + language + '/execute.bat';
-        //
-        //     filesToAdd[codeFileName] = ejs.render(TEMPLATES[language].code, {stateMachine: jsonModel});
-        //     filesToAdd[batchFileName] = ejs.render(TEMPLATES[language].batch, {stateMachine: jsonModel});
-        //
-        // }
+
+        for (language in TEMPLATES) {
+            codeFileName = 'GeneratedCode/' + language + '/Sim.' + TEMPLATES[language].extension;
+            filesToAdd[codeFileName] = ejs.render(TEMPLATES[language].code, {sim: jsonModel});
+        }
 
         artifact.addFiles(filesToAdd, function (err) {
             if (err) {
