@@ -173,14 +173,14 @@ define([
                 self.extractAgentSignals(nodes, childNode, agentModel);
             }
             else if (self.core.isTypeOf(childNode, self.META['Data Structure'])) {
-                agentModel.DataStructure = self.extractDataStructures(nodes, childNode);
+                agentModel.Data = self.extractDataStructures(nodes, childNode);
             }
             else if (self.core.isTypeOf(childNode, self.META['Courses'])) {
                 // uncomment the following
                 //agentModel.Courses = self.extractCourses(nodes, childNode);
             }
             else if (self.core.isTypeOf(childNode, self.META['Course Actions'])) {
-                agentModel.CourseActions = self.extractCourseActions(nodes, childNode);
+                agentModel.CourseActions = self.extractCourseActions(nodes, childNode, nodeAgent);
             }
             else if (self.core.isTypeOf(childNode, self.META['library agents'])) {
                 var lagents = self.extractAgents(nodes, childNode);
@@ -199,7 +199,7 @@ define([
     };
 
 
-    JSCodeGenerator.prototype.extractCourseActions = function (nodes, nodeCourseActions) {
+    JSCodeGenerator.prototype.extractCourseActions = function (nodes, nodeCourseActions, nodeAgent) {
         var self = this;
         var childrenPaths = self.core.getChildrenPaths(nodeCourseActions);
         var courseActions = {};
@@ -207,7 +207,7 @@ define([
             var childNode = nodes[childrenPaths[i]];
             var cname = self.core.getAttribute(childNode, 'name');
             if (self.core.isTypeOf(childNode, self.META['CourseAction'])) {
-                courseActions[cname] = self.extractCourseAction(nodes, childNode);
+                courseActions[cname] = self.extractCourseAction(nodes, childNode, nodeAgent);
             }
             else {
                 // self.logger.info("Ignoring unexpected model under Agents.");
@@ -216,15 +216,16 @@ define([
         return courseActions;
     };
 
-    JSCodeGenerator.prototype.extractValueFromConnection = function(node, nodes) {
+    JSCodeGenerator.prototype.extractConnNode = function (node, nodes, isReturnName) {
         var self = this;
         var value = null;
         var t = self.core.getCollectionPaths(node, 'dst');
         if (t !== null && t.length !== 0) {
             t = t[0];
             var v = self.core.getPointerPath(nodes[t], "src");
-            v = nodes[v];
-            value = self.core.getAttribute(v, 'name');
+            value = nodes[v];
+            if (isReturnName)
+                value = self.core.getAttribute(value, 'name');
         }
 
         if (value === null) {
@@ -232,50 +233,94 @@ define([
             if (t !== null && t.length !== 0) {
                 t = t[0];
                 var v = self.core.getPointerPath(nodes[t], "dst");
-                v = nodes[v];
-                value = self.core.getAttribute(v, 'name');
+                value = nodes[v];
+                if (isReturnName)
+                    value = self.core.getAttribute(value, 'name');
             }
         }
         return value;
     }
+    JSCodeGenerator.prototype.extractConnNodeFromParent = function (node, nodes, transitionMeta, isReverse) {
+        var self = this;
+        var valueNode = null;
+        var t = self.extractChildOfMeta(nodes, transitionMeta, self.core.getParent(self.core.getParent(node)));
 
-    JSCodeGenerator.prototype.extractCourseAction = function (nodes, nodeCourseAction) {
+        if (!isReverse) {
+            for (var i = 0; i < t.length; i++) {
+                var dst = self.core.getPointerPath(t[i], 'dst');
+                if (dst == self.core.getPath(node)) {
+                    var src = self.core.getPointerPath(t[i], 'src');
+                    valueNode = nodes[src];
+                    break;
+                }
+            }
+        } else {
+            for (var i = 0; i < t.length; i++) {
+                var dst = self.core.getPointerPath(t[i], 'src');
+                if (dst == self.core.getPath(node)) {
+                    var src = self.core.getPointerPath(t[i], 'dst');
+                    valueNode = nodes[src];
+                    break;
+                }
+            }
+        }
+        return valueNode;
+    }
+    JSCodeGenerator.prototype.extractCourseAction = function (nodes, nodeCourseAction, nodeAgent) {
         var self = this;
         var ca = {};
         var data = self.extractChildOfMeta(nodes, "IData", nodeCourseAction);
-        data = data.map(function (node) {
-            var path = self.core.getPointerPath(node, 'type');
-            path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
-            var j = {};
-            j.name = self.core.getAttribute(node, "name");
-            j.type = path;
-            return j;
-        });
-        if (data.length !== 0)
-            ca.Data = data;
+        if (data.length !== 0) {
+            ca.data = {};
+            data.map(function (node) {
+                var path = self.core.getPointerPath(node, 'type');
+                path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
+                var j = {};
+                var name = self.core.getAttribute(node, "name");
+                j.type = path;
+                var valueNode = self.extractConnNodeFromParent(node, nodes, "Feed Data");
+                valueNode = self.core.getPointerPath(valueNode, 'refer');
+                j.value = self.extractLocalPathAddress(nodes, valueNode, "Data", "Data", nodeAgent);
+                ca.data[name] = j;
+                return j;
+            });
 
+        }
 
         var dataFields = self.extractChildOfMeta(nodes, "IFieldData", nodeCourseAction);
-        dataFields = dataFields.map(function (node) {
-            var path = self.core.getPointerPath(node, 'type');
-            path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
-            var j = {};
-            j.name = self.core.getAttribute(node, "name");
-            j.type = path;
-            return j;
-        });
-        if (dataFields.length !== 0)
-            ca.FieldData = dataFields;
-
-        ca.fieldActions = [];
+        if (dataFields.length !== 0) {
+            ca.FieldData = {};
+            dataFields.map(function (node) {
+                var path = self.core.getPointerPath(node, 'type');
+                path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
+                var j = {};
+                var name = self.core.getAttribute(node, "name");
+                j.type = path;
+                var valueNode = self.extractConnNodeFromParent(node, nodes, "FeedFieldData");
+                valueNode = self.core.getPointerPath(valueNode, 'refer');
+                j.value = self.extractFieldDataAddress(nodes, valueNode);
+                ca.FieldData[name] = j;
+                return j;
+            });
+        }
 
         var signals = self.extractChildOfMeta(nodes, "CourseActionSignal", nodeCourseAction);
-        var signals = signals.map(function (node) {
-            var name = self.core.getAttribute(node, 'name');
-            return name;
-        });
-        if (signals.length !== 0)
-            ca.CourseActionSignals = signals;
+        if (signals.length !== 0) {
+            ca.CourseActionSignals = {};
+            signals.map(function (node) {
+                var j = {};
+                var name = self.core.getAttribute(node, "name");
+                // j.Signal = self.extractConnNode(node, nodes, true)
+                var valueNode = self.extractConnNodeFromParent(node, nodes, "ConnectSignal", true);
+                valueNode = self.core.getPointerPath(valueNode, 'refer');
+                // j.Signal = self.extractFieldDataAddress(nodes, valueNode);
+                j.Signal = self.extractSignalPath(nodes, nodes[valueNode]);
+                ca.CourseActionSignals[name] = j;
+                return j;
+            });
+        }
+
+        ca.fieldActions = [];
 
         var start = self.extractChildOfMeta(nodes, "Course Action Start", nodeCourseAction)[0];
         var nc = start;
@@ -299,42 +344,48 @@ define([
                     s.type = "IAction";
 
                     var data = self.extractChildOfMeta(nodes, "IData", nc);
-                    data = data.map(function (node) {
-                        var path = self.core.getPointerPath(node, 'type');
-                        path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
-                        var j = {};
-                        j.name = self.core.getAttribute(node, "name");
-                        j.type = path;
-                        j.value = self.extractValueFromConnection(node, nodes);
-                        return j;
+                    if (data.length !== 0) {
+                        s.data = {};
+                        data.map(function (node) {
+                            var path = self.core.getPointerPath(node, 'type');
+                            path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
+                            var j = {};
+                            var name = self.core.getAttribute(node, "name");
+                            j.type = path;
+                            j.value = self.extractConnNode(node, nodes, true);
+                            s.data[name] = j;
+                            return j;
 
-                    });
-                    if (data.length !== 0)
-                        s.Data = data;
+                        });
+                    }
 
                     var dataFields = self.extractChildOfMeta(nodes, "IFieldData", nc);
-                    dataFields = dataFields.map(function (node) {
-                        var path = self.core.getPointerPath(node, 'type');
-                        path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
-                        var j = {};
-                        j.name = self.core.getAttribute(node, "name");
-                        j.type = path;
-                        j.value = self.extractValueFromConnection(node, nodes);
-                        return j;
-                    });
-                    if (dataFields.length !== 0)
-                        s.FieldData = dataFields;
+                    if (dataFields.length !== 0) {
+                        s.FieldData = {};
+                        dataFields.map(function (node) {
+                            var path = self.core.getPointerPath(node, 'type');
+                            path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
+                            var j = {};
+                            var name = self.core.getAttribute(node, "name");
+                            j.type = path;
+                            j.value = self.extractConnNode(node, nodes, true);
+                            s.FieldData[name] = j;
+                            return j;
+                        });
+                    }
 
 
                     var signals = self.extractChildOfMeta(nodes, "ActionSignal", nc);
-                    var signals = signals.map(function (node) {
-                        var j = {};
-                        j.name = self.core.getAttribute(node, "name");
-                        j.courseActionSignal = self.extractValueFromConnection(node, nodes);
-                        return j;
-                    });
-                    if (signals.length !== 0)
-                        s.ActionSignals = signals;
+                    if (signals.length !== 0) {
+                        s.ActionSignals = {};
+                        signals.map(function (node) {
+                            var j = {};
+                            var name = self.core.getAttribute(node, "name");
+                            j.courseActionSignal = self.extractConnNode(node, nodes, true);
+                            s.ActionSignals[name] = j;
+                            return j;
+                        });
+                    }
                 }
                 ca.fieldActions.push(s);
                 nc = self.extractChildOfMeta(nodes, "End Action", nc)[0];
@@ -641,6 +692,77 @@ define([
         return address;
     };
 
+    JSCodeGenerator.prototype.extractLocalPathAddress = function (nodes, path, metaType, prefix, me) {
+        if (prefix === null)
+            prefix = metaType;
+        var self = this;
+        var pathNames = [];
+        if (path != null) {
+            var node = nodes[path];
+            while (node !== null && (self.core.isTypeOf(node, self.META[metaType]))) {
+                var name = self.core.getAttribute(node, 'name');
+                pathNames.push(name);
+                node = self.core.getParent(node);
+            }
+            var agents = [];
+            var p = self.core.getParent(node);
+            while (true) {
+                if (p === me)
+                    break;
+                else if (self.core.isTypeOf(p, self.META['Agent']))
+                    agents.push(self.core.getAttribute(p, 'name'));
+                else if (self.core.isTypeOf(p, self.META['Simulation'])) {
+                    break;
+                }
+                p = self.core.getParent(p);
+            }
+        }
+        else
+            return null;
+        pathNames = pathNames.reverse();
+        var address = pathNames.reduce(function (a, b) {
+            return a + "." + b;
+        }, prefix);
+
+
+        if (agents.length > 0) {
+            agents = agents.reverse();
+            var first = true;
+            var agentsAddress = agents.reduce(function (a, b) {
+                if (first) {
+                    first = false;
+                    return a + b;
+                }
+                else
+                    return a + ".childs." + b;
+            }, "childs.");
+            return agentsAddress + "." + address;
+        }
+
+        return address;
+    };
+    JSCodeGenerator.prototype.extractFieldDataAddress = function (nodes, path) {
+        var prefix = "Fields";
+        var self = this;
+        var pathNames = [];
+        if (path != null) {
+            var fieldData = nodes[path];
+            pathNames.push(self.core.getAttribute(fieldData, 'name'));
+            var node = self.core.getParent(fieldData);
+            while (node !== null && (self.core.isTypeOf(node, self.META['Field']))) {
+                var name = self.core.getAttribute(node, 'name');
+                pathNames.push(name);
+                node = self.core.getParent(node);
+            }
+        }
+        else
+            return null;
+        pathNames = pathNames.reverse();
+        var address = pathNames.reduce(function (a, b) {
+            return a + "." + b;
+        }, prefix);
+        return address;
+    };
 
     // done
     JSCodeGenerator.prototype.extractAgentSignals = function (nodes, nodeAgentSignals, agentModel) {
