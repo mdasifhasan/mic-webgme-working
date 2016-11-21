@@ -176,8 +176,7 @@ define([
                 agentModel.Data = self.extractDataStructures(nodes, childNode);
             }
             else if (self.core.isTypeOf(childNode, self.META['Courses'])) {
-                // uncomment the following
-                //agentModel.Courses = self.extractCourses(nodes, childNode);
+                agentModel.Courses = self.extractCourses(nodes, childNode, nodeAgent);
             }
             else if (self.core.isTypeOf(childNode, self.META['Course Actions'])) {
                 agentModel.CourseActions = self.extractCourseActions(nodes, childNode, nodeAgent);
@@ -314,7 +313,7 @@ define([
                 var valueNode = self.extractConnNodeFromParent(node, nodes, "ConnectSignal", true);
                 valueNode = self.core.getPointerPath(valueNode, 'refer');
                 // j.Signal = self.extractFieldDataAddress(nodes, valueNode);
-                j.Signal = self.extractSignalPath(nodes, nodes[valueNode]);
+                j.Signal = self.extractSignalPath(nodes, nodes[valueNode], nodeAgent);
                 ca.CourseActionSignals[name] = j;
                 return j;
             });
@@ -381,7 +380,7 @@ define([
                         signals.map(function (node) {
                             var j = {};
                             var name = self.core.getAttribute(node, "name");
-                            j.courseActionSignal = self.extractConnNode(node, nodes, true);
+                            j.CourseActionSignal = self.extractConnNode(node, nodes, true);
                             s.ActionSignals[name] = j;
                             return j;
                         });
@@ -396,24 +395,26 @@ define([
         return ca;
     };
 
-    JSCodeGenerator.prototype.extractSignalPath = function (nodes, s) {
+    JSCodeGenerator.prototype.extractSignalPath = function (nodes, s, agentNode) {
         var self = this;
         var parent = self.core.getParent(s);
         var signal = {};
         if (self.core.isTypeOf(parent, self.META['Field'])) {
-            signal.name = self.core.getAttribute(s, "name");
-            signal.type = "Field";
-            signal.path = self.extractPathAddress(nodes, self.core.getPath(parent),
-                "Field", "Fields");
+            // signal.name = self.core.getAttribute(s, "name");
+            // signal.type = "Field";
+            // signal.path = self.extractPathAddress(nodes, self.core.getPath(parent),
+            //     "Field", "Fields");
+            signal = self.extractFieldDataAddress(nodes, self.core.getPath(s));
         } else {
             // agents local signal
             signal.name = self.core.getAttribute(s, "name");
             signal.type = "local";
+            signal = self.extractLocalPathAddress(nodes, self.core.getPath(s), "Signal", "AgentSignals", agentNode);
         }
         return signal;
     };
 
-    JSCodeGenerator.prototype.extractCourses = function (nodes, nodeCourses) {
+    JSCodeGenerator.prototype.extractCourses = function (nodes, nodeCourses, nodeAgent) {
         var self = this;
         var childrenPaths = self.core.getChildrenPaths(nodeCourses);
         var Courses = {};
@@ -429,7 +430,7 @@ define([
                         var s = self.core.getPointerPath(nodes[p], "src");
                         s = nodes[s];
                         s = nodes[self.core.getPointerPath(s, "refer")];
-                        var signal = self.extractSignalPath(nodes, s);
+                        var signal = self.extractSignalPath(nodes, s, nodeAgent);
                         signals.push(signal);
                     });
                 }
@@ -447,7 +448,7 @@ define([
         return Courses;
     };
 
-    JSCodeGenerator.prototype.extractCourse = function (nodes, nodeCourse) {
+    JSCodeGenerator.prototype.extractCourse = function (nodes, nodeCourse, nodeAgent) {
 
         var self = this;
 
@@ -471,12 +472,12 @@ define([
                         s.type = "FireSignal";
                         s.isWait = self.core.getAttribute(nc, 'wait');
                         var path = self.core.getPointerPath(nc, "refer");
-                        var signal = self.extractSignalPath(nodes, nodes[path]);
+                        var signal = self.extractSignalPath(nodes, nodes[path], nodeAgent);
                         s.signal = signal;
                     } else if (self.core.isTypeOf(nc, self.META['WaitForSignal'])) {
                         s.type = "WaitForSignal";
                         var path = self.core.getPointerPath(nc, "refer");
-                        var signal = self.extractSignalPath(nodes, nodes[path]);
+                        var signal = self.extractSignalPath(nodes, nodes[path], nodeAgent);
                         s.signal = signal;
                     } else if (self.core.isTypeOf(nc, self.META['Course'])) {
                         s.type = "Course";
