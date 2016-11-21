@@ -1,1 +1,13 @@
-Asif
+var DataTypes = function () {
+};
+
+<%for (var key in sim.DataTypes) {%>
+DataTypes.<%=key%> = function(){
+    <%for (var key in sim.DataTypes[key]) {%>
+    this.<%=key%> = function(){
+    <% var value = sim.DataTypes[key]%>
+    this.value = <%=value%>;
+    };
+    <%}%>
+};
+<%}%>
