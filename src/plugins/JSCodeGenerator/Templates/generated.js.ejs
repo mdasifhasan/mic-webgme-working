@@ -42,6 +42,8 @@ this.referValue = referValue;
 inheritsFrom(ReferData, Data);
 // end of the primitives
 
+
+// generated code
 <%for (var key in sim.DataTypes) {
     parseDataType(sim.DataTypes[key])
 }%>
@@ -60,8 +62,8 @@ else if (type === "ReferData"){
 else if (type === "Object"){
     var value = data.value;
     var objType = data.objType;%><%-prefix%>=new Obj(<%=value%>, '<%-objType%>');<%}
-else if (type === "Dictionary"){%><%-prefix%>={};<%
-    var values = data.values;
+else if (type === "Data"){%><%-prefix%>=new <%-data.base%>();<%
+    var values = data.value;
     for (var k in values){%>
 <%parseData(values[k], prefix +"['"+k+"']")
 }
@@ -72,15 +74,15 @@ else if (type === "Dictionary"){%><%-prefix%>={};<%
 <% function parseDataType(data){
 type = data.type
 var name = data.name
-if(type === "Dictionary"){
-var values = data.values%>
+if(type === "Data"){
+var values = data.value%>
 var <%=name%> = function () {
 Data.apply(this);
 <%for (var k in values){
 parseData(values[k], "this['"+k+"']")%>
-<%}%>
-};
+<%}%>};
 inheritsFrom(<%=name%> , Data);
 <%}%>
 <%}%>
 
+// end of generated code

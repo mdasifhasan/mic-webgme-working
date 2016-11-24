@@ -658,31 +658,10 @@ define([
             j.value = null;
             return j;
         }
-        else if (self.core.isTypeOf(childNode, self.META['Dictionary'])) {
-            var t = "KeyValuePair";
-            var pairs = self.extractChildOfMeta(nodes, t, childNode);
-            var j = {};
-            j.type = "Dictionary";
-            j.values = {};
-            pairs.map(function (node) {
-                // var j = {};
-                var key = self.core.getPointerPath(node, "src");
-                var value = self.core.getPointerPath(node, "dst");
-                key = nodes[key];
-                value = nodes[value];
-                key = self.core.getAttribute(key, "value");
-                // value = self.core.getAttribute(value, "value");
-                value = self.extractData(nodes, value);
-
-                j.values[key] = value;
-                value.name = key;
-                return 0;
-            });
-            return j;
-        }
         else if (self.core.isTypeOf(childNode, self.META['Data'])) {
             var j = {};
             j.type = "Data";
+            j.base = self.core.getAttribute(self.core.getBase(childNode), "name");
             j.value = self.extractDataStructures(nodes, childNode);
             return j;
         }

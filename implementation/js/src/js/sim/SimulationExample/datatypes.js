@@ -66,6 +66,7 @@ var DataPhysics = function () {
 };
 
 var DataGroup = function () {
+    Data.apply(this);
     this.name = new Text("default");
     this.value = new Obj(null);
     this.enablePhysics = new Boolean(false);
