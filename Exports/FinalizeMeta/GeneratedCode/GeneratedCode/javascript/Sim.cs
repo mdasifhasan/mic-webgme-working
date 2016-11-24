@@ -42,37 +42,31 @@ this.value = value;
 inheritsFrom(ReferData, Data);
 // end of the primitives
 
-<%for (var key in sim.DataTypes) {
-    parseDataType(sim.DataTypes[key])
-}%>
 
 
 
-<% function parseData(data, prefix){
-    type = data.type
-if(type === "Number"){
-var value = data.value
-var name = data.name%><%-prefix%>=new Number(<%=value%>);<%}
-else if (type === "Dictionary"){%><%-prefix%>={};<%
-var values = data.values;
-for (var k in values){%>
-<%parseData(values[k], prefix +"['"+k+"']")
-}
-}
-}%>
 
-<% function parseDataType(data){
-type = data.type
-var name = data.name
-if(type === "Dictionary"){
-var values = data.values%>
-var <%=name%> = function () {
+
+var DictionarySample = function () {
 Data.apply(this);
-<%for (var k in values){
-parseData(values[k], "this['"+k+"']")%>
-<%}%>
+this['0']=new Number(11);
+this['1']=new Number(21);
+this['2']=new Number(31);
+this['3']={};
+this['3']['0']=new Number(2);
+this['3']['3']=new Number(4);
+this['3']['4']={};
+this['3']['4']['0']=new Number(2);
+this['3']['abs']=new Number(3);
+
 };
-inheritsFrom(<%=name%> , Data);
-<%}%>
-<%}%>
+inheritsFrom(DictionarySample , Data);
+
+
+
+
+
+
+
+
 

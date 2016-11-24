@@ -9,7 +9,7 @@ define([
     return {
         javascript: {
             code: javascriptGenerated,
-            extension: 'js'
+            extension: 'cs'
         }
     };
 });

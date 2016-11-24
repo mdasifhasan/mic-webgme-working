@@ -616,6 +616,7 @@ define([
             var childNode = nodes[childrenPaths[i]];
             var cname = self.core.getAttribute(childNode, 'name');
             DataStructure[cname] = self.extractData(nodes, childNode);
+            DataStructure[cname].name = cname;
         }
         return DataStructure;
     };
@@ -624,31 +625,45 @@ define([
         var self = this;
 
         if (self.core.isTypeOf(childNode, self.META['Number'])) {
-            return self.core.getAttribute(childNode, 'value');
+            var j = {};
+            j.type = "Number";
+            j.value = self.core.getAttribute(childNode, 'value');
+            return j;
         }
         else if (self.core.isTypeOf(childNode, self.META['Text'])) {
-            return self.core.getAttribute(childNode, 'value');
+            var j = {};
+            j.type = "Text";
+            j.value = self.core.getAttribute(childNode, 'value');
+            return j;
         }
         else if (self.core.isTypeOf(childNode, self.META['Boolean'])) {
-            return self.core.getAttribute(childNode, 'value');
+            var j = {};
+            j.type = "Boolean";
+            j.value = self.core.getAttribute(childNode, 'value');
+            return j;
         }
         else if (self.core.isTypeOf(childNode, self.META['Object'])) {
             var j = {};
-            j.type = self.core.getAttribute(childNode, 'type');
+            j.type = "Object";
+            j.objType = self.core.getAttribute(childNode, 'type');
             j.value = null;
             return j;
         }
         else if (self.core.isTypeOf(childNode, self.META['ReferData'])) {
             // not implemented yet
             var j = {};
+            j.type = "ReferData";
             var path = self.core.getPointerPath(childNode, 'type');
-            j.type = self.extractPathAddress(nodes, path, "Data", "DataTypes");
+            j.dataType = self.extractPathAddress(nodes, path, "Data", "DataTypes");
+            j.value = null;
             return j;
         }
         else if (self.core.isTypeOf(childNode, self.META['Dictionary'])) {
             var t = "KeyValuePair";
             var pairs = self.extractChildOfMeta(nodes, t, childNode);
             var j = {};
+            j.type = "Dictionary";
+            j.values = {};
             pairs.map(function (node) {
                 // var j = {};
                 var key = self.core.getPointerPath(node, "src");
@@ -659,13 +674,17 @@ define([
                 // value = self.core.getAttribute(value, "value");
                 value = self.extractData(nodes, value);
 
-                j[key] = value;
+                j.values[key] = value;
+                value.name = key;
                 return 0;
             });
             return j;
         }
         else if (self.core.isTypeOf(childNode, self.META['Data'])) {
-            return self.extractDataStructures(nodes, childNode);
+            var j = {};
+            j.type = "Data";
+            j.value = self.extractDataStructures(nodes, childNode);
+            return j;
         }
         else {
             self.logger.info("Ignoring unexpected model under Agents.");

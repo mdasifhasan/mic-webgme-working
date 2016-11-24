@@ -1,61 +1,161 @@
 {
   "name": "Simulation Example",
   "DataTypes": {
-    "DictionarySample": {
-      "0": 11,
-      "1": 21,
-      "2": 31,
-      "3": {
-        "0": 2,
-        "2": 3,
-        "3": 5
-      }
+    "Number": {
+      "type": "Number",
+      "value": 0,
+      "name": "Number"
     },
     "DataSprite": {
-      "image name": "default",
-      "y": 0,
-      "Physics": {
-        "physics body": {
-          "type": "object",
-          "value": null
+      "type": "Data",
+      "value": {
+        "image name": {
+          "type": "Text",
+          "value": "default",
+          "name": "image name"
         },
-        "enable physics": false
-      },
-      "SpriteObject": {
-        "type": "object",
-        "value": null
-      },
-      "Group": {
-        "name": "default",
-        "enable physics": false,
-        "group object": {
-          "type": "object",
-          "value": null
+        "y": {
+          "type": "Number",
+          "value": 0,
+          "name": "y"
+        },
+        "Physics": {
+          "type": "Data",
+          "value": {
+            "physics body": {
+              "type": "Object",
+              "objType": "object",
+              "value": null,
+              "name": "physics body"
+            },
+            "enable physics": {
+              "type": "Boolean",
+              "value": false,
+              "name": "enable physics"
+            }
+          },
+          "name": "Physics"
+        },
+        "SpriteObject": {
+          "type": "Object",
+          "objType": "object",
+          "value": null,
+          "name": "SpriteObject"
+        },
+        "Group": {
+          "type": "Data",
+          "value": {
+            "name": {
+              "type": "Text",
+              "value": "default",
+              "name": "name"
+            },
+            "enable physics": {
+              "type": "Boolean",
+              "value": false,
+              "name": "enable physics"
+            },
+            "group object": {
+              "type": "Object",
+              "objType": "object",
+              "value": null,
+              "name": "group object"
+            }
+          },
+          "name": "Group"
+        },
+        "x": {
+          "type": "Number",
+          "value": 0,
+          "name": "x"
         }
       },
-      "x": 0
+      "name": "DataSprite"
     },
     "Primitives": {
-      "Text": "",
-      "ReferData": {
-        "type": null
-      },
-      "Object": {
-        "type": "object",
-        "value": null
-      },
-      "Boolean": false,
-      "Dictionary": {},
-      "Number": 0
+      "type": "Data",
+      "value": {},
+      "name": "Primitives"
     },
     "DataText": {
-      "Y": 0,
-      "Text": "",
-      "TextObject": {
-        "type": "object",
-        "value": null
+      "type": "Data",
+      "value": {
+        "Y": {
+          "type": "Number",
+          "value": 0,
+          "name": "Y"
+        },
+        "Text": {
+          "type": "Text",
+          "value": "",
+          "name": "Text"
+        },
+        "TextObject": {
+          "type": "Object",
+          "objType": "object",
+          "value": null,
+          "name": "TextObject"
+        },
+        "X": {
+          "type": "Number",
+          "value": 0,
+          "name": "X"
+        }
       },
-      "X": 0
+      "name": "DataText"
+    },
+    "DictionarySample": {
+      "type": "Dictionary",
+      "values": {
+        "0": {
+          "type": "Number",
+          "value": 11,
+          "name": "0"
+        },
+        "1": {
+          "type": "Number",
+          "value": 21,
+          "name": "1"
+        },
+        "2": {
+          "type": "Number",
+          "value": 31,
+          "name": "2"
+        },
+        "3": {
+          "type": "Dictionary",
+          "values": {
+            "0": {
+              "type": "Number",
+              "value": 2,
+              "name": "0"
+            },
+            "3": {
+              "type": "Number",
+              "value": 4,
+              "name": "3"
+            },
+            "4": {
+              "type": "Dictionary",
+              "values": {
+                "0": {
+                  "type": "Number",
+                  "value": 2,
+                  "name": "0"
+                }
+              },
+              "name": "4"
+            },
+            "abs": {
+              "type": "Number",
+              "value": 3,
+              "name": "abs"
+            }
+          },
+          "name": "3"
+        }
+      },
+      "name": "DictionarySample"
     }
   },
   "Fields": {
@@ -73,7 +173,7 @@
           "Data": [
             {
               "name": "OutTotalCount",
-              "type": "DataTypes.Primitives.Number"
+              "type": "DataTypes.Number"
             }
           ],
           "FieldData": [
@@ -91,11 +191,11 @@
           "Data": [
             {
               "name": "Number-type",
-              "type": "DataTypes.Primitives.Number"
+              "type": "DataTypes.Number"
             },
             {
               "name": "Text-type",
-              "type": "DataTypes.Primitives.Text"
+              "type": null
             }
           ]
         }
@@ -236,13 +336,31 @@
           ],
           "Data": {
             "DataText": {
-              "Y": 0,
-              "Text": "",
-              "TextObject": {
-                "type": "object",
-                "value": null
+              "type": "Data",
+              "value": {
+                "Y": {
+                  "type": "Number",
+                  "value": 0,
+                  "name": "Y"
+                },
+                "Text": {
+                  "type": "Text",
+                  "value": "",
+                  "name": "Text"
+                },
+                "TextObject": {
+                  "type": "Object",
+                  "objType": "object",
+                  "value": null,
+                  "name": "TextObject"
+                },
+                "X": {
+                  "type": "Number",
+                  "value": 0,
+                  "name": "X"
+                }
               },
-              "X": 0
+              "name": "DataText"
             }
           }
         },
@@ -250,28 +368,70 @@
           "name": "Sprite",
           "Data": {
             "DataSprite": {
-              "image name": "default",
-              "Group": {
-                "name": "default",
-                "enable physics": false,
-                "group object": {
-                  "type": "object",
-                  "value": null
+              "type": "Data",
+              "value": {
+                "image name": {
+                  "type": "Text",
+                  "value": "default",
+                  "name": "image name"
+                },
+                "Group": {
+                  "type": "Data",
+                  "value": {
+                    "name": {
+                      "type": "Text",
+                      "value": "default",
+                      "name": "name"
+                    },
+                    "enable physics": {
+                      "type": "Boolean",
+                      "value": false,
+                      "name": "enable physics"
+                    },
+                    "group object": {
+                      "type": "Object",
+                      "objType": "object",
+                      "value": null,
+                      "name": "group object"
+                    }
+                  },
+                  "name": "Group"
+                },
+                "y": {
+                  "type": "Number",
+                  "value": 0,
+                  "name": "y"
+                },
+                "Physics": {
+                  "type": "Data",
+                  "value": {
+                    "physics body": {
+                      "type": "Object",
+                      "objType": "object",
+                      "value": null,
+                      "name": "physics body"
+                    },
+                    "enable physics": {
+                      "type": "Boolean",
+                      "value": false,
+                      "name": "enable physics"
+                    }
+                  },
+                  "name": "Physics"
+                },
+                "SpriteObject": {
+                  "type": "Object",
+                  "objType": "object",
+                  "value": null,
+                  "name": "SpriteObject"
+                },
+                "x": {
+                  "type": "Number",
+                  "value": 0,
+                  "name": "x"
                 }
               },
-              "y": 0,
-              "Physics": {
-                "physics body": {
-                  "type": "object",
-                  "value": null
-                },
-                "enable physics": false
-              },
-              "SpriteObject": {
-                "type": "object",
-                "value": null
-              },
-              "x": 0
+              "name": "DataSprite"
             }
           },
           "CourseActions": {
@@ -368,28 +528,70 @@
               "name": "Sprite",
               "Data": {
                 "DataSprite": {
-                  "image name": "default",
-                  "Group": {
-                    "name": "default",
-                    "enable physics": false,
-                    "group object": {
-                      "type": "object",
-                      "value": null
+                  "type": "Data",
+                  "value": {
+                    "image name": {
+                      "type": "Text",
+                      "value": "default",
+                      "name": "image name"
+                    },
+                    "Group": {
+                      "type": "Data",
+                      "value": {
+                        "name": {
+                          "type": "Text",
+                          "value": "default",
+                          "name": "name"
+                        },
+                        "enable physics": {
+                          "type": "Boolean",
+                          "value": false,
+                          "name": "enable physics"
+                        },
+                        "group object": {
+                          "type": "Object",
+                          "objType": "object",
+                          "value": null,
+                          "name": "group object"
+                        }
+                      },
+                      "name": "Group"
+                    },
+                    "y": {
+                      "type": "Number",
+                      "value": 0,
+                      "name": "y"
+                    },
+                    "Physics": {
+                      "type": "Data",
+                      "value": {
+                        "physics body": {
+                          "type": "Object",
+                          "objType": "object",
+                          "value": null,
+                          "name": "physics body"
+                        },
+                        "enable physics": {
+                          "type": "Boolean",
+                          "value": false,
+                          "name": "enable physics"
+                        }
+                      },
+                      "name": "Physics"
+                    },
+                    "SpriteObject": {
+                      "type": "Object",
+                      "objType": "object",
+                      "value": null,
+                      "name": "SpriteObject"
+                    },
+                    "x": {
+                      "type": "Number",
+                      "value": 0,
+                      "name": "x"
                     }
                   },
-                  "y": 0,
-                  "Physics": {
-                    "physics body": {
-                      "type": "object",
-                      "value": null
-                    },
-                    "enable physics": false
-                  },
-                  "SpriteObject": {
-                    "type": "object",
-                    "value": null
-                  },
-                  "x": 0
+                  "name": "DataSprite"
                 }
               },
               "Courses": {
@@ -483,28 +685,70 @@
               "name": "Sprite",
               "Data": {
                 "DataSprite": {
-                  "image name": "default",
-                  "Group": {
-                    "name": "default",
-                    "enable physics": false,
-                    "group object": {
-                      "type": "object",
-                      "value": null
+                  "type": "Data",
+                  "value": {
+                    "image name": {
+                      "type": "Text",
+                      "value": "default",
+                      "name": "image name"
+                    },
+                    "Group": {
+                      "type": "Data",
+                      "value": {
+                        "name": {
+                          "type": "Text",
+                          "value": "default",
+                          "name": "name"
+                        },
+                        "enable physics": {
+                          "type": "Boolean",
+                          "value": false,
+                          "name": "enable physics"
+                        },
+                        "group object": {
+                          "type": "Object",
+                          "objType": "object",
+                          "value": null,
+                          "name": "group object"
+                        }
+                      },
+                      "name": "Group"
+                    },
+                    "y": {
+                      "type": "Number",
+                      "value": 0,
+                      "name": "y"
+                    },
+                    "Physics": {
+                      "type": "Data",
+                      "value": {
+                        "physics body": {
+                          "type": "Object",
+                          "objType": "object",
+                          "value": null,
+                          "name": "physics body"
+                        },
+                        "enable physics": {
+                          "type": "Boolean",
+                          "value": false,
+                          "name": "enable physics"
+                        }
+                      },
+                      "name": "Physics"
+                    },
+                    "SpriteObject": {
+                      "type": "Object",
+                      "objType": "object",
+                      "value": null,
+                      "name": "SpriteObject"
+                    },
+                    "x": {
+                      "type": "Number",
+                      "value": 0,
+                      "name": "x"
                     }
                   },
-                  "y": 0,
-                  "Physics": {
-                    "physics body": {
-                      "type": "object",
-                      "value": null
-                    },
-                    "enable physics": false
-                  },
-                  "SpriteObject": {
-                    "type": "object",
-                    "value": null
-                  },
-                  "x": 0
+                  "name": "DataSprite"
                 }
               },
               "Courses": {
@@ -600,28 +844,70 @@
               "name": "Sprite",
               "Data": {
                 "DataSprite": {
-                  "image name": "default",
-                  "Group": {
-                    "name": "default",
-                    "enable physics": false,
-                    "group object": {
-                      "type": "object",
-                      "value": null
+                  "type": "Data",
+                  "value": {
+                    "image name": {
+                      "type": "Text",
+                      "value": "default",
+                      "name": "image name"
+                    },
+                    "Group": {
+                      "type": "Data",
+                      "value": {
+                        "name": {
+                          "type": "Text",
+                          "value": "default",
+                          "name": "name"
+                        },
+                        "enable physics": {
+                          "type": "Boolean",
+                          "value": false,
+                          "name": "enable physics"
+                        },
+                        "group object": {
+                          "type": "Object",
+                          "objType": "object",
+                          "value": null,
+                          "name": "group object"
+                        }
+                      },
+                      "name": "Group"
+                    },
+                    "y": {
+                      "type": "Number",
+                      "value": 0,
+                      "name": "y"
+                    },
+                    "Physics": {
+                      "type": "Data",
+                      "value": {
+                        "physics body": {
+                          "type": "Object",
+                          "objType": "object",
+                          "value": null,
+                          "name": "physics body"
+                        },
+                        "enable physics": {
+                          "type": "Boolean",
+                          "value": false,
+                          "name": "enable physics"
+                        }
+                      },
+                      "name": "Physics"
+                    },
+                    "SpriteObject": {
+                      "type": "Object",
+                      "objType": "object",
+                      "value": null,
+                      "name": "SpriteObject"
+                    },
+                    "x": {
+                      "type": "Number",
+                      "value": 0,
+                      "name": "x"
                     }
                   },
-                  "y": 0,
-                  "Physics": {
-                    "physics body": {
-                      "type": "object",
-                      "value": null
-                    },
-                    "enable physics": false
-                  },
-                  "SpriteObject": {
-                    "type": "object",
-                    "value": null
-                  },
-                  "x": 0
+                  "name": "DataSprite"
                 }
               },
               "Courses": {
@@ -722,17 +1008,21 @@
         "DebugSignal"
       ],
       "Data": {
-        "StarCount": 0
+        "StarCount": {
+          "type": "Number",
+          "value": 0,
+          "name": "StarCount"
+        }
       },
       "CourseActions": {
         "Count Subscribers": {
           "data": {
             "CountText": {
-              "type": "DataTypes.Primitives.Text",
+              "type": null,
               "value": "childs.Text.Data.DataText.Text"
             },
             "Count": {
-              "type": "DataTypes.Primitives.Number",
+              "type": "DataTypes.Number",
               "value": "Data.StarCount"
             }
           },
@@ -753,7 +1043,7 @@
               "type": "IAction",
               "data": {
                 "OutTotalCount": {
-                  "type": "DataTypes.Primitives.Number",
+                  "type": "DataTypes.Number",
                   "value": "Count"
                 }
               },
@@ -769,11 +1059,11 @@
               "type": "IAction",
               "data": {
                 "Number-type": {
-                  "type": "DataTypes.Primitives.Number",
+                  "type": "DataTypes.Number",
                   "value": "Count"
                 },
                 "Text-type": {
-                  "type": "DataTypes.Primitives.Text",
+                  "type": null,
                   "value": "CountText"
                 }
               }
@@ -786,13 +1076,31 @@
           "name": "Text",
           "Data": {
             "DataText": {
-              "Text": "",
-              "Y": 0,
-              "TextObject": {
-                "type": "object",
-                "value": null
+              "type": "Data",
+              "value": {
+                "Text": {
+                  "type": "Text",
+                  "value": "",
+                  "name": "Text"
+                },
+                "Y": {
+                  "type": "Number",
+                  "value": 0,
+                  "name": "Y"
+                },
+                "TextObject": {
+                  "type": "Object",
+                  "objType": "object",
+                  "value": null,
+                  "name": "TextObject"
+                },
+                "X": {
+                  "type": "Number",
+                  "value": 0,
+                  "name": "X"
+                }
               },
-              "X": 0
+              "name": "DataText"
             }
           },
           "CourseActions": {
