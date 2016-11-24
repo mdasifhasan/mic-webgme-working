@@ -34,10 +34,10 @@ this.value = value;
 };
 inheritsFrom(Obj, Data);
 
-var ReferData = function (value, dataType) {
+var ReferData = function (referValue, dataType) {
 Data.apply(this);
 this.dataType = dataType;
-this.value = value;
+this.referValue = referValue;
 };
 inheritsFrom(ReferData, Data);
 // end of the primitives
@@ -49,17 +49,25 @@ inheritsFrom(ReferData, Data);
 
 
 <% function parseData(data, prefix){
-    type = data.type
-if(type === "Number"){
-var value = data.value
-var name = data.name%><%-prefix%>=new Number(<%=value%>);<%}
+    type = data.type;
+if(type === "Number" || type === "Boolean"){
+    var value = data.value;%><%-prefix%>=new <%=type%>(<%=value%>);<%}
+else if (type === "Text"){
+    var value = data.value;%><%-prefix%>=new Text('<%-value%>');<%}
+else if (type === "ReferData"){
+    var referValue = data.value;
+    var dataType = data.dataType;%><%-prefix%>=new ReferData('<%=referValue%>', '<%-dataType%>');<%}
+else if (type === "Object"){
+    var value = data.value;
+    var objType = data.objType;%><%-prefix%>=new Obj(<%=value%>, '<%-objType%>');<%}
 else if (type === "Dictionary"){%><%-prefix%>={};<%
-var values = data.values;
-for (var k in values){%>
+    var values = data.values;
+    for (var k in values){%>
 <%parseData(values[k], prefix +"['"+k+"']")
 }
 }
 }%>
+
 
 <% function parseDataType(data){
 type = data.type

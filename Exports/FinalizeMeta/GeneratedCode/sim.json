@@ -1,10 +1,65 @@
 {
   "name": "Simulation Example",
   "DataTypes": {
-    "Number": {
-      "type": "Number",
-      "value": 0,
-      "name": "Number"
+    "DictionarySample": {
+      "type": "Dictionary",
+      "values": {
+        "0": {
+          "type": "Text",
+          "value": "Sample Text",
+          "name": "0"
+        },
+        "1": {
+          "type": "Boolean",
+          "value": true,
+          "name": "1"
+        },
+        "2": {
+          "type": "Boolean",
+          "value": false,
+          "name": "2"
+        },
+        "3": {
+          "type": "Dictionary",
+          "values": {
+            "0": {
+              "type": "Object",
+              "objType": "object",
+              "value": null,
+              "name": "0"
+            },
+            "3": {
+              "type": "Number",
+              "value": 4,
+              "name": "3"
+            },
+            "4": {
+              "type": "ReferData",
+              "dataType": "DataTypes.DataSprite",
+              "value": null,
+              "name": "4"
+            },
+            "5": {
+              "type": "Dictionary",
+              "values": {
+                "0": {
+                  "type": "Number",
+                  "value": 2,
+                  "name": "0"
+                }
+              },
+              "name": "5"
+            },
+            "abs": {
+              "type": "Number",
+              "value": 3,
+              "name": "abs"
+            }
+          },
+          "name": "3"
+        }
+      },
+      "name": "DictionarySample"
     },
     "DataSprite": {
       "type": "Data",
@@ -103,59 +158,6 @@
         }
       },
       "name": "DataText"
-    },
-    "DictionarySample": {
-      "type": "Dictionary",
-      "values": {
-        "0": {
-          "type": "Number",
-          "value": 11,
-          "name": "0"
-        },
-        "1": {
-          "type": "Number",
-          "value": 21,
-          "name": "1"
-        },
-        "2": {
-          "type": "Number",
-          "value": 31,
-          "name": "2"
-        },
-        "3": {
-          "type": "Dictionary",
-          "values": {
-            "0": {
-              "type": "Number",
-              "value": 2,
-              "name": "0"
-            },
-            "3": {
-              "type": "Number",
-              "value": 4,
-              "name": "3"
-            },
-            "4": {
-              "type": "Dictionary",
-              "values": {
-                "0": {
-                  "type": "Number",
-                  "value": 2,
-                  "name": "0"
-                }
-              },
-              "name": "4"
-            },
-            "abs": {
-              "type": "Number",
-              "value": 3,
-              "name": "abs"
-            }
-          },
-          "name": "3"
-        }
-      },
-      "name": "DictionarySample"
     }
   },
   "Fields": {
@@ -173,7 +175,7 @@
           "Data": [
             {
               "name": "OutTotalCount",
-              "type": "DataTypes.Number"
+              "type": null
             }
           ],
           "FieldData": [
@@ -191,7 +193,7 @@
           "Data": [
             {
               "name": "Number-type",
-              "type": "DataTypes.Number"
+              "type": null
             },
             {
               "name": "Text-type",
@@ -1022,7 +1024,7 @@
               "value": "childs.Text.Data.DataText.Text"
             },
             "Count": {
-              "type": "DataTypes.Number",
+              "type": null,
               "value": "Data.StarCount"
             }
           },
@@ -1043,7 +1045,7 @@
               "type": "IAction",
               "data": {
                 "OutTotalCount": {
-                  "type": "DataTypes.Number",
+                  "type": null,
                   "value": "Count"
                 }
               },
@@ -1059,7 +1061,7 @@
               "type": "IAction",
               "data": {
                 "Number-type": {
-                  "type": "DataTypes.Number",
+                  "type": null,
                   "value": "Count"
                 },
                 "Text-type": {
