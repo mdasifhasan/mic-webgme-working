@@ -40,8 +40,14 @@ var testField = function () {
     console.log("dAll: ", dAll);
 };
 
+var testAgents = function () {
+    var TestGame = new TestGame1("TestGame1");
+    console.log("Agent TestGame:", TestGame);
+};
+
 var test=function(){
-    testField();
+    testAgents();
+    //testField();
     // testDictionary();
     // testDataSprite();
 };
