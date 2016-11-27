@@ -7,6 +7,44 @@
 var Field = function (name) {
     this.name = name;
     this.interfaces = {};
+    this.data = {};
+};
+
+Field.prototype.addData = function (name) {
+    this.data[name] = [];
+    return this;
+};
+
+Field.prototype.removeData = function (name) {
+    delete this.data[name];
+    return this;
+};
+
+Field.prototype.subscribeData = function (name, data) {
+    if (!(name in this.data))
+        this.addData(name);
+    this.data[name].push(data);
+    return this;
+};
+
+Field.prototype.unsubscribeData = function (name, data) {
+    if (!(name in this.data))
+        return;
+    this.data[name].splice(this.data[name].indexOf(data), 1);
+    return this;
+};
+
+Field.prototype.getData =function(name, mode){
+    if (!(name in this.data))
+        return;
+    if(mode === null || mode === "all")
+        return this.data[name];
+    else if(mode === "first")
+        return this.data[name][0];
+    else if(mode === "random")
+        return this.data[name][Math.floor(Math.random() * this.data[name].length)];
+    else
+        return this.data[name];
 };
 
 Field.prototype.addInterface = function (name) {
@@ -15,7 +53,7 @@ Field.prototype.addInterface = function (name) {
 };
 
 Field.prototype.removeInterface = function (name) {
-    delete this.childs[name];
+    delete this.interfaces[name];
     return this;
 };
 
@@ -45,6 +83,20 @@ Field.prototype.triggerAction = function (name, args) {
         res = res && this.interfaces[name][i](args);
     }
     return res;
+};
+
+var ReferFieldData = function (field, fieldDataName) {
+    this.field = field;
+    this.fieldDataName = fieldDataName;
+};
+ReferFieldData.prototype.first = function () {
+    return this.field.getData(this.fieldDataName, "first");
+};
+ReferFieldData.prototype.random = function () {
+    return this.field.getData(this.fieldDataName, "random");
+};
+ReferFieldData.prototype.all = function () {
+    return this.field.getData(this.fieldDataName);
 };
 
 // end of fields constructs
@@ -79,6 +131,7 @@ Fields.Canvas.Group.CreateGroup = function (d) {
     return this.triggerAction("CreateGroup", d);
 };
 
+Fields.Canvas.dataSprite = new ReferFieldData(Fields.Canvas, "dataSprite");
 // End of Fields
 
 
@@ -99,6 +152,16 @@ var createGroup = function (d) {
 // Subscripions of Fields
 Fields.Canvas.subscribeToInterface("CreateSprite", createSprite);
 Fields.Canvas.Group.subscribeToInterface("CreateGroup", createGroup);
+
+var dataSprite = new DataSprite();
+dataSprite.imageName = "d1";
+Fields.Canvas.subscribeData("dataSprite", dataSprite);
+dataSprite = new DataSprite();
+dataSprite.imageName = "d2";
+Fields.Canvas.subscribeData("dataSprite", dataSprite);
+dataSprite = new DataSprite();
+dataSprite.imageName = "d3";
+Fields.Canvas.subscribeData("dataSprite", dataSprite);
 // end of Subscripions of Fields
 
 

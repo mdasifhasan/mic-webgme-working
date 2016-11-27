@@ -209,23 +209,9 @@
           "FieldData": {
             "DataSprite-type": {
               "type": "DataTypes.DataSprite"
-            }
-          },
-          "Fields": {
-            "Group": {
-              "Actions": {
-                "Create Group": {
-                  "Data": [
-                    {
-                      "name": "Group-type",
-                      "type": "DataTypes.Group"
-                    }
-                  ],
-                  "ActionSignals": [
-                    "Error"
-                  ]
-                }
-              }
+            },
+            "DataSprite 2": {
+              "type": "DataTypes.DataSprite"
             }
           },
           "Actions": {
@@ -243,6 +229,23 @@
               "ActionSignals": [
                 "Error"
               ]
+            }
+          },
+          "Fields": {
+            "Group": {
+              "Actions": {
+                "Create Group": {
+                  "Data": [
+                    {
+                      "name": "Group-type",
+                      "type": "DataTypes.Group"
+                    }
+                  ],
+                  "ActionSignals": [
+                    "Error"
+                  ]
+                }
+              }
             }
           }
         }

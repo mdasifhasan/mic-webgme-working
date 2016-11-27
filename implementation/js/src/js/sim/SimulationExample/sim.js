@@ -31,6 +31,13 @@ var testField = function () {
     var ds = new DataSprite();
     Fields.Canvas.CreateSprite(ds);
     Fields.Canvas.Group.CreateGroup(ds.Group);
+
+    var d1 = Fields.Canvas.dataSprite.first(); //DataSprite
+    console.log("d1: ", d1);
+    var dR = Fields.Canvas.dataSprite.random(); //DataSprite
+    console.log("dR: ", dR);
+    var dAll = Fields.Canvas.dataSprite.all(); //array
+    console.log("dAll: ", dAll);
 };
 
 var test=function(){

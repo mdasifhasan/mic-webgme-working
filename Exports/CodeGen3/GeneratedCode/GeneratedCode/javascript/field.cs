@@ -1,12 +1,46 @@
-/**
-* Created by AH on 11/24/2016.
-*/
-
 // ************ Fields ************  //
 
 var Field = function (name) {
 this.name = name;
 this.interfaces = {};
+this.data = {};
+};
+
+Field.prototype.addData = function (name) {
+this.data[name] = [];
+return this;
+};
+
+Field.prototype.removeData = function (name) {
+delete this.data[name];
+return this;
+};
+
+Field.prototype.subscribeData = function (name, data) {
+if (!(name in this.data))
+this.addData(name);
+this.data[name].push(data);
+return this;
+};
+
+Field.prototype.unsubscribeData = function (name, data) {
+if (!(name in this.data))
+return;
+this.data[name].splice(this.data[name].indexOf(data), 1);
+return this;
+};
+
+Field.prototype.getData =function(name, mode){
+if (!(name in this.data))
+return;
+if(mode === null || mode === "all")
+return this.data[name];
+else if(mode === "first")
+return this.data[name][0];
+else if(mode === "random")
+return this.data[name][Math.floor(Math.random() * this.data[name].length)];
+else
+return this.data[name];
 };
 
 Field.prototype.addInterface = function (name) {
@@ -15,7 +49,7 @@ return this;
 };
 
 Field.prototype.removeInterface = function (name) {
-delete this.childs[name];
+delete this.interfaces[name];
 return this;
 };
 
@@ -47,7 +81,19 @@ res = res && this.interfaces[name][i](args);
 return res;
 };
 
-// end of fields constructs
+var ReferFieldData = function (field, fieldDataName) {
+this.field = field;
+this.fieldDataName = fieldDataName;
+};
+ReferFieldData.prototype.first = function () {
+return this.field.getData(this.fieldDataName, "first");
+};
+ReferFieldData.prototype.random = function () {
+return this.field.getData(this.fieldDataName, "random");
+};
+ReferFieldData.prototype.all = function () {
+return this.field.getData(this.fieldDataName);
+};
 
 
 
@@ -101,11 +147,19 @@ Fields.FieldCanvas.FieldSprites.CreateSprite = function(DataSprite, DataSprite2,
     }
     return this.triggerAction('CreateSprite', DataSprite, DataSprite2, signal_Error);
 };
+Fields.FieldCanvas.FieldSprites.DataSprite-type = new ReferFieldData(Fields.FieldCanvas.FieldSprites, 'DataSprite-type');
+    
+Fields.FieldCanvas.FieldSprites.DataSprite2 = new ReferFieldData(Fields.FieldCanvas.FieldSprites, 'DataSprite2');
+    
 Fields.FieldErrorHandler = new Field('FieldErrorHandler');
 Fields.FieldTestGame = new Field('FieldTestGame');
+Fields.FieldTestGame.Stars = new ReferFieldData(Fields.FieldTestGame, 'Stars');
+    
 
 
 // end of generated code
+
+
 
 
 
