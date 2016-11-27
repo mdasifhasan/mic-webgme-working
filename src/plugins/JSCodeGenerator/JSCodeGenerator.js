@@ -840,8 +840,11 @@ define([
 
 
         for (language in TEMPLATES) {
-            codeFileName = 'GeneratedCode/' + language + '/Sim.' + TEMPLATES[language].extension;
-            filesToAdd[codeFileName] = ejs.render(TEMPLATES[language].code, {sim: jsonModel});
+            codeFileName = 'GeneratedCode/' + language + '/data.' + TEMPLATES[language].extension;
+            filesToAdd[codeFileName] = ejs.render(TEMPLATES[language].data, {sim: jsonModel});
+
+            codeFileName = 'GeneratedCode/' + language + '/field.' + TEMPLATES[language].extension;
+            filesToAdd[codeFileName] = ejs.render(TEMPLATES[language].field, {sim: jsonModel});
         }
 
         artifact.addFiles(filesToAdd, function (err) {

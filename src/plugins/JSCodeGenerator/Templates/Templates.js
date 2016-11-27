@@ -2,13 +2,17 @@
  * @author kecso / https://github.com/kecso
  */
 define([
-    'text!./generated.js.ejs'
-], function (javascriptGenerated) {
+    'text!./javascript.data.ejs',
+    'text!./javascript.field.ejs'
+], function (javascriptData,
+             javascriptField
+) {
     'use strict';
 
     return {
         javascript: {
-            code: javascriptGenerated,
+            data: javascriptData,
+            field: javascriptField,
             extension: 'cs'
         }
     };
