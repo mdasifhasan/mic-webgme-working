@@ -26,9 +26,17 @@ var testDictionary =function(){
     console.log("ds.value[3].value[0].value", ds.value[3].value[0].value);
 };
 
+
+var testField = function () {
+    var ds = new DataSprite();
+    Fields.Canvas.CreateSprite(ds);
+    Fields.Canvas.Group.CreateGroup(ds.Group);
+};
+
 var test=function(){
-    testDictionary();
-    testDataSprite();
+    testField();
+    // testDictionary();
+    // testDataSprite();
 };
 
 test();

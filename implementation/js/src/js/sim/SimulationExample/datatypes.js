@@ -82,8 +82,8 @@ var DataSprite = function () {
     this.scale.x = new Number(1);
     this.scale.y = new Number(1);
     this.sprite = new Obj(null);
-    this.group = new DataGroup();
-    this.group.name="sprite";
+    this.Group = new DataGroup();
+    this.Group.name="sprite";
     this.physics = new DataPhysics();
 };
 inheritsFrom(DataSprite, Data);
