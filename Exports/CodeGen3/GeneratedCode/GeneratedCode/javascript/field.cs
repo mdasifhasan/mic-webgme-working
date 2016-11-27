@@ -52,13 +52,20 @@ return res;
 
 
 // generated code
-<%if("Fields" in sim)parseFields(sim.Fields, "Fields.")%>
 
-<%function parseFields(field, prefix){
-    for (var k in field){%>
-<%-prefix%><%-k%> = new Field('<%-k%>');<%if("Fields" in field[k]) console.log(field[k].Fields);   parseFields(field[k].Fields, prefix+k+".");
-    }
-}%>
+Fields.FieldGameEngine = new Field('FieldGameEngine');
+Fields.FieldDebug = new Field('FieldDebug');
+Fields.FieldDebug.DebugChild = new Field('DebugChild');
+Fields.FieldDebug.DebugChild.DebugChildChild = new Field('DebugChildChild');
+Fields.FieldParse = new Field('FieldParse');
+Fields.FieldCanvas = new Field('FieldCanvas');
+Fields.FieldCanvas.FieldTextView = new Field('FieldTextView');
+Fields.FieldCanvas.FieldSprites = new Field('FieldSprites');
+Fields.FieldCanvas.FieldSprites.Group = new Field('Group');
+Fields.FieldErrorHandler = new Field('FieldErrorHandler');
+Fields.FieldTestGame = new Field('FieldTestGame');
+
+
 // end of generated code
 
 

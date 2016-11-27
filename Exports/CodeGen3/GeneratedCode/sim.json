@@ -116,66 +116,6 @@
       },
       "name": "DataText"
     },
-    "DictionarySample": {
-      "type": "Dictionary",
-      "values": {
-        "0": {
-          "type": "Text",
-          "value": "Sample Text",
-          "name": "0"
-        },
-        "1": {
-          "type": "Boolean",
-          "value": true,
-          "name": "1"
-        },
-        "2": {
-          "type": "Boolean",
-          "value": false,
-          "name": "2"
-        },
-        "3": {
-          "type": "Dictionary",
-          "values": {
-            "0": {
-              "type": "Object",
-              "objType": "object",
-              "value": null,
-              "name": "0"
-            },
-            "3": {
-              "type": "Number",
-              "value": 4,
-              "name": "3"
-            },
-            "4": {
-              "type": "ReferData",
-              "dataType": "DataTypes.DataSprite",
-              "value": null,
-              "name": "4"
-            },
-            "5": {
-              "type": "Dictionary",
-              "values": {
-                "0": {
-                  "type": "Number",
-                  "value": 2,
-                  "name": "0"
-                }
-              },
-              "name": "5"
-            },
-            "abs": {
-              "type": "Number",
-              "value": 3,
-              "name": "abs"
-            }
-          },
-          "name": "3"
-        }
-      },
-      "name": "DictionarySample"
-    },
     "Group": {
       "type": "Data",
       "base": "Data",
