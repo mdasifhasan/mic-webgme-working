@@ -3,9 +3,11 @@
  */
 define([
     'text!./javascript.data.ejs',
-    'text!./javascript.field.ejs'
+    'text!./javascript.field.ejs',
+    'text!./javascript.agent.ejs'
 ], function (javascriptData,
-             javascriptField
+             javascriptField,
+             javascriptAgent
 ) {
     'use strict';
 
@@ -13,6 +15,7 @@ define([
         javascript: {
             data: javascriptData,
             field: javascriptField,
+            agents: javascriptAgent,
             extension: 'cs'
         }
     };

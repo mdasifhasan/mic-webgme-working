@@ -41,7 +41,7 @@ var testField = function () {
 };
 
 var testAgents = function () {
-    var TestGame = new TestGame1("TestGame1");
+    var TestGame = new TestGame1();
     console.log("Agent TestGame:", TestGame);
 };
 

@@ -1,0 +1,26 @@
+// generated code
+<%if("Agents" in sim)parseAgents(sim.Agents)%>
+
+// end of generated code
+
+<%
+function parseAgents(agents) {
+    for(var k in agents){
+        parseAgent(agents[k]);
+    }
+};
+%>
+
+<%
+function parseAgent(agent) {
+var name = agent.name.replace(/\s/g, '');
+%>
+var <%-name%> = function (name) {
+    if(!name)
+        name = "<%-name%>";
+    Agent.apply(this, [name]);
+};
+inheritsFrom(<%-name%>, Agent);<%
+
+};
+%>
