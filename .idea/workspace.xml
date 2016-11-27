@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="300b4105-8e50-46d4-9300-a0067c2cd2b8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode.zip" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode.zip" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/field.cs" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/field.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/metadata.json" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/metadata.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/sim.json" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/sim.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.field.ejs" afterPath="$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.field.ejs" />
@@ -27,7 +29,7 @@
     <favorites_list name="Projects" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5875198">
+    <splitter split-orientation="horizontal" split-proportion="0.5843179">
       <split-first>
         <leaf>
           <file leaf-file-name="constructs.js" pinned="false" current-in-tab="false">
@@ -53,8 +55,8 @@
           <file leaf-file-name="javascript.field.ejs" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.field.ejs">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="576">
-                  <caret line="58" column="119" lean-forward="false" selection-start-line="58" selection-start-column="119" selection-end-line="58" selection-end-column="119" />
+                <state relative-caret-position="290">
+                  <caret line="64" column="33" lean-forward="false" selection-start-line="64" selection-start-column="33" selection-end-line="64" selection-end-column="33" />
                   <folding />
                 </state>
               </provider>
@@ -63,8 +65,8 @@
           <file leaf-file-name="field.cs" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/field.cs">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="476">
-                  <caret line="55" column="54" lean-forward="true" selection-start-line="55" selection-start-column="54" selection-end-line="55" selection-end-column="54" />
+                <state relative-caret-position="586">
+                  <caret line="65" column="44" lean-forward="false" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
                   <folding />
                 </state>
               </provider>
@@ -121,16 +123,15 @@
               <file leaf-file-name="sim.json" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/sim.json">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="65">
-                      <caret line="231" column="29" lean-forward="true" selection-start-line="231" selection-start-column="29" selection-end-line="231" selection-end-column="29" />
+                    <state relative-caret-position="43">
+                      <caret line="230" column="18" lean-forward="false" selection-start-line="230" selection-start-column="11" selection-end-line="230" selection-end-column="18" />
                       <folding>
                         <element signature="n#!!block;n#DataTypes#0;n#!!top" expanded="false" />
                         <element signature="n#!!block;n#FieldDebug#0;n#!!block;n#Fields#0;n#!!top" expanded="false" />
                         <element signature="n#!!block;n#FieldParse#0;n#!!block;n#Fields#0;n#!!top" expanded="false" />
                         <element signature="n#!!block;n#FieldTextView#0;n#!!block;n#Fields#0;n#!!block;n#FieldCanvas#0;n#!!block;n#Fields#0;n#!!top" expanded="false" />
                         <element signature="n#!!block;n#Fields#0;n#!!block;n#FieldSprites#0;n#!!block;n#Fields#0;n#!!block;n#FieldCanvas#0;n#!!block;n#Fields#0;n#!!top" expanded="false" />
-                        <element signature="n#!!block;n#FieldTestGame#0;n#!!block;n#Fields#0;n#!!top" expanded="false" />
-                        <marker date="1480269091597" expanded="false" signature="5682:35307" ph="{...}" />
+                        <marker date="1480271206489" expanded="false" signature="29821:36057" ph="{...}" />
                       </folding>
                     </state>
                   </provider>
@@ -166,7 +167,7 @@
                 <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/SimulationExample/fields.js">
                   <provider selected="true" editor-type-id="text-editor">
                     <state relative-caret-position="158">
-                      <caret line="66" column="0" lean-forward="true" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+                      <caret line="66" column="0" lean-forward="false" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
                       <folding>
                         <element signature="e#0#39#0" expanded="false" />
                       </folding>
@@ -559,12 +560,12 @@
       <workItem from="1479704045995" duration="6143000" />
       <workItem from="1479830060161" duration="7181000" />
       <workItem from="1479999429798" duration="16709000" />
-      <workItem from="1480224575191" duration="10805000" />
+      <workItem from="1480224575191" duration="12790000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="246715000" />
+    <option name="totallyTimeSpent" value="248700000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -933,22 +934,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.field.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="58" column="119" lean-forward="false" selection-start-line="58" selection-start-column="119" selection-end-line="58" selection-end-column="119" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/field.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="55" column="54" lean-forward="true" selection-start-line="55" selection-start-column="54" selection-end-line="55" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/SimulationExample/fields.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -961,17 +946,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/sim.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="231" column="29" lean-forward="true" selection-start-line="231" selection-start-column="29" selection-end-line="231" selection-end-column="29" />
+        <state relative-caret-position="43">
+          <caret line="230" column="18" lean-forward="false" selection-start-line="230" selection-start-column="11" selection-end-line="230" selection-end-column="18" />
           <folding>
             <element signature="n#!!block;n#DataTypes#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#FieldDebug#0;n#!!block;n#Fields#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#FieldParse#0;n#!!block;n#Fields#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#FieldTextView#0;n#!!block;n#Fields#0;n#!!block;n#FieldCanvas#0;n#!!block;n#Fields#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#Fields#0;n#!!block;n#FieldSprites#0;n#!!block;n#Fields#0;n#!!block;n#FieldCanvas#0;n#!!block;n#Fields#0;n#!!top" expanded="false" />
-            <element signature="n#!!block;n#FieldTestGame#0;n#!!block;n#Fields#0;n#!!top" expanded="false" />
-            <marker date="1480269091597" expanded="false" signature="5682:35307" ph="{...}" />
+            <marker date="1480271206489" expanded="false" signature="29821:36057" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.field.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="64" column="33" lean-forward="false" selection-start-line="64" selection-start-column="33" selection-end-line="64" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/field.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="586">
+          <caret line="65" column="44" lean-forward="false" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
+          <folding />
         </state>
       </provider>
     </entry>

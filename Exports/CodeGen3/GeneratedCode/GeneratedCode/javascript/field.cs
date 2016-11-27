@@ -57,13 +57,23 @@ Fields.FieldGameEngine = new Field('FieldGameEngine');
 Fields.FieldDebug = new Field('FieldDebug');
 Fields.FieldDebug.DebugChild = new Field('DebugChild');
 Fields.FieldDebug.DebugChild.DebugChildChild = new Field('DebugChildChild');
+Fields.FieldDebug.CountDataSubscribers = function(OutTotalCount){};
 Fields.FieldParse = new Field('FieldParse');
+Fields.FieldParse.NumberToString = function(Number-type, Text-type){};
 Fields.FieldCanvas = new Field('FieldCanvas');
 Fields.FieldCanvas.FieldTextView = new Field('FieldTextView');
+Fields.FieldCanvas.FieldTextView.CreateTextView = function(DataText-type){};
+Fields.FieldCanvas.FieldTextView.UpdateTextView = function(DataText-type){};
 Fields.FieldCanvas.FieldSprites = new Field('FieldSprites');
 Fields.FieldCanvas.FieldSprites.Group = new Field('Group');
+Fields.FieldCanvas.FieldSprites.Group.CreateGroup = function(Group-type){};
+Fields.FieldCanvas.FieldSprites.CreateSprite = function(DataSprite, DataSprite2){};
 Fields.FieldErrorHandler = new Field('FieldErrorHandler');
 Fields.FieldTestGame = new Field('FieldTestGame');
+
+
+
+
 
 
 // end of generated code

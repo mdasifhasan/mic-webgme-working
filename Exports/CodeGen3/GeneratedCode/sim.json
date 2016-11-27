@@ -232,7 +232,11 @@
             "CreateSprite": {
               "Data": [
                 {
-                  "name": "DataSprite-type",
+                  "name": "DataSprite",
+                  "type": "DataTypes.DataSprite"
+                },
+                {
+                  "name": "DataSprite2",
                   "type": "DataTypes.DataSprite"
                 }
               ],
@@ -468,9 +472,13 @@
                   "name": "CreateSprite",
                   "type": "IAction",
                   "data": {
-                    "DataSprite-type": {
+                    "DataSprite": {
                       "type": "DataTypes.DataSprite",
                       "value": "DataSprite-type"
+                    },
+                    "DataSprite2": {
+                      "type": "DataTypes.DataSprite",
+                      "value": null
                     }
                   },
                   "ActionSignals": {
@@ -650,9 +658,13 @@
                       "name": "CreateSprite",
                       "type": "IAction",
                       "data": {
-                        "DataSprite-type": {
+                        "DataSprite": {
                           "type": "DataTypes.DataSprite",
                           "value": "DataSprite-type"
+                        },
+                        "DataSprite2": {
+                          "type": "DataTypes.DataSprite",
+                          "value": null
                         }
                       },
                       "ActionSignals": {
@@ -810,9 +822,13 @@
                       "name": "CreateSprite",
                       "type": "IAction",
                       "data": {
-                        "DataSprite-type": {
+                        "DataSprite": {
                           "type": "DataTypes.DataSprite",
                           "value": "DataSprite-type"
+                        },
+                        "DataSprite2": {
+                          "type": "DataTypes.DataSprite",
+                          "value": null
                         }
                       },
                       "ActionSignals": {
@@ -972,9 +988,13 @@
                       "name": "CreateSprite",
                       "type": "IAction",
                       "data": {
-                        "DataSprite-type": {
+                        "DataSprite": {
                           "type": "DataTypes.DataSprite",
                           "value": "DataSprite-type"
+                        },
+                        "DataSprite2": {
+                          "type": "DataTypes.DataSprite",
+                          "value": null
                         }
                       },
                       "ActionSignals": {

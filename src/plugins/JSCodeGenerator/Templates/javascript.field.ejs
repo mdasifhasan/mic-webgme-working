@@ -56,8 +56,31 @@ return res;
 
 <%function parseFields(field, prefix){
     for (var k in field){%>
-<%-prefix%><%-k%> = new Field('<%-k%>');<%if("Fields" in field[k]) console.log(field[k].Fields);   parseFields(field[k].Fields, prefix+k+".");
+<%-prefix%><%-k%> = new Field('<%-k%>');<%if("Fields" in field[k])parseFields(field[k].Fields, prefix+k+".");
+    if("Actions" in field[k])parseActions(field[k].Actions, prefix+k+".");
     }
+}%>
+
+<%function parseActions(actions, prefix){
+        for (var k in actions){%>
+<%-prefix%><%-k.replace(/\s/g, '')%> = function(<%parseActionParams(actions[k])%>){};<%
+}}%>
+
+<%function parseActionParams(action){
+    var retString = null;
+    if("Data" in action) {
+        var i = 0;
+        for(; i < action.Data.length; i++){
+            var d = action.Data[i];
+            var dName = d.name;
+            if(retString === null)
+                retString = d.name.replace(/\s/g, '');
+            else
+                retString += ", " + d.name.replace(/\s/g, '');
+        }
+    }
+    if(retString !== null)
+        %><%=retString%><%
 }%>
 // end of generated code
 
