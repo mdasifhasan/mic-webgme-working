@@ -60,10 +60,18 @@ return res;
     if("Actions" in field[k])parseActions(field[k].Actions, prefix+k+".");
     }
 }%>
+// end of generated code
 
 <%function parseActions(actions, prefix){
-        for (var k in actions){%>
-<%-prefix%><%-k.replace(/\s/g, '')%> = function(<%parseActionParams(actions[k])%>){};<%
+        for (var k in actions){
+            var retString = parseActionParams(actions[k]);
+            if(retString === null)
+                retString = "";
+            var fnName = k.replace(/\s/g, '');
+%>
+<%-prefix%><%-fnName%> = function(<%-retString%>){<%parseActionBodyForParam(actions[k])%>
+    return this.triggerAction('<%-fnName%>', <%-retString%>);
+};<%
 }}%>
 
 <%function parseActionParams(action){
@@ -74,14 +82,54 @@ return res;
             var d = action.Data[i];
             var dName = d.name;
             if(retString === null)
-                retString = d.name.replace(/\s/g, '');
+                retString = dName.replace(/\s/g, '');
             else
-                retString += ", " + d.name.replace(/\s/g, '');
+                retString += ", " + dName.replace(/\s/g, '');
         }
     }
-    if(retString !== null)
-        %><%=retString%><%
+    if("ActionSignals" in action) {
+        var i = 0;
+        for(; i < action.ActionSignals.length; i++){
+            var d = action.ActionSignals[i];
+            var dName = "signal_" + d;
+            if(retString === null)
+                retString = dName.replace(/\s/g, '');
+            else
+                retString += ", " + dName.replace(/\s/g, '');
+        }
+    }
+    return retString;
 }%>
-// end of generated code
+
+
+<%function parseActionBodyForParam(action){
+    if("Data" in action) {
+        var i = 0;
+        for(; i < action.Data.length; i++){
+            var d = action.Data[i];
+            var dName = d.name.replace(/\s/g, '');
+            var dType = d.type;
+            if(dType !== null){
+                dType = dType.replace('DataTypes.','')
+
+    %>
+    if(!(<%-dName%> instanceof <%-dType%>)){
+        throw {name:"Bad Parameter", message: "<%-dName%> is not instance of <%-dType%>"};
+    }<%}}
+    }
+    if("ActionSignals" in action) {
+        var i = 0;
+    for(; i < action.ActionSignals.length; i++){
+        var d = action.ActionSignals[i];
+        var dName = "signal_" + d;
+        var dType = "Signal";
+    %>
+    if(!(<%-dName%> instanceof <%-dType%>)){
+        throw {name:"Bad Parameter", message: "<%-dName%> is not instance of <%-dType%>"};
+    }<%}
+    }
+}%>
+
+
 
 
