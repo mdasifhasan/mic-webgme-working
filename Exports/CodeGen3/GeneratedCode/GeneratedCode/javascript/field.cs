@@ -103,8 +103,11 @@ Fields.FieldGameEngine = new Field('FieldGameEngine');
 Fields.FieldDebug = new Field('FieldDebug');
 Fields.FieldDebug.DebugChild = new Field('DebugChild');
 Fields.FieldDebug.DebugChild.DebugChildChild = new Field('DebugChildChild');
-Fields.FieldDebug.CountDataSubscribers = function(OutTotalCount){
-    return this.triggerAction('CountDataSubscribers', OutTotalCount);
+Fields.FieldDebug.CountDataSubscribers = function(OutTotalCount, fd_IFieldData){
+    if(!(fd_IFieldData instanceof ReferFieldData)){
+        throw {name:"Bad Parameter", message: "fd_IFieldData is not instance of ReferFieldData"};
+    }
+    return this.triggerAction('CountDataSubscribers', OutTotalCount, fd_IFieldData);
 };
 Fields.FieldParse = new Field('FieldParse');
 Fields.FieldParse.NumberToString = function(Number-type, Text-type){

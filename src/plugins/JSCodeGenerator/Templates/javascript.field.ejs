@@ -144,6 +144,17 @@ return this.field.getData(this.fieldDataName);
                 retString += ", " + dName.replace(/\s/g, '');
         }
     }
+    if("FieldData" in action) {
+        var i = 0;
+        for(; i < action.FieldData.length; i++){
+            var d = action.FieldData[i];
+            var dName = "fd_" + d.name;
+            if(retString === null)
+                retString = dName.replace(/\s/g, '');
+            else
+                retString += ", " + dName.replace(/\s/g, '');
+        }
+    }
     if("ActionSignals" in action) {
         var i = 0;
         for(; i < action.ActionSignals.length; i++){
@@ -173,6 +184,17 @@ return this.field.getData(this.fieldDataName);
     if(!(<%-dName%> instanceof <%-dType%>)){
         throw {name:"Bad Parameter", message: "<%-dName%> is not instance of <%-dType%>"};
     }<%}}
+    }
+    if("FieldData" in action) {
+        var i = 0;
+        for(; i < action.FieldData.length; i++){
+            var d = action.FieldData[i];
+            var dName = "fd_" + d.name.replace(/\s/g, '');
+            var dType = "ReferFieldData";
+    %>
+    if(!(<%-dName%> instanceof <%-dType%>)){
+        throw {name:"Bad Parameter", message: "<%-dName%> is not instance of <%-dType%>"};
+    }<%}
     }
     if("ActionSignals" in action) {
         var i = 0;
