@@ -263,9 +263,11 @@
   "Agents": {
     "Canvas": {
       "name": "Canvas",
+      "base": "Canvas",
       "libraryAgents": {
         "Text": {
           "name": "Text",
+          "base": "Canvas.library.Text",
           "Courses": {
             "CreateText": {
               "signals": [
@@ -356,6 +358,7 @@
         },
         "Sprite": {
           "name": "Sprite",
+          "base": "Canvas.library.Sprite",
           "Data": {
             "DataSprite": {
               "type": "Data",
@@ -513,16 +516,20 @@
       }
     },
     "Game Engine": {
-      "name": "Game Engine"
+      "name": "Game Engine",
+      "base": "Game Engine"
     },
     "Test Game": {
       "name": "Test Game",
+      "base": "Test Game",
       "childs": {
         "Star2": {
           "name": "Star2",
+          "base": "Test Game.library.Star",
           "childs": {
             "Sprite": {
               "name": "Sprite",
+              "base": "Canvas.library.Sprite",
               "Data": {
                 "DataSprite": {
                   "type": "Data",
@@ -684,9 +691,11 @@
         },
         "Star1": {
           "name": "Star1",
+          "base": "Test Game.library.Star",
           "childs": {
             "Sprite": {
               "name": "Sprite",
+              "base": "Canvas.library.Sprite",
               "Data": {
                 "DataSprite": {
                   "type": "Data",
@@ -850,9 +859,23 @@
       "libraryAgents": {
         "Star": {
           "name": "Star",
+          "base": "Test Game.library.Star",
+          "libraryAgents": {
+            "SampleAgent": {
+              "name": "SampleAgent",
+              "base": "Test Game.library.Star.library.SampleAgent",
+              "libraryAgents": {
+                "SampleAgent2": {
+                  "name": "SampleAgent2",
+                  "base": "Test Game.library.Star.library.SampleAgent.library.SampleAgent2"
+                }
+              }
+            }
+          },
           "childs": {
             "Sprite": {
               "name": "Sprite",
+              "base": "Canvas.library.Sprite",
               "Data": {
                 "DataSprite": {
                   "type": "Data",
@@ -1016,12 +1039,14 @@
     },
     "Error Handler": {
       "name": "Error Handler",
+      "base": "Error Handler",
       "Courses": {
         "Report Critical Error": {}
       }
     },
     "Debug": {
       "name": "Debug",
+      "base": "Debug",
       "AgentSignals": [
         "DebugSignal"
       ],
@@ -1092,6 +1117,7 @@
       "childs": {
         "Text": {
           "name": "Text",
+          "base": "Canvas.library.Text",
           "Data": {
             "DataText": {
               "type": "Data",

@@ -38,6 +38,7 @@ TestGame1.libraryAgents.Star = function (name) {
     if(name === null)
         name = "Star";
     Agent.apply(this, [name]);
-    this.addChild(new Canvas.libraryAgents.Sprite("Sprite"));
+    var sprite = new Canvas.libraryAgents.Sprite("Sprite");
+    this.addChild(sprite);
 };
 inheritsFrom(TestGame1.libraryAgents.Star, Agent);

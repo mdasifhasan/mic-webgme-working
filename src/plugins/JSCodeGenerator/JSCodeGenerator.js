@@ -134,7 +134,7 @@ define([
 
 
         if (nodeAgents !== null) {
-            var agents = self.extractAgents(nodes, nodeAgents);
+            var agents = self.extractAgents(nodes, nodeAgents, true);
             if (agents.length !== 0)
                 jsonModel.Agents = agents;
         }
@@ -143,7 +143,7 @@ define([
     };
     JSCodeGenerator.prototype.errorMessages = [];
 
-    JSCodeGenerator.prototype.extractAgents = function (nodes, nodeAgents) {
+    JSCodeGenerator.prototype.extractAgents = function (nodes, nodeAgents, exportLibraryAgents) {
         var self = this;
         var agents = {};
         var childrenPaths = self.core.getChildrenPaths(nodeAgents);
@@ -154,7 +154,7 @@ define([
                 var agent = {};
                 agent.name = cname;
                 agents[cname] = agent;
-                self.extractAgent(nodes, childNode, agent);
+                self.extractAgent(nodes, childNode, agent, exportLibraryAgents);
             } else {
                 self.logger.info("Ignoring unexpected model under Agents.");
             }
@@ -162,11 +162,25 @@ define([
         return agents;
     };
 
-    JSCodeGenerator.prototype.extractAgent = function (nodes, nodeAgent, agentModel) {
+    JSCodeGenerator.prototype.getAgentBase = function (nodeAgent) {
+        var p = nodeAgent,
+            prev = null,
+            self = this;
+        while (p) {
+            if(self.core.getPath(p) === "/9/7/R"){
+                return prev;
+            }
+            prev = p;
+            p = self.core.getBase(p);
+        }
+    };
+
+    JSCodeGenerator.prototype.extractAgent = function (nodes, nodeAgent, agentModel, exportLibraryAgents) {
         var self = this;
         var childrenPaths = self.core.getChildrenPaths(nodeAgent);
         var aname = self.core.getAttribute(nodeAgent, 'name');
         self.logger.info("extracting agent", aname + ", total childrens: ", childrenPaths.length);
+        agentModel.base = self.extractAgentBasePath(nodes, self.getAgentBase(nodeAgent));
         for (var i = 0; i < childrenPaths.length; i++) {
             var childNode = nodes[childrenPaths[i]];
             var cname = self.core.getAttribute(childNode, 'name');
@@ -183,12 +197,14 @@ define([
                 agentModel.CourseActions = self.extractCourseActions(nodes, childNode, nodeAgent);
             }
             else if (self.core.isTypeOf(childNode, self.META['library agents'])) {
-                var lagents = self.extractAgents(nodes, childNode);
-                if (lagents.length !== 0)
-                    agentModel.libraryAgents = lagents;
+                if (exportLibraryAgents) {
+                    var lagents = self.extractAgents(nodes, childNode, true);
+                    if (lagents.length !== 0)
+                        agentModel.libraryAgents = lagents;
+                }
             }
             else if (self.core.isTypeOf(childNode, self.META['Childs'])) {
-                var lagents = self.extractAgents(nodes, childNode);
+                var lagents = self.extractAgents(nodes, childNode, false);
                 if (lagents.length !== 0)
                     agentModel.childs = lagents;
             }
@@ -763,6 +779,39 @@ define([
         }, prefix);
         return address;
     };
+
+    JSCodeGenerator.prototype.extractAgentBasePath = function (nodes, node) {
+        var self = this;
+        if (node != null) {
+            var agents = [];
+            var p = node;
+            while (p) {
+                if (self.core.isTypeOf(p, self.META['Simulation']))
+                    break;
+                else if (self.core.isTypeOf(p, self.META['Agent']))
+                    agents.push(self.core.getAttribute(p, 'name'));
+                p = self.core.getParent(p);
+            }
+        }
+        else
+            return null;
+
+        if (agents.length > 0) {
+            agents = agents.reverse();
+            var first = true;
+            var agentsAddress = agents.reduce(function (a, b) {
+                if (first) {
+                    first = false;
+                    return a + b;
+                }
+                else
+                    return a + ".library." + b;
+            }, "");
+            return agentsAddress;
+        }
+        return null;
+    };
+
 
     // done
     JSCodeGenerator.prototype.extractAgentSignals = function (nodes, nodeAgentSignals, agentModel) {

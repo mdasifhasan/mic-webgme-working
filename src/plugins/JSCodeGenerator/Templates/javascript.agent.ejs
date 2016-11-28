@@ -6,21 +6,51 @@
 <%
 function parseAgents(agents) {
     for(var k in agents){
-        parseAgent(agents[k]);
+        parseAgent(agents[k], "");
     }
 };
 %>
 
 <%
-function parseAgent(agent) {
+function parseAgent(agent, prefix) {
 var name = agent.name.replace(/\s/g, '');
 %>
-var <%-name%> = function (name) {
+<%if (prefix === ""){
+%>var <%-name%> = function (name) {<%
+}else{
+%><%-prefix%><%-name%> = function (name) {<%
+}
+%>
     if(!name)
         name = "<%-name%>";
-    Agent.apply(this, [name]);
-};
+    Agent.apply(this, [name]);<%
+    if("childs" in agent){%>
+    var child = null;<%
+        for (var c in agent.childs){
+            var ca = agent.childs[c];
+            var cname = ca.name.replace(/\s/g, '');
+            var cbase = ca.base.replace(/\s/g, '');
+%>
+    var child = new <%-cbase%>('<%-cname%>');
+    this.addChild(child);<%
+
+}
+} //end of childs agents
+%>
+};<%
+if (prefix === ""){%>
 inheritsFrom(<%-name%>, Agent);<%
+}else{%>
+inheritsFrom(<%-prefix%><%-name%>, Agent);<%}
+
+if("libraryAgents" in agent){%>
+<%-prefix + name%>.library = {};<%
+    for (var k in agent.libraryAgents){
+        var la = agent.libraryAgents[k];
+%><%-parseAgent(la, prefix + name + ".library.")%><%
+}
+} //end of library agents
+
 
 };
 %>
