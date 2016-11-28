@@ -530,77 +530,6 @@
             "Sprite": {
               "name": "Sprite",
               "base": "Canvas.library.Sprite",
-              "Data": {
-                "DataSprite": {
-                  "type": "Data",
-                  "base": "DataSprite",
-                  "value": {
-                    "image name": {
-                      "type": "Text",
-                      "value": "default",
-                      "name": "image name"
-                    },
-                    "SpriteObject": {
-                      "type": "Object",
-                      "objType": "object",
-                      "value": null,
-                      "name": "SpriteObject"
-                    },
-                    "Group": {
-                      "type": "Data",
-                      "base": "Group",
-                      "value": {
-                        "name": {
-                          "type": "Text",
-                          "value": "default",
-                          "name": "name"
-                        },
-                        "enable physics": {
-                          "type": "Boolean",
-                          "value": false,
-                          "name": "enable physics"
-                        },
-                        "group object": {
-                          "type": "Object",
-                          "objType": "object",
-                          "value": null,
-                          "name": "group object"
-                        }
-                      },
-                      "name": "Group"
-                    },
-                    "Physics": {
-                      "type": "Data",
-                      "base": "Physics",
-                      "value": {
-                        "physics body": {
-                          "type": "Object",
-                          "objType": "object",
-                          "value": null,
-                          "name": "physics body"
-                        },
-                        "enable physics": {
-                          "type": "Boolean",
-                          "value": false,
-                          "name": "enable physics"
-                        }
-                      },
-                      "name": "Physics"
-                    },
-                    "x": {
-                      "type": "Number",
-                      "value": 0,
-                      "name": "x"
-                    },
-                    "y": {
-                      "type": "Number",
-                      "value": 0,
-                      "name": "y"
-                    }
-                  },
-                  "name": "DataSprite"
-                }
-              },
               "Courses": {
                 "create sprite under group": {
                   "childs": [
@@ -701,67 +630,15 @@
                   "type": "Data",
                   "base": "DataSprite",
                   "value": {
-                    "image name": {
-                      "type": "Text",
-                      "value": "default",
-                      "name": "image name"
-                    },
-                    "SpriteObject": {
-                      "type": "Object",
-                      "objType": "object",
-                      "value": null,
-                      "name": "SpriteObject"
-                    },
-                    "Group": {
-                      "type": "Data",
-                      "base": "Group",
-                      "value": {
-                        "name": {
-                          "type": "Text",
-                          "value": "default",
-                          "name": "name"
-                        },
-                        "enable physics": {
-                          "type": "Boolean",
-                          "value": false,
-                          "name": "enable physics"
-                        },
-                        "group object": {
-                          "type": "Object",
-                          "objType": "object",
-                          "value": null,
-                          "name": "group object"
-                        }
-                      },
-                      "name": "Group"
-                    },
-                    "Physics": {
-                      "type": "Data",
-                      "base": "Physics",
-                      "value": {
-                        "physics body": {
-                          "type": "Object",
-                          "objType": "object",
-                          "value": null,
-                          "name": "physics body"
-                        },
-                        "enable physics": {
-                          "type": "Boolean",
-                          "value": false,
-                          "name": "enable physics"
-                        }
-                      },
-                      "name": "Physics"
+                    "y": {
+                      "type": "Number",
+                      "value": 100,
+                      "name": "y"
                     },
                     "x": {
                       "type": "Number",
-                      "value": 0,
+                      "value": 100,
                       "name": "x"
-                    },
-                    "y": {
-                      "type": "Number",
-                      "value": 0,
-                      "name": "y"
                     }
                   },
                   "name": "DataSprite"
@@ -876,77 +753,6 @@
             "Sprite": {
               "name": "Sprite",
               "base": "Canvas.library.Sprite",
-              "Data": {
-                "DataSprite": {
-                  "type": "Data",
-                  "base": "DataSprite",
-                  "value": {
-                    "image name": {
-                      "type": "Text",
-                      "value": "default",
-                      "name": "image name"
-                    },
-                    "SpriteObject": {
-                      "type": "Object",
-                      "objType": "object",
-                      "value": null,
-                      "name": "SpriteObject"
-                    },
-                    "Group": {
-                      "type": "Data",
-                      "base": "Group",
-                      "value": {
-                        "name": {
-                          "type": "Text",
-                          "value": "default",
-                          "name": "name"
-                        },
-                        "enable physics": {
-                          "type": "Boolean",
-                          "value": false,
-                          "name": "enable physics"
-                        },
-                        "group object": {
-                          "type": "Object",
-                          "objType": "object",
-                          "value": null,
-                          "name": "group object"
-                        }
-                      },
-                      "name": "Group"
-                    },
-                    "Physics": {
-                      "type": "Data",
-                      "base": "Physics",
-                      "value": {
-                        "physics body": {
-                          "type": "Object",
-                          "objType": "object",
-                          "value": null,
-                          "name": "physics body"
-                        },
-                        "enable physics": {
-                          "type": "Boolean",
-                          "value": false,
-                          "name": "enable physics"
-                        }
-                      },
-                      "name": "Physics"
-                    },
-                    "x": {
-                      "type": "Number",
-                      "value": 0,
-                      "name": "x"
-                    },
-                    "y": {
-                      "type": "Number",
-                      "value": 0,
-                      "name": "y"
-                    }
-                  },
-                  "name": "DataSprite"
-                }
-              },
               "Courses": {
                 "create sprite under group": {
                   "childs": [
@@ -1118,36 +924,6 @@
         "Text": {
           "name": "Text",
           "base": "Canvas.library.Text",
-          "Data": {
-            "DataText": {
-              "type": "Data",
-              "base": "DataText",
-              "value": {
-                "Text": {
-                  "type": "Text",
-                  "value": "",
-                  "name": "Text"
-                },
-                "Y": {
-                  "type": "Number",
-                  "value": 0,
-                  "name": "Y"
-                },
-                "TextObject": {
-                  "type": "Object",
-                  "objType": "object",
-                  "value": null,
-                  "name": "TextObject"
-                },
-                "X": {
-                  "type": "Number",
-                  "value": 0,
-                  "name": "X"
-                }
-              },
-              "name": "DataText"
-            }
-          },
           "CourseActions": {
             "UpdateText": {
               "data": {

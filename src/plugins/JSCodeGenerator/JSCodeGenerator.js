@@ -125,7 +125,7 @@ define([
                 self.extractFields(nodes, childNode, jsonModel);
             }
             else if (self.core.isTypeOf(childNode, self.META['DataTypes'])) {
-                jsonModel.DataTypes = self.extractDataStructures(nodes, childNode);
+                jsonModel.DataTypes = self.extractDataStructures(nodes, childNode, false);
             }
             else {
                 self.logger.info("Ignoring unexpected models under simulation.");
@@ -167,7 +167,7 @@ define([
             prev = null,
             self = this;
         while (p) {
-            if(self.core.getPath(p) === "/9/7/R"){
+            if (self.core.getPath(p) === "/9/7/R") {
                 return prev;
             }
             prev = p;
@@ -180,6 +180,11 @@ define([
         var childrenPaths = self.core.getChildrenPaths(nodeAgent);
         var aname = self.core.getAttribute(nodeAgent, 'name');
         self.logger.info("extracting agent", aname + ", total childrens: ", childrenPaths.length);
+        var nodeBaseAgent = self.getAgentBase(nodeAgent);
+        var isChild = false;
+        if (self.core.getPath(nodeBaseAgent) !== self.core.getPath(nodeAgent)) {
+            isChild = true;
+        }
         agentModel.base = self.extractAgentBasePath(nodes, self.getAgentBase(nodeAgent));
         for (var i = 0; i < childrenPaths.length; i++) {
             var childNode = nodes[childrenPaths[i]];
@@ -188,7 +193,9 @@ define([
                 self.extractAgentSignals(nodes, childNode, agentModel);
             }
             else if (self.core.isTypeOf(childNode, self.META['Data Structure'])) {
-                agentModel.Data = self.extractDataStructures(nodes, childNode);
+                var d = self.extractDataStructures(nodes, childNode, isChild);
+                if(d)
+                    agentModel.Data = d;
             }
             else if (self.core.isTypeOf(childNode, self.META['Courses'])) {
                 agentModel.Courses = self.extractCourses(nodes, childNode, nodeAgent);
@@ -624,46 +631,91 @@ define([
     };
 
 
-    JSCodeGenerator.prototype.extractDataStructures = function (nodes, nodeFields) {
+    JSCodeGenerator.prototype.extractDataStructures = function (nodes, nodeFields, exportOnlyChanges) {
         var self = this;
         var childrenPaths = self.core.getChildrenPaths(nodeFields);
         var DataStructure = {};
+        var isChanged = false;
         for (var i = 0; i < childrenPaths.length; i++) {
             var childNode = nodes[childrenPaths[i]];
             var cname = self.core.getAttribute(childNode, 'name');
-            DataStructure[cname] = self.extractData(nodes, childNode);
-            DataStructure[cname].name = cname;
+            if (exportOnlyChanges) {
+                var j = self.extractData(nodes, childNode, exportOnlyChanges);
+                if (j) {
+                    DataStructure[cname] = j;
+                    DataStructure[cname].name = cname;
+                    isChanged = true;
+                }
+            } else {
+                DataStructure[cname] = self.extractData(nodes, childNode, exportOnlyChanges);
+                DataStructure[cname].name = cname;
+            }
         }
+        if(exportOnlyChanges)
+            if(!isChanged)
+                return null;
         return DataStructure;
     };
 
-    JSCodeGenerator.prototype.extractData = function (nodes, childNode) {
+    JSCodeGenerator.prototype.extractData = function (nodes, childNode, exportOnlyChanges) {
         var self = this;
-
+        self.logger.info("exportOnlyChanges", exportOnlyChanges);
         if (self.core.isTypeOf(childNode, self.META['Number'])) {
             var j = {};
             j.type = "Number";
             j.value = self.core.getAttribute(childNode, 'value');
-            return j;
+            if (exportOnlyChanges) {
+                var baseNode = self.core.getBase(childNode);
+                var baseValue = self.core.getAttribute(baseNode, 'value');
+                if (j.value !== baseValue)
+                    return j;
+                else
+                    return null;
+            }else
+                return j;
         }
         else if (self.core.isTypeOf(childNode, self.META['Text'])) {
             var j = {};
             j.type = "Text";
             j.value = self.core.getAttribute(childNode, 'value');
-            return j;
+            if (exportOnlyChanges) {
+                var baseNode = self.core.getBase(childNode);
+                var baseValue = self.core.getAttribute(baseNode, 'value');
+                if (j.value !== baseValue)
+                    return j;
+                else
+                    return null;
+            }else
+                return j;
         }
         else if (self.core.isTypeOf(childNode, self.META['Boolean'])) {
             var j = {};
             j.type = "Boolean";
             j.value = self.core.getAttribute(childNode, 'value');
-            return j;
+            if (exportOnlyChanges) {
+                var baseNode = self.core.getBase(childNode);
+                var baseValue = self.core.getAttribute(baseNode, 'value');
+                if (j.value !== baseValue)
+                    return j;
+                else
+                    return null;
+            }else
+                return j;
         }
         else if (self.core.isTypeOf(childNode, self.META['Object'])) {
             var j = {};
             j.type = "Object";
             j.objType = self.core.getAttribute(childNode, 'type');
             j.value = null;
-            return j;
+            if (exportOnlyChanges) {
+                var baseNode = self.core.getBase(childNode);
+                var baseValue = self.core.getAttribute(baseNode, 'value');
+                if ((j.value || baseValue) && j.value !== baseValue)
+                    return j;
+                else
+                    return null;
+            }else
+                return j;
         }
         else if (self.core.isTypeOf(childNode, self.META['ReferData'])) {
             // not implemented yet
@@ -672,13 +724,24 @@ define([
             var path = self.core.getPointerPath(childNode, 'type');
             j.dataType = self.extractPathAddress(nodes, path, "Data", "DataTypes");
             j.value = null;
-            return j;
+            if (exportOnlyChanges) {
+                var baseNode = self.core.getBase(childNode);
+                var baseValue = self.core.getAttribute(baseNode, 'value');
+                if (j.value !== baseValue)
+                    return j;
+                else
+                    return null;
+            }else
+                return j;
         }
         else if (self.core.isTypeOf(childNode, self.META['Data'])) {
             var j = {};
             j.type = "Data";
             j.base = self.core.getAttribute(self.core.getBase(childNode), "name");
-            j.value = self.extractDataStructures(nodes, childNode);
+            j.value = self.extractDataStructures(nodes, childNode, exportOnlyChanges);
+            if(exportOnlyChanges)
+                if(!j.value)
+                    return null;
             return j;
         }
         else {
