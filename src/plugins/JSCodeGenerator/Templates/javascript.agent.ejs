@@ -23,20 +23,20 @@ var name = agent.name.replace(/\s/g, '');
 %>
     if(!name)
         name = "<%-name%>";
-    Agent.apply(this, [name]);<%
+    Agent.apply(this, [name]);
+    <%parseAgentData(agent, true, "this")%><%
     if("childs" in agent){%>
     var child = null;<%
         for (var c in agent.childs){
             var ca = agent.childs[c];
             var cname = ca.name.replace(/\s/g, '');
             var cbase = ca.base.replace(/\s/g, '');
-%>
+    %>
     var child = new <%-cbase%>('<%-cname%>');
-    this.addChild(child);<%
-
+    this.addChild(child);
+    <%parseChildData(ca, "child")%><%
 }
-} //end of childs agents
-%>
+}//end of childs agents%>
 };<%
 if (prefix === ""){%>
 inheritsFrom(<%-name%>, Agent);<%
@@ -54,3 +54,56 @@ if("libraryAgents" in agent){%>
 
 };
 %>
+
+<% function parseChildData(agent, prefix){
+    parseAgentData(agent, false,prefix);
+    if("childs" in agent)
+        for (var c in agent.childs)
+            parseChildData(agent.childs[c], prefix + ".childs['"+c+"']");
+}
+%>
+
+<% function parseData(data, prefix){
+    type = data.type;
+if(type === "Number" || type === "Boolean"){
+    var value = data.value;%><%-prefix%>.value = <%=value%>;<%}
+else if (type === "Text"){
+    var value = data.value;%><%-prefix%>.value = <%-value%>;<%}
+else if (type === "ReferData"){
+    var referValue = data.value;
+    var dataType = data.dataType;%><%-prefix%>.referValue = <%=referValue%>;<%}
+else if (type === "Object"){
+    var value = data.value;
+    var objType = data.objType;%><%-prefix%>.value = <%=value%>;<%}
+else if (type === "Data"){
+    var values = data.value;
+        for (var k in values){%>
+<%parseData(values[k], prefix +"['"+k+"']")
+}
+}
+}%>
+
+
+<%
+function parseAgentData(agent, isCreateInstance, prefix){
+if("Data" in agent){
+    if(isCreateInstance){
+%>
+    <%-prefix%>.data = {};<%}
+for (var d in agent.Data){
+    var data = agent.Data[d];
+    type = data.type;
+    var name = data.name;
+    if(type === "Data"){
+        var base = data.base;
+        var values = data.value
+    if(isCreateInstance){%>
+    <%-prefix%>.data['<%=name%>'] = new <%=base%>();
+    <%}
+    for (var k in values){
+    parseData(values[k], prefix + ".data['"+name+"']"+"['"+k+"']")%>
+<%}%>
+<%}%>
+<%}
+}
+}%>
