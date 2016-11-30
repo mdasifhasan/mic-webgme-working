@@ -180,11 +180,11 @@ define([
         var childrenPaths = self.core.getChildrenPaths(nodeAgent);
         var aname = self.core.getAttribute(nodeAgent, 'name');
         self.logger.info("extracting agent", aname + ", total childrens: ", childrenPaths.length);
-        var nodeBaseAgent = self.getAgentBase(nodeAgent);
-        var isChild = false;
-        if (self.core.getPath(nodeBaseAgent) !== self.core.getPath(nodeAgent)) {
-            isChild = true;
-        }
+        // var nodeBaseAgent = self.getAgentBase(nodeAgent);
+        // var isChild = false;
+        // if (self.core.getPath(nodeBaseAgent) !== self.core.getPath(nodeAgent)) {
+        //     isChild = true;
+        // }
         agentModel.base = self.extractAgentBasePath(nodes, self.getAgentBase(nodeAgent));
         for (var i = 0; i < childrenPaths.length; i++) {
             var childNode = nodes[childrenPaths[i]];
@@ -193,7 +193,7 @@ define([
                 self.extractAgentSignals(nodes, childNode, agentModel);
             }
             else if (self.core.isTypeOf(childNode, self.META['Data Structure'])) {
-                var d = self.extractDataStructures(nodes, childNode, isChild);
+                var d = self.extractDataStructures(nodes, childNode, true, true);
                 if(d)
                     agentModel.Data = d;
             }
@@ -631,7 +631,7 @@ define([
     };
 
 
-    JSCodeGenerator.prototype.extractDataStructures = function (nodes, nodeFields, exportOnlyChanges) {
+    JSCodeGenerator.prototype.extractDataStructures = function (nodes, nodeFields, exportOnlyChanges, exportBase) {
         var self = this;
         var childrenPaths = self.core.getChildrenPaths(nodeFields);
         var DataStructure = {};
@@ -640,7 +640,7 @@ define([
             var childNode = nodes[childrenPaths[i]];
             var cname = self.core.getAttribute(childNode, 'name');
             if (exportOnlyChanges) {
-                var j = self.extractData(nodes, childNode, exportOnlyChanges);
+                var j = self.extractData(nodes, childNode, exportOnlyChanges, exportBase);
                 if (j) {
                     DataStructure[cname] = j;
                     DataStructure[cname].name = cname;
@@ -657,7 +657,7 @@ define([
         return DataStructure;
     };
 
-    JSCodeGenerator.prototype.extractData = function (nodes, childNode, exportOnlyChanges) {
+    JSCodeGenerator.prototype.extractData = function (nodes, childNode, exportOnlyChanges, exportBase) {
         var self = this;
         self.logger.info("exportOnlyChanges", exportOnlyChanges);
         if (self.core.isTypeOf(childNode, self.META['Number'])) {
@@ -738,10 +738,16 @@ define([
             var j = {};
             j.type = "Data";
             j.base = self.core.getAttribute(self.core.getBase(childNode), "name");
-            j.value = self.extractDataStructures(nodes, childNode, exportOnlyChanges);
-            if(exportOnlyChanges)
-                if(!j.value)
-                    return null;
+            j.value = self.extractDataStructures(nodes, childNode, exportOnlyChanges, false);
+            if(exportOnlyChanges){
+                if(!j.value){
+                    if(exportBase){
+                        delete j['value'];
+                        return j;
+                    }else
+                        return null;
+                }
+            }
             return j;
         }
         else {
