@@ -27,10 +27,10 @@ var TestGame1 = function (name) {
     Star1.childs.Sprite.data.DataSprite.x =300;
     Star1.childs.Sprite.data.DataSprite.imageName ="Star1";
     this.addChild(Star1);
-    var Star2 = new TestGame1.libraryAgents.Star("Star2");
-    Star2.childs.Sprite.data.DataSprite.x =500;
-    Star2.childs.Sprite.data.DataSprite.imageName ="Star2";
-    this.addChild(Star2);
+    // var Star2 = new TestGame1.libraryAgents.Star("Star2");
+    // Star2.childs.Sprite.data.DataSprite.x =500;
+    // Star2.childs.Sprite.data.DataSprite.imageName ="Star2";
+    // this.addChild(Star2);
 };
 inheritsFrom(TestGame1, Agent);
 TestGame1.libraryAgents = {};
@@ -40,5 +40,13 @@ TestGame1.libraryAgents.Star = function (name) {
     Agent.apply(this, [name]);
     var sprite = new Canvas.libraryAgents.Sprite("Sprite");
     this.addChild(sprite);
+
+
+    var courseStar = new Course(this, "courseStar");
+    sprite.addCourse(courseStar);
+    Fields.GameEngine.signals.subscribeSignal("update", courseStar);
+    var courseCreate = new Course(this, "courseCreate");
+    var courseUpdate = new Course(this, "courseUpdate");
+    courseStar.childs = [courseCreate, courseUpdate];
 };
 inheritsFrom(TestGame1.libraryAgents.Star, Agent);

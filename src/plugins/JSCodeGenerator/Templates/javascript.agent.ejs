@@ -50,8 +50,6 @@ if("libraryAgents" in agent){%>
 %><%-parseAgent(la, prefix + name + ".library.")%><%
 }
 } //end of library agents
-
-
 };
 %>
 
@@ -78,7 +76,7 @@ else if (type === "Object"){
 else if (type === "Data"){
     var values = data.value;
         for (var k in values){%>
-<%parseData(values[k], prefix +"['"+k+"']")
+    <%parseData(values[k], prefix +"['"+k+"']")
 }
 }
 }%>
@@ -101,7 +99,7 @@ for (var d in agent.Data){
     <%-prefix%>.data['<%=name%>'] = new <%=base%>();
     <%}
     for (var k in values){
-    parseData(values[k], prefix + ".data['"+name+"']"+"['"+k+"']")%>
+        parseData(values[k], prefix + ".data['"+name+"']"+"['"+k+"']")%>
 <%}%>
 <%}%>
 <%}
