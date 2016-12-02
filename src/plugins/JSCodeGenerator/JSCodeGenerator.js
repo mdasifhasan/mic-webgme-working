@@ -364,8 +364,9 @@ define([
                 var s = {};
                 s.name = self.core.getAttribute(nc, "name");
                 if (self.core.isTypeOf(nc, self.META['IAction'])) {
-                    s.type = "IAction";
-
+                    // s.type = "IAction";
+                    var fActionNode = self.core.getPath(self.core.getBase(nc));
+                    s.field = self.extractFieldDataAddress(nodes, fActionNode);
                     var data = self.extractChildOfMeta(nodes, "IData", nc);
                     if (data.length !== 0) {
                         s.data = {};

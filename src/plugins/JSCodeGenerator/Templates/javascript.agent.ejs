@@ -168,12 +168,45 @@ if("Courses" in agent){
    if("CourseActions" in agent){
        for (var ca in agent.CourseActions){
            var cAction = agent.CourseActions[ca];
+           var name = ca.replace(/\s/g, '');
             var retString = parseActionParams(cAction);
             if(retString === null)
                 retString = "";
 %>
-<%-prefix%>.ca_<%-ca.replace(/\s/g, '')%> = function (<%-retString%>) {
+<%-prefix%>.CA_<%-name%> = function (<%-retString%>) {
 <%parseActionBodyForParam(cAction)%>
+<%
+    if("fieldActions" in cAction) {%>
+    var res = {};
+<%      for (var i = 0; i < cAction.fieldActions.length; i++) {
+            var fa = cAction.fieldActions[i];
+            faname = fa.name.replace(/\s/g, '');
+%>
+    res.<%-faname%> = false;
+        <%}
+    }
+%>
+};
+
+<%-prefix%>.CA_<%-name%>.prototype.trigger = function (course) {
+<%
+if("fieldActions" in cAction) {
+    for (var i = 0; i < cAction.fieldActions.length; i++) {
+    var fa = cAction.fieldActions[i];
+    faname = fa.name.replace(/\s/g, '');
+    var retString = parseFieldActionParams(fa);
+    if(retString === null)
+        retString = "";
+%>
+    if(!res.<%-faname%>){
+        this.res.<%-faname%> = <%-fa.field%>(<%-retString%>);
+        if(!this.res.<%-faname%>)
+            return false;
+    }
+<%}
+}
+%>
+    return true;
 };
 <%
        }
@@ -250,6 +283,50 @@ for(var cas in action.CourseActionSignals){
     if("CourseActionSignals" in action) {
         for(var d in action.CourseActionSignals){
             var dName = "signal_" + d;
+            if(retString === null)
+                retString = dName.replace(/\s/g, '');
+            else
+                retString += ", " + dName.replace(/\s/g, '');
+        }
+    }
+    return retString;
+}%>
+
+<%function parseFieldActionParams(action){
+    var retString = null;
+    if("data" in action) {
+        for(var d in action.data){
+            var dName = action.data[d].value;
+            if(dName)
+                dName = "this.data." + dName;
+            else
+                dName = "null";
+            if(retString === null)
+                retString = dName.replace(/\s/g, '');
+            else
+                retString += ", " + dName.replace(/\s/g, '');
+        }
+    }
+    if("FieldData" in action) {
+        for(var d in action.FieldData){
+            var dName = action.FieldData[d].value;
+            if(dName)
+                dName = "this.data." + "fd_" + dName;
+            else
+                dName = "null";
+            if(retString === null)
+                retString = dName.replace(/\s/g, '');
+            else
+                retString += ", " + dName.replace(/\s/g, '');
+        }
+    }
+    if("CourseActionSignals" in action) {
+        for(var d in action.ActionSignals){
+            var dName = action.ActionSignals[d].CourseActionSignal;
+            if(dName)
+                dName = "this.signals." + "signal_" + dName;
+            else
+                dName = "null";
             if(retString === null)
                 retString = dName.replace(/\s/g, '');
             else

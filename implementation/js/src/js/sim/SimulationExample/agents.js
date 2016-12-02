@@ -25,13 +25,29 @@ Canvas.libraryAgents.Sprite.CourseAction_CreateSprite = function (DataSprite) {
     signals.error = false;
     var data = {};
     data.DataSprite = DataSprite;
+    this.res = {};
+    res.f1 = false;
+    res.f2 = false;
+    res.f3 = false;
 };
 
 CourseAction_CreateSprite.prototype.trigger = function (course) {
-    var dataSprite = this.data.DataSprite;
-    Fields.Canvas.CreateSprite(dataSprite, this.signals.error);
-    var res = Fields.root.getChild("Canvas").triggerAction("createSprite", dataSprite);
-    return res;
+    if(!this.res.f1){
+        this.res.f1 = Fields.Canvas.CreateSprite(this.data.DataSprite, this.signals.error);
+        if(!this.res_f1)
+            return false;
+    }
+    if(!this.res.f2){
+        this.res.f2 = Fields.Canvas.CreateSprite(this.data.DataSprite, this.signals.error);
+        if(!this.res_f2)
+            return false;
+    }
+    if(!this.res.f3){
+        this.res.f3 = Fields.Canvas.CreateSprite(this.data.DataSprite, this.signals.error);
+        if(!this.res_f3)
+            return false;
+    }
+    return true;
 };
 
 

@@ -299,7 +299,7 @@
               "fieldActions": [
                 {
                   "name": "Update TextView",
-                  "type": "IAction",
+                  "field": "Fields.FieldCanvas.FieldTextView.Update TextView",
                   "data": {
                     "DataText-type": {
                       "type": "DataTypes.DataText",
@@ -319,7 +319,7 @@
               "fieldActions": [
                 {
                   "name": "Create TextView",
-                  "type": "IAction",
+                  "field": "Fields.FieldCanvas.FieldTextView.Create TextView",
                   "data": {
                     "DataText-type": {
                       "type": "DataTypes.DataText",
@@ -371,7 +371,7 @@
               "fieldActions": [
                 {
                   "name": "Create Group",
-                  "type": "IAction",
+                  "field": "Fields.FieldCanvas.FieldSprites.Group.Create Group",
                   "data": {
                     "Group-type": {
                       "type": "DataTypes.Group",
@@ -405,7 +405,7 @@
               "fieldActions": [
                 {
                   "name": "CreateSprite",
-                  "type": "IAction",
+                  "field": "Fields.FieldCanvas.FieldSprites.CreateSprite",
                   "data": {
                     "DataSprite": {
                       "type": "DataTypes.DataSprite",
@@ -509,7 +509,7 @@
                   "fieldActions": [
                     {
                       "name": "Create Group",
-                      "type": "IAction",
+                      "field": "Fields.Create Group",
                       "data": {
                         "Group-type": {
                           "type": "DataTypes.Group",
@@ -543,7 +543,7 @@
                   "fieldActions": [
                     {
                       "name": "CreateSprite",
-                      "type": "IAction",
+                      "field": "Fields.CreateSprite",
                       "data": {
                         "DataSprite": {
                           "type": "DataTypes.DataSprite",
@@ -647,7 +647,7 @@
                   "fieldActions": [
                     {
                       "name": "Create Group",
-                      "type": "IAction",
+                      "field": "Fields.Create Group",
                       "data": {
                         "Group-type": {
                           "type": "DataTypes.Group",
@@ -681,7 +681,7 @@
                   "fieldActions": [
                     {
                       "name": "CreateSprite",
-                      "type": "IAction",
+                      "field": "Fields.CreateSprite",
                       "data": {
                         "DataSprite": {
                           "type": "DataTypes.DataSprite",
@@ -775,7 +775,7 @@
                   "fieldActions": [
                     {
                       "name": "Create Group",
-                      "type": "IAction",
+                      "field": "Fields.Create Group",
                       "data": {
                         "Group-type": {
                           "type": "DataTypes.Group",
@@ -809,7 +809,7 @@
                   "fieldActions": [
                     {
                       "name": "CreateSprite",
-                      "type": "IAction",
+                      "field": "Fields.CreateSprite",
                       "data": {
                         "DataSprite": {
                           "type": "DataTypes.DataSprite",
@@ -877,7 +877,7 @@
           "fieldActions": [
             {
               "name": "CountDataSubscribers",
-              "type": "IAction",
+              "field": "Fields.FieldDebug.CountDataSubscribers",
               "data": {
                 "OutTotalCount": {
                   "type": null,
@@ -893,7 +893,7 @@
             },
             {
               "name": "NumberToString",
-              "type": "IAction",
+              "field": "Fields.FieldParse.NumberToString",
               "data": {
                 "Number-type": {
                   "type": null,
@@ -930,7 +930,7 @@
               "fieldActions": [
                 {
                   "name": "Update TextView",
-                  "type": "IAction",
+                  "field": "Fields.Update TextView",
                   "data": {
                     "DataText-type": {
                       "type": "DataTypes.DataText",
@@ -950,7 +950,7 @@
               "fieldActions": [
                 {
                   "name": "Create TextView",
-                  "type": "IAction",
+                  "field": "Fields.Create TextView",
                   "data": {
                     "DataText-type": {
                       "type": "DataTypes.DataText",

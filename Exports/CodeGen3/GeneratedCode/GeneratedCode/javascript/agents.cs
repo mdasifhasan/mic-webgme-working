@@ -33,7 +33,7 @@ Canvas.library.Text = function (name) {
 
 };
 inheritsFrom(Canvas.library.Text, Agent);
-Canvas.library.Text.ca_UpdateText = function (DataText-type) {
+Canvas.library.Text.CA_UpdateText = function (DataText-type) {
 
     var data = {};
     if(!(DataText-type instanceof DataText)){
@@ -42,9 +42,25 @@ Canvas.library.Text.ca_UpdateText = function (DataText-type) {
 
     data.DataText-type = DataText-type;
 
+
+    var res = {};
+
+    res.UpdateTextView = false;
+        
 };
 
-Canvas.library.Text.ca_CreateText = function (DataText-type) {
+Canvas.library.Text.CA_UpdateText.prototype.trigger = function (course) {
+
+    if(!res.UpdateTextView){
+        this.res.UpdateTextView = Fields.FieldCanvas.FieldTextView.Update TextView(this.data.DataText-type);
+        if(!this.res.UpdateTextView)
+            return false;
+    }
+
+    return true;
+};
+
+Canvas.library.Text.CA_CreateText = function (DataText-type) {
 
     var data = {};
     if(!(DataText-type instanceof DataText)){
@@ -53,6 +69,22 @@ Canvas.library.Text.ca_CreateText = function (DataText-type) {
 
     data.DataText-type = DataText-type;
 
+
+    var res = {};
+
+    res.CreateTextView = false;
+        
+};
+
+Canvas.library.Text.CA_CreateText.prototype.trigger = function (course) {
+
+    if(!res.CreateTextView){
+        this.res.CreateTextView = Fields.FieldCanvas.FieldTextView.Create TextView(this.data.DataText-type);
+        if(!this.res.CreateTextView)
+            return false;
+    }
+
+    return true;
 };
 
 Canvas.library.Sprite = function (name) {
@@ -87,7 +119,7 @@ Canvas.library.Sprite = function (name) {
 
 };
 inheritsFrom(Canvas.library.Sprite, Agent);
-Canvas.library.Sprite.ca_Create Group = function (Group-type, signal_Error) {
+Canvas.library.Sprite.CA_CreateGroup = function (Group-type, signal_Error) {
 
     var data = {};
     if(!(Group-type instanceof Group)){
@@ -102,9 +134,25 @@ Canvas.library.Sprite.ca_Create Group = function (Group-type, signal_Error) {
     }
     signals.signal_Error = signal_Error;
 
+
+    var res = {};
+
+    res.CreateGroup = false;
+        
 };
 
-Canvas.library.Sprite.ca_Create Sprite = function (DataSprite-type, signal_Error) {
+Canvas.library.Sprite.CA_CreateGroup.prototype.trigger = function (course) {
+
+    if(!res.CreateGroup){
+        this.res.CreateGroup = Fields.FieldCanvas.FieldSprites.Group.Create Group(this.data.Group-type);
+        if(!this.res.CreateGroup)
+            return false;
+    }
+
+    return true;
+};
+
+Canvas.library.Sprite.CA_CreateSprite = function (DataSprite-type, signal_Error) {
 
     var data = {};
     if(!(DataSprite-type instanceof DataSprite)){
@@ -119,6 +167,22 @@ Canvas.library.Sprite.ca_Create Sprite = function (DataSprite-type, signal_Error
     }
     signals.signal_Error = signal_Error;
 
+
+    var res = {};
+
+    res.CreateSprite = false;
+        
+};
+
+Canvas.library.Sprite.CA_CreateSprite.prototype.trigger = function (course) {
+
+    if(!res.CreateSprite){
+        this.res.CreateSprite = Fields.FieldCanvas.FieldSprites.CreateSprite(this.data.DataSprite-type, null);
+        if(!this.res.CreateSprite)
+            return false;
+    }
+
+    return true;
 };
 
 var GameEngine = function (name) {
@@ -264,7 +328,7 @@ var Debug = function (name) {
 
 };
 inheritsFrom(Debug, Agent);
-Debug.ca_Count Subscribers = function (CountText, Count, fd_InputWhichFieldData, signal_CASampleSignal) {
+Debug.CA_CountSubscribers = function (CountText, Count, fd_InputWhichFieldData, signal_CASampleSignal) {
 
     var data = {};
     data.CountText = CountText;
@@ -276,16 +340,42 @@ Debug.ca_Count Subscribers = function (CountText, Count, fd_InputWhichFieldData,
     }
     data.fd_InputWhichFieldData = fd_InputWhichFieldData;
 
-var signals = {};
+    var signals = {};
     if(!(signal_CASampleSignal instanceof string)){
         throw {name:"Bad Parameter", message: "signal_CASampleSignal is not instance of string"};
     }
     signals.signal_CASampleSignal = signal_CASampleSignal;
 
+
+    var res = {};
+
+    res.CountDataSubscribers = false;
+        
+    res.NumberToString = false;
+        
+};
+
+Debug.CA_CountSubscribers.prototype.trigger = function (course) {
+
+    if(!res.CountDataSubscribers){
+        this.res.CountDataSubscribers = Fields.FieldDebug.CountDataSubscribers(this.data.Count, this.data.fd_InputWhichFieldData);
+        if(!this.res.CountDataSubscribers)
+            return false;
+    }
+
+    if(!res.NumberToString){
+        this.res.NumberToString = Fields.FieldParse.NumberToString(this.data.Count, this.data.CountText);
+        if(!this.res.NumberToString)
+            return false;
+    }
+
+    return true;
 };
 
 
 // end of generated code
+
+
 
 
 
