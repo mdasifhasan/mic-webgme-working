@@ -24,7 +24,8 @@ var name = agent.name.replace(/\s/g, '');
     if(!name)
         name = "<%-name%>";
     Agent.apply(this, [name]);
-    <%parseAgentData(agent, true, "this")%><%
+    <%parseAgentData(agent, true, "this")%>
+    <%parseCourses(agent, "this", true)%><%
     if("childs" in agent){%>
     var child = null;<%
         for (var c in agent.childs){
@@ -34,7 +35,8 @@ var name = agent.name.replace(/\s/g, '');
     %>
     var child = new <%-cbase%>('<%-cname%>');
     this.addChild(child);
-    <%parseChildData(ca, "child")%><%
+    <%parseChildData(ca, "child")%>
+    <%parseCourses(ca, "child", false)%><%
 }
 }//end of childs agents%>
 };<%
@@ -104,4 +106,58 @@ for (var d in agent.Data){
 <%}%>
 <%}
 }
+}%>
+
+
+<%function parseCourses(agent, ownerVarName, isCreateCourseInstance){
+if("Courses" in agent){
+%>var course;<%
+  for (var c in agent.Courses){
+        var cs = agent.Courses[c];
+        var name = c;
+        if(isCreateCourseInstance){
+%>
+
+    course = new Course(this, "<%-name%>");
+    <%-ownerVarName%>.addCourse(<%-name%>);
+    <%
+            if("childs" in cs){
+                for(var i = 0; i < cs.childs.length; i++){
+                    var child = cs.childs[i];
+                    parseChildCourses(ownerVarName, child, ownerVarName+"['"+name+"']");
+                }
+            }
+        }else{%>
+    course = <%-ownerVarName%>.courses['<%-name%>'];<%}
+    if("signals" in cs){
+        for(var i = 0; i < cs.signals.length; i++){
+            var signal = cs.signals[i];
+            var path = signal.path;
+            if(signal.type === "Field"){
+                var signalPath = signal.path.substr(0, signal.path.length-signal.name.length-1);%>
+    <%-signalPath%>.signals.subscribeSignal('<%-signal.name%>', course);<%
+            }else if(signal.type === "local"){
+                var signalPath = signal.path.substr("AgentSignals".length); %>
+    <%-ownerVarName%>.signals.subscribeSignal('<%-signal.name%>', course);<%
+            }
+        }
+    }//end of signals
+}%>
+<%}
+}%>
+
+
+<%function parseChildCourses(owner, child, prefix) {
+        var name = child.name;
+        var type = child.type;
+        %>
+    course = new Course(<%-owner%>, '<%-name%>');
+    <%-prefix%>.addCourse(course);
+<%
+    if("childs" in child){
+        for(var i = 0; i < child.childs.length; i++){
+            var ch = child.childs[i];
+            parseChildCourses(owner, ch, prefix + "['" + name + "']");
+        }
+    }
 }%>

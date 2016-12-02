@@ -271,12 +271,20 @@
           "Courses": {
             "CreateText": {
               "signals": [
-                "Fields.FieldGameEngine.SignalCreate"
+                {
+                  "name": "SignalCreate",
+                  "type": "Field",
+                  "path": "Fields.FieldGameEngine.SignalCreate"
+                }
               ]
             },
             "UpdateText": {
               "signals": [
-                "Fields.FieldGameEngine.SignalUpdate"
+                {
+                  "name": "SignalUpdate",
+                  "type": "Field",
+                  "path": "Fields.FieldGameEngine.SignalUpdate"
+                }
               ]
             }
           },
@@ -353,7 +361,11 @@
               },
               "CourseActionSignals": {
                 "Error": {
-                  "Signal": "Fields.FieldErrorHandler.Critical Error"
+                  "Signal": {
+                    "name": "Critical Error",
+                    "type": "Field",
+                    "path": "Fields.FieldErrorHandler.Critical Error"
+                  }
                 }
               },
               "fieldActions": [
@@ -383,7 +395,11 @@
               },
               "CourseActionSignals": {
                 "Error": {
-                  "Signal": "Fields.FieldErrorHandler.Critical Error"
+                  "Signal": {
+                    "name": "Critical Error",
+                    "type": "Field",
+                    "path": "Fields.FieldErrorHandler.Critical Error"
+                  }
                 }
               },
               "fieldActions": [
@@ -463,7 +479,11 @@
                     }
                   ],
                   "signals": [
-                    "Fields.FieldGameEngine.SignalCreate"
+                    {
+                      "name": "SignalCreate",
+                      "type": "Field",
+                      "path": "Fields.FieldGameEngine.SignalCreate"
+                    }
                   ]
                 },
                 "Create Sprite": {},
@@ -479,7 +499,11 @@
                   },
                   "CourseActionSignals": {
                     "Error": {
-                      "Signal": "Fields.FieldErrorHandler.Critical Error"
+                      "Signal": {
+                        "name": "Critical Error",
+                        "type": "Field",
+                        "path": "Fields.FieldErrorHandler.Critical Error"
+                      }
                     }
                   },
                   "fieldActions": [
@@ -509,7 +533,11 @@
                   },
                   "CourseActionSignals": {
                     "Error": {
-                      "Signal": "Fields.FieldErrorHandler.Critical Error"
+                      "Signal": {
+                        "name": "Critical Error",
+                        "type": "Field",
+                        "path": "Fields.FieldErrorHandler.Critical Error"
+                      }
                     }
                   },
                   "fieldActions": [
@@ -589,7 +617,11 @@
                     }
                   ],
                   "signals": [
-                    "Fields.FieldGameEngine.SignalCreate"
+                    {
+                      "name": "SignalCreate",
+                      "type": "Field",
+                      "path": "Fields.FieldGameEngine.SignalCreate"
+                    }
                   ]
                 },
                 "Create Sprite": {},
@@ -605,7 +637,11 @@
                   },
                   "CourseActionSignals": {
                     "Error": {
-                      "Signal": "Fields.FieldErrorHandler.Critical Error"
+                      "Signal": {
+                        "name": "Critical Error",
+                        "type": "Field",
+                        "path": "Fields.FieldErrorHandler.Critical Error"
+                      }
                     }
                   },
                   "fieldActions": [
@@ -635,7 +671,11 @@
                   },
                   "CourseActionSignals": {
                     "Error": {
-                      "Signal": "Fields.FieldErrorHandler.Critical Error"
+                      "Signal": {
+                        "name": "Critical Error",
+                        "type": "Field",
+                        "path": "Fields.FieldErrorHandler.Critical Error"
+                      }
                     }
                   },
                   "fieldActions": [
@@ -705,7 +745,11 @@
                     }
                   ],
                   "signals": [
-                    "Fields.FieldGameEngine.SignalCreate"
+                    {
+                      "name": "SignalCreate",
+                      "type": "Field",
+                      "path": "Fields.FieldGameEngine.SignalCreate"
+                    }
                   ]
                 },
                 "Create Sprite": {},
@@ -721,7 +765,11 @@
                   },
                   "CourseActionSignals": {
                     "Error": {
-                      "Signal": "Fields.FieldErrorHandler.Critical Error"
+                      "Signal": {
+                        "name": "Critical Error",
+                        "type": "Field",
+                        "path": "Fields.FieldErrorHandler.Critical Error"
+                      }
                     }
                   },
                   "fieldActions": [
@@ -751,7 +799,11 @@
                   },
                   "CourseActionSignals": {
                     "Error": {
-                      "Signal": "Fields.FieldErrorHandler.Critical Error"
+                      "Signal": {
+                        "name": "Critical Error",
+                        "type": "Field",
+                        "path": "Fields.FieldErrorHandler.Critical Error"
+                      }
                     }
                   },
                   "fieldActions": [
@@ -815,7 +867,11 @@
           },
           "CourseActionSignals": {
             "CASampleSignal": {
-              "Signal": "childs.Text.AgentSignals.TextSignal"
+              "Signal": {
+                "name": "TextSignal",
+                "type": "local",
+                "path": "childs.Text.AgentSignals.TextSignal"
+              }
             }
           },
           "fieldActions": [
@@ -911,12 +967,20 @@
           "Courses": {
             "CreateText": {
               "signals": [
-                "Fields.FieldGameEngine.SignalCreate"
+                {
+                  "name": "SignalCreate",
+                  "type": "Field",
+                  "path": "Fields.FieldGameEngine.SignalCreate"
+                }
               ]
             },
             "UpdateText": {
               "signals": [
-                "Fields.FieldGameEngine.SignalUpdate"
+                {
+                  "name": "SignalUpdate",
+                  "type": "Field",
+                  "path": "Fields.FieldGameEngine.SignalUpdate"
+                }
               ]
             }
           }
@@ -943,7 +1007,11 @@
               "name": "SignalCreate-refer",
               "type": "FireSignal",
               "isWait": false,
-              "signal": "Fields.FieldGameEngine.SignalCreate"
+              "signal": {
+                "name": "SignalCreate",
+                "type": "Field",
+                "path": "Fields.FieldGameEngine.SignalCreate"
+              }
             },
             {
               "name": "Course",
@@ -952,7 +1020,11 @@
             {
               "name": "SignalUpdate-refer",
               "type": "WaitForSignal",
-              "signal": "Fields.FieldGameEngine.SignalUpdate"
+              "signal": {
+                "name": "SignalUpdate",
+                "type": "Field",
+                "path": "Fields.FieldGameEngine.SignalUpdate"
+              }
             },
             {
               "name": "Course",
@@ -960,18 +1032,34 @@
             }
           ],
           "signals": [
-            "AgentSignals.DebugSignal",
-            "Fields.FieldDebug.DebugChild.DebugChildChild.DebugChildSignal"
+            {
+              "name": "DebugSignal",
+              "type": "local",
+              "path": "AgentSignals.DebugSignal"
+            },
+            {
+              "name": "DebugChildSignal",
+              "type": "Field",
+              "path": "Fields.FieldDebug.DebugChild.DebugChildChild.DebugChildSignal"
+            }
           ]
         },
         "SampleCourse2": {
           "signals": [
-            "Fields.FieldDebug.DebugChild.DebugChildChild.DebugChildSignal"
+            {
+              "name": "DebugChildSignal",
+              "type": "Field",
+              "path": "Fields.FieldDebug.DebugChild.DebugChildChild.DebugChildSignal"
+            }
           ]
         },
         "Show Stars Count": {
           "signals": [
-            "Fields.FieldGameEngine.SignalUpdate"
+            {
+              "name": "SignalUpdate",
+              "type": "Field",
+              "path": "Fields.FieldGameEngine.SignalUpdate"
+            }
           ]
         }
       }

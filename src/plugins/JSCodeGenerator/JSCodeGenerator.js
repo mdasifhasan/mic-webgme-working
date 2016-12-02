@@ -424,16 +424,16 @@ define([
         var parent = self.core.getParent(s);
         var signal = {};
         if (self.core.isTypeOf(parent, self.META['Field'])) {
-            // signal.name = self.core.getAttribute(s, "name");
-            // signal.type = "Field";
+            signal.name = self.core.getAttribute(s, "name");
+            signal.type = "Field";
             // signal.path = self.extractPathAddress(nodes, self.core.getPath(parent),
             //     "Field", "Fields");
-            signal = self.extractFieldDataAddress(nodes, self.core.getPath(s));
+            signal.path = self.extractFieldDataAddress(nodes, self.core.getPath(s));
         } else {
             // agents local signal
             signal.name = self.core.getAttribute(s, "name");
             signal.type = "local";
-            signal = self.extractLocalPathAddress(nodes, self.core.getPath(s), "Signal", "AgentSignals", agentNode);
+            signal.path = self.extractLocalPathAddress(nodes, self.core.getPath(s), "Signal", "AgentSignals", agentNode);
         }
         return signal;
     };

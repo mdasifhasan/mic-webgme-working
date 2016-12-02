@@ -156,6 +156,17 @@ var Course = function (owner, name, childs, action) {
     this.isFinished = false;
 };
 
+Course.prototype.addCourse = function (course) {
+    debug.log("adding", course.name, "to parent course", this.name);
+    this.childs[course.name] = course;
+};
+
+Course.prototype.removeCourse = function (course) {
+    debug.log("removing", course.name, "from parent course", this.name);
+    if (course.name in this.childs)
+        delete this.childs[course.name];
+};
+
 Course.prototype.reset = function () {
     this.next = 0;
     this.isChildsFinsihed = false;
@@ -229,7 +240,8 @@ Signals.prototype.subscribeSignal = function (signal, course) {
     if (!(signal in this.signals))
         this.signals[signal] = [];
     if (course)
-        this.signals[signal].push(course);
+        if(!(course in this.signals[signal]))
+            this.signals[signal].push(course);
 };
 
 Signals.prototype.unsubscribeSignal = function (signal, course) {
