@@ -34,9 +34,25 @@ Canvas.library.Text = function (name) {
 };
 inheritsFrom(Canvas.library.Text, Agent);
 Canvas.library.Text.ca_UpdateText = function (DataText-type) {
+
+    var data = {};
+    if(!(DataText-type instanceof DataText)){
+        throw {name:"Bad Parameter", message: "DataText-type is not instance of DataText"};
+    }
+
+    data.DataText-type = DataText-type;
+
 };
 
 Canvas.library.Text.ca_CreateText = function (DataText-type) {
+
+    var data = {};
+    if(!(DataText-type instanceof DataText)){
+        throw {name:"Bad Parameter", message: "DataText-type is not instance of DataText"};
+    }
+
+    data.DataText-type = DataText-type;
+
 };
 
 Canvas.library.Sprite = function (name) {
@@ -72,9 +88,37 @@ Canvas.library.Sprite = function (name) {
 };
 inheritsFrom(Canvas.library.Sprite, Agent);
 Canvas.library.Sprite.ca_Create Group = function (Group-type, signal_Error) {
+
+    var data = {};
+    if(!(Group-type instanceof Group)){
+        throw {name:"Bad Parameter", message: "Group-type is not instance of Group"};
+    }
+
+    data.Group-type = Group-type;
+
+    var signals = {};
+    if(!(signal_Error instanceof string)){
+        throw {name:"Bad Parameter", message: "signal_Error is not instance of string"};
+    }
+    signals.signal_Error = signal_Error;
+
 };
 
 Canvas.library.Sprite.ca_Create Sprite = function (DataSprite-type, signal_Error) {
+
+    var data = {};
+    if(!(DataSprite-type instanceof DataSprite)){
+        throw {name:"Bad Parameter", message: "DataSprite-type is not instance of DataSprite"};
+    }
+
+    data.DataSprite-type = DataSprite-type;
+
+    var signals = {};
+    if(!(signal_Error instanceof string)){
+        throw {name:"Bad Parameter", message: "signal_Error is not instance of string"};
+    }
+    signals.signal_Error = signal_Error;
+
 };
 
 var GameEngine = function (name) {
@@ -221,6 +265,23 @@ var Debug = function (name) {
 };
 inheritsFrom(Debug, Agent);
 Debug.ca_Count Subscribers = function (CountText, Count, fd_InputWhichFieldData, signal_CASampleSignal) {
+
+    var data = {};
+    data.CountText = CountText;
+
+    data.Count = Count;
+
+    if(!(fd_InputWhichFieldData instanceof ReferFieldData)){
+        throw {name:"Bad Parameter", message: "fd_InputWhichFieldData is not instance of ReferFieldData"};
+    }
+    data.fd_InputWhichFieldData = fd_InputWhichFieldData;
+
+var signals = {};
+    if(!(signal_CASampleSignal instanceof string)){
+        throw {name:"Bad Parameter", message: "signal_CASampleSignal is not instance of string"};
+    }
+    signals.signal_CASampleSignal = signal_CASampleSignal;
+
 };
 
 

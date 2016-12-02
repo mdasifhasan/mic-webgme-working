@@ -29,7 +29,6 @@ Canvas.libraryAgents.Sprite.CourseAction_CreateSprite = function (DataSprite) {
 
 CourseAction_CreateSprite.prototype.trigger = function (course) {
     var dataSprite = this.data.DataSprite;
-
     Fields.Canvas.CreateSprite(dataSprite, this.signals.error);
     var res = Fields.root.getChild("Canvas").triggerAction("createSprite", dataSprite);
     return res;

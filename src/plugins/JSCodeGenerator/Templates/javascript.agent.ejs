@@ -172,14 +172,60 @@ if("Courses" in agent){
             if(retString === null)
                 retString = "";
 %>
-<%-prefix%>.ca_<%-ca%> = function (<%-retString%>) {
+<%-prefix%>.ca_<%-ca.replace(/\s/g, '')%> = function (<%-retString%>) {
+<%parseActionBodyForParam(cAction)%>
 };
 <%
        }
    }
 }%>
 
+<%function parseActionBodyForParam(action){
+if("data" in action) {
+    var i = 0;
+%>
+    var data = {};<%
+for(var dt in action.data){
+    var d = action.data[dt];
+    var dName = dt.replace(/\s/g, '');
+    var dType = d.type;
+if(dType !== null){
+    dType = dType.replace('DataTypes.','')
 
+%>
+    if(!(<%-dName%> instanceof <%-dType%>)){
+        throw {name:"Bad Parameter", message: "<%-dName%> is not instance of <%-dType%>"};
+    }
+<%}%>
+    data.<%-dName%> = <%-dName%>;
+<%}
+}
+if("FieldData" in action) {
+for(var dt in action.FieldData){
+    var d = action.FieldData[dt];
+    var dName = "fd_" + dt.replace(/\s/g, '');
+    var dType = "ReferFieldData";
+%>
+    if(!(<%-dName%> instanceof <%-dType%>)){
+        throw {name:"Bad Parameter", message: "<%-dName%> is not instance of <%-dType%>"};
+    }
+    data.<%-dName%> = <%-dName%>;
+<%}
+}
+if("CourseActionSignals" in action) {%>
+    var signals = {};<%
+for(var cas in action.CourseActionSignals){
+    var d = action.CourseActionSignals[cas];
+    var dName = "signal_" + cas;
+    var dType = "string";
+%>
+    if(!(<%-dName%> instanceof <%-dType%>)){
+        throw {name:"Bad Parameter", message: "<%-dName%> is not instance of <%-dType%>"};
+    }
+    signals.<%-dName%> = <%-dName%>;
+<%}
+}
+}%>
 
 <%function parseActionParams(action){
     var retString = null;
