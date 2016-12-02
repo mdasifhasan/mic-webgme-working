@@ -33,6 +33,12 @@ Canvas.library.Text = function (name) {
 
 };
 inheritsFrom(Canvas.library.Text, Agent);
+Canvas.library.Text.ca_UpdateText = function (DataText-type) {
+};
+
+Canvas.library.Text.ca_CreateText = function (DataText-type) {
+};
+
 Canvas.library.Sprite = function (name) {
     if(!name)
         name = "Sprite";
@@ -65,6 +71,12 @@ Canvas.library.Sprite = function (name) {
 
 };
 inheritsFrom(Canvas.library.Sprite, Agent);
+Canvas.library.Sprite.ca_Create Group = function (Group-type, signal_Error) {
+};
+
+Canvas.library.Sprite.ca_Create Sprite = function (DataSprite-type, signal_Error) {
+};
+
 var GameEngine = function (name) {
     if(!name)
         name = "GameEngine";
@@ -208,8 +220,19 @@ var Debug = function (name) {
 
 };
 inheritsFrom(Debug, Agent);
+Debug.ca_Count Subscribers = function (CountText, Count, fd_InputWhichFieldData, signal_CASampleSignal) {
+};
+
 
 // end of generated code
+
+
+
+
+
+
+
+
 
 
 

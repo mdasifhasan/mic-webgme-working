@@ -44,7 +44,7 @@ if (prefix === ""){%>
 inheritsFrom(<%-name%>, Agent);<%
 }else{%>
 inheritsFrom(<%-prefix%><%-name%>, Agent);<%}
-
+parseCourseActions(agent, prefix+name);
 if("libraryAgents" in agent){%>
 <%-prefix + name%>.library = {};<%
     for (var k in agent.libraryAgents){
@@ -52,7 +52,7 @@ if("libraryAgents" in agent){%>
 %><%-parseAgent(la, prefix + name + ".library.")%><%
 }
 } //end of library agents
-};
+}
 %>
 
 <% function parseChildData(agent, prefix){
@@ -160,4 +160,55 @@ if("Courses" in agent){
             parseChildCourses(owner, ch, prefix + "['" + name + "']");
         }
     }
+}%>
+
+
+
+<%function parseCourseActions(agent, prefix) {
+   if("CourseActions" in agent){
+       for (var ca in agent.CourseActions){
+           var cAction = agent.CourseActions[ca];
+            var retString = parseActionParams(cAction);
+            if(retString === null)
+                retString = "";
+%>
+<%-prefix%>.ca_<%-ca%> = function (<%-retString%>) {
+};
+<%
+       }
+   }
+}%>
+
+
+
+<%function parseActionParams(action){
+    var retString = null;
+    if("data" in action) {
+        for(var d in action.data){
+            var dName = d;
+            if(retString === null)
+                retString = dName.replace(/\s/g, '');
+            else
+                retString += ", " + dName.replace(/\s/g, '');
+        }
+    }
+    if("FieldData" in action) {
+        for(var d in action.FieldData){
+            var dName = "fd_" + d;
+            if(retString === null)
+                retString = dName.replace(/\s/g, '');
+            else
+                retString += ", " + dName.replace(/\s/g, '');
+        }
+    }
+    if("CourseActionSignals" in action) {
+        for(var d in action.CourseActionSignals){
+            var dName = "signal_" + d;
+            if(retString === null)
+                retString = dName.replace(/\s/g, '');
+            else
+                retString += ", " + dName.replace(/\s/g, '');
+        }
+    }
+    return retString;
 }%>

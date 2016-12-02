@@ -117,7 +117,7 @@ Fields.Canvas = new Field("Canvas");
 Fields.Canvas.Sprites = new Field("Sprites");
 Fields.Canvas.Group = new Field("Group");
 
-Fields.Canvas.CreateSprite = function (d) {
+Fields.Canvas.CreateSprite = function (d, signalError) {
     if(!(d instanceof DataSprite)){
         throw {name:"Bad Parameter", message: "d is not instance of DataSprite"};
     }

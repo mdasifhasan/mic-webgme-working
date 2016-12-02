@@ -356,7 +356,7 @@
               "data": {
                 "Group-type": {
                   "type": "DataTypes.Group",
-                  "value": null
+                  "value": "Data.DataSprite.Group"
                 }
               },
               "CourseActionSignals": {
@@ -494,7 +494,7 @@
                   "data": {
                     "Group-type": {
                       "type": "DataTypes.Group",
-                      "value": null
+                      "value": "Data.DataSprite.Group"
                     }
                   },
                   "CourseActionSignals": {
@@ -632,7 +632,7 @@
                   "data": {
                     "Group-type": {
                       "type": "DataTypes.Group",
-                      "value": null
+                      "value": "Data.DataSprite.Group"
                     }
                   },
                   "CourseActionSignals": {
@@ -760,7 +760,7 @@
                   "data": {
                     "Group-type": {
                       "type": "DataTypes.Group",
-                      "value": null
+                      "value": "Data.DataSprite.Group"
                     }
                   },
                   "CourseActionSignals": {
