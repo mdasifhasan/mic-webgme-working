@@ -35,8 +35,7 @@ var name = agent.name.replace(/\s/g, '');
     %>
     var child = new <%-cbase%>('<%-cname%>');
     this.addChild(child);
-    <%parseChildData(ca, "child")%>
-    <%parseCourses(ca, "child", false)%><%
+    <%parseChildData(ca, "child")%><%
 }
 }//end of childs agents%>
 };<%
