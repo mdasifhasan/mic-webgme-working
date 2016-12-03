@@ -143,7 +143,7 @@ define([
     };
     JSCodeGenerator.prototype.errorMessages = [];
 
-    JSCodeGenerator.prototype.extractAgents = function (nodes, nodeAgents, exportLibraryAgents) {
+    JSCodeGenerator.prototype.extractAgents = function (nodes, nodeAgents, isBaseAgent) {
         var self = this;
         var agents = {};
         var childrenPaths = self.core.getChildrenPaths(nodeAgents);
@@ -154,7 +154,7 @@ define([
                 var agent = {};
                 agent.name = cname;
                 agents[cname] = agent;
-                self.extractAgent(nodes, childNode, agent, exportLibraryAgents);
+                self.extractAgent(nodes, childNode, agent, isBaseAgent);
             } else {
                 self.logger.info("Ignoring unexpected model under Agents.");
             }
@@ -175,7 +175,7 @@ define([
         }
     };
 
-    JSCodeGenerator.prototype.extractAgent = function (nodes, nodeAgent, agentModel, exportLibraryAgents) {
+    JSCodeGenerator.prototype.extractAgent = function (nodes, nodeAgent, agentModel, isBaseAgent) {
         var self = this;
         var childrenPaths = self.core.getChildrenPaths(nodeAgent);
         var aname = self.core.getAttribute(nodeAgent, 'name');
@@ -204,7 +204,7 @@ define([
                 agentModel.CourseActions = self.extractCourseActions(nodes, childNode, nodeAgent);
             }
             else if (self.core.isTypeOf(childNode, self.META['library agents'])) {
-                if (exportLibraryAgents) {
+                if (isBaseAgent) {
                     var lagents = self.extractAgents(nodes, childNode, true);
                     if (lagents.length !== 0)
                         agentModel.libraryAgents = lagents;
@@ -214,13 +214,116 @@ define([
                 var lagents = self.extractAgents(nodes, childNode, false);
                 if (lagents.length !== 0)
                     agentModel.childs = lagents;
+            } else if (self.core.isTypeOf(childNode, self.META['Modules'])) {
+                if (isBaseAgent) {
+                    var d = self.extractModules(nodes, childNode, nodeAgent);
+                    if (d)
+                        agentModel.Modules = d;
+                }
+            } else if (self.core.isTypeOf(childNode, self.META['Bindings'])) {
+                if (isBaseAgent) {
+                    var d = self.extractBindings(nodes, childNode, nodeAgent);
+                    if (d)
+                        agentModel.Bindings = d;
+                }
             }
             else {
                 self.logger.info("Ignoring unexpected model under Agents.");
             }
         }
     };
+    JSCodeGenerator.prototype.extractModules = function (nodes, nodeModules, agentNode) {
+        var self = this;
+        var modules = self.extractChildOfMeta(nodes, 'Module', nodeModules);
+        var j = {};
+        for (var i = 0; i < modules.length; i++) {
+            var module = modules[i];
+            var moduleName = self.core.getAttribute(module, "name");
+            var m = {};
+            j[moduleName] = m;
+            var childrenPaths = self.core.getChildrenPaths(module);
+            for (var i = 0; i < childrenPaths.length; i++) {
+                var childNode = nodes[childrenPaths[i]];
+                var cname = self.core.getAttribute(childNode, 'name');
+                if (self.core.isTypeOf(childNode, self.META['Init'])) {
+                    m.init = {};
+                    var signals = self.extractChildOfMeta(nodes, 'ReferSignal', childNode);
+                    if (signals.length > 0) {
+                        var s = {};
+                        m.init.signals = s;
+                        for (var k = 0; k < signals.length; k++) {
+                            var signal = signals[k];
+                            var sname = self.core.getAttribute(signal, 'name');
+                            var refer = self.core.getPointerPath(signal, 'refer');
+                            if (refer) {
+                                refer = nodes[refer];
+                                refer = self.extractSignalPath(nodes, refer, agentNode);
+                            }
+                            s.name = sname;
+                            s.signal = refer;
+                        }
+                    }
+                }
+                else if (self.core.isTypeOf(childNode, self.META['Component'])) {
+                    var c = {};
+                    m[cname] = c;
+                    var fActionNodePath = self.core.getPointerPath(childNode, 'refer');
+                    c.fieldInterface = self.extractFieldDataAddress(nodes, fActionNodePath);
+                    c.params = self.extractFieldAction(nodes, nodes[fActionNodePath]);
+                }
+                else {
+                    // self.logger.info("Ignoring unexpected model under Agents.");
+                }
+            }
+        }
 
+        return j;
+    };
+    JSCodeGenerator.prototype.extractBindings = function (nodes, nodeBindings, agentNode) {
+        var self = this;
+        var fieldSubscriptions = self.extractChildOfMeta(nodes, 'FieldSubscription', nodeBindings);
+        var j = {};
+        for (var i = 0; i < fieldSubscriptions.length; i++) {
+            var fieldSub = fieldSubscriptions[i];
+            var m = {};
+            j[i+""] = m;
+            var childrenPaths = self.core.getChildrenPaths(fieldSub);
+            for (var ci = 0; ci < childrenPaths.length; ci++) {
+                var childNode = nodes[childrenPaths[ci]];
+                if (self.core.isTypeOf(childNode, self.META['Bind Component to Field'])) {
+                    var c = {};
+                    var rc = self.extractChildOfMeta(nodes, 'Refer Component', childNode)[0];
+                    var rfa = self.extractChildOfMeta(nodes, 'Refer IAction', childNode)[0];
+                    rc = self.core.getPointerPath(rc, 'refer');
+                    rfa = self.core.getPointerPath(rfa, 'refer');
+                    if(rc && rfa){
+                        c.type = "Action";
+                        c.componentName = self.core.getAttribute(nodes[rc], 'name');
+                        c.fieldAction = self.extractFieldDataAddress(nodes, rfa);
+                        m[ci+""] = c;
+                    }
+                }
+                else if (self.core.isTypeOf(childNode, self.META['Bind Data to FieldData'])) {
+                    var c = {};
+                    var rc = self.extractChildOfMeta(nodes, 'Refer Data', childNode)[0];
+                    var rfa = self.extractChildOfMeta(nodes, 'Refer FieldData', childNode)[0];
+                    rc = self.core.getPointerPath(rc, 'refer');
+                    rfa = self.core.getPointerPath(rfa, 'refer');
+                    if(rc && rfa){
+                        c.type = "Data";
+                        c.data = self.extractLocalPathAddress(nodes, rc, "Data", "Data", agentNode);
+                        c.fieldData = self.extractFieldDataAddress(nodes, rfa);
+                        m[ci+""] = c;
+                    }
+                }
+                else {
+                    // self.logger.info("Ignoring unexpected model under Agents.");
+                }
+            }
+        }
+
+        return j;
+    };
 
     JSCodeGenerator.prototype.extractCourseActions = function (nodes, nodeCourseActions, nodeAgent) {
         var self = this;
@@ -467,7 +570,7 @@ define([
                     Courses[cname].signals = signals;
                 var courseAction = null;
                 var actionNode = self.core.getPointerPath(childNode, 'action');
-                if(actionNode) {
+                if (actionNode) {
                     actionNode = nodes[actionNode];
                     courseAction = self.core.getAttribute(actionNode, 'name');
                 }
@@ -515,7 +618,7 @@ define([
                         s.type = "Course";
                         var courseAction = null;
                         var actionNode = self.core.getPointerPath(nc, 'action');
-                        if(actionNode) {
+                        if (actionNode) {
                             actionNode = nodes[actionNode];
                             courseAction = self.core.getAttribute(actionNode, 'name');
                         }
@@ -595,38 +698,8 @@ define([
                 // iAction.name = cname;
                 if (!("Actions" in jsonModel))
                     jsonModel.Actions = {};
-                jsonModel.Actions[cname] = iAction;
-                var data = self.extractChildOfMeta(nodes, "IData", childNode);
-                data = data.map(function (node) {
-                    var path = self.core.getPointerPath(node, 'type');
-                    path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
-                    var j = {};
-                    j.name = self.core.getAttribute(node, "name");
-                    j.type = path;
-                    return j;
-                });
-                if (data.length !== 0)
-                    iAction.Data = data;
+                jsonModel.Actions[cname] = self.extractFieldAction(nodes, childNode);
 
-                var dataFields = self.extractChildOfMeta(nodes, "IFieldData", childNode);
-                dataFields = dataFields.map(function (node) {
-                    var path = self.core.getPointerPath(node, 'type');
-                    path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
-                    var j = {};
-                    j.name = self.core.getAttribute(node, "name");
-                    j.type = path;
-                    return j;
-                });
-                if (dataFields.length !== 0)
-                    iAction.FieldData = dataFields;
-
-                var signals = self.extractChildOfMeta(nodes, "ActionSignal", childNode);
-                var signals = signals.map(function (node) {
-                    var name = self.core.getAttribute(node, 'name');
-                    return name;
-                });
-                if (signals.length !== 0)
-                    iAction.ActionSignals = signals;
             }
             else if (self.core.isTypeOf(childNode, self.META['FieldData'])) {
                 var iData = {};
@@ -645,7 +718,42 @@ define([
         return jsonModel;
     };
 
+    JSCodeGenerator.prototype.extractFieldAction = function (nodes, nodeFieldAction) {
+        var iAction = {};
+        var self = this;
+        var data = self.extractChildOfMeta(nodes, "IData", nodeFieldAction);
+        data = data.map(function (node) {
+            var path = self.core.getPointerPath(node, 'type');
+            path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
+            var j = {};
+            j.name = self.core.getAttribute(node, "name");
+            j.type = path;
+            return j;
+        });
+        if (data.length !== 0)
+            iAction.Data = data;
 
+        var dataFields = self.extractChildOfMeta(nodes, "IFieldData", nodeFieldAction);
+        dataFields = dataFields.map(function (node) {
+            var path = self.core.getPointerPath(node, 'type');
+            path = self.extractPathAddress(nodes, path, "Data", "DataTypes");
+            var j = {};
+            j.name = self.core.getAttribute(node, "name");
+            j.type = path;
+            return j;
+        });
+        if (dataFields.length !== 0)
+            iAction.FieldData = dataFields;
+
+        var signals = self.extractChildOfMeta(nodes, "ActionSignal", nodeFieldAction);
+        var signals = signals.map(function (node) {
+            var name = self.core.getAttribute(node, 'name');
+            return name;
+        });
+        if (signals.length !== 0)
+            iAction.ActionSignals = signals;
+        return iAction;
+    };
     JSCodeGenerator.prototype.extractDataStructures = function (nodes, nodeFields, exportOnlyChanges, exportBase) {
         var self = this;
         var childrenPaths = self.core.getChildrenPaths(nodeFields);
@@ -666,8 +774,8 @@ define([
                 DataStructure[cname].name = cname;
             }
         }
-        if(exportOnlyChanges)
-            if(!isChanged)
+        if (exportOnlyChanges)
+            if (!isChanged)
                 return null;
         return DataStructure;
     };
@@ -686,7 +794,7 @@ define([
                     return j;
                 else
                     return null;
-            }else
+            } else
                 return j;
         }
         else if (self.core.isTypeOf(childNode, self.META['Text'])) {
@@ -700,7 +808,7 @@ define([
                     return j;
                 else
                     return null;
-            }else
+            } else
                 return j;
         }
         else if (self.core.isTypeOf(childNode, self.META['Boolean'])) {
@@ -714,7 +822,7 @@ define([
                     return j;
                 else
                     return null;
-            }else
+            } else
                 return j;
         }
         else if (self.core.isTypeOf(childNode, self.META['Object'])) {
@@ -729,7 +837,7 @@ define([
                     return j;
                 else
                     return null;
-            }else
+            } else
                 return j;
         }
         else if (self.core.isTypeOf(childNode, self.META['ReferData'])) {
@@ -746,7 +854,7 @@ define([
                     return j;
                 else
                     return null;
-            }else
+            } else
                 return j;
         }
         else if (self.core.isTypeOf(childNode, self.META['Data'])) {
@@ -754,12 +862,12 @@ define([
             j.type = "Data";
             j.base = self.core.getAttribute(self.core.getBase(childNode), "name");
             j.value = self.extractDataStructures(nodes, childNode, exportOnlyChanges, false);
-            if(exportOnlyChanges){
-                if(!j.value){
-                    if(exportBase){
+            if (exportOnlyChanges) {
+                if (!j.value) {
+                    if (exportBase) {
                         delete j['value'];
                         return j;
-                    }else
+                    } else
                         return null;
                 }
             }
@@ -997,6 +1105,7 @@ define([
                 deferred.resolve(hashes[0]);
             });
         });
+
 
         return deferred.promise;
     };

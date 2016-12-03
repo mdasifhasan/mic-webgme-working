@@ -353,6 +353,62 @@
               "name": "DataSprite"
             }
           },
+          "Modules": {
+            "SpriteActions": {
+              "CreateSprite-refer": {
+                "fieldInterface": "Fields.FieldCanvas.FieldSprites.CreateSprite",
+                "params": {
+                  "Data": [
+                    {
+                      "name": "DataSprite",
+                      "type": "DataTypes.DataSprite"
+                    },
+                    {
+                      "name": "DataSprite2",
+                      "type": "DataTypes.DataSprite"
+                    }
+                  ],
+                  "ActionSignals": [
+                    "Error"
+                  ]
+                }
+              },
+              "Create Group-refer": {
+                "fieldInterface": "Fields.FieldCanvas.FieldSprites.Group.Create Group",
+                "params": {
+                  "Data": [
+                    {
+                      "name": "Group-type",
+                      "type": "DataTypes.Group"
+                    }
+                  ],
+                  "ActionSignals": [
+                    "Error"
+                  ]
+                }
+              },
+              "init": {}
+            }
+          },
+          "Bindings": {
+            "0": {
+              "0": {
+                "type": "Action",
+                "componentName": "CreateSprite-refer",
+                "fieldAction": "Fields.FieldCanvas.FieldSprites.CreateSprite"
+              },
+              "1": {
+                "type": "Data",
+                "data": "Data.DataSprite",
+                "fieldData": "Fields.FieldCanvas.FieldSprites.DataSprite-type"
+              },
+              "2": {
+                "type": "Action",
+                "componentName": "Create Group-refer",
+                "fieldAction": "Fields.FieldCanvas.FieldSprites.Group.Create Group"
+              }
+            }
+          },
           "CourseActions": {
             "Create Group": {
               "data": {
@@ -455,7 +511,21 @@
     },
     "Game Engine": {
       "name": "Game Engine",
-      "base": "Game Engine"
+      "base": "Game Engine",
+      "Modules": {
+        "GameEngine": {
+          "init": {
+            "signals": {
+              "name": "SignalCreate",
+              "signal": {
+                "name": "SignalCreate",
+                "type": "Field",
+                "path": "Fields.FieldGameEngine.SignalCreate"
+              }
+            }
+          }
+        }
+      }
     },
     "Test Game": {
       "name": "Test Game",
@@ -732,6 +802,15 @@
         "Star": {
           "name": "Star",
           "base": "Test Game.library.Star",
+          "Bindings": {
+            "0": {
+              "0": {
+                "type": "Data",
+                "data": "childs.Sprite.Data.DataSprite",
+                "fieldData": "Fields.FieldTestGame.Stars"
+              }
+            }
+          },
           "libraryAgents": {
             "SampleAgent": {
               "name": "SampleAgent",
