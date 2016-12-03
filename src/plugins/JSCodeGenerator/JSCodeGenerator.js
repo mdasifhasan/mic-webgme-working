@@ -513,6 +513,13 @@ define([
                         s.signal = signal;
                     } else if (self.core.isTypeOf(nc, self.META['Course'])) {
                         s.type = "Course";
+                        var courseAction = null;
+                        var actionNode = self.core.getPointerPath(nc, 'action');
+                        if(actionNode) {
+                            actionNode = nodes[actionNode];
+                            courseAction = self.core.getAttribute(actionNode, 'name');
+                        }
+                        s.courseAction = courseAction;
                         var childs = self.extractCourse(nodes, nc);
                         if (childs.length > 0)
                             s.childs = childs;

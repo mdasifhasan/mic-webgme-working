@@ -432,11 +432,13 @@
               "childs": [
                 {
                   "name": "Create Group",
-                  "type": "Course"
+                  "type": "Course",
+                  "courseAction": "Create Group"
                 },
                 {
                   "name": "Create Sprite",
-                  "type": "Course"
+                  "type": "Course",
+                  "courseAction": "Create Sprite"
                 }
               ],
               "courseAction": null
@@ -478,11 +480,13 @@
                   "childs": [
                     {
                       "name": "Create Group",
-                      "type": "Course"
+                      "type": "Course",
+                      "courseAction": "Create Group"
                     },
                     {
                       "name": "Create Sprite",
-                      "type": "Course"
+                      "type": "Course",
+                      "courseAction": "Create Sprite"
                     }
                   ],
                   "signals": [
@@ -621,11 +625,13 @@
                   "childs": [
                     {
                       "name": "Create Group",
-                      "type": "Course"
+                      "type": "Course",
+                      "courseAction": "Create Group"
                     },
                     {
                       "name": "Create Sprite",
-                      "type": "Course"
+                      "type": "Course",
+                      "courseAction": "Create Sprite"
                     }
                   ],
                   "signals": [
@@ -754,11 +760,13 @@
                   "childs": [
                     {
                       "name": "Create Group",
-                      "type": "Course"
+                      "type": "Course",
+                      "courseAction": "Create Group"
                     },
                     {
                       "name": "Create Sprite",
-                      "type": "Course"
+                      "type": "Course",
+                      "courseAction": "Create Sprite"
                     }
                   ],
                   "signals": [
@@ -1018,14 +1026,17 @@
             {
               "name": "CourseComposite",
               "type": "Course",
+              "courseAction": null,
               "childs": [
                 {
                   "name": "Course1",
-                  "type": "Course"
+                  "type": "Course",
+                  "courseAction": null
                 },
                 {
                   "name": "Course2",
-                  "type": "Course"
+                  "type": "Course",
+                  "courseAction": null
                 }
               ]
             },
@@ -1041,7 +1052,8 @@
             },
             {
               "name": "Course",
-              "type": "Course"
+              "type": "Course",
+              "courseAction": null
             },
             {
               "name": "SignalUpdate-refer",
@@ -1054,7 +1066,8 @@
             },
             {
               "name": "Course",
-              "type": "Course"
+              "type": "Course",
+              "courseAction": null
             }
           ],
           "signals": [

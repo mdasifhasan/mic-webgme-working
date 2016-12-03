@@ -20,27 +20,24 @@ Canvas.library.Text = function (name) {
 
 
     var course;
+    course = new Course(this, "CreateText", null, new this.CA_CreateText());
 
-    course = new Course(this, "CreateText");
     this.addCourse(CreateText);
     
     Fields.FieldGameEngine.signals.subscribeSignal('SignalCreate', course);
+    course = new Course(this, "UpdateText", null, new this.CA_UpdateText());
 
-    course = new Course(this, "UpdateText");
     this.addCourse(UpdateText);
     
     Fields.FieldGameEngine.signals.subscribeSignal('SignalUpdate', course);
 
 };
 inheritsFrom(Canvas.library.Text, Agent);
-Canvas.library.Text.CA_UpdateText = function (DataText-type) {
+Canvas.library.Text.prototype.CA_UpdateText = function () {
 
-    this.data = {};
-    if(!(DataText-type instanceof DataText)){
-        throw {name:"Bad Parameter", message: "DataText-type is not instance of DataText"};
-    }
+    var caData = {};
 
-    this.data.DataText-type = DataText-type;
+    this.caData.DataText-type = this.data.DataText;
 
 
     this.res = {};
@@ -49,10 +46,10 @@ Canvas.library.Text.CA_UpdateText = function (DataText-type) {
         
 };
 
-Canvas.library.Text.CA_UpdateText.prototype.trigger = function (course) {
+Canvas.library.Text.prototype.CA_UpdateText.prototype.trigger = function (course) {
 
-    if(!res.UpdateTextView){
-        this.res.UpdateTextView = Fields.FieldCanvas.FieldTextView.Update TextView(this.data.DataText-type);
+    if(!this.res.UpdateTextView){
+        this.res.UpdateTextView = Fields.FieldCanvas.FieldTextView.Update TextView(this.caData.DataText-type);
         if(!this.res.UpdateTextView)
             return false;
     }
@@ -60,14 +57,11 @@ Canvas.library.Text.CA_UpdateText.prototype.trigger = function (course) {
     return true;
 };
 
-Canvas.library.Text.CA_CreateText = function (DataText-type) {
+Canvas.library.Text.prototype.CA_CreateText = function () {
 
-    this.data = {};
-    if(!(DataText-type instanceof DataText)){
-        throw {name:"Bad Parameter", message: "DataText-type is not instance of DataText"};
-    }
+    var caData = {};
 
-    this.data.DataText-type = DataText-type;
+    this.caData.DataText-type = this.data.DataText;
 
 
     this.res = {};
@@ -76,10 +70,10 @@ Canvas.library.Text.CA_CreateText = function (DataText-type) {
         
 };
 
-Canvas.library.Text.CA_CreateText.prototype.trigger = function (course) {
+Canvas.library.Text.prototype.CA_CreateText.prototype.trigger = function (course) {
 
-    if(!res.CreateTextView){
-        this.res.CreateTextView = Fields.FieldCanvas.FieldTextView.Create TextView(this.data.DataText-type);
+    if(!this.res.CreateTextView){
+        this.res.CreateTextView = Fields.FieldCanvas.FieldTextView.Create TextView(this.caData.DataText-type);
         if(!this.res.CreateTextView)
             return false;
     }
@@ -98,41 +92,36 @@ Canvas.library.Sprite = function (name) {
 
 
     var course;
-
     course = new Course(this, "create sprite under group");
     this.addCourse(create sprite under group);
     
-    course = new Course(this, 'Create Group');
+    course = new Course(this, "Create Group", null, new this.CA_CreateGroup());
+    
     this['create sprite under group'].addCourse(course);
 
-    course = new Course(this, 'Create Sprite');
+    course = new Course(this, "Create Sprite", null, new this.CA_CreateSprite());
+    
     this['create sprite under group'].addCourse(course);
 
+    course = new Course(this, "Create Sprite", null, new this.CA_CreateSprite());
 
-    course = new Course(this, "Create Sprite");
     this.addCourse(Create Sprite);
     
+    course = new Course(this, "Create Group", null, new this.CA_CreateGroup());
 
-    course = new Course(this, "Create Group");
     this.addCourse(Create Group);
     
 
 };
 inheritsFrom(Canvas.library.Sprite, Agent);
-Canvas.library.Sprite.CA_CreateGroup = function (Group-type, signal_Error) {
+Canvas.library.Sprite.prototype.CA_CreateGroup = function () {
 
-    this.data = {};
-    if(!(Group-type instanceof Group)){
-        throw {name:"Bad Parameter", message: "Group-type is not instance of Group"};
-    }
+    var caData = {};
 
-    this.data.Group-type = Group-type;
+    this.caData.Group-type = this.data.DataSprite.Group;
 
-    this.signals = {};
-    if(!(signal_Error instanceof Signal)){
-        throw {name:"Bad Parameter", message: "signal_Error is not instance of Signal"};
-    }
-    this.signals.signal_Error = signal_Error;
+    this.caSignals = {};
+    this.caSignals.signal_Error = new Signal(Fields.FieldErrorHandler, 'Critical Error');
 
 
     this.res = {};
@@ -141,10 +130,10 @@ Canvas.library.Sprite.CA_CreateGroup = function (Group-type, signal_Error) {
         
 };
 
-Canvas.library.Sprite.CA_CreateGroup.prototype.trigger = function (course) {
+Canvas.library.Sprite.prototype.CA_CreateGroup.prototype.trigger = function (course) {
 
-    if(!res.CreateGroup){
-        this.res.CreateGroup = Fields.FieldCanvas.FieldSprites.Group.Create Group(this.data.Group-type);
+    if(!this.res.CreateGroup){
+        this.res.CreateGroup = Fields.FieldCanvas.FieldSprites.Group.Create Group(this.caData.Group-type, this.caSignals.Error);
         if(!this.res.CreateGroup)
             return false;
     }
@@ -152,20 +141,14 @@ Canvas.library.Sprite.CA_CreateGroup.prototype.trigger = function (course) {
     return true;
 };
 
-Canvas.library.Sprite.CA_CreateSprite = function (DataSprite-type, signal_Error) {
+Canvas.library.Sprite.prototype.CA_CreateSprite = function () {
 
-    this.data = {};
-    if(!(DataSprite-type instanceof DataSprite)){
-        throw {name:"Bad Parameter", message: "DataSprite-type is not instance of DataSprite"};
-    }
+    var caData = {};
 
-    this.data.DataSprite-type = DataSprite-type;
+    this.caData.DataSprite-type = this.data.DataSprite;
 
-    this.signals = {};
-    if(!(signal_Error instanceof Signal)){
-        throw {name:"Bad Parameter", message: "signal_Error is not instance of Signal"};
-    }
-    this.signals.signal_Error = signal_Error;
+    this.caSignals = {};
+    this.caSignals.signal_Error = new Signal(Fields.FieldErrorHandler, 'Critical Error');
 
 
     this.res = {};
@@ -174,10 +157,10 @@ Canvas.library.Sprite.CA_CreateSprite = function (DataSprite-type, signal_Error)
         
 };
 
-Canvas.library.Sprite.CA_CreateSprite.prototype.trigger = function (course) {
+Canvas.library.Sprite.prototype.CA_CreateSprite.prototype.trigger = function (course) {
 
-    if(!res.CreateSprite){
-        this.res.CreateSprite = Fields.FieldCanvas.FieldSprites.CreateSprite(this.data.DataSprite-type, null);
+    if(!this.res.CreateSprite){
+        this.res.CreateSprite = Fields.FieldCanvas.FieldSprites.CreateSprite(this.caData.DataSprite-type, null, this.caSignals.Error);
         if(!this.res.CreateSprite)
             return false;
     }
@@ -255,7 +238,6 @@ var ErrorHandler = function (name) {
     Agent.apply(this, [name]);
     
     var course;
-
     course = new Course(this, "Report Critical Error");
     this.addCourse(Report Critical Error);
     
@@ -268,40 +250,38 @@ var Debug = function (name) {
     Agent.apply(this, [name]);
     
     var course;
-
     course = new Course(this, "SampleCourse");
     this.addCourse(SampleCourse);
     
-    course = new Course(this, 'CourseComposite');
+    course = new Course(this, "CourseComposite");
     this['SampleCourse'].addCourse(course);
 
-    course = new Course(this, 'Course1');
+    course = new Course(this, "Course1");
     this['SampleCourse']['CourseComposite'].addCourse(course);
 
-    course = new Course(this, 'Course2');
+    course = new Course(this, "Course2");
     this['SampleCourse']['CourseComposite'].addCourse(course);
 
-    course = new Course(this, 'SignalCreate-refer');
+    course = new Course(this, "SignalCreate-refer");
     this['SampleCourse'].addCourse(course);
 
-    course = new Course(this, 'Course');
+    course = new Course(this, "Course");
     this['SampleCourse'].addCourse(course);
 
-    course = new Course(this, 'SignalUpdate-refer');
+    course = new Course(this, "SignalUpdate-refer");
     this['SampleCourse'].addCourse(course);
 
-    course = new Course(this, 'Course');
+    course = new Course(this, "Course");
     this['SampleCourse'].addCourse(course);
 
     this.signals.subscribeSignal('DebugSignal', course);
     Fields.FieldDebug.DebugChild.DebugChildChild.signals.subscribeSignal('DebugChildSignal', course);
-
     course = new Course(this, "SampleCourse2");
     this.addCourse(SampleCourse2);
     
     Fields.FieldDebug.DebugChild.DebugChildChild.signals.subscribeSignal('DebugChildSignal', course);
+    course = new Course(this, "Show Stars Count", null, new this.CA_CountSubscribers());
 
-    course = new Course(this, "Show Stars Count");
     this.addCourse(Show Stars Count);
     
     Fields.FieldGameEngine.signals.subscribeSignal('SignalUpdate', course);
@@ -314,23 +294,17 @@ var Debug = function (name) {
 
 };
 inheritsFrom(Debug, Agent);
-Debug.CA_CountSubscribers = function (CountText, Count, fd_InputWhichFieldData, signal_CASampleSignal) {
+Debug.prototype.CA_CountSubscribers = function () {
 
-    this.data = {};
-    this.data.CountText = CountText;
+    var caData = {};
+    this.caData.CountText = this.childs.Text.data.DataText.Text;
 
-    this.data.Count = Count;
+    this.caData.Count = this.data.StarCount;
 
-    if(!(fd_InputWhichFieldData instanceof ReferFieldData)){
-        throw {name:"Bad Parameter", message: "fd_InputWhichFieldData is not instance of ReferFieldData"};
-    }
-    this.data.fd_InputWhichFieldData = fd_InputWhichFieldData;
+    this.caData.fd_InputWhichFieldData = Fields.FieldTestGame.Stars;
 
-    this.signals = {};
-    if(!(signal_CASampleSignal instanceof Signal)){
-        throw {name:"Bad Parameter", message: "signal_CASampleSignal is not instance of Signal"};
-    }
-    this.signals.signal_CASampleSignal = signal_CASampleSignal;
+    this.caSignals = {};
+    this.caSignals.signal_CASampleSignal = new Signal(this.childs.Text.signals.TextSignal, 'TextSignal');
 
 
     this.res = {};
@@ -341,16 +315,16 @@ Debug.CA_CountSubscribers = function (CountText, Count, fd_InputWhichFieldData, 
         
 };
 
-Debug.CA_CountSubscribers.prototype.trigger = function (course) {
+Debug.prototype.CA_CountSubscribers.prototype.trigger = function (course) {
 
-    if(!res.CountDataSubscribers){
-        this.res.CountDataSubscribers = Fields.FieldDebug.CountDataSubscribers(this.data.Count, this.data.fd_InputWhichFieldData);
+    if(!this.res.CountDataSubscribers){
+        this.res.CountDataSubscribers = Fields.FieldDebug.CountDataSubscribers(this.caData.Count, this.caData.fd_InputWhichFieldData);
         if(!this.res.CountDataSubscribers)
             return false;
     }
 
-    if(!res.NumberToString){
-        this.res.NumberToString = Fields.FieldParse.NumberToString(this.data.Count, this.data.CountText);
+    if(!this.res.NumberToString){
+        this.res.NumberToString = Fields.FieldParse.NumberToString(this.caData.Count, this.caData.CountText);
         if(!this.res.NumberToString)
             return false;
     }

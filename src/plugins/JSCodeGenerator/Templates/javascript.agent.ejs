@@ -114,10 +114,13 @@ if("Courses" in agent){
   for (var c in agent.Courses){
         var cs = agent.Courses[c];
         var name = c;
+      var courseAction = "courseAction" in cs ? cs.courseAction?"CA_"+cs.courseAction.replace(/\s/g, ''):null : null;
         if(isCreateCourseInstance){
+            if(courseAction){
 %>
-
-    course = new Course(this, "<%-name%>");
+    course = new Course(this, "<%-name%>", null, new this.<%-courseAction%>());
+<%}else{%>
+    course = new Course(this, "<%-name%>");<%}%>
     <%-ownerVarName%>.addCourse(<%-name%>);
     <%
             if("childs" in cs){
@@ -126,7 +129,7 @@ if("Courses" in agent){
                     parseChildCourses(ownerVarName, child, ownerVarName+"['"+name+"']");
                 }
             }
-        }else{%>
+    }else{%>
     course = <%-ownerVarName%>.courses['<%-name%>'];<%}
     if("signals" in cs){
         for(var i = 0; i < cs.signals.length; i++){
@@ -149,8 +152,12 @@ if("Courses" in agent){
 <%function parseChildCourses(owner, child, prefix) {
         var name = child.name;
         var type = child.type;
-        %>
-    course = new Course(<%-owner%>, '<%-name%>');
+        var courseAction = "courseAction" in child ? child.courseAction?"CA_"+child.courseAction.replace(/\s/g, ''):null : null;
+        if(courseAction){
+    %>
+    course = new Course(this, "<%-name%>", null, new this.<%-courseAction%>());
+    <%}else{%>
+    course = new Course(this, "<%-name%>");<%}%>
     <%-prefix%>.addCourse(course);
 <%
     if("childs" in child){
@@ -172,7 +179,7 @@ if("Courses" in agent){
             if(retString === null)
                 retString = "";
 %>
-<%-prefix%>.CA_<%-name%> = function (<%-retString%>) {
+<%-prefix%>.prototype.CA_<%-name%> = function () {
 <%parseActionBodyForParam(cAction)%>
 <%
     if("fieldActions" in cAction) {%>
@@ -187,7 +194,7 @@ if("Courses" in agent){
 %>
 };
 
-<%-prefix%>.CA_<%-name%>.prototype.trigger = function (course) {
+<%-prefix%>.prototype.CA_<%-name%>.prototype.trigger = function (course) {
 <%
 if("fieldActions" in cAction) {
     for (var i = 0; i < cAction.fieldActions.length; i++) {
@@ -197,7 +204,7 @@ if("fieldActions" in cAction) {
     if(retString === null)
         retString = "";
 %>
-    if(!res.<%-faname%>){
+    if(!this.res.<%-faname%>){
         this.res.<%-faname%> = <%-fa.field%>(<%-retString%>);
         if(!this.res.<%-faname%>)
             return false;
@@ -216,20 +223,19 @@ if("fieldActions" in cAction) {
 if("data" in action) {
     var i = 0;
 %>
-    this.data = {};<%
+    var caData = {};<%
 for(var dt in action.data){
     var d = action.data[dt];
     var dName = dt.replace(/\s/g, '');
     var dType = d.type;
+    var dValue = d.value;
+    if(dValue)
+        dValue = dValue.replace("Data.", "data.")
 if(dType !== null){
     dType = dType.replace('DataTypes.','')
-
 %>
-    if(!(<%-dName%> instanceof <%-dType%>)){
-        throw {name:"Bad Parameter", message: "<%-dName%> is not instance of <%-dType%>"};
-    }
 <%}%>
-    this.data.<%-dName%> = <%-dName%>;
+    this.caData.<%-dName%> = this.<%-dValue%>;
 <%}
 }
 if("FieldData" in action) {
@@ -237,24 +243,31 @@ for(var dt in action.FieldData){
     var d = action.FieldData[dt];
     var dName = "fd_" + dt.replace(/\s/g, '');
     var dType = "ReferFieldData";
+    var dValue = d.value;
 %>
-    if(!(<%-dName%> instanceof <%-dType%>)){
-        throw {name:"Bad Parameter", message: "<%-dName%> is not instance of <%-dType%>"};
-    }
-    this.data.<%-dName%> = <%-dName%>;
+    this.caData.<%-dName%> = <%-dValue%>;
 <%}
 }
 if("CourseActionSignals" in action) {%>
-    this.signals = {};<%
+    this.caSignals = {};<%
 for(var cas in action.CourseActionSignals){
     var d = action.CourseActionSignals[cas];
     var dName = "signal_" + cas;
     var dType = "Signal";
-%>
-    if(!(<%-dName%> instanceof <%-dType%>)){
-        throw {name:"Bad Parameter", message: "<%-dName%> is not instance of <%-dType%>"};
+    var dSignalPath = null;
+    var dSignalName = null;
+    var signal = d.Signal;
+    if(signal) {
+        if (signal.type === 'local') {
+            dSignalName = signal.name;
+            dSignalPath = "this." + signal.path.replace("AgentSignals", "signals");
+        } else {
+            dSignalPath = signal.path.substr(0, signal.path.length - signal.name.length - 1);
+            dSignalName = signal.name;
+        }
     }
-    this.signals.<%-dName%> = <%-dName%>;
+%>
+    this.caSignals.<%-dName%> = new Signal(<%-dSignalPath%>, '<%-dSignalName%>');
 <%}
 }
 }%>
@@ -297,7 +310,7 @@ for(var cas in action.CourseActionSignals){
         for(var d in action.data){
             var dName = action.data[d].value;
             if(dName)
-                dName = "this.data." + dName;
+                dName = "this.caData." + dName;
             else
                 dName = "null";
             if(retString === null)
@@ -310,7 +323,7 @@ for(var cas in action.CourseActionSignals){
         for(var d in action.FieldData){
             var dName = action.FieldData[d].value;
             if(dName)
-                dName = "this.data." + "fd_" + dName;
+                dName = "this.caData." + "fd_" + dName;
             else
                 dName = "null";
             if(retString === null)
@@ -319,11 +332,11 @@ for(var cas in action.CourseActionSignals){
                 retString += ", " + dName.replace(/\s/g, '');
         }
     }
-    if("CourseActionSignals" in action) {
+    if("ActionSignals" in action) {
         for(var d in action.ActionSignals){
             var dName = action.ActionSignals[d].CourseActionSignal;
             if(dName)
-                dName = "this.signals." + "signal_" + dName;
+                dName = "this.caSignals." + dName;
             else
                 dName = "null";
             if(retString === null)
