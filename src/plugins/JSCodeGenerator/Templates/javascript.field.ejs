@@ -201,7 +201,7 @@ return this.field.getData(this.fieldDataName);
     for(; i < action.ActionSignals.length; i++){
         var d = action.ActionSignals[i];
         var dName = "signal_" + d;
-        var dType = "string";
+        var dType = "Signal";
     %>
     if(!(<%-dName%> instanceof <%-dType%>)){
         throw {name:"Bad Parameter", message: "<%-dName%> is not instance of <%-dType%>"};

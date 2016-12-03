@@ -465,6 +465,13 @@ define([
                     Courses[cname].childs = c;
                 if (signals.length > 0)
                     Courses[cname].signals = signals;
+                var courseAction = null;
+                var actionNode = self.core.getPointerPath(childNode, 'action');
+                if(actionNode) {
+                    actionNode = nodes[actionNode];
+                    courseAction = self.core.getAttribute(actionNode, 'name');
+                }
+                Courses[cname].courseAction = courseAction;
             }
             else {
                 // self.logger.info("Ignoring unexpected model under Agents.");

@@ -276,7 +276,8 @@
                   "type": "Field",
                   "path": "Fields.FieldGameEngine.SignalCreate"
                 }
-              ]
+              ],
+              "courseAction": "CreateText"
             },
             "UpdateText": {
               "signals": [
@@ -285,7 +286,8 @@
                   "type": "Field",
                   "path": "Fields.FieldGameEngine.SignalUpdate"
                 }
-              ]
+              ],
+              "courseAction": "UpdateText"
             }
           },
           "CourseActions": {
@@ -436,10 +438,15 @@
                   "name": "Create Sprite",
                   "type": "Course"
                 }
-              ]
+              ],
+              "courseAction": null
             },
-            "Create Sprite": {},
-            "Create Group": {}
+            "Create Sprite": {
+              "courseAction": "Create Sprite"
+            },
+            "Create Group": {
+              "courseAction": "Create Group"
+            }
           }
         }
       }
@@ -484,10 +491,15 @@
                       "type": "Field",
                       "path": "Fields.FieldGameEngine.SignalCreate"
                     }
-                  ]
+                  ],
+                  "courseAction": null
                 },
-                "Create Sprite": {},
-                "Create Group": {}
+                "Create Sprite": {
+                  "courseAction": "Create Sprite"
+                },
+                "Create Group": {
+                  "courseAction": "Create Group"
+                }
               },
               "CourseActions": {
                 "Create Group": {
@@ -622,10 +634,15 @@
                       "type": "Field",
                       "path": "Fields.FieldGameEngine.SignalCreate"
                     }
-                  ]
+                  ],
+                  "courseAction": null
                 },
-                "Create Sprite": {},
-                "Create Group": {}
+                "Create Sprite": {
+                  "courseAction": "Create Sprite"
+                },
+                "Create Group": {
+                  "courseAction": "Create Group"
+                }
               },
               "CourseActions": {
                 "Create Group": {
@@ -750,10 +767,15 @@
                       "type": "Field",
                       "path": "Fields.FieldGameEngine.SignalCreate"
                     }
-                  ]
+                  ],
+                  "courseAction": null
                 },
-                "Create Sprite": {},
-                "Create Group": {}
+                "Create Sprite": {
+                  "courseAction": "Create Sprite"
+                },
+                "Create Group": {
+                  "courseAction": "Create Group"
+                }
               },
               "CourseActions": {
                 "Create Group": {
@@ -838,7 +860,9 @@
       "name": "Error Handler",
       "base": "Error Handler",
       "Courses": {
-        "Report Critical Error": {}
+        "Report Critical Error": {
+          "courseAction": null
+        }
       }
     },
     "Debug": {
@@ -972,7 +996,8 @@
                   "type": "Field",
                   "path": "Fields.FieldGameEngine.SignalCreate"
                 }
-              ]
+              ],
+              "courseAction": "CreateText"
             },
             "UpdateText": {
               "signals": [
@@ -981,7 +1006,8 @@
                   "type": "Field",
                   "path": "Fields.FieldGameEngine.SignalUpdate"
                 }
-              ]
+              ],
+              "courseAction": "UpdateText"
             }
           }
         }
@@ -1042,7 +1068,8 @@
               "type": "Field",
               "path": "Fields.FieldDebug.DebugChild.DebugChildChild.DebugChildSignal"
             }
-          ]
+          ],
+          "courseAction": null
         },
         "SampleCourse2": {
           "signals": [
@@ -1051,7 +1078,8 @@
               "type": "Field",
               "path": "Fields.FieldDebug.DebugChild.DebugChildChild.DebugChildSignal"
             }
-          ]
+          ],
+          "courseAction": null
         },
         "Show Stars Count": {
           "signals": [
@@ -1060,7 +1088,8 @@
               "type": "Field",
               "path": "Fields.FieldGameEngine.SignalUpdate"
             }
-          ]
+          ],
+          "courseAction": "Count Subscribers"
         }
       }
     }

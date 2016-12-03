@@ -35,17 +35,17 @@ Canvas.library.Text = function (name) {
 inheritsFrom(Canvas.library.Text, Agent);
 Canvas.library.Text.CA_UpdateText = function (DataText-type) {
 
-    var data = {};
+    this.data = {};
     if(!(DataText-type instanceof DataText)){
         throw {name:"Bad Parameter", message: "DataText-type is not instance of DataText"};
     }
 
-    data.DataText-type = DataText-type;
+    this.data.DataText-type = DataText-type;
 
 
-    var res = {};
+    this.res = {};
 
-    res.UpdateTextView = false;
+    this.res.UpdateTextView = false;
         
 };
 
@@ -62,17 +62,17 @@ Canvas.library.Text.CA_UpdateText.prototype.trigger = function (course) {
 
 Canvas.library.Text.CA_CreateText = function (DataText-type) {
 
-    var data = {};
+    this.data = {};
     if(!(DataText-type instanceof DataText)){
         throw {name:"Bad Parameter", message: "DataText-type is not instance of DataText"};
     }
 
-    data.DataText-type = DataText-type;
+    this.data.DataText-type = DataText-type;
 
 
-    var res = {};
+    this.res = {};
 
-    res.CreateTextView = false;
+    this.res.CreateTextView = false;
         
 };
 
@@ -121,23 +121,23 @@ Canvas.library.Sprite = function (name) {
 inheritsFrom(Canvas.library.Sprite, Agent);
 Canvas.library.Sprite.CA_CreateGroup = function (Group-type, signal_Error) {
 
-    var data = {};
+    this.data = {};
     if(!(Group-type instanceof Group)){
         throw {name:"Bad Parameter", message: "Group-type is not instance of Group"};
     }
 
-    data.Group-type = Group-type;
+    this.data.Group-type = Group-type;
 
-    var signals = {};
-    if(!(signal_Error instanceof string)){
-        throw {name:"Bad Parameter", message: "signal_Error is not instance of string"};
+    this.signals = {};
+    if(!(signal_Error instanceof Signal)){
+        throw {name:"Bad Parameter", message: "signal_Error is not instance of Signal"};
     }
-    signals.signal_Error = signal_Error;
+    this.signals.signal_Error = signal_Error;
 
 
-    var res = {};
+    this.res = {};
 
-    res.CreateGroup = false;
+    this.res.CreateGroup = false;
         
 };
 
@@ -154,23 +154,23 @@ Canvas.library.Sprite.CA_CreateGroup.prototype.trigger = function (course) {
 
 Canvas.library.Sprite.CA_CreateSprite = function (DataSprite-type, signal_Error) {
 
-    var data = {};
+    this.data = {};
     if(!(DataSprite-type instanceof DataSprite)){
         throw {name:"Bad Parameter", message: "DataSprite-type is not instance of DataSprite"};
     }
 
-    data.DataSprite-type = DataSprite-type;
+    this.data.DataSprite-type = DataSprite-type;
 
-    var signals = {};
-    if(!(signal_Error instanceof string)){
-        throw {name:"Bad Parameter", message: "signal_Error is not instance of string"};
+    this.signals = {};
+    if(!(signal_Error instanceof Signal)){
+        throw {name:"Bad Parameter", message: "signal_Error is not instance of Signal"};
     }
-    signals.signal_Error = signal_Error;
+    this.signals.signal_Error = signal_Error;
 
 
-    var res = {};
+    this.res = {};
 
-    res.CreateSprite = false;
+    this.res.CreateSprite = false;
         
 };
 
@@ -205,7 +205,6 @@ var TestGame = function (name) {
     
 
 
-    
     var child = new TestGame.library.Star('Star1');
     this.addChild(child);
     child.childs['Sprite'].data['DataSprite']['y'].value = 100;
@@ -215,7 +214,6 @@ child.childs['Sprite'].data['DataSprite']['x'].value = 100;
 
 
 
-    
 };
 inheritsFrom(TestGame, Agent);
 TestGame.library = {};
@@ -230,12 +228,6 @@ TestGame.library.Star = function (name) {
     this.addChild(child);
     
 
-
-    var course;
-    course = child.courses['create sprite under group'];
-    Fields.FieldGameEngine.signals.subscribeSignal('SignalCreate', course);
-    course = child.courses['Create Sprite'];
-    course = child.courses['Create Group'];
 
 };
 inheritsFrom(TestGame.library.Star, Agent);
@@ -320,38 +312,32 @@ var Debug = function (name) {
     
 
 
-    var course;
-    course = child.courses['CreateText'];
-    Fields.FieldGameEngine.signals.subscribeSignal('SignalCreate', course);
-    course = child.courses['UpdateText'];
-    Fields.FieldGameEngine.signals.subscribeSignal('SignalUpdate', course);
-
 };
 inheritsFrom(Debug, Agent);
 Debug.CA_CountSubscribers = function (CountText, Count, fd_InputWhichFieldData, signal_CASampleSignal) {
 
-    var data = {};
-    data.CountText = CountText;
+    this.data = {};
+    this.data.CountText = CountText;
 
-    data.Count = Count;
+    this.data.Count = Count;
 
     if(!(fd_InputWhichFieldData instanceof ReferFieldData)){
         throw {name:"Bad Parameter", message: "fd_InputWhichFieldData is not instance of ReferFieldData"};
     }
-    data.fd_InputWhichFieldData = fd_InputWhichFieldData;
+    this.data.fd_InputWhichFieldData = fd_InputWhichFieldData;
 
-    var signals = {};
-    if(!(signal_CASampleSignal instanceof string)){
-        throw {name:"Bad Parameter", message: "signal_CASampleSignal is not instance of string"};
+    this.signals = {};
+    if(!(signal_CASampleSignal instanceof Signal)){
+        throw {name:"Bad Parameter", message: "signal_CASampleSignal is not instance of Signal"};
     }
-    signals.signal_CASampleSignal = signal_CASampleSignal;
+    this.signals.signal_CASampleSignal = signal_CASampleSignal;
 
 
-    var res = {};
+    this.res = {};
 
-    res.CountDataSubscribers = false;
+    this.res.CountDataSubscribers = false;
         
-    res.NumberToString = false;
+    this.res.NumberToString = false;
         
 };
 

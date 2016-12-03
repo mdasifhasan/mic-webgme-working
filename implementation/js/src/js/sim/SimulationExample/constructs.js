@@ -299,3 +299,17 @@ Signals.prototype._processSignal = function (signal) {
     }
     return false;
 };
+
+
+
+var Signal = function (signals, signalName) {
+    this.signals = signals;
+    this.signalName = signalName;
+};
+
+Signal.prototype.fire = function () {
+    if(this.signals)
+        if(this.signalName)
+            return this.signals.fireSignal(this.signalName);
+    return true;
+};

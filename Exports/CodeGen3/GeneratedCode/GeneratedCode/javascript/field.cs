@@ -133,8 +133,8 @@ Fields.FieldCanvas.FieldSprites.Group.CreateGroup = function(Group-type, signal_
     if(!(Group-type instanceof Group)){
         throw {name:"Bad Parameter", message: "Group-type is not instance of Group"};
     }
-    if(!(signal_Error instanceof string)){
-        throw {name:"Bad Parameter", message: "signal_Error is not instance of string"};
+    if(!(signal_Error instanceof Signal)){
+        throw {name:"Bad Parameter", message: "signal_Error is not instance of Signal"};
     }
     return this.triggerAction('CreateGroup', Group-type, signal_Error);
 };
@@ -145,8 +145,8 @@ Fields.FieldCanvas.FieldSprites.CreateSprite = function(DataSprite, DataSprite2,
     if(!(DataSprite2 instanceof DataSprite)){
         throw {name:"Bad Parameter", message: "DataSprite2 is not instance of DataSprite"};
     }
-    if(!(signal_Error instanceof string)){
-        throw {name:"Bad Parameter", message: "signal_Error is not instance of string"};
+    if(!(signal_Error instanceof Signal)){
+        throw {name:"Bad Parameter", message: "signal_Error is not instance of Signal"};
     }
     return this.triggerAction('CreateSprite', DataSprite, DataSprite2, signal_Error);
 };

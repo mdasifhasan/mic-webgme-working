@@ -20,9 +20,9 @@ Canvas.libraryAgents.Sprite = function (name) {
 inheritsFrom(Canvas.libraryAgents.Sprite, Agent);
 
 
-Canvas.libraryAgents.Sprite.CourseAction_CreateSprite = function (DataSprite) {
+Canvas.libraryAgents.Sprite.CourseAction_CreateSprite = function (DataSprite, signalError) {
     var signals = {};
-    signals.error = false;
+    signals.signalError = signalError;
     var data = {};
     data.DataSprite = DataSprite;
     this.res = {};
@@ -77,7 +77,7 @@ TestGame1.libraryAgents.Star = function (name) {
     var courseStar = new Course(this, "courseStar");
     sprite.addCourse(courseStar);
     Fields.GameEngine.signals.subscribeSignal("update", courseStar);
-    var courseCreate = new Course(this, "courseCreate");
+    var courseCreate = new Course(this, "courseCreate", null, new Canvas.libraryAgents.Sprite.CourseAction_CreateSprite(this.data.DataSprite, new Signal(this.signals.sig, "sampleSignal")) );
     var courseUpdate = new Course(this, "courseUpdate");
     courseStar.childs = [courseCreate, courseUpdate];
 };

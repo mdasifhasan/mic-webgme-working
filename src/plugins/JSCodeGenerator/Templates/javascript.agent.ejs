@@ -176,12 +176,12 @@ if("Courses" in agent){
 <%parseActionBodyForParam(cAction)%>
 <%
     if("fieldActions" in cAction) {%>
-    var res = {};
+    this.res = {};
 <%      for (var i = 0; i < cAction.fieldActions.length; i++) {
             var fa = cAction.fieldActions[i];
             faname = fa.name.replace(/\s/g, '');
 %>
-    res.<%-faname%> = false;
+    this.res.<%-faname%> = false;
         <%}
     }
 %>
@@ -216,7 +216,7 @@ if("fieldActions" in cAction) {
 if("data" in action) {
     var i = 0;
 %>
-    var data = {};<%
+    this.data = {};<%
 for(var dt in action.data){
     var d = action.data[dt];
     var dName = dt.replace(/\s/g, '');
@@ -229,7 +229,7 @@ if(dType !== null){
         throw {name:"Bad Parameter", message: "<%-dName%> is not instance of <%-dType%>"};
     }
 <%}%>
-    data.<%-dName%> = <%-dName%>;
+    this.data.<%-dName%> = <%-dName%>;
 <%}
 }
 if("FieldData" in action) {
@@ -241,20 +241,20 @@ for(var dt in action.FieldData){
     if(!(<%-dName%> instanceof <%-dType%>)){
         throw {name:"Bad Parameter", message: "<%-dName%> is not instance of <%-dType%>"};
     }
-    data.<%-dName%> = <%-dName%>;
+    this.data.<%-dName%> = <%-dName%>;
 <%}
 }
 if("CourseActionSignals" in action) {%>
-    var signals = {};<%
+    this.signals = {};<%
 for(var cas in action.CourseActionSignals){
     var d = action.CourseActionSignals[cas];
     var dName = "signal_" + cas;
-    var dType = "string";
+    var dType = "Signal";
 %>
     if(!(<%-dName%> instanceof <%-dType%>)){
         throw {name:"Bad Parameter", message: "<%-dName%> is not instance of <%-dType%>"};
     }
-    signals.<%-dName%> = <%-dName%>;
+    this.signals.<%-dName%> = <%-dName%>;
 <%}
 }
 }%>
