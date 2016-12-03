@@ -194,7 +194,7 @@ define([
             }
             else if (self.core.isTypeOf(childNode, self.META['Data Structure'])) {
                 var d = self.extractDataStructures(nodes, childNode, true, true);
-                if(d)
+                if (d)
                     agentModel.Data = d;
             }
             else if (self.core.isTypeOf(childNode, self.META['Courses'])) {
@@ -241,6 +241,9 @@ define([
             var moduleName = self.core.getAttribute(module, "name");
             var m = {};
             j[moduleName] = m;
+            m.name = moduleName;
+            m.Filename = self.core.getAttribute(module, "Filename");
+            m.ImplementationClass = self.core.getAttribute(module, "ImplementationClass");
             var childrenPaths = self.core.getChildrenPaths(module);
             for (var i = 0; i < childrenPaths.length; i++) {
                 var childNode = nodes[childrenPaths[i]];
@@ -286,7 +289,7 @@ define([
         for (var i = 0; i < fieldSubscriptions.length; i++) {
             var fieldSub = fieldSubscriptions[i];
             var m = {};
-            j[i+""] = m;
+            j[i + ""] = m;
             var childrenPaths = self.core.getChildrenPaths(fieldSub);
             for (var ci = 0; ci < childrenPaths.length; ci++) {
                 var childNode = nodes[childrenPaths[ci]];
@@ -296,11 +299,11 @@ define([
                     var rfa = self.extractChildOfMeta(nodes, 'Refer IAction', childNode)[0];
                     rc = self.core.getPointerPath(rc, 'refer');
                     rfa = self.core.getPointerPath(rfa, 'refer');
-                    if(rc && rfa){
+                    if (rc && rfa) {
                         c.type = "Action";
                         c.componentName = self.core.getAttribute(nodes[rc], 'name');
                         c.fieldAction = self.extractFieldDataAddress(nodes, rfa);
-                        m[ci+""] = c;
+                        m[ci + ""] = c;
                     }
                 }
                 else if (self.core.isTypeOf(childNode, self.META['Bind Data to FieldData'])) {
@@ -309,11 +312,11 @@ define([
                     var rfa = self.extractChildOfMeta(nodes, 'Refer FieldData', childNode)[0];
                     rc = self.core.getPointerPath(rc, 'refer');
                     rfa = self.core.getPointerPath(rfa, 'refer');
-                    if(rc && rfa){
+                    if (rc && rfa) {
                         c.type = "Data";
                         c.data = self.extractLocalPathAddress(nodes, rc, "Data", "Data", agentNode);
                         c.fieldData = self.extractFieldDataAddress(nodes, rfa);
-                        m[ci+""] = c;
+                        m[ci + ""] = c;
                     }
                 }
                 else {
@@ -1089,6 +1092,12 @@ define([
 
             codeFileName = 'GeneratedCode/' + language + '/agents.' + TEMPLATES[language].extension;
             filesToAdd[codeFileName] = ejs.render(TEMPLATES[language].agents, {sim: jsonModel});
+
+            if ("Agents" in jsonModel) {
+                for (var a in jsonModel.Agents) {
+                    self.generateAgentModules(language, filesToAdd, jsonModel.Agents[a], "");
+                }
+            }
         }
 
         artifact.addFiles(filesToAdd, function (err) {
@@ -1110,7 +1119,23 @@ define([
         return deferred.promise;
     };
 
-
+    JSCodeGenerator.prototype.generateAgentModules = function (language, filesToAdd, agent, prefix) {
+        var self = this;
+        if ("Modules" in agent) {
+            for (var m in agent.Modules) {
+                var module = agent.Modules[m];
+                var genFileName = module.Filename;
+                if (!genFileName || genFileName === "")
+                    genFileName = prefix + agent.name + "." + module.name;
+                var codeFileName = 'GeneratedCode/' + language + '/modules/' + genFileName + "." + TEMPLATES[language].extension;
+                filesToAdd[codeFileName] = ejs.render(TEMPLATES[language].module, {mod: module});
+            }
+        }
+        if ("libraryAgents" in agent) {
+            for (var a in agent.libraryAgents)
+                self.generateAgentModules(language, filesToAdd, agent.libraryAgents[a], prefix + agent.name + ".library.");
+        }
+    };
     var CourseTable = function () {
 
     };
