@@ -1,1 +1,100 @@
-<%-mod.name%>
+<%var modName = mod.genFileName.replace(/\s/g, '')
+var signalParams = "";
+if ("signals" in mod.init) {
+    signalParams = parseSignalParams(mod.init.signals);
+    if (signalParams === null)
+        signalParams = "";
+}
+%>
+<%-modName%> = function(){
+};
+
+<%-modName%>.prototype.init(<%-signalParams%>){
+    <%
+    if(mod.ImplementationClass === ""){
+        if ("signals" in mod.init){
+            parseSignalBodyForParams(mod.init.signals)
+        }
+    }else{%>
+        this.implementation = new <%-mod.ImplementationClass%>();
+        this.implementation.init(<%-signalParams%>);
+    <%}
+    %>
+};
+
+<%
+if ("Components" in mod) {
+    for (var c in mod.Components) {
+        var componentName = c.replace(/\s/g, '');
+        var componentParams = parseComponentParams(mod.Components[c].params);
+%>
+<%-modName%>.prototype.<%-componentName%> = function(<%-componentParams%>){
+<%
+if(mod.ImplementationClass === ""){%>
+    console.log("Component <%-componentName%> not implemented in Module: <%-modName%>");
+<%}else{%>
+        this.implementation.<%-componentName%>(<%-componentParams%>);
+<%}
+%>
+};
+<%    }
+}
+%>
+
+
+<%function parseSignalParams(signals){
+    var retString = null;
+    for (var d in signals) {
+        var dName = "signal_" + d;
+        if (retString === null)
+            retString = dName.replace(/\s/g, '');
+        else
+            retString += ", " + dName.replace(/\s/g, '');
+    }
+    return retString;
+}%>
+
+<%function parseSignalBodyForParams(signals){
+    for (var d in signals) {
+        var dName = "signal_" + d;
+        dName = dName.replace(/\s/g, '');
+%>
+    this.<%-dName%> = <%-dName%>;
+<%
+    }
+}%>
+
+<%function parseComponentParams(componentParams){
+    var retString = null;
+    if("Data" in componentParams) {
+
+        for(var i = 0; i < componentParams.Data.length; i++){
+            var dName = componentParams.Data[i].name;
+            if(retString === null)
+                retString = dName.replace(/\s/g, '');
+            else
+                retString += ", " + dName.replace(/\s/g, '');
+        }
+    }
+    if("FieldData" in componentParams) {
+        for(var i = 0; i < componentParams.FieldData.length; i++){
+            var dName = componentParams.FieldData[i].name;
+            var dName = "fd_" + dName;
+            if(retString === null)
+                retString = dName.replace(/\s/g, '');
+            else
+                retString += ", " + dName.replace(/\s/g, '');
+        }
+    }
+    if("ActionSignals" in componentParams) {
+        for(var i = 0; i < componentParams.ActionSignals.length; i++){
+            var dName = componentParams.ActionSignals[i];
+            var dName = "signal_" + dName;
+            if(retString === null)
+                retString = dName.replace(/\s/g, '');
+            else
+                retString += ", " + dName.replace(/\s/g, '');
+        }
+    }
+    return retString;
+}%>

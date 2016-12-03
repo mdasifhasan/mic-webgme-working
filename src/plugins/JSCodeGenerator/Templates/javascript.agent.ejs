@@ -37,7 +37,10 @@ var name = agent.name.replace(/\s/g, '');
     this.addChild(child);
     <%parseChildData(ca, "child")%><%
 }
-}//end of childs agents%>
+}
+parseModules(agent);
+parseModuleBindings(agent);
+//end of childs agents%>
 };<%
 if (prefix === ""){%>
 inheritsFrom(<%-name%>, Agent);<%
@@ -260,9 +263,10 @@ for(var cas in action.CourseActionSignals){
     if(signal) {
         if (signal.type === 'local') {
             dSignalName = signal.name;
-            dSignalPath = "this." + signal.path.replace("AgentSignals", "signals");
+            var spath = signal.path.substr(0, signal.path.length - signal.name.length - 1);
+            dSignalPath = "this." + spath.replace("AgentSignals", "signals");
         } else {
-            dSignalPath = signal.path.substr(0, signal.path.length - signal.name.length - 1);
+            dSignalPath = signal.path.substr(0, signal.path.length - signal.name.length - 1) + ".signals";
             dSignalName = signal.name;
         }
     }
@@ -346,4 +350,52 @@ for(var cas in action.CourseActionSignals){
         }
     }
     return retString;
+}%>
+
+<%function parseModules(agent){
+    if("Modules" in agent){
+        var modules = agent.Modules;
+            for(var m in modules){
+        var module = modules[m];
+        var modName = module.genFileName;
+        var signalParams = "";
+        if ("signals" in module.init) {
+            signalParams = parseSignalParams(module.init.signals);
+            if (signalParams === null)
+                signalParams = "";
+        }
+%>
+    this.mod_<%-module.name%> = new <%-modName%>();
+    this.mod_<%-module.name%>.init(<%-signalParams%>);
+    <%}
+    }
+}%>
+
+<%function parseSignalParams(signals){
+    var retString = null;
+    for (var d in signals) {
+        var dSignalPath = null;
+        var dSignalName = null;
+        var signal = signals[d];
+        if(signal) {
+            if (signal.type === 'local') {
+                dSignalName = signal.name;
+                dSignalPath = "this." + signal.path.replace("AgentSignals", "signals");
+            } else {
+                dSignalPath = signal.path.substr(0, signal.path.length - signal.name.length - 1) + ".signals";
+                dSignalName = signal.name;
+            }
+        }
+        dName = "new Signal(" + dSignalPath+ ", '" + dSignalName +"')";
+
+        if (retString === null)
+            retString = dName;
+        else
+            retString += ", " + dName;
+    }
+    return retString;
+}%>
+
+<%function parseModuleBindings(agent){
+
 }%>

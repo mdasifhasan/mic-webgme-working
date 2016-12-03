@@ -4,6 +4,7 @@ var Field = function (name) {
 this.name = name;
 this.interfaces = {};
 this.data = {};
+this.signals = new Signals();
 };
 
 Field.prototype.addData = function (name) {

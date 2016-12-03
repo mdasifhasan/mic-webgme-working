@@ -358,45 +358,49 @@
               "name": "SpriteActions",
               "Filename": "",
               "ImplementationClass": "ModuleSpriteActions",
-              "CreateSprite-refer": {
-                "fieldInterface": "Fields.FieldCanvas.FieldSprites.CreateSprite",
-                "params": {
-                  "Data": [
-                    {
-                      "name": "DataSprite",
-                      "type": "DataTypes.DataSprite"
-                    },
-                    {
-                      "name": "DataSprite2",
-                      "type": "DataTypes.DataSprite"
-                    }
-                  ],
-                  "ActionSignals": [
-                    "Error"
-                  ]
+              "Components": {
+                "CreateSprite-refer": {
+                  "fieldInterface": "Fields.FieldCanvas.FieldSprites.CreateSprite",
+                  "params": {
+                    "Data": [
+                      {
+                        "name": "DataSprite",
+                        "type": "DataTypes.DataSprite"
+                      },
+                      {
+                        "name": "DataSprite2",
+                        "type": "DataTypes.DataSprite"
+                      }
+                    ],
+                    "ActionSignals": [
+                      "Error"
+                    ]
+                  }
+                },
+                "Create Group-refer": {
+                  "fieldInterface": "Fields.FieldCanvas.FieldSprites.Group.Create Group",
+                  "params": {
+                    "Data": [
+                      {
+                        "name": "Group-type",
+                        "type": "DataTypes.Group"
+                      }
+                    ],
+                    "ActionSignals": [
+                      "Error"
+                    ]
+                  }
                 }
               },
-              "Create Group-refer": {
-                "fieldInterface": "Fields.FieldCanvas.FieldSprites.Group.Create Group",
-                "params": {
-                  "Data": [
-                    {
-                      "name": "Group-type",
-                      "type": "DataTypes.Group"
-                    }
-                  ],
-                  "ActionSignals": [
-                    "Error"
-                  ]
-                }
-              },
-              "init": {}
+              "init": {},
+              "genFileName": "Canvas.library.Sprite.SpriteActions"
             }
           },
           "Bindings": {
             "0": {
               "0": {
                 "type": "Action",
+                "moduleName": "SpriteActions",
                 "componentName": "CreateSprite-refer",
                 "fieldAction": "Fields.FieldCanvas.FieldSprites.CreateSprite"
               },
@@ -407,6 +411,7 @@
               },
               "2": {
                 "type": "Action",
+                "moduleName": "SpriteActions",
                 "componentName": "Create Group-refer",
                 "fieldAction": "Fields.FieldCanvas.FieldSprites.Group.Create Group"
               }
@@ -516,20 +521,25 @@
       "name": "Game Engine",
       "base": "Game Engine",
       "Modules": {
-        "GameEngine": {
-          "name": "GameEngine",
+        "ModGameEngine": {
+          "name": "ModGameEngine",
           "Filename": "GameEngine",
           "ImplementationClass": "ModuleGameEngine",
           "init": {
             "signals": {
-              "name": "SignalCreate",
-              "signal": {
+              "SignalUpdate": {
+                "name": "SignalUpdate",
+                "type": "Field",
+                "path": "Fields.FieldGameEngine.SignalUpdate"
+              },
+              "SignalCreate": {
                 "name": "SignalCreate",
                 "type": "Field",
                 "path": "Fields.FieldGameEngine.SignalCreate"
               }
             }
-          }
+          },
+          "genFileName": "GameEngine"
         }
       }
     },
@@ -964,67 +974,6 @@
       "AgentSignals": [
         "DebugSignal"
       ],
-      "CourseActions": {
-        "Count Subscribers": {
-          "data": {
-            "CountText": {
-              "type": null,
-              "value": "childs.Text.Data.DataText.Text"
-            },
-            "Count": {
-              "type": null,
-              "value": "Data.StarCount"
-            }
-          },
-          "FieldData": {
-            "InputWhichFieldData": {
-              "type": null,
-              "value": "Fields.FieldTestGame.Stars"
-            }
-          },
-          "CourseActionSignals": {
-            "CASampleSignal": {
-              "Signal": {
-                "name": "TextSignal",
-                "type": "local",
-                "path": "childs.Text.AgentSignals.TextSignal"
-              }
-            }
-          },
-          "fieldActions": [
-            {
-              "name": "CountDataSubscribers",
-              "field": "Fields.FieldDebug.CountDataSubscribers",
-              "data": {
-                "OutTotalCount": {
-                  "type": null,
-                  "value": "Count"
-                }
-              },
-              "FieldData": {
-                "WhichFieldData": {
-                  "type": null,
-                  "value": "InputWhichFieldData"
-                }
-              }
-            },
-            {
-              "name": "NumberToString",
-              "field": "Fields.FieldParse.NumberToString",
-              "data": {
-                "Number-type": {
-                  "type": null,
-                  "value": "Count"
-                },
-                "Text-type": {
-                  "type": null,
-                  "value": "CountText"
-                }
-              }
-            }
-          ]
-        }
-      },
       "childs": {
         "Text": {
           "name": "Text",
@@ -1102,6 +1051,16 @@
               ],
               "courseAction": "UpdateText"
             }
+          }
+        }
+      },
+      "Bindings": {
+        "0": {
+          "0": {
+            "type": "Action",
+            "moduleName": "DebugSubscribers",
+            "componentName": "CountDataSubscribers-refer",
+            "fieldAction": "Fields.FieldDebug.CountDataSubscribers"
           }
         }
       },
@@ -1188,6 +1147,95 @@
             }
           ],
           "courseAction": "Count Subscribers"
+        }
+      },
+      "Modules": {
+        "DebugSubscribers": {
+          "name": "DebugSubscribers",
+          "Filename": "",
+          "ImplementationClass": "",
+          "Components": {
+            "CountDataSubscribers-refer": {
+              "fieldInterface": "Fields.FieldDebug.CountDataSubscribers",
+              "params": {
+                "Data": [
+                  {
+                    "name": "OutTotalCount",
+                    "type": null
+                  }
+                ],
+                "FieldData": [
+                  {
+                    "name": "IFieldData",
+                    "type": null
+                  }
+                ]
+              }
+            }
+          },
+          "init": {},
+          "genFileName": "Debug.DebugSubscribers"
+        }
+      },
+      "CourseActions": {
+        "Count Subscribers": {
+          "data": {
+            "CountText": {
+              "type": null,
+              "value": "childs.Text.Data.DataText.Text"
+            },
+            "Count": {
+              "type": null,
+              "value": "Data.StarCount"
+            }
+          },
+          "FieldData": {
+            "InputWhichFieldData": {
+              "type": null,
+              "value": "Fields.FieldTestGame.Stars"
+            }
+          },
+          "CourseActionSignals": {
+            "CASampleSignal": {
+              "Signal": {
+                "name": "TextSignal",
+                "type": "local",
+                "path": "childs.Text.AgentSignals.TextSignal"
+              }
+            }
+          },
+          "fieldActions": [
+            {
+              "name": "CountDataSubscribers",
+              "field": "Fields.FieldDebug.CountDataSubscribers",
+              "data": {
+                "OutTotalCount": {
+                  "type": null,
+                  "value": "Count"
+                }
+              },
+              "FieldData": {
+                "WhichFieldData": {
+                  "type": null,
+                  "value": "InputWhichFieldData"
+                }
+              }
+            },
+            {
+              "name": "NumberToString",
+              "field": "Fields.FieldParse.NumberToString",
+              "data": {
+                "Number-type": {
+                  "type": null,
+                  "value": "Count"
+                },
+                "Text-type": {
+                  "type": null,
+                  "value": "CountText"
+                }
+              }
+            }
+          ]
         }
       }
     }

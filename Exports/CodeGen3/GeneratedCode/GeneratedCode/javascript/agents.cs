@@ -112,6 +112,9 @@ Canvas.library.Sprite = function (name) {
     this.addCourse(Create Group);
     
 
+    this.mod_SpriteActions = new Canvas.library.Sprite.SpriteActions();
+    this.mod_SpriteActions.init();
+    
 };
 inheritsFrom(Canvas.library.Sprite, Agent);
 Canvas.library.Sprite.prototype.CA_CreateGroup = function () {
@@ -121,7 +124,7 @@ Canvas.library.Sprite.prototype.CA_CreateGroup = function () {
     this.caData.Group-type = this.data.DataSprite.Group;
 
     this.caSignals = {};
-    this.caSignals.signal_Error = new Signal(Fields.FieldErrorHandler, 'Critical Error');
+    this.caSignals.signal_Error = new Signal(Fields.FieldErrorHandler.signals, 'Critical Error');
 
 
     this.res = {};
@@ -148,7 +151,7 @@ Canvas.library.Sprite.prototype.CA_CreateSprite = function () {
     this.caData.DataSprite-type = this.data.DataSprite;
 
     this.caSignals = {};
-    this.caSignals.signal_Error = new Signal(Fields.FieldErrorHandler, 'Critical Error');
+    this.caSignals.signal_Error = new Signal(Fields.FieldErrorHandler.signals, 'Critical Error');
 
 
     this.res = {};
@@ -173,6 +176,9 @@ var GameEngine = function (name) {
         name = "GameEngine";
     Agent.apply(this, [name]);
     
+    
+    this.mod_ModGameEngine = new GameEngine();
+    this.mod_ModGameEngine.init(new Signal(Fields.FieldGameEngine.signals, 'SignalUpdate'), new Signal(Fields.FieldGameEngine.signals, 'SignalCreate'));
     
 };
 inheritsFrom(GameEngine, Agent);
@@ -292,6 +298,9 @@ var Debug = function (name) {
     
 
 
+    this.mod_DebugSubscribers = new Debug.DebugSubscribers();
+    this.mod_DebugSubscribers.init();
+    
 };
 inheritsFrom(Debug, Agent);
 Debug.prototype.CA_CountSubscribers = function () {
@@ -304,7 +313,7 @@ Debug.prototype.CA_CountSubscribers = function () {
     this.caData.fd_InputWhichFieldData = Fields.FieldTestGame.Stars;
 
     this.caSignals = {};
-    this.caSignals.signal_CASampleSignal = new Signal(this.childs.Text.signals.TextSignal, 'TextSignal');
+    this.caSignals.signal_CASampleSignal = new Signal(this.childs.Text.signals, 'TextSignal');
 
 
     this.res = {};
@@ -334,6 +343,12 @@ Debug.prototype.CA_CountSubscribers.prototype.trigger = function (course) {
 
 
 // end of generated code
+
+
+
+
+
+
 
 
 

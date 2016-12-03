@@ -262,14 +262,15 @@ define([
                                 refer = nodes[refer];
                                 refer = self.extractSignalPath(nodes, refer, agentNode);
                             }
-                            s.name = sname;
-                            s.signal = refer;
+                            s[sname] = refer;
                         }
                     }
                 }
                 else if (self.core.isTypeOf(childNode, self.META['Component'])) {
+                    if(!("Components" in m))
+                        m.Components = {};
                     var c = {};
-                    m[cname] = c;
+                    m.Components[cname] = c;
                     var fActionNodePath = self.core.getPointerPath(childNode, 'refer');
                     c.fieldInterface = self.extractFieldDataAddress(nodes, fActionNodePath);
                     c.params = self.extractFieldAction(nodes, nodes[fActionNodePath]);
@@ -301,7 +302,9 @@ define([
                     rfa = self.core.getPointerPath(rfa, 'refer');
                     if (rc && rfa) {
                         c.type = "Action";
-                        c.componentName = self.core.getAttribute(nodes[rc], 'name');
+                        var nodeComponent = nodes[rc];
+                        c.moduleName = self.core.getAttribute(self.core.getParent(nodeComponent), 'name');
+                        c.componentName = self.core.getAttribute(nodeComponent, 'name');
                         c.fieldAction = self.extractFieldDataAddress(nodes, rfa);
                         m[ci + ""] = c;
                     }
@@ -1073,17 +1076,15 @@ define([
             codeFileName;
 
         artifact = self.blobClient.createArtifact('GeneratedCode');
-        filesToAdd['sim.json'] = JSON.stringify(jsonModel, null, 2);
-        filesToAdd['metadata.json'] = JSON.stringify({
-            projectId: self.projectId,
-            commitHash: self.commitHash,
-            branchName: self.branchName,
-            timeStamp: (new Date()).toISOString(),
-            pluginVersion: self.getVersion()
-        }, null, 2);
+
 
 
         for (language in TEMPLATES) {
+            if ("Agents" in jsonModel) {
+                for (var a in jsonModel.Agents) {
+                    self.generateAgentModules(language, filesToAdd, jsonModel.Agents[a], "");
+                }
+            }
             codeFileName = 'GeneratedCode/' + language + '/data.' + TEMPLATES[language].extension;
             filesToAdd[codeFileName] = ejs.render(TEMPLATES[language].data, {sim: jsonModel});
 
@@ -1093,12 +1094,16 @@ define([
             codeFileName = 'GeneratedCode/' + language + '/agents.' + TEMPLATES[language].extension;
             filesToAdd[codeFileName] = ejs.render(TEMPLATES[language].agents, {sim: jsonModel});
 
-            if ("Agents" in jsonModel) {
-                for (var a in jsonModel.Agents) {
-                    self.generateAgentModules(language, filesToAdd, jsonModel.Agents[a], "");
-                }
-            }
         }
+
+        filesToAdd['sim.json'] = JSON.stringify(jsonModel, null, 2);
+        filesToAdd['metadata.json'] = JSON.stringify({
+            projectId: self.projectId,
+            commitHash: self.commitHash,
+            branchName: self.branchName,
+            timeStamp: (new Date()).toISOString(),
+            pluginVersion: self.getVersion()
+        }, null, 2);
 
         artifact.addFiles(filesToAdd, function (err) {
             if (err) {
@@ -1127,6 +1132,7 @@ define([
                 var genFileName = module.Filename;
                 if (!genFileName || genFileName === "")
                     genFileName = prefix + agent.name + "." + module.name;
+                module.genFileName = genFileName;
                 var codeFileName = 'GeneratedCode/' + language + '/modules/' + genFileName + "." + TEMPLATES[language].extension;
                 filesToAdd[codeFileName] = ejs.render(TEMPLATES[language].module, {mod: module});
             }
