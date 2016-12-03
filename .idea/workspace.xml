@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="300b4105-8e50-46d4-9300-a0067c2cd2b8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode.zip" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode.zip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/metadata.json" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/metadata.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/sim.json" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/sim.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nodemon_start.bat" afterPath="$PROJECT_DIR$/nodemon_start.bat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/plugins/JSCodeGenerator/JSCodeGenerator.js" afterPath="$PROJECT_DIR$/src/plugins/JSCodeGenerator/JSCodeGenerator.js" />
-    </list>
+    <list default="true" id="300b4105-8e50-46d4-9300-a0067c2cd2b8" name="Default" comment="" />
     <ignored path="Projects.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -101,7 +94,7 @@
         </leaf>
       </split-first>
       <split-second>
-        <splitter split-orientation="vertical" split-proportion="0.82106453">
+        <splitter split-orientation="vertical" split-proportion="0.6070215">
           <split-first>
             <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
               <file leaf-file-name="JSCodeGenerator.js" pinned="false" current-in-tab="false">
@@ -138,8 +131,8 @@
               <file leaf-file-name="sim.json" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/sim.json">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="177">
-                      <caret line="345" column="19" lean-forward="true" selection-start-line="345" selection-start-column="19" selection-end-line="345" selection-end-column="19" />
+                    <state relative-caret-position="339">
+                      <caret line="509" column="7" lean-forward="true" selection-start-line="509" selection-start-column="7" selection-end-line="509" selection-end-column="7" />
                       <folding>
                         <element signature="n#!!block;n#DataTypes#0;n#!!top" expanded="false" />
                         <element signature="n#!!block;n#Fields#0;n#!!top" expanded="false" />
@@ -871,12 +864,12 @@
       <workItem from="1479830060161" duration="7181000" />
       <workItem from="1479999429798" duration="16709000" />
       <workItem from="1480224575191" duration="57774000" />
-      <workItem from="1480653786206" duration="37446000" />
+      <workItem from="1480653786206" duration="37513000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="331130000" />
+    <option name="totallyTimeSpent" value="331197000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1291,8 +1284,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/sim.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="345" column="19" lean-forward="true" selection-start-line="345" selection-start-column="19" selection-end-line="345" selection-end-column="19" />
+        <state relative-caret-position="339">
+          <caret line="509" column="7" lean-forward="true" selection-start-line="509" selection-start-column="7" selection-end-line="509" selection-end-column="7" />
           <folding>
             <element signature="n#!!block;n#DataTypes#0;n#!!top" expanded="false" />
             <element signature="n#!!block;n#Fields#0;n#!!top" expanded="false" />
