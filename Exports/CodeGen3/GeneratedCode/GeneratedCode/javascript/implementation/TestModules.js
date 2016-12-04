@@ -29,7 +29,7 @@ ModuleGameEngine.prototype.tick = function(){
     }else{
         this.signal_SignalUpdate.fire();
     }
-    if(this.i < 1){
+    if(this.i < 2){
         setTimeout(step(this), 10000);
     }else{
         console.log("step finished");
@@ -45,10 +45,12 @@ ModuleSpriteActions.prototype.init = function(){
 
 
 ModuleSpriteActions.prototype.CreateSprite_refer = function(DataSprite, DataSprite2, signal_Error){
-
+    console.log("Creating sprite with data: ", DataSprite);
+return true;
 
 };
 
 ModuleSpriteActions.prototype.CreateGroup_refer = function(Group_type, signal_Error){
-
+    console.log("Creating group with data: ", Group_type);
+    return true;
 };

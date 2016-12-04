@@ -257,7 +257,7 @@ if("CourseActionSignals" in action) {%>
     this.caSignals = {};<%
 for(var cas in action.CourseActionSignals){
     var d = action.CourseActionSignals[cas];
-    var dName = "signal_" + cas;
+    var dName = cas;
     var dType = "Signal";
     var dSignalPath = null;
     var dSignalName = null;
@@ -410,8 +410,9 @@ if("Bindings" in agent){
     if(fieldSub.type === "Action"){
         dFieldPath = fieldSub.fieldAction.substr(0, fieldSub.fieldAction.length - fieldSub.fieldName.length - 1).replace(/\s/g, '').replace("-", "_");
         dFieldInterfaceName = fieldSub.fieldName.replace(/\s/g, '').replace("-", "_");
+        var modname =fieldSub.moduleName.replace(/\s/g, '').replace("-", "_");
 %>
-    <%-dFieldPath%>.subscribeToInterface('<%-dFieldInterfaceName%>', this.mod_<%-fieldSub.moduleName.replace(/\s/g, '').replace("-", "_")%>.<%-fieldSub.componentName.replace(/\s/g, '').replace("-", "_")%>);
+    <%-dFieldPath%>.subscribeToInterface('<%-dFieldInterfaceName%>', this.mod_<%-modname%>.<%-fieldSub.componentName.replace(/\s/g, '').replace("-", "_")%>.bind(this.mod_<%-modname%>));
 <%
     }else if(fieldSub.type === "Data"){
         dFieldPath = fieldSub.fieldData.substr(0, fieldSub.fieldData.length - fieldSub.fieldName.length - 1);

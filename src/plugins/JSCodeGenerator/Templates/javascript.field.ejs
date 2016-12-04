@@ -141,7 +141,7 @@ var Fields = {};
         var i = 0;
         for(; i < action.Data.length; i++){
             var d = action.Data[i];
-            var dName = d.name;
+            var dName = "data_" + d.name;
             if(retString === null)
                 retString = dName.replace(/\s/g, '').replace("-", "_");
             else
@@ -179,13 +179,13 @@ var Fields = {};
         var i = 0;
         for(; i < action.Data.length; i++){
             var d = action.Data[i];
-            var dName = d.name.replace(/\s/g, '').replace("-", "_");
+            var dName = "data_" + d.name.replace(/\s/g, '').replace("-", "_");
             var dType = d.type;
             if(dType !== null){
                 dType = dType.replace('DataTypes.','')
 
     %>
-    if(!(<%-dName%> instanceof <%-dType%>)){
+    if(<%-dName%> && !(<%-dName%> instanceof <%-dType%>)){
         throw {name:"Bad Parameter", message: "<%-dName%> is not instance of <%-dType%>"};
     }<%}}
     }
@@ -196,7 +196,7 @@ var Fields = {};
             var dName = "fd_" + d.name.replace(/\s/g, '').replace("-", "_");
             var dType = "ReferFieldData";
     %>
-    if(!(<%-dName%> instanceof <%-dType%>)){
+    if(<%-dName%> && !(<%-dName%> instanceof <%-dType%>)){
         throw {name:"Bad Parameter", message: "<%-dName%> is not instance of <%-dType%>"};
     }<%}
     }
@@ -207,7 +207,7 @@ var Fields = {};
         var dName = "signal_" + d;
         var dType = "Signal";
     %>
-    if(!(<%-dName%> instanceof <%-dType%>)){
+    if(<%-dName%> && !(<%-dName%> instanceof <%-dType%>)){
         throw {name:"Bad Parameter", message: "<%-dName%> is not instance of <%-dType%>"};
     }<%}
     }

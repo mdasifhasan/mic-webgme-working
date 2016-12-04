@@ -107,52 +107,52 @@ Fields.FieldGameEngine = new Field('FieldGameEngine');
 Fields.FieldDebug = new Field('FieldDebug');
 Fields.FieldDebug.DebugChild = new Field('DebugChild');
 Fields.FieldDebug.DebugChild.DebugChildChild = new Field('DebugChildChild');
-Fields.FieldDebug.CountDataSubscribers = function(OutTotalCount, fd_IFieldData){
-    if(!(fd_IFieldData instanceof ReferFieldData)){
+Fields.FieldDebug.CountDataSubscribers = function(data_OutTotalCount, fd_IFieldData){
+    if(fd_IFieldData && !(fd_IFieldData instanceof ReferFieldData)){
         throw {name:"Bad Parameter", message: "fd_IFieldData is not instance of ReferFieldData"};
     }
-    return this.triggerAction('CountDataSubscribers', OutTotalCount, fd_IFieldData);
+    return this.triggerAction('CountDataSubscribers', data_OutTotalCount, fd_IFieldData);
 };
 Fields.FieldParse = new Field('FieldParse');
-Fields.FieldParse.NumberToString = function(Number_type, Text_type){
-    return this.triggerAction('NumberToString', Number_type, Text_type);
+Fields.FieldParse.NumberToString = function(data_Number_type, data_Text_type){
+    return this.triggerAction('NumberToString', data_Number_type, data_Text_type);
 };
 Fields.FieldCanvas = new Field('FieldCanvas');
 Fields.FieldCanvas.FieldTextView = new Field('FieldTextView');
-Fields.FieldCanvas.FieldTextView.CreateTextView = function(DataText_type){
-    if(!(DataText_type instanceof DataText)){
-        throw {name:"Bad Parameter", message: "DataText_type is not instance of DataText"};
+Fields.FieldCanvas.FieldTextView.CreateTextView = function(data_DataText_type){
+    if(data_DataText_type && !(data_DataText_type instanceof DataText)){
+        throw {name:"Bad Parameter", message: "data_DataText_type is not instance of DataText"};
     }
-    return this.triggerAction('CreateTextView', DataText_type);
+    return this.triggerAction('CreateTextView', data_DataText_type);
 };
-Fields.FieldCanvas.FieldTextView.UpdateTextView = function(DataText_type){
-    if(!(DataText_type instanceof DataText)){
-        throw {name:"Bad Parameter", message: "DataText_type is not instance of DataText"};
+Fields.FieldCanvas.FieldTextView.UpdateTextView = function(data_DataText_type){
+    if(data_DataText_type && !(data_DataText_type instanceof DataText)){
+        throw {name:"Bad Parameter", message: "data_DataText_type is not instance of DataText"};
     }
-    return this.triggerAction('UpdateTextView', DataText_type);
+    return this.triggerAction('UpdateTextView', data_DataText_type);
 };
 Fields.FieldCanvas.FieldSprites = new Field('FieldSprites');
 Fields.FieldCanvas.FieldSprites.Group = new Field('Group');
-Fields.FieldCanvas.FieldSprites.Group.CreateGroup = function(Group_type, signal_Error){
-    if(!(Group_type instanceof Group)){
-        throw {name:"Bad Parameter", message: "Group_type is not instance of Group"};
+Fields.FieldCanvas.FieldSprites.Group.CreateGroup = function(data_Group_type, signal_Error){
+    if(data_Group_type && !(data_Group_type instanceof Group)){
+        throw {name:"Bad Parameter", message: "data_Group_type is not instance of Group"};
     }
-    if(!(signal_Error instanceof Signal)){
+    if(signal_Error && !(signal_Error instanceof Signal)){
         throw {name:"Bad Parameter", message: "signal_Error is not instance of Signal"};
     }
-    return this.triggerAction('CreateGroup', Group_type, signal_Error);
+    return this.triggerAction('CreateGroup', data_Group_type, signal_Error);
 };
-Fields.FieldCanvas.FieldSprites.CreateSprite = function(DataSprite, DataSprite2, signal_Error){
-    if(!(DataSprite instanceof DataSprite)){
-        throw {name:"Bad Parameter", message: "DataSprite is not instance of DataSprite"};
+Fields.FieldCanvas.FieldSprites.CreateSprite = function(data_DataSprite, data_DataSprite2, signal_Error){
+    if(data_DataSprite && !(data_DataSprite instanceof DataSprite)){
+        throw {name:"Bad Parameter", message: "data_DataSprite is not instance of DataSprite"};
     }
-    if(!(DataSprite2 instanceof DataSprite)){
-        throw {name:"Bad Parameter", message: "DataSprite2 is not instance of DataSprite"};
+    if(data_DataSprite2 && !(data_DataSprite2 instanceof DataSprite)){
+        throw {name:"Bad Parameter", message: "data_DataSprite2 is not instance of DataSprite"};
     }
-    if(!(signal_Error instanceof Signal)){
+    if(signal_Error && !(signal_Error instanceof Signal)){
         throw {name:"Bad Parameter", message: "signal_Error is not instance of Signal"};
     }
-    return this.triggerAction('CreateSprite', DataSprite, DataSprite2, signal_Error);
+    return this.triggerAction('CreateSprite', data_DataSprite, data_DataSprite2, signal_Error);
 };
 Fields.FieldCanvas.FieldSprites.DataSprite_type = new ReferFieldData(Fields.FieldCanvas.FieldSprites, 'DataSprite_type');
     

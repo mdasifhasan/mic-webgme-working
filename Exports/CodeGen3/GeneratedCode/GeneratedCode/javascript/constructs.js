@@ -152,6 +152,7 @@ var Course = function (owner, name, childs, action) {
     this.next = 0;
     this.action = action;
     this.childs = !childs? {} : childs;
+    this.childsArray = [];
     this.isChildsFinsihed = false;
     this.isFinished = false;
 };
@@ -159,12 +160,14 @@ var Course = function (owner, name, childs, action) {
 Course.prototype.addCourse = function (course) {
     console.log("adding", course.name, "to parent course", this.name);
     this.childs[course.name] = course;
+    this.childsArray.push(course);
 };
 
 Course.prototype.removeCourse = function (course) {
     console.log("removing", course.name, "from parent course", this.name);
     if (course.name in this.childs)
         delete this.childs[course.name];
+    this.childsArray.splice(this.childsArray.indexOf(course), 1);
 };
 
 Course.prototype.reset = function () {
@@ -179,11 +182,11 @@ Course.prototype.trigger = function () {
     if (this.isFinished)
         this.reset();
 
-    console.log(this.name, " triggering child courses, total childs:", this.childs.length, " currentIndex:", this.next);
+    console.log(this.name, " triggering child courses, total childs:", this.childsArray.length, " currentIndex:", this.next);
     while (!this.isChildsFinsihed) {
-        if (this.next < this.childs.length) {
-            if (this.childs[this.next].trigger()) {
-                console.log(this.name, "child finished: ", this.childs[this.next].name);
+        if (this.next < this.childsArray.length) {
+            if (this.childsArray[this.next].trigger()) {
+                console.log(this.name, "child finished: ", this.childsArray[this.next].name);
                 this.next++;
             } else
                 break;
@@ -206,27 +209,27 @@ Course.prototype.trigger = function () {
     return this.isFinished;
 };
 
-Course.prototype.runCourseList = function (courseList) {
-    var i,
-        toBeRemoved = [],
-        isFinished = true;
-    for (i = 0; i < courseList.length; i++) {
-        if (courseList[i].trigger()) {
-            //toBeRemoved.push(courseList[i]);
-        } else
-            isFinished = false;
-    }
-    for (i = 0; i < toBeRemoved.length; i++) {
-        console.log('Removing child course', toBeRemoved[i].name, 'from ', this.name)
-        courseList.splice(courseList.indexOf(toBeRemoved[i]), 1);
-    }
-    // if (courseList.length == 0)
-    //     return true;
-    // else
-    //     return false;
-
-    return isFinished;
-};
+// Course.prototype.runCourseList = function (courseList) {
+//     var i,
+//         toBeRemoved = [],
+//         isFinished = true;
+//     for (i = 0; i < courseList.length; i++) {
+//         if (courseList[i].trigger()) {
+//             //toBeRemoved.push(courseList[i]);
+//         } else
+//             isFinished = false;
+//     }
+//     for (i = 0; i < toBeRemoved.length; i++) {
+//         console.log('Removing child course', toBeRemoved[i].name, 'from ', this.name)
+//         courseList.splice(courseList.indexOf(toBeRemoved[i]), 1);
+//     }
+//     // if (courseList.length == 0)
+//     //     return true;
+//     // else
+//     //     return false;
+//
+//     return isFinished;
+// };
 
 
 // ************ Signals ************  //

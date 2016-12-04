@@ -9,9 +9,9 @@ var Canvas = function (name) {
     this.mod_SpriteActions = new Canvas.SpriteActions();
     this.mod_SpriteActions.init();
     
-    Fields.FieldCanvas.FieldSprites.subscribeToInterface('CreateSprite', this.mod_SpriteActions.CreateSprite_refer);
+    Fields.FieldCanvas.FieldSprites.subscribeToInterface('CreateSprite', this.mod_SpriteActions.CreateSprite_refer.bind(this.mod_SpriteActions));
 
-    Fields.FieldCanvas.FieldSprites.Group.subscribeToInterface('CreateGroup', this.mod_SpriteActions.CreateGroup_refer);
+    Fields.FieldCanvas.FieldSprites.Group.subscribeToInterface('CreateGroup', this.mod_SpriteActions.CreateGroup_refer.bind(this.mod_SpriteActions));
 
 };
 inheritsFrom(Canvas, Agent);
@@ -123,7 +123,7 @@ Canvas.library.Sprite.prototype.CA_CreateGroup = function (self) {
     this.caData.Group_type = self.data.DataSprite.Group;
 
     this.caSignals = {};
-    this.caSignals.signal_Error = new Signal(Fields.FieldErrorHandler.signals, 'Critical Error');
+    this.caSignals.Error = new Signal(Fields.FieldErrorHandler.signals, 'Critical Error');
 
 
     this.res = {};
@@ -150,7 +150,7 @@ Canvas.library.Sprite.prototype.CA_CreateSprite = function (self) {
     this.caData.DataSprite_type = self.data.DataSprite;
 
     this.caSignals = {};
-    this.caSignals.signal_Error = new Signal(Fields.FieldErrorHandler.signals, 'Critical Error');
+    this.caSignals.Error = new Signal(Fields.FieldErrorHandler.signals, 'Critical Error');
 
 
     this.res = {};
@@ -308,7 +308,7 @@ var course;
     this.mod_DebugSubscribers = new Debug.DebugSubscribers();
     this.mod_DebugSubscribers.init();
     
-    Fields.FieldDebug.subscribeToInterface('CountDataSubscribers', this.mod_DebugSubscribers.CountDataSubscribers_refer);
+    Fields.FieldDebug.subscribeToInterface('CountDataSubscribers', this.mod_DebugSubscribers.CountDataSubscribers_refer.bind(this.mod_DebugSubscribers));
 
 };
 inheritsFrom(Debug, Agent);
@@ -322,7 +322,7 @@ Debug.prototype.CA_CountSubscribers = function (self) {
     this.caData.fd_InputWhichFieldData = Fields.FieldTestGame.Stars;
 
     this.caSignals = {};
-    this.caSignals.signal_CASampleSignal = new Signal(self.childs.Text.signals, 'TextSignal');
+    this.caSignals.CASampleSignal = new Signal(self.childs.Text.signals, 'TextSignal');
 
 
     this.res = {};
