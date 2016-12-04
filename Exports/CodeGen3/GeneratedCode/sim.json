@@ -28,12 +28,6 @@
           "value": "default",
           "name": "image name"
         },
-        "SpriteObject": {
-          "type": "Object",
-          "objType": "object",
-          "value": null,
-          "name": "SpriteObject"
-        },
         "Group": {
           "type": "Data",
           "base": "Group",
@@ -61,11 +55,55 @@
           "type": "Data",
           "base": "Physics",
           "value": {
+            "bounce": {
+              "type": "Data",
+              "base": "Data",
+              "value": {
+                "x": {
+                  "type": "Number",
+                  "value": 0,
+                  "name": "x"
+                },
+                "y": {
+                  "type": "Number",
+                  "value": 0.5,
+                  "name": "y"
+                }
+              },
+              "name": "bounce"
+            },
             "physics body": {
               "type": "Object",
               "objType": "object",
               "value": null,
               "name": "physics body"
+            },
+            "collideWorldBounds": {
+              "type": "Boolean",
+              "value": false,
+              "name": "collideWorldBounds"
+            },
+            "immovable": {
+              "type": "Boolean",
+              "value": false,
+              "name": "immovable"
+            },
+            "gravity": {
+              "type": "Data",
+              "base": "Data",
+              "value": {
+                "x": {
+                  "type": "Number",
+                  "value": 0,
+                  "name": "x"
+                },
+                "y": {
+                  "type": "Number",
+                  "value": 300,
+                  "name": "y"
+                }
+              },
+              "name": "gravity"
             },
             "enable physics": {
               "type": "Boolean",
@@ -74,6 +112,23 @@
             }
           },
           "name": "Physics"
+        },
+        "scale": {
+          "type": "Data",
+          "base": "Data",
+          "value": {
+            "x": {
+              "type": "Number",
+              "value": 1,
+              "name": "x"
+            },
+            "y": {
+              "type": "Number",
+              "value": 1,
+              "name": "y"
+            }
+          },
+          "name": "scale"
         },
         "x": {
           "type": "Number",
@@ -84,6 +139,12 @@
           "type": "Number",
           "value": 0,
           "name": "y"
+        },
+        "SpriteObject": {
+          "type": "Object",
+          "objType": "object",
+          "value": null,
+          "name": "SpriteObject"
         }
       },
       "name": "DataSprite"
@@ -557,6 +618,133 @@
       "name": "Test Game",
       "base": "Test Game",
       "childs": {
+        "Star1": {
+          "name": "Star1",
+          "base": "Test Game.library.Star",
+          "childs": {
+            "Sprite": {
+              "name": "Sprite",
+              "base": "Canvas.library.Sprite",
+              "Data": {
+                "DataSprite": {
+                  "type": "Data",
+                  "base": "DataSprite",
+                  "value": {
+                    "y": {
+                      "type": "Number",
+                      "value": 100,
+                      "name": "y"
+                    },
+                    "x": {
+                      "type": "Number",
+                      "value": 100,
+                      "name": "x"
+                    }
+                  },
+                  "name": "DataSprite"
+                }
+              },
+              "Courses": {
+                "create sprite under group": {
+                  "childs": [
+                    {
+                      "name": "CreateGroup",
+                      "type": "Course",
+                      "courseAction": "Create Group"
+                    },
+                    {
+                      "name": "CreateSprite",
+                      "type": "Course",
+                      "courseAction": "Create Sprite"
+                    }
+                  ],
+                  "signals": [
+                    {
+                      "name": "SignalCreate",
+                      "type": "Field",
+                      "path": "Fields.FieldGameEngine.SignalCreate"
+                    }
+                  ],
+                  "courseAction": null
+                }
+              },
+              "CourseActions": {
+                "Create Group": {
+                  "data": {
+                    "Group-type": {
+                      "type": "DataTypes.Group",
+                      "value": "Data.DataSprite.Group"
+                    }
+                  },
+                  "CourseActionSignals": {
+                    "Error": {
+                      "Signal": {
+                        "name": "Critical Error",
+                        "type": "Field",
+                        "path": "Fields.FieldErrorHandler.Critical Error"
+                      }
+                    }
+                  },
+                  "fieldActions": [
+                    {
+                      "name": "Create Group",
+                      "field": "Fields.Create Group",
+                      "data": {
+                        "Group-type": {
+                          "type": "DataTypes.Group",
+                          "value": "Group-type"
+                        }
+                      },
+                      "ActionSignals": {
+                        "Error": {
+                          "CourseActionSignal": "Error"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "Create Sprite": {
+                  "data": {
+                    "DataSprite-type": {
+                      "type": "DataTypes.DataSprite",
+                      "value": "Data.DataSprite"
+                    }
+                  },
+                  "CourseActionSignals": {
+                    "Error": {
+                      "Signal": {
+                        "name": "Critical Error",
+                        "type": "Field",
+                        "path": "Fields.FieldErrorHandler.Critical Error"
+                      }
+                    }
+                  },
+                  "fieldActions": [
+                    {
+                      "name": "CreateSprite",
+                      "field": "Fields.CreateSprite",
+                      "data": {
+                        "DataSprite": {
+                          "type": "DataTypes.DataSprite",
+                          "value": "DataSprite-type"
+                        },
+                        "DataSprite2": {
+                          "type": "DataTypes.DataSprite",
+                          "value": null
+                        }
+                      },
+                      "ActionSignals": {
+                        "Error": {
+                          "CourseActionSignal": "Error"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
         "Star2": {
           "name": "Star2",
           "base": "Test Game.library.Star",
@@ -672,8 +860,8 @@
             }
           }
         },
-        "Star1": {
-          "name": "Star1",
+        "Star3": {
+          "name": "Star3",
           "base": "Test Game.library.Star",
           "childs": {
             "Sprite": {
@@ -686,25 +874,13 @@
                   "value": {
                     "y": {
                       "type": "Number",
-                      "value": 100,
+                      "value": 300,
                       "name": "y"
                     },
                     "x": {
                       "type": "Number",
-                      "value": 100,
+                      "value": 300,
                       "name": "x"
-                    },
-                    "Group": {
-                      "type": "Data",
-                      "base": "Group",
-                      "value": {
-                        "enable physics": {
-                          "type": "Boolean",
-                          "value": true,
-                          "name": "enable physics"
-                        }
-                      },
-                      "name": "Group"
                     }
                   },
                   "name": "DataSprite"
@@ -846,6 +1022,37 @@
                 "DataSprite": {
                   "type": "Data",
                   "base": "DataSprite",
+                  "value": {
+                    "image name": {
+                      "type": "Text",
+                      "value": "star",
+                      "name": "image name"
+                    },
+                    "Group": {
+                      "type": "Data",
+                      "base": "Group",
+                      "value": {
+                        "enable physics": {
+                          "type": "Boolean",
+                          "value": true,
+                          "name": "enable physics"
+                        }
+                      },
+                      "name": "Group"
+                    },
+                    "Physics": {
+                      "type": "Data",
+                      "base": "Physics",
+                      "value": {
+                        "collideWorldBounds": {
+                          "type": "Boolean",
+                          "value": true,
+                          "name": "collideWorldBounds"
+                        }
+                      },
+                      "name": "Physics"
+                    }
+                  },
                   "name": "DataSprite"
                 }
               },

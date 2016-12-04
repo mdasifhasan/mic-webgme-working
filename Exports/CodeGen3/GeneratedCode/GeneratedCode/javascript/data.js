@@ -56,16 +56,27 @@ inheritsFrom(Physics , Data);
 var DataSprite = function () {
 Data.apply(this);
 this['image name']=new Text('default');
-this['SpriteObject']=new Obj(null, 'object');
 this['Group']=new Group();
 this['Group']['name']=new Text('default');
 this['Group']['enable physics']=new Boolean(false);
 this['Group']['group object']=new Obj(null, 'object');
 this['Physics']=new Physics();
+this['Physics']['bounce']=new Data();
+this['Physics']['bounce']['x']=new Number(0);
+this['Physics']['bounce']['y']=new Number(0.5);
 this['Physics']['physics body']=new Obj(null, 'object');
+this['Physics']['collideWorldBounds']=new Boolean(false);
+this['Physics']['immovable']=new Boolean(false);
+this['Physics']['gravity']=new Data();
+this['Physics']['gravity']['x']=new Number(0);
+this['Physics']['gravity']['y']=new Number(300);
 this['Physics']['enable physics']=new Boolean(false);
+this['scale']=new Data();
+this['scale']['x']=new Number(1);
+this['scale']['y']=new Number(1);
 this['x']=new Number(0);
 this['y']=new Number(0);
+this['SpriteObject']=new Obj(null, 'object');
 };
 inheritsFrom(DataSprite , Data);
 

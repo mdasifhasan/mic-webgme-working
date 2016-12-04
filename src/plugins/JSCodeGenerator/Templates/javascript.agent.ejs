@@ -71,7 +71,7 @@ if("libraryAgents" in agent){%>
 if(type === "Number" || type === "Boolean"){
     var value = data.value;%><%-prefix%>.value = <%=value%>;<%}
 else if (type === "Text"){
-    var value = data.value;%><%-prefix%>.value = <%-value%>;<%}
+    var value = data.value;%><%-prefix%>.value = '<%-value%>';<%}
 else if (type === "ReferData"){
     var referValue = data.value;
     var dataType = data.dataType;%><%-prefix%>.referValue = <%=referValue%>;<%}

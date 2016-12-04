@@ -188,17 +188,22 @@ var TestGame = function (name) {
     this.signals = new Signals();
     
     var child = null;
-    var child = new TestGame.library.Star('Star2');
-    this.addChild(child);
-    
-
-
     var child = new TestGame.library.Star('Star1');
     this.addChild(child);
     child.childs['Sprite'].data['DataSprite']['y'].value = 100;
 child.childs['Sprite'].data['DataSprite']['x'].value = 100;
 
-    child.childs['Sprite'].data['DataSprite']['Group']['enable physics'].value = true;
+
+
+    var child = new TestGame.library.Star('Star2');
+    this.addChild(child);
+    
+
+
+    var child = new TestGame.library.Star('Star3');
+    this.addChild(child);
+    child.childs['Sprite'].data['DataSprite']['y'].value = 300;
+child.childs['Sprite'].data['DataSprite']['x'].value = 300;
 
 
 
@@ -214,7 +219,12 @@ TestGame.library.Star = function (name) {
     var child = null;
     var child = new Canvas.library.Sprite('Sprite');
     this.addChild(child);
-    
+    child.data['DataSprite']['image name'].value = 'star';
+
+    child.data['DataSprite']['Group']['enable physics'].value = true;
+
+    child.data['DataSprite']['Physics']['collideWorldBounds'].value = true;
+
 
 
     Fields.FieldTestGame.subscribeData('Stars', this.childs.Sprite.data.DataSprite);
