@@ -24,6 +24,7 @@ var name = agent.name.replace(/\s/g, '');
     if(!name)
         name = "<%-name%>";
     Agent.apply(this, [name]);
+    this.signals = new Signals();
     <%parseAgentData(agent, true, "this")%>
     <%parseCourses(agent, "this", true)%><%
     if("childs" in agent){%>
@@ -397,5 +398,28 @@ for(var cas in action.CourseActionSignals){
 }%>
 
 <%function parseModuleBindings(agent){
-
+if("Bindings" in agent){
+    var fieldSubscriptions = agent.Bindings;
+        for(var fs in fieldSubscriptions){
+    var fieldSubP = fieldSubscriptions[fs];
+    for(var f in fieldSubP){
+        var fieldSub = fieldSubP[f];
+    var dFieldPath = null;
+    var dFieldInterfaceName = null;
+    if(fieldSub.type === "Action"){
+        dFieldPath = fieldSub.fieldAction.substr(0, fieldSub.fieldAction.length - fieldSub.fieldName.length - 1).replace(/\s/g, '');
+        dFieldInterfaceName = fieldSub.fieldName.replace(/\s/g, '');
+%>
+    <%-dFieldPath%>.subscribeToInterface('<%-dFieldInterfaceName%>', this.mod_<%-fieldSub.moduleName.replace(/\s/g, '')%>.<%-fieldSub.componentName.replace(/\s/g, '')%>);
+<%
+    }else if(fieldSub.type === "Data"){
+        dFieldPath = fieldSub.fieldData.substr(0, fieldSub.fieldData.length - fieldSub.fieldName.length - 1);
+        dFieldInterfaceName = fieldSub.fieldName.replace(/\s/g, '');
+        var dataPath = fieldSub.data.replace("Data", "data").replace(/\s/g, '');
+%>
+    <%-dFieldPath%>.subscribeData('<%-dFieldInterfaceName%>', this.<%-dataPath%>);
+<%
+    }
+}}
+}
 }%>

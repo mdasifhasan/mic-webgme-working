@@ -402,17 +402,20 @@
                 "type": "Action",
                 "moduleName": "SpriteActions",
                 "componentName": "CreateSprite-refer",
+                "fieldName": "CreateSprite",
                 "fieldAction": "Fields.FieldCanvas.FieldSprites.CreateSprite"
               },
               "1": {
                 "type": "Data",
                 "data": "Data.DataSprite",
+                "fieldName": "DataSprite-type",
                 "fieldData": "Fields.FieldCanvas.FieldSprites.DataSprite-type"
               },
               "2": {
                 "type": "Action",
                 "moduleName": "SpriteActions",
                 "componentName": "Create Group-refer",
+                "fieldName": "Create Group",
                 "fieldAction": "Fields.FieldCanvas.FieldSprites.Group.Create Group"
               }
             }
@@ -521,9 +524,9 @@
       "name": "Game Engine",
       "base": "Game Engine",
       "Modules": {
-        "ModGameEngine": {
-          "name": "ModGameEngine",
-          "Filename": "GameEngine",
+        "GameEngine": {
+          "name": "GameEngine",
+          "Filename": "ModGameEngine",
           "ImplementationClass": "ModuleGameEngine",
           "init": {
             "signals": {
@@ -539,7 +542,7 @@
               }
             }
           },
-          "genFileName": "GameEngine"
+          "genFileName": "ModGameEngine"
         }
       }
     },
@@ -823,6 +826,7 @@
               "0": {
                 "type": "Data",
                 "data": "childs.Sprite.Data.DataSprite",
+                "fieldName": "Stars",
                 "fieldData": "Fields.FieldTestGame.Stars"
               }
             }
@@ -1060,6 +1064,7 @@
             "type": "Action",
             "moduleName": "DebugSubscribers",
             "componentName": "CountDataSubscribers-refer",
+            "fieldName": "CountDataSubscribers",
             "fieldAction": "Fields.FieldDebug.CountDataSubscribers"
           }
         }

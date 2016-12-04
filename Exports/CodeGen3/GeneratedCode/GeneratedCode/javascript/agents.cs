@@ -115,6 +115,12 @@ Canvas.library.Sprite = function (name) {
     this.mod_SpriteActions = new Canvas.library.Sprite.SpriteActions();
     this.mod_SpriteActions.init();
     
+    Fields.FieldCanvas.FieldSprites.subscribeToInterface('CreateSprite', this.mod_SpriteActions.CreateSprite-refer);
+
+    Fields.FieldCanvas.FieldSprites.subscribeData('DataSprite-type', this.data.DataSprite);
+
+    Fields.FieldCanvas.FieldSprites.Group.subscribeToInterface('CreateGroup', this.mod_SpriteActions.CreateGroup-refer);
+
 };
 inheritsFrom(Canvas.library.Sprite, Agent);
 Canvas.library.Sprite.prototype.CA_CreateGroup = function () {
@@ -177,8 +183,8 @@ var GameEngine = function (name) {
     Agent.apply(this, [name]);
     
     
-    this.mod_ModGameEngine = new GameEngine();
-    this.mod_ModGameEngine.init(new Signal(Fields.FieldGameEngine.signals, 'SignalUpdate'), new Signal(Fields.FieldGameEngine.signals, 'SignalCreate'));
+    this.mod_GameEngine = new ModGameEngine();
+    this.mod_GameEngine.init(new Signal(Fields.FieldGameEngine.signals, 'SignalUpdate'), new Signal(Fields.FieldGameEngine.signals, 'SignalCreate'));
     
 };
 inheritsFrom(GameEngine, Agent);
@@ -217,6 +223,8 @@ TestGame.library.Star = function (name) {
     this.addChild(child);
     
 
+
+Fields.FieldTestGame.subscribeData('Stars', this.childs.Sprite.data.DataSprite);
 
 };
 inheritsFrom(TestGame.library.Star, Agent);
@@ -301,6 +309,8 @@ var Debug = function (name) {
     this.mod_DebugSubscribers = new Debug.DebugSubscribers();
     this.mod_DebugSubscribers.init();
     
+    Fields.FieldDebug.subscribeToInterface('CountDataSubscribers', this.mod_DebugSubscribers.CountDataSubscribers-refer);
+
 };
 inheritsFrom(Debug, Agent);
 Debug.prototype.CA_CountSubscribers = function () {

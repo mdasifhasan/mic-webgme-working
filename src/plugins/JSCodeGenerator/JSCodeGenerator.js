@@ -305,6 +305,7 @@ define([
                         var nodeComponent = nodes[rc];
                         c.moduleName = self.core.getAttribute(self.core.getParent(nodeComponent), 'name');
                         c.componentName = self.core.getAttribute(nodeComponent, 'name');
+                        c.fieldName = self.core.getAttribute(nodes[rfa], 'name');
                         c.fieldAction = self.extractFieldDataAddress(nodes, rfa);
                         m[ci + ""] = c;
                     }
@@ -318,6 +319,7 @@ define([
                     if (rc && rfa) {
                         c.type = "Data";
                         c.data = self.extractLocalPathAddress(nodes, rc, "Data", "Data", agentNode);
+                        c.fieldName = self.core.getAttribute(nodes[rfa], 'name');
                         c.fieldData = self.extractFieldDataAddress(nodes, rfa);
                         m[ci + ""] = c;
                     }
