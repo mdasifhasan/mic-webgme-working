@@ -70,8 +70,10 @@ return this;
 
 Field.prototype.triggerAction = function (name, args) {
 console.log("Firing field action: ", name);
-if (!(name in this.interfaces))
-return;
+if (!(name in this.interfaces)){
+console.log("No component subscribed to the interface: ", name, "of", this);
+return true;
+}
 //console.log("Found field action: ", this.interfaces[name], " would Call with args:", args);
 var i,
 res = true;

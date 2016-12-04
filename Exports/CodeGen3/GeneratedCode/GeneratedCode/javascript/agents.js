@@ -6,7 +6,6 @@ var Canvas = function (name) {
     Agent.apply(this, [name]);
     this.signals = new Signals();
     
-    
     this.mod_SpriteActions = new Canvas.SpriteActions();
     this.mod_SpriteActions.init();
     
@@ -27,8 +26,7 @@ Canvas.library.Text = function (name) {
     this.data['DataText'] = new DataText();
     
 
-
-    var course;
+var course;
     course = new Course(this, "CreateText", null, new this.CA_CreateText(this));
 
     this.addCourse(course);
@@ -100,27 +98,19 @@ Canvas.library.Sprite = function (name) {
     this.data['DataSprite'] = new DataSprite();
     
 
-
-    var course;
+var course;
     course = new Course(this, "create sprite under group");
     this.addCourse(course);
     
-    course = new Course(this, "Create Group", null, new this.CA_CreateGroup(this));
+    course = new Course(this, "CreateGroup", null, new this.CA_CreateGroup(this));
     
     this.courses['create sprite under group'].addCourse(course);
 
-    course = new Course(this, "Create Sprite", null, new this.CA_CreateSprite(this));
+    course = new Course(this, "CreateSprite", null, new this.CA_CreateSprite(this));
     
     this.courses['create sprite under group'].addCourse(course);
 
-    course = new Course(this, "Create Sprite", null, new this.CA_CreateSprite(this));
-
-    this.addCourse(course);
-    
-    course = new Course(this, "Create Group", null, new this.CA_CreateGroup(this));
-
-    this.addCourse(course);
-    
+    Fields.FieldGameEngine.signals.subscribeSignal('SignalCreate', this.courses['create sprite under group']);
 
     Fields.FieldCanvas.FieldSprites.subscribeData('DataSprite_type', this.data.DataSprite);
 
@@ -186,7 +176,6 @@ var GameEngine = function (name) {
     Agent.apply(this, [name]);
     this.signals = new Signals();
     
-    
     this.mod_GameEngine = new ModGameEngine();
     this.mod_GameEngine.init(new Signal(Fields.FieldGameEngine.signals, 'SignalUpdate'), new Signal(Fields.FieldGameEngine.signals, 'SignalCreate'));
     
@@ -197,7 +186,6 @@ var TestGame = function (name) {
         name = "TestGame";
     Agent.apply(this, [name]);
     this.signals = new Signals();
-    
     
     var child = null;
     var child = new TestGame.library.Star('Star2');
@@ -223,7 +211,6 @@ TestGame.library.Star = function (name) {
     Agent.apply(this, [name]);
     this.signals = new Signals();
     
-    
     var child = null;
     var child = new Canvas.library.Sprite('Sprite');
     this.addChild(child);
@@ -241,7 +228,6 @@ TestGame.library.Star.library.SampleAgent = function (name) {
     Agent.apply(this, [name]);
     this.signals = new Signals();
     
-    
 };
 inheritsFrom(TestGame.library.Star.library.SampleAgent, Agent);
 TestGame.library.Star.library.SampleAgent.library = {};
@@ -251,7 +237,6 @@ TestGame.library.Star.library.SampleAgent.library.SampleAgent2 = function (name)
     Agent.apply(this, [name]);
     this.signals = new Signals();
     
-    
 };
 inheritsFrom(TestGame.library.Star.library.SampleAgent.library.SampleAgent2, Agent);
 var ErrorHandler = function (name) {
@@ -259,7 +244,6 @@ var ErrorHandler = function (name) {
         name = "ErrorHandler";
     Agent.apply(this, [name]);
     this.signals = new Signals();
-    
     var course;
     course = new Course(this, "Report Critical Error");
     this.addCourse(course);
@@ -273,7 +257,12 @@ var Debug = function (name) {
     Agent.apply(this, [name]);
     this.signals = new Signals();
     
-    var course;
+    var child = null;
+    var child = new Canvas.library.Text('Text');
+    this.addChild(child);
+    
+
+var course;
     course = new Course(this, "SampleCourse");
     this.addCourse(course);
     
@@ -282,6 +271,12 @@ var Debug = function (name) {
 
     course = new Course(this, "Course1");
     this.courses['SampleCourse'].childs['CourseComposite'].addCourse(course);
+
+    course = new Course(this, "Course11");
+    this.courses['SampleCourse'].childs['CourseComposite'].childs['Course1'].addCourse(course);
+
+    course = new Course(this, "Course12");
+    this.courses['SampleCourse'].childs['CourseComposite'].childs['Course1'].addCourse(course);
 
     course = new Course(this, "Course2");
     this.courses['SampleCourse'].childs['CourseComposite'].addCourse(course);
@@ -309,12 +304,6 @@ var Debug = function (name) {
     this.addCourse(course);
     
     Fields.FieldGameEngine.signals.subscribeSignal('SignalUpdate', this.courses['Show Stars Count']);
-
-    var child = null;
-    var child = new Canvas.library.Text('Text');
-    this.addChild(child);
-    
-
 
     this.mod_DebugSubscribers = new Debug.DebugSubscribers();
     this.mod_DebugSubscribers.init();

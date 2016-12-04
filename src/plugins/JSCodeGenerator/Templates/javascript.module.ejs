@@ -33,8 +33,9 @@ if ("Components" in mod) {
 <%
 if(mod.ImplementationClass === ""){%>
     console.log("Component <%-componentName%> not implemented in Module: <%-modName%>");
+    return true;
 <%}else{%>
-        this.implementation.<%-componentName%>(<%-componentParams%>);
+        return this.implementation.<%-componentName%>(<%-componentParams%>);
 <%}
 %>
 };

@@ -25,8 +25,7 @@ var name = agent.name.replace(/\s/g, '').replace("-", "_");
         name = "<%-name%>";
     Agent.apply(this, [name]);
     this.signals = new Signals();
-    <%parseAgentData(agent, true, "this")%>
-    <%parseCourses(agent, "this", true)%><%
+    <%parseAgentData(agent, true, "this")%><%
     if("childs" in agent){%>
     var child = null;<%
         for (var c in agent.childs){
@@ -39,6 +38,7 @@ var name = agent.name.replace(/\s/g, '').replace("-", "_");
     <%parseChildData(ca, "child")%><%
 }
 }
+parseCourses(agent, "this", true);
 parseModules(agent);
 parseModuleBindings(agent);
 //end of childs agents%>

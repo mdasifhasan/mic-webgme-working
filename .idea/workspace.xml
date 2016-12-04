@@ -2,25 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="300b4105-8e50-46d4-9300-a0067c2cd2b8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/constructs.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/implementation/TestModules.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/lib/phaser.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/Canvas.SpriteActions.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/Debug.DebugSubscribers.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/sim.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/Canvas.library.Sprite.SpriteActions.cs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/Debug.DebugSubscribers.cs" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/agents.cs" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/agents.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/data.cs" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/data.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/field.cs" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/field.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/ModGameEngine.cs" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/ModGameEngine.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode.zip" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode.zip" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/agents.js" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/agents.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/constructs.js" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/constructs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/field.js" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/field.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/implementation/TestModules.js" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/implementation/TestModules.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/Canvas.SpriteActions.js" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/Canvas.SpriteActions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/Debug.DebugSubscribers.js" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/Debug.DebugSubscribers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/sim.js" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/sim.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/metadata.json" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/metadata.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/sim.json" afterPath="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/sim.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/plugins/JSCodeGenerator/JSCodeGenerator.js" afterPath="$PROJECT_DIR$/src/plugins/JSCodeGenerator/JSCodeGenerator.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/Templates.js" afterPath="$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/Templates.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.agent.ejs" afterPath="$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.agent.ejs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.field.ejs" afterPath="$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.field.ejs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.module.ejs" afterPath="$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.module.ejs" />
@@ -45,24 +37,14 @@
     <favorites_list name="Projects" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5199477">
+    <splitter split-orientation="horizontal" split-proportion="0.69011104">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
           <file leaf-file-name="javascript.agent.ejs" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.agent.ejs">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="513">
-                  <caret line="268" column="31" lean-forward="false" selection-start-line="268" selection-start-column="31" selection-end-line="268" selection-end-column="31" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="javascript.module.ejs" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.module.ejs">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="80">
-                  <caret line="4" column="55" lean-forward="false" selection-start-line="4" selection-start-column="55" selection-end-line="4" selection-end-column="55" />
+                <state relative-caret-position="468">
+                  <caret line="41" column="20" lean-forward="false" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
                   <folding />
                 </state>
               </provider>
@@ -71,27 +53,21 @@
           <file leaf-file-name="agents.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/agents.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="350">
-                  <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+                <state relative-caret-position="360">
+                  <caret line="110" column="52" lean-forward="false" selection-start-line="110" selection-start-column="52" selection-end-line="110" selection-end-column="52" />
                   <folding>
-                    <marker date="1480817847375" expanded="true" signature="3411:3684" ph="{...}" />
-                    <marker date="1480817847375" expanded="true" signature="3772:4019" ph="{...}" />
-                    <marker date="1480817847375" expanded="true" signature="3804:3999" ph="{...}" />
-                    <marker date="1480817847375" expanded="true" signature="4088:4361" ph="{...}" />
-                    <marker date="1480817847375" expanded="true" signature="4450:4706" ph="{...}" />
-                    <marker date="1480817847375" expanded="true" signature="4483:4686" ph="{...}" />
-                    <marker date="1480817847375" expanded="true" signature="4742:5065" ph="{...}" />
-                    <marker date="1480817847375" expanded="true" signature="5131:5650" ph="{...}" />
-                    <marker date="1480817847375" expanded="true" signature="5746:6055" ph="{...}" />
-                    <marker date="1480817847375" expanded="true" signature="6197:6319" ph="{...}" />
-                    <marker date="1480817847375" expanded="true" signature="6522:6645" ph="{...}" />
-                    <marker date="1480817847375" expanded="true" signature="6767:6991" ph="{...}" />
-                    <marker date="1480817847375" expanded="true" signature="7056:8979" ph="{...}" />
-                    <marker date="1480817847375" expanded="true" signature="9063:9511" ph="{...}" />
-                    <marker date="1480817847375" expanded="true" signature="9588:10074" ph="{...}" />
-                    <marker date="1480817847375" expanded="true" signature="9629:9840" ph="{...}" />
-                    <marker date="1480817847375" expanded="true" signature="9874:10054" ph="{...}" />
+                    <marker date="1480823208752" expanded="true" signature="9187:9612" ph="{...}" />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="javascript.module.ejs" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.module.ejs">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="80">
+                  <caret line="19" column="65" lean-forward="false" selection-start-line="19" selection-start-column="65" selection-end-line="19" selection-end-column="65" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -99,8 +75,8 @@
           <file leaf-file-name="TestModules.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/implementation/TestModules.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="400">
-                  <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+                <state relative-caret-position="240">
+                  <caret line="14" column="2" lean-forward="false" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
                   <folding>
                     <element signature="e#0#41#0" expanded="false" />
                   </folding>
@@ -108,51 +84,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Debug.DebugSubscribers.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/Debug.DebugSubscribers.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ModGameEngine.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/ModGameEngine.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="0">
-                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/index.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="180">
-                  <caret line="9" column="55" lean-forward="true" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="sim.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/sim.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="280">
-                  <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+                <state relative-caret-position="100">
+                  <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="constructs.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="constructs.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/constructs.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="403">
-                  <caret line="77" column="50" lean-forward="false" selection-start-line="77" selection-start-column="50" selection-end-line="77" selection-end-column="50" />
+                <state relative-caret-position="3">
+                  <caret line="153" column="39" lean-forward="true" selection-start-line="153" selection-start-column="39" selection-end-line="153" selection-end-column="39" />
                   <folding />
                 </state>
               </provider>
@@ -167,7 +113,7 @@
               <file leaf-file-name="JSCodeGenerator.js" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/src/plugins/JSCodeGenerator/JSCodeGenerator.js">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="-179">
+                    <state relative-caret-position="-159">
                       <caret line="1103" column="40" lean-forward="false" selection-start-line="1103" selection-start-column="40" selection-end-line="1103" selection-end-column="40" />
                       <folding>
                         <element signature="e#745#942#0" expanded="false" />
@@ -359,8 +305,29 @@
                 <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/sim.json">
                   <provider selected="true" editor-type-id="text-editor">
                     <state relative-caret-position="-79">
-                      <caret line="983" column="19" lean-forward="false" selection-start-line="983" selection-start-column="19" selection-end-line="983" selection-end-column="19" />
-                      <folding />
+                      <caret line="966" column="19" lean-forward="false" selection-start-line="966" selection-start-column="19" selection-end-line="966" selection-end-column="19" />
+                      <folding>
+                        <marker date="1480823208886" expanded="true" signature="34708:36387" ph="{...}" />
+                        <marker date="1480823208886" expanded="true" signature="34739:36379" ph="{...}" />
+                        <marker date="1480823208886" expanded="true" signature="34759:35003" ph="{...}" />
+                        <marker date="1480823208886" expanded="true" signature="34786:34885" ph="{&quot;type&quot;: null...}" />
+                        <marker date="1480823208886" expanded="true" signature="34908:34991" ph="{&quot;type&quot;: null...}" />
+                        <marker date="1480823208886" expanded="true" signature="35028:35172" ph="{...}" />
+                        <marker date="1480823208886" expanded="true" signature="35065:35160" ph="{&quot;type&quot;: null...}" />
+                        <marker date="1480823208886" expanded="true" signature="35207:35441" ph="{...}" />
+                        <marker date="1480823208886" expanded="true" signature="35239:35429" ph="{...}" />
+                        <marker date="1480823208886" expanded="true" signature="35265:35415" ph="{&quot;name&quot;: &quot;TextSignal&quot;...}" />
+                        <marker date="1480823208886" expanded="true" signature="35469:36369" ph="[...]" />
+                        <marker date="1480823208886" expanded="true" signature="35483:35950" ph="{&quot;name&quot;: &quot;CountDataSubscribers&quot;...}" />
+                        <marker date="1480823208886" expanded="true" signature="35618:35755" ph="{...}" />
+                        <marker date="1480823208886" expanded="true" signature="35653:35739" ph="{&quot;type&quot;: null...}" />
+                        <marker date="1480823208886" expanded="true" signature="35784:35936" ph="{...}" />
+                        <marker date="1480823208886" expanded="true" signature="35820:35920" ph="{&quot;type&quot;: null...}" />
+                        <marker date="1480823208886" expanded="true" signature="35964:36357" ph="{&quot;name&quot;: &quot;NumberToString&quot;...}" />
+                        <marker date="1480823208886" expanded="true" signature="36087:36343" ph="{...}" />
+                        <marker date="1480823208886" expanded="true" signature="36120:36206" ph="{&quot;type&quot;: null...}" />
+                        <marker date="1480823208886" expanded="true" signature="36237:36327" ph="{&quot;type&quot;: null...}" />
+                      </folding>
                     </state>
                   </provider>
                 </entry>
@@ -391,10 +358,10 @@
           </split-first>
           <split-second>
             <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-              <file leaf-file-name="fields.js" pinned="false" current-in-tab="true">
+              <file leaf-file-name="fields.js" pinned="false" current-in-tab="false">
                 <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/SimulationExample/fields.js">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="-920">
+                    <state relative-caret-position="-1140">
                       <caret line="23" column="29" lean-forward="false" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="29" />
                       <folding>
                         <element signature="e#0#39#0" expanded="false" />
@@ -449,11 +416,11 @@
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="constructs.js" pinned="false" current-in-tab="false">
+              <file leaf-file-name="constructs.js" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/SimulationExample/constructs.js">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="-1304">
-                      <caret line="266" column="19" lean-forward="false" selection-start-line="266" selection-start-column="19" selection-end-line="266" selection-end-column="19" />
+                    <state relative-caret-position="71">
+                      <caret line="89" column="0" lean-forward="false" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
                       <folding>
                         <element signature="e#0#39#0" expanded="false" />
                       </folding>
@@ -511,9 +478,11 @@
       <find>this.caData</find>
       <find>this.data</find>
       <find>Canvas.library.Sprite.SpriteActions</find>
+      <find>debug.log</find>
     </findStrings>
     <replaceStrings>
       <replace>replace(/\s/g, '').replace(&quot;-&quot;, &quot;_&quot;)</replace>
+      <replace>console.log(</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -522,9 +491,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/toBeDeleted/InheritanceExample.js" />
-        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Sprite.js" />
-        <option value="$PROJECT_DIR$/implementation/js/src/js/sim/toBeDeleted/TestGame.js" />
         <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Platform.js" />
         <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Agents/Player.js" />
         <option value="$PROJECT_DIR$/implementation/js/src/js/sim/Fields/FieldCanvas.js" />
@@ -564,15 +530,18 @@
         <option value="$PROJECT_DIR$/implementation/js/src/js/sim/SimulationExample/fields.js" />
         <option value="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/agents.cs" />
         <option value="$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/Templates.js" />
+        <option value="$PROJECT_DIR$/src/plugins/JSCodeGenerator/JSCodeGenerator.js" />
+        <option value="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/Canvas.library.Sprite.SpriteActions.js" />
+        <option value="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/index.html" />
+        <option value="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/ModGameEngine.js" />
+        <option value="$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.module.ejs" />
+        <option value="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/field.js" />
         <option value="$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.field.ejs" />
         <option value="$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.agent.ejs" />
-        <option value="$PROJECT_DIR$/src/plugins/JSCodeGenerator/JSCodeGenerator.js" />
-        <option value="$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.module.ejs" />
-        <option value="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/agents.js" />
-        <option value="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/Canvas.library.Sprite.SpriteActions.js" />
-        <option value="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/implementation/TestModules.js" />
         <option value="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/sim.js" />
-        <option value="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/index.html" />
+        <option value="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/implementation/TestModules.js" />
+        <option value="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/agents.js" />
+        <option value="$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/constructs.js" />
       </list>
     </option>
   </component>
@@ -1286,12 +1255,12 @@
       <workItem from="1479830060161" duration="7181000" />
       <workItem from="1479999429798" duration="16709000" />
       <workItem from="1480224575191" duration="57774000" />
-      <workItem from="1480653786206" duration="58819000" />
+      <workItem from="1480653786206" duration="64289000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="352503000" />
+    <option name="totallyTimeSpent" value="357973000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1306,7 +1275,7 @@
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1914331" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1914331" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3279743" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32616082" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1359,14 +1328,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="30" lean-forward="false" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/platform.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="43" lean-forward="true" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1586,16 +1547,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/SimulationExample/constructs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1304">
-          <caret line="266" column="19" lean-forward="false" selection-start-line="266" selection-start-column="19" selection-end-line="266" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#39#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/implementation/js/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="117">
@@ -1608,14 +1559,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.field.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="101" column="16" lean-forward="false" selection-start-line="101" selection-start-column="16" selection-end-line="101" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -1639,84 +1582,29 @@
     <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/sim.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-79">
-          <caret line="983" column="19" lean-forward="false" selection-start-line="983" selection-start-column="19" selection-end-line="983" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/field.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/SimulationExample/fields.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <caret line="966" column="19" lean-forward="false" selection-start-line="966" selection-start-column="19" selection-end-line="966" selection-end-column="19" />
           <folding>
-            <element signature="e#0#39#0" expanded="false" />
+            <marker date="1480823208886" expanded="true" signature="34708:36387" ph="{...}" />
+            <marker date="1480823208886" expanded="true" signature="34739:36379" ph="{...}" />
+            <marker date="1480823208886" expanded="true" signature="34759:35003" ph="{...}" />
+            <marker date="1480823208886" expanded="true" signature="34786:34885" ph="{&quot;type&quot;: null...}" />
+            <marker date="1480823208886" expanded="true" signature="34908:34991" ph="{&quot;type&quot;: null...}" />
+            <marker date="1480823208886" expanded="true" signature="35028:35172" ph="{...}" />
+            <marker date="1480823208886" expanded="true" signature="35065:35160" ph="{&quot;type&quot;: null...}" />
+            <marker date="1480823208886" expanded="true" signature="35207:35441" ph="{...}" />
+            <marker date="1480823208886" expanded="true" signature="35239:35429" ph="{...}" />
+            <marker date="1480823208886" expanded="true" signature="35265:35415" ph="{&quot;name&quot;: &quot;TextSignal&quot;...}" />
+            <marker date="1480823208886" expanded="true" signature="35469:36369" ph="[...]" />
+            <marker date="1480823208886" expanded="true" signature="35483:35950" ph="{&quot;name&quot;: &quot;CountDataSubscribers&quot;...}" />
+            <marker date="1480823208886" expanded="true" signature="35618:35755" ph="{...}" />
+            <marker date="1480823208886" expanded="true" signature="35653:35739" ph="{&quot;type&quot;: null...}" />
+            <marker date="1480823208886" expanded="true" signature="35784:35936" ph="{...}" />
+            <marker date="1480823208886" expanded="true" signature="35820:35920" ph="{&quot;type&quot;: null...}" />
+            <marker date="1480823208886" expanded="true" signature="35964:36357" ph="{&quot;name&quot;: &quot;NumberToString&quot;...}" />
+            <marker date="1480823208886" expanded="true" signature="36087:36343" ph="{...}" />
+            <marker date="1480823208886" expanded="true" signature="36120:36206" ph="{&quot;type&quot;: null...}" />
+            <marker date="1480823208886" expanded="true" signature="36237:36327" ph="{&quot;type&quot;: null...}" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/constructs.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="77" column="50" lean-forward="false" selection-start-line="77" selection-start-column="50" selection-end-line="77" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.module.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" column="55" lean-forward="false" selection-start-line="4" selection-start-column="55" selection-end-line="4" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.agent.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="268" column="31" lean-forward="false" selection-start-line="268" selection-start-column="31" selection-end-line="268" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/agents.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
-          <folding>
-            <marker date="1480817847375" expanded="true" signature="3411:3684" ph="{...}" />
-            <marker date="1480817847375" expanded="true" signature="3772:4019" ph="{...}" />
-            <marker date="1480817847375" expanded="true" signature="3804:3999" ph="{...}" />
-            <marker date="1480817847375" expanded="true" signature="4088:4361" ph="{...}" />
-            <marker date="1480817847375" expanded="true" signature="4450:4706" ph="{...}" />
-            <marker date="1480817847375" expanded="true" signature="4483:4686" ph="{...}" />
-            <marker date="1480817847375" expanded="true" signature="4742:5065" ph="{...}" />
-            <marker date="1480817847375" expanded="true" signature="5131:5650" ph="{...}" />
-            <marker date="1480817847375" expanded="true" signature="5746:6055" ph="{...}" />
-            <marker date="1480817847375" expanded="true" signature="6197:6319" ph="{...}" />
-            <marker date="1480817847375" expanded="true" signature="6522:6645" ph="{...}" />
-            <marker date="1480817847375" expanded="true" signature="6767:6991" ph="{...}" />
-            <marker date="1480817847375" expanded="true" signature="7056:8979" ph="{...}" />
-            <marker date="1480817847375" expanded="true" signature="9063:9511" ph="{...}" />
-            <marker date="1480817847375" expanded="true" signature="9588:10074" ph="{...}" />
-            <marker date="1480817847375" expanded="true" signature="9629:9840" ph="{...}" />
-            <marker date="1480817847375" expanded="true" signature="9874:10054" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/Debug.DebugSubscribers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1728,27 +1616,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/implementation/TestModules.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/ModGameEngine.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/plugins/JSCodeGenerator/JSCodeGenerator.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-179">
+        <state relative-caret-position="-159">
           <caret line="1103" column="40" lean-forward="false" selection-start-line="1103" selection-start-column="40" selection-end-line="1103" selection-end-column="40" />
           <folding>
             <element signature="e#745#942#0" expanded="false" />
@@ -1925,18 +1795,122 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/sim.js">
+    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/platform.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        <state relative-caret-position="67">
+          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" column="55" lean-forward="true" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
+        <state relative-caret-position="100">
+          <caret line="5" column="20" lean-forward="false" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/Debug.DebugSubscribers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/modules/ModGameEngine.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" column="50" lean-forward="false" selection-start-line="6" selection-start-column="50" selection-end-line="6" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/field.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="75" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.field.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="75" column="1" lean-forward="false" selection-start-line="75" selection-start-column="1" selection-end-line="75" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.module.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="19" column="65" lean-forward="false" selection-start-line="19" selection-start-column="65" selection-end-line="19" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/plugins/JSCodeGenerator/Templates/javascript.agent.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="41" column="20" lean-forward="false" selection-start-line="41" selection-start-column="20" selection-end-line="41" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/sim.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/implementation/TestModules.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="14" column="2" lean-forward="false" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/SimulationExample/fields.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#39#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/implementation/js/src/js/sim/SimulationExample/constructs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="71">
+          <caret line="89" column="0" lean-forward="false" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#39#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/agents.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="110" column="52" lean-forward="false" selection-start-line="110" selection-start-column="52" selection-end-line="110" selection-end-column="52" />
+          <folding>
+            <marker date="1480823208752" expanded="true" signature="9187:9612" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Exports/CodeGen3/GeneratedCode/GeneratedCode/javascript/constructs.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3">
+          <caret line="153" column="39" lean-forward="true" selection-start-line="153" selection-start-column="39" selection-end-line="153" selection-end-column="39" />
           <folding />
         </state>
       </provider>

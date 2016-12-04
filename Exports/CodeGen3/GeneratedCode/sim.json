@@ -485,23 +485,24 @@
             "create sprite under group": {
               "childs": [
                 {
-                  "name": "Create Group",
+                  "name": "CreateGroup",
                   "type": "Course",
                   "courseAction": "Create Group"
                 },
                 {
-                  "name": "Create Sprite",
+                  "name": "CreateSprite",
                   "type": "Course",
                   "courseAction": "Create Sprite"
                 }
               ],
+              "signals": [
+                {
+                  "name": "SignalCreate",
+                  "type": "Field",
+                  "path": "Fields.FieldGameEngine.SignalCreate"
+                }
+              ],
               "courseAction": null
-            },
-            "Create Sprite": {
-              "courseAction": "Create Sprite"
-            },
-            "Create Group": {
-              "courseAction": "Create Group"
             }
           }
         }
@@ -574,12 +575,12 @@
                 "create sprite under group": {
                   "childs": [
                     {
-                      "name": "Create Group",
+                      "name": "CreateGroup",
                       "type": "Course",
                       "courseAction": "Create Group"
                     },
                     {
-                      "name": "Create Sprite",
+                      "name": "CreateSprite",
                       "type": "Course",
                       "courseAction": "Create Sprite"
                     }
@@ -592,12 +593,6 @@
                     }
                   ],
                   "courseAction": null
-                },
-                "Create Sprite": {
-                  "courseAction": "Create Sprite"
-                },
-                "Create Group": {
-                  "courseAction": "Create Group"
                 }
               },
               "CourseActions": {
@@ -719,12 +714,12 @@
                 "create sprite under group": {
                   "childs": [
                     {
-                      "name": "Create Group",
+                      "name": "CreateGroup",
                       "type": "Course",
                       "courseAction": "Create Group"
                     },
                     {
-                      "name": "Create Sprite",
+                      "name": "CreateSprite",
                       "type": "Course",
                       "courseAction": "Create Sprite"
                     }
@@ -737,12 +732,6 @@
                     }
                   ],
                   "courseAction": null
-                },
-                "Create Sprite": {
-                  "courseAction": "Create Sprite"
-                },
-                "Create Group": {
-                  "courseAction": "Create Group"
                 }
               },
               "CourseActions": {
@@ -864,12 +853,12 @@
                 "create sprite under group": {
                   "childs": [
                     {
-                      "name": "Create Group",
+                      "name": "CreateGroup",
                       "type": "Course",
                       "courseAction": "Create Group"
                     },
                     {
-                      "name": "Create Sprite",
+                      "name": "CreateSprite",
                       "type": "Course",
                       "courseAction": "Create Sprite"
                     }
@@ -882,12 +871,6 @@
                     }
                   ],
                   "courseAction": null
-                },
-                "Create Sprite": {
-                  "courseAction": "Create Sprite"
-                },
-                "Create Group": {
-                  "courseAction": "Create Group"
                 }
               },
               "CourseActions": {
@@ -1086,7 +1069,19 @@
                 {
                   "name": "Course1",
                   "type": "Course",
-                  "courseAction": null
+                  "courseAction": null,
+                  "childs": [
+                    {
+                      "name": "Course11",
+                      "type": "Course",
+                      "courseAction": null
+                    },
+                    {
+                      "name": "Course12",
+                      "type": "Course",
+                      "courseAction": null
+                    }
+                  ]
                 },
                 {
                   "name": "Course2",

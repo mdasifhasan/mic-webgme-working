@@ -6,17 +6,17 @@ var inheritsFrom = function (child, parent) {
     child.prototype = Object.create(parent.prototype);
 };
 
-var debug = {};
+debug = {};
 debug.log = function () {
-    console.log(arguments);
+    console.log.apply(null, arguments);
     if (arguments[0] === "_force") {
         console.log.apply(null, arguments);
     }
-}
+};
 
 debug.force = function () {
     console.log.apply(null, arguments);
-}
+};
 
 
 // ************ Simulation ************  //
@@ -72,43 +72,43 @@ var Agent = function (name) {
     this.signals = new Signals();
     this.data = {};
     this.childs = {};
-    debug.log("Creating new agent: ", this.name);
+    console.log("Creating new agent: ", this.name);
 };
 
 Agent.prototype.addChild = function (childAgent) {
-    debug.log("adding child ", childAgent.name, "to", this.name);
+    console.log("adding child ", childAgent.name, "to", this.name);
     this.childs[childAgent.name] = childAgent;
 };
 
 Agent.prototype.removeChild = function (childAgent) {
-    debug.log("removing child ", childAgent.name, "from", this.name);
+    console.log("removing child ", childAgent.name, "from", this.name);
     if (childAgent.name in this.childs)
         delete this.childs[childAgent.name];
 };
 
 
 Agent.prototype.addCourse = function (course) {
-    debug.log("adding", course.name, "to", this.name);
+    console.log("adding", course.name, "to", this.name);
     this.courses[course.name] = course;
 };
 
 Agent.prototype.removeCourse = function (course) {
-    debug.log("removing", course.name, "from", this.name);
+    console.log("removing", course.name, "from", this.name);
     if (course.name in this.courses)
         delete this.courses[course.name];
 };
 
 
 // Agent.prototype.update = function () {
-//     debug.log("Updating " + this.name);
-//     debug.log("Updating the childs of", this.name);
+//     console.log("Updating " + this.name);
+//     console.log("Updating the childs of", this.name);
 //     var isChildsFinished = true;
 //     for (var c in this.childs) {
-//         debug.log("Updating child " + this.childs[c]);
+//         console.log("Updating child " + this.childs[c]);
 //         isChildsFinished = isChildsFinished && this.childs[c].update();
-//         debug.log("isChildsFinished: ", isChildsFinished);
+//         console.log("isChildsFinished: ", isChildsFinished);
 //     }
-//     debug.log("Finished updating this childs of", this.name);
+//     console.log("Finished updating this childs of", this.name);
 //
 //     var i;
 //     var toBeRemoved = [];
@@ -117,13 +117,13 @@ Agent.prototype.removeCourse = function (course) {
 //         var a = this.fired[key];
 //         for (i = 0; i < a.length; i++) {
 //             if (a[i].trigger()) {
-//                 debug.log(key, ' - finished course: ', a[i].name);
+//                 console.log(key, ' - finished course: ', a[i].name);
 //                 toBeRemoved.push({signal: key, course: a[i]});
 //             }
 //         }
 //     }
 //     for (i = 0; i < toBeRemoved.length; i++) {
-//         debug.log(key, ' - unsubscribe course: ', a[i].name);
+//         console.log(key, ' - unsubscribe course: ', a[i].name);
 //         var signal = toBeRemoved[i].signal;
 //         var course = toBeRemoved[i].course;
 //         if (signal in this.fired) {
@@ -134,7 +134,7 @@ Agent.prototype.removeCourse = function (course) {
 //             }
 //         }
 //     }
-//     debug.log(this.name, ": fired signals length: ", Object.keys(this.fired).length);
+//     console.log(this.name, ": fired signals length: ", Object.keys(this.fired).length);
 //     if (Object.keys(this.fired).length === 0)
 //         return true && isChildsFinished;
 //     else
@@ -151,18 +151,18 @@ var Course = function (owner, name, childs, action) {
     this.name = name;
     this.next = 0;
     this.action = action;
-    this.childs = !childs? [] : childs;
+    this.childs = !childs? {} : childs;
     this.isChildsFinsihed = false;
     this.isFinished = false;
 };
 
 Course.prototype.addCourse = function (course) {
-    debug.log("adding", course.name, "to parent course", this.name);
+    console.log("adding", course.name, "to parent course", this.name);
     this.childs[course.name] = course;
 };
 
 Course.prototype.removeCourse = function (course) {
-    debug.log("removing", course.name, "from parent course", this.name);
+    console.log("removing", course.name, "from parent course", this.name);
     if (course.name in this.childs)
         delete this.childs[course.name];
 };
@@ -174,33 +174,33 @@ Course.prototype.reset = function () {
 }
 
 Course.prototype.trigger = function () {
-    debug.log("triggering course: ", this.name);
+    console.log("triggering course: ", this.name);
     // run pre first, run childs one by one, when all the childs are finished then run itself
     if (this.isFinished)
         this.reset();
 
-    debug.log(this.name, " triggering child courses");
+    console.log(this.name, " triggering child courses, total childs:", this.childs.length, " currentIndex:", this.next);
     while (!this.isChildsFinsihed) {
         if (this.next < this.childs.length) {
             if (this.childs[this.next].trigger()) {
-                debug.log(this.name, "child finished: ", this.childs[this.next].name);
+                console.log(this.name, "child finished: ", this.childs[this.next].name);
                 this.next++;
             } else
                 break;
         } else {
-            debug.log(this.name, "all child courses are finished.");
+            console.log(this.name, "all child courses are finished.");
             this.isChildsFinsihed = true;
             break;
         }
     }
     if (this.isChildsFinsihed && !this.isFinished) {
-        debug.log(this.name, "trigger course of self.");
+        console.log(this.name, "trigger course of self.");
         if (!this.action|| this.action.trigger(this)) {
             this.isFinished = true;
-            debug.log(this.name, "self execution is finished");
+            console.log(this.name, "self execution is finished");
         } else {
             this.isFinished = false;
-            debug.log(this.name, "self execution is not finished, will continue at next");
+            console.log(this.name, "self execution is not finished, will continue at next");
         }
     }
     return this.isFinished;
@@ -217,7 +217,7 @@ Course.prototype.runCourseList = function (courseList) {
             isFinished = false;
     }
     for (i = 0; i < toBeRemoved.length; i++) {
-        debug.log('Removing child course', toBeRemoved[i].name, 'from ', this.name)
+        console.log('Removing child course', toBeRemoved[i].name, 'from ', this.name)
         courseList.splice(courseList.indexOf(toBeRemoved[i]), 1);
     }
     // if (courseList.length == 0)
@@ -236,7 +236,7 @@ var Signals = function () {
     this.fired = {};
 };
 Signals.prototype.subscribeSignal = function (signal, course) {
-    debug.log(signal, "subscribe signal, ", course);
+    console.log(signal, "subscribe signal, ", course);
     if (!(signal in this.signals))
         this.signals[signal] = [];
     if (course)
@@ -257,7 +257,7 @@ Signals.prototype.unsubscribeSignal = function (signal, course) {
 };
 
 Signals.prototype.fireSignal = function (signal) {
-    debug.log(signal, "fire signal, currently subscribed", this.signals[signal]);
+    console.log(signal, "fire signal, currently subscribed", this.signals[signal]);
     if (!(signal in this.fired)) {
         if (signal in this.signals) {
             this.fired[signal] = this.signals[signal].slice(0);
@@ -269,7 +269,7 @@ Signals.prototype.fireSignal = function (signal) {
 };
 
 Signals.prototype._processSignal = function (signal) {
-    debug.log(signal, "processing signal, ", this.fired[signal]);
+    console.log(signal, "processing signal, ", this.fired[signal]);
     if(this.fired[signal].length === 0) {
         delete this.fired[signal];
         return true;
@@ -279,12 +279,12 @@ Signals.prototype._processSignal = function (signal) {
     var a = this.fired[signal];
     for (i = 0; i < a.length; i++) {
         if (a[i].trigger()) {
-            debug.log(signal, ' - finished course: ', a[i].name);
+            console.log(signal, ' - finished course: ', a[i].name);
             toBeRemoved.push({signal: signal, course: a[i]});
         }
     }
     for (i = 0; i < toBeRemoved.length; i++) {
-        debug.log(signal, ' - unsubscribe course: ', a[i].name);
+        console.log(signal, ' - unsubscribe course: ', toBeRemoved[i].course.name);
         var signal = toBeRemoved[i].signal;
         var course = toBeRemoved[i].course;
         if (signal in this.fired) {
@@ -292,7 +292,7 @@ Signals.prototype._processSignal = function (signal) {
             l.splice(l.indexOf(course), 1);
             if (l.length === 0) {
                 delete this.fired[signal];
-                debug.log(signal, ' - processing finished');
+                console.log(signal, ' - processing finished');
                 return true;
             }
         }
