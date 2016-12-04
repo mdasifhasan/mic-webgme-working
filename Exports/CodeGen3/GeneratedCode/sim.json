@@ -264,6 +264,50 @@
     "Canvas": {
       "name": "Canvas",
       "base": "Canvas",
+      "Modules": {
+        "SpriteActions": {
+          "name": "SpriteActions",
+          "Filename": "",
+          "ImplementationClass": "ModuleSpriteActions",
+          "Components": {
+            "CreateSprite-refer": {
+              "fieldInterface": "Fields.FieldCanvas.FieldSprites.CreateSprite",
+              "params": {
+                "Data": [
+                  {
+                    "name": "DataSprite",
+                    "type": "DataTypes.DataSprite"
+                  },
+                  {
+                    "name": "DataSprite2",
+                    "type": "DataTypes.DataSprite"
+                  }
+                ],
+                "ActionSignals": [
+                  "Error"
+                ]
+              }
+            },
+            "Create Group-refer": {
+              "fieldInterface": "Fields.FieldCanvas.FieldSprites.Group.Create Group",
+              "params": {
+                "Data": [
+                  {
+                    "name": "Group-type",
+                    "type": "DataTypes.Group"
+                  }
+                ],
+                "ActionSignals": [
+                  "Error"
+                ]
+              }
+            }
+          },
+          "init": {},
+          "genFileName": "Canvas.SpriteActions",
+          "agentName": "Canvas"
+        }
+      },
       "libraryAgents": {
         "Text": {
           "name": "Text",
@@ -353,70 +397,13 @@
               "name": "DataSprite"
             }
           },
-          "Modules": {
-            "SpriteActions": {
-              "name": "SpriteActions",
-              "Filename": "",
-              "ImplementationClass": "ModuleSpriteActions",
-              "Components": {
-                "CreateSprite-refer": {
-                  "fieldInterface": "Fields.FieldCanvas.FieldSprites.CreateSprite",
-                  "params": {
-                    "Data": [
-                      {
-                        "name": "DataSprite",
-                        "type": "DataTypes.DataSprite"
-                      },
-                      {
-                        "name": "DataSprite2",
-                        "type": "DataTypes.DataSprite"
-                      }
-                    ],
-                    "ActionSignals": [
-                      "Error"
-                    ]
-                  }
-                },
-                "Create Group-refer": {
-                  "fieldInterface": "Fields.FieldCanvas.FieldSprites.Group.Create Group",
-                  "params": {
-                    "Data": [
-                      {
-                        "name": "Group-type",
-                        "type": "DataTypes.Group"
-                      }
-                    ],
-                    "ActionSignals": [
-                      "Error"
-                    ]
-                  }
-                }
-              },
-              "init": {},
-              "genFileName": "Canvas.library.Sprite.SpriteActions"
-            }
-          },
           "Bindings": {
             "0": {
               "0": {
-                "type": "Action",
-                "moduleName": "SpriteActions",
-                "componentName": "CreateSprite-refer",
-                "fieldName": "CreateSprite",
-                "fieldAction": "Fields.FieldCanvas.FieldSprites.CreateSprite"
-              },
-              "1": {
                 "type": "Data",
                 "data": "Data.DataSprite",
                 "fieldName": "DataSprite-type",
                 "fieldData": "Fields.FieldCanvas.FieldSprites.DataSprite-type"
-              },
-              "2": {
-                "type": "Action",
-                "moduleName": "SpriteActions",
-                "componentName": "Create Group-refer",
-                "fieldName": "Create Group",
-                "fieldAction": "Fields.FieldCanvas.FieldSprites.Group.Create Group"
               }
             }
           },
@@ -518,6 +505,24 @@
             }
           }
         }
+      },
+      "Bindings": {
+        "0": {
+          "0": {
+            "type": "Action",
+            "moduleName": "SpriteActions",
+            "componentName": "CreateSprite-refer",
+            "fieldName": "CreateSprite",
+            "fieldAction": "Fields.FieldCanvas.FieldSprites.CreateSprite"
+          },
+          "1": {
+            "type": "Action",
+            "moduleName": "SpriteActions",
+            "componentName": "Create Group-refer",
+            "fieldName": "Create Group",
+            "fieldAction": "Fields.FieldCanvas.FieldSprites.Group.Create Group"
+          }
+        }
       }
     },
     "Game Engine": {
@@ -542,7 +547,8 @@
               }
             }
           },
-          "genFileName": "ModGameEngine"
+          "genFileName": "ModGameEngine",
+          "agentName": "Game Engine"
         }
       }
     },
@@ -1179,7 +1185,8 @@
             }
           },
           "init": {},
-          "genFileName": "Debug.DebugSubscribers"
+          "genFileName": "Debug.DebugSubscribers",
+          "agentName": "Debug"
         }
       },
       "CourseActions": {

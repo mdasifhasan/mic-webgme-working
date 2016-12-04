@@ -1,4 +1,5 @@
-<%var modName = mod.genFileName.replace(/\s/g, '')
+<%
+var modName = mod.genFileName.replace(/\s/g, '').replace("-", "_");
 var signalParams = "";
 if ("signals" in mod.init) {
     signalParams = parseSignalParams(mod.init.signals);
@@ -9,7 +10,7 @@ if ("signals" in mod.init) {
 <%-modName%> = function(){
 };
 
-<%-modName%>.prototype.init(<%-signalParams%>){
+<%-modName%>.prototype.init = function(<%-signalParams%>){
     <%
     if(mod.ImplementationClass === ""){
         if ("signals" in mod.init){
@@ -25,7 +26,7 @@ if ("signals" in mod.init) {
 <%
 if ("Components" in mod) {
     for (var c in mod.Components) {
-        var componentName = c.replace(/\s/g, '');
+        var componentName = c.replace(/\s/g, '').replace("-", "_");
         var componentParams = parseComponentParams(mod.Components[c].params);
 %>
 <%-modName%>.prototype.<%-componentName%> = function(<%-componentParams%>){
@@ -47,9 +48,9 @@ if(mod.ImplementationClass === ""){%>
     for (var d in signals) {
         var dName = "signal_" + d;
         if (retString === null)
-            retString = dName.replace(/\s/g, '');
+            retString = dName.replace(/\s/g, '').replace("-", "_");
         else
-            retString += ", " + dName.replace(/\s/g, '');
+            retString += ", " + dName.replace(/\s/g, '').replace("-", "_");
     }
     return retString;
 }%>
@@ -57,7 +58,7 @@ if(mod.ImplementationClass === ""){%>
 <%function parseSignalBodyForParams(signals){
     for (var d in signals) {
         var dName = "signal_" + d;
-        dName = dName.replace(/\s/g, '');
+        dName = dName.replace(/\s/g, '').replace("-", "_");
 %>
     this.<%-dName%> = <%-dName%>;
 <%
@@ -71,9 +72,9 @@ if(mod.ImplementationClass === ""){%>
         for(var i = 0; i < componentParams.Data.length; i++){
             var dName = componentParams.Data[i].name;
             if(retString === null)
-                retString = dName.replace(/\s/g, '');
+                retString = dName.replace(/\s/g, '').replace("-", "_");
             else
-                retString += ", " + dName.replace(/\s/g, '');
+                retString += ", " + dName.replace(/\s/g, '').replace("-", "_");
         }
     }
     if("FieldData" in componentParams) {
@@ -81,9 +82,9 @@ if(mod.ImplementationClass === ""){%>
             var dName = componentParams.FieldData[i].name;
             var dName = "fd_" + dName;
             if(retString === null)
-                retString = dName.replace(/\s/g, '');
+                retString = dName.replace(/\s/g, '').replace("-", "_");
             else
-                retString += ", " + dName.replace(/\s/g, '');
+                retString += ", " + dName.replace(/\s/g, '').replace("-", "_");
         }
     }
     if("ActionSignals" in componentParams) {
@@ -91,9 +92,9 @@ if(mod.ImplementationClass === ""){%>
             var dName = componentParams.ActionSignals[i];
             var dName = "signal_" + dName;
             if(retString === null)
-                retString = dName.replace(/\s/g, '');
+                retString = dName.replace(/\s/g, '').replace("-", "_");
             else
-                retString += ", " + dName.replace(/\s/g, '');
+                retString += ", " + dName.replace(/\s/g, '').replace("-", "_");
         }
     }
     return retString;

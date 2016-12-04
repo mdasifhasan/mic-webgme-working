@@ -19,7 +19,7 @@ define([
             field: javascriptField,
             agents: javascriptAgent,
             module: javascriptModule,
-            extension: 'cs'
+            extension: 'js'
         }
     };
 });

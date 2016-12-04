@@ -1135,6 +1135,7 @@ define([
                 if (!genFileName || genFileName === "")
                     genFileName = prefix + agent.name + "." + module.name;
                 module.genFileName = genFileName;
+                module.agentName = prefix + agent.name;
                 var codeFileName = 'GeneratedCode/' + language + '/modules/' + genFileName + "." + TEMPLATES[language].extension;
                 filesToAdd[codeFileName] = ejs.render(TEMPLATES[language].module, {mod: module});
             }

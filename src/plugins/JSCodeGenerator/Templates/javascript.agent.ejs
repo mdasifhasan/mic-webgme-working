@@ -13,7 +13,7 @@ function parseAgents(agents) {
 
 <%
 function parseAgent(agent, prefix) {
-var name = agent.name.replace(/\s/g, '');
+var name = agent.name.replace(/\s/g, '').replace("-", "_");
 %>
 <%if (prefix === ""){
 %>var <%-name%> = function (name) {<%
@@ -31,8 +31,8 @@ var name = agent.name.replace(/\s/g, '');
     var child = null;<%
         for (var c in agent.childs){
             var ca = agent.childs[c];
-            var cname = ca.name.replace(/\s/g, '');
-            var cbase = ca.base.replace(/\s/g, '');
+            var cname = ca.name.replace(/\s/g, '').replace("-", "_");
+            var cbase = ca.base.replace(/\s/g, '').replace("-", "_");
     %>
     var child = new <%-cbase%>('<%-cname%>');
     this.addChild(child);
@@ -118,19 +118,19 @@ if("Courses" in agent){
   for (var c in agent.Courses){
         var cs = agent.Courses[c];
         var name = c;
-      var courseAction = "courseAction" in cs ? cs.courseAction?"CA_"+cs.courseAction.replace(/\s/g, ''):null : null;
+      var courseAction = "courseAction" in cs ? cs.courseAction?"CA_"+cs.courseAction.replace(/\s/g, '').replace("-", "_"):null : null;
         if(isCreateCourseInstance){
             if(courseAction){
 %>
-    course = new Course(this, "<%-name%>", null, new this.<%-courseAction%>());
+    course = new Course(this, "<%-name%>", null, new this.<%-courseAction%>(this));
 <%}else{%>
     course = new Course(this, "<%-name%>");<%}%>
-    <%-ownerVarName%>.addCourse(<%-name%>);
+    <%-ownerVarName%>.addCourse(course);
     <%
             if("childs" in cs){
                 for(var i = 0; i < cs.childs.length; i++){
                     var child = cs.childs[i];
-                    parseChildCourses(ownerVarName, child, ownerVarName+"['"+name+"']");
+                    parseChildCourses(ownerVarName, child, ownerVarName+".courses['"+name+"']");
                 }
             }
     }else{%>
@@ -141,10 +141,10 @@ if("Courses" in agent){
             var path = signal.path;
             if(signal.type === "Field"){
                 var signalPath = signal.path.substr(0, signal.path.length-signal.name.length-1);%>
-    <%-signalPath%>.signals.subscribeSignal('<%-signal.name%>', course);<%
+    <%-signalPath%>.signals.subscribeSignal('<%-signal.name%>', this.courses['<%-name%>']);<%
             }else if(signal.type === "local"){
                 var signalPath = signal.path.substr("AgentSignals".length); %>
-    <%-ownerVarName%>.signals.subscribeSignal('<%-signal.name%>', course);<%
+    <%-ownerVarName%>.signals.subscribeSignal('<%-signal.name%>', this.courses['<%-name%>']);<%
             }
         }
     }//end of signals
@@ -156,10 +156,10 @@ if("Courses" in agent){
 <%function parseChildCourses(owner, child, prefix) {
         var name = child.name;
         var type = child.type;
-        var courseAction = "courseAction" in child ? child.courseAction?"CA_"+child.courseAction.replace(/\s/g, ''):null : null;
+        var courseAction = "courseAction" in child ? child.courseAction?"CA_"+child.courseAction.replace(/\s/g, '').replace("-", "_"):null : null;
         if(courseAction){
     %>
-    course = new Course(this, "<%-name%>", null, new this.<%-courseAction%>());
+    course = new Course(this, "<%-name%>", null, new this.<%-courseAction%>(this));
     <%}else{%>
     course = new Course(this, "<%-name%>");<%}%>
     <%-prefix%>.addCourse(course);
@@ -167,7 +167,7 @@ if("Courses" in agent){
     if("childs" in child){
         for(var i = 0; i < child.childs.length; i++){
             var ch = child.childs[i];
-            parseChildCourses(owner, ch, prefix + "['" + name + "']");
+            parseChildCourses(owner, ch, prefix+ ".childs['" + name + "']");
         }
     }
 }%>
@@ -178,19 +178,19 @@ if("Courses" in agent){
    if("CourseActions" in agent){
        for (var ca in agent.CourseActions){
            var cAction = agent.CourseActions[ca];
-           var name = ca.replace(/\s/g, '');
+           var name = ca.replace(/\s/g, '').replace("-", "_");
             var retString = parseActionParams(cAction);
             if(retString === null)
                 retString = "";
 %>
-<%-prefix%>.prototype.CA_<%-name%> = function () {
+<%-prefix%>.prototype.CA_<%-name%> = function (self) {
 <%parseActionBodyForParam(cAction)%>
 <%
     if("fieldActions" in cAction) {%>
     this.res = {};
 <%      for (var i = 0; i < cAction.fieldActions.length; i++) {
             var fa = cAction.fieldActions[i];
-            faname = fa.name.replace(/\s/g, '');
+            faname = fa.name.replace(/\s/g, '').replace("-", "_");
 %>
     this.res.<%-faname%> = false;
         <%}
@@ -203,13 +203,14 @@ if("Courses" in agent){
 if("fieldActions" in cAction) {
     for (var i = 0; i < cAction.fieldActions.length; i++) {
     var fa = cAction.fieldActions[i];
-    faname = fa.name.replace(/\s/g, '');
+    var fieldName = fa.field.replace(/\s/g, '').replace("-", "_");
+    faname = fa.name.replace(/\s/g, '').replace("-", "_");
     var retString = parseFieldActionParams(fa);
     if(retString === null)
         retString = "";
 %>
     if(!this.res.<%-faname%>){
-        this.res.<%-faname%> = <%-fa.field%>(<%-retString%>);
+        this.res.<%-faname%> = <%-fieldName%>(<%-retString%>);
         if(!this.res.<%-faname%>)
             return false;
     }
@@ -227,10 +228,10 @@ if("fieldActions" in cAction) {
 if("data" in action) {
     var i = 0;
 %>
-    var caData = {};<%
+    this.caData = {};<%
 for(var dt in action.data){
     var d = action.data[dt];
-    var dName = dt.replace(/\s/g, '');
+    var dName = dt.replace(/\s/g, '').replace("-", "_");
     var dType = d.type;
     var dValue = d.value;
     if(dValue)
@@ -239,13 +240,13 @@ if(dType !== null){
     dType = dType.replace('DataTypes.','')
 %>
 <%}%>
-    this.caData.<%-dName%> = this.<%-dValue%>;
+    this.caData.<%-dName%> = self.<%-dValue%>;
 <%}
 }
 if("FieldData" in action) {
 for(var dt in action.FieldData){
     var d = action.FieldData[dt];
-    var dName = "fd_" + dt.replace(/\s/g, '');
+    var dName = "fd_" + dt.replace(/\s/g, '').replace("-", "_");
     var dType = "ReferFieldData";
     var dValue = d.value;
 %>
@@ -265,7 +266,7 @@ for(var cas in action.CourseActionSignals){
         if (signal.type === 'local') {
             dSignalName = signal.name;
             var spath = signal.path.substr(0, signal.path.length - signal.name.length - 1);
-            dSignalPath = "this." + spath.replace("AgentSignals", "signals");
+            dSignalPath = "self." + spath.replace("AgentSignals", "signals");
         } else {
             dSignalPath = signal.path.substr(0, signal.path.length - signal.name.length - 1) + ".signals";
             dSignalName = signal.name;
@@ -283,27 +284,27 @@ for(var cas in action.CourseActionSignals){
         for(var d in action.data){
             var dName = d;
             if(retString === null)
-                retString = dName.replace(/\s/g, '');
+                retString = dName.replace(/\s/g, '').replace("-", "_");
             else
-                retString += ", " + dName.replace(/\s/g, '');
+                retString += ", " + dName.replace(/\s/g, '').replace("-", "_");
         }
     }
     if("FieldData" in action) {
         for(var d in action.FieldData){
             var dName = "fd_" + d;
             if(retString === null)
-                retString = dName.replace(/\s/g, '');
+                retString = dName.replace(/\s/g, '').replace("-", "_");
             else
-                retString += ", " + dName.replace(/\s/g, '');
+                retString += ", " + dName.replace(/\s/g, '').replace("-", "_");
         }
     }
     if("CourseActionSignals" in action) {
         for(var d in action.CourseActionSignals){
             var dName = "signal_" + d;
             if(retString === null)
-                retString = dName.replace(/\s/g, '');
+                retString = dName.replace(/\s/g, '').replace("-", "_");
             else
-                retString += ", " + dName.replace(/\s/g, '');
+                retString += ", " + dName.replace(/\s/g, '').replace("-", "_");
         }
     }
     return retString;
@@ -319,9 +320,9 @@ for(var cas in action.CourseActionSignals){
             else
                 dName = "null";
             if(retString === null)
-                retString = dName.replace(/\s/g, '');
+                retString = dName.replace(/\s/g, '').replace("-", "_");
             else
-                retString += ", " + dName.replace(/\s/g, '');
+                retString += ", " + dName.replace(/\s/g, '').replace("-", "_");
         }
     }
     if("FieldData" in action) {
@@ -332,9 +333,9 @@ for(var cas in action.CourseActionSignals){
             else
                 dName = "null";
             if(retString === null)
-                retString = dName.replace(/\s/g, '');
+                retString = dName.replace(/\s/g, '').replace("-", "_");
             else
-                retString += ", " + dName.replace(/\s/g, '');
+                retString += ", " + dName.replace(/\s/g, '').replace("-", "_");
         }
     }
     if("ActionSignals" in action) {
@@ -345,9 +346,9 @@ for(var cas in action.CourseActionSignals){
             else
                 dName = "null";
             if(retString === null)
-                retString = dName.replace(/\s/g, '');
+                retString = dName.replace(/\s/g, '').replace("-", "_");
             else
-                retString += ", " + dName.replace(/\s/g, '');
+                retString += ", " + dName.replace(/\s/g, '').replace("-", "_");
         }
     }
     return retString;
@@ -407,15 +408,15 @@ if("Bindings" in agent){
     var dFieldPath = null;
     var dFieldInterfaceName = null;
     if(fieldSub.type === "Action"){
-        dFieldPath = fieldSub.fieldAction.substr(0, fieldSub.fieldAction.length - fieldSub.fieldName.length - 1).replace(/\s/g, '');
-        dFieldInterfaceName = fieldSub.fieldName.replace(/\s/g, '');
+        dFieldPath = fieldSub.fieldAction.substr(0, fieldSub.fieldAction.length - fieldSub.fieldName.length - 1).replace(/\s/g, '').replace("-", "_");
+        dFieldInterfaceName = fieldSub.fieldName.replace(/\s/g, '').replace("-", "_");
 %>
-    <%-dFieldPath%>.subscribeToInterface('<%-dFieldInterfaceName%>', this.mod_<%-fieldSub.moduleName.replace(/\s/g, '')%>.<%-fieldSub.componentName.replace(/\s/g, '')%>);
+    <%-dFieldPath%>.subscribeToInterface('<%-dFieldInterfaceName%>', this.mod_<%-fieldSub.moduleName.replace(/\s/g, '').replace("-", "_")%>.<%-fieldSub.componentName.replace(/\s/g, '').replace("-", "_")%>);
 <%
     }else if(fieldSub.type === "Data"){
         dFieldPath = fieldSub.fieldData.substr(0, fieldSub.fieldData.length - fieldSub.fieldName.length - 1);
-        dFieldInterfaceName = fieldSub.fieldName.replace(/\s/g, '');
-        var dataPath = fieldSub.data.replace("Data", "data").replace(/\s/g, '');
+        dFieldInterfaceName = fieldSub.fieldName.replace(/\s/g, '').replace("-", "_");
+        var dataPath = fieldSub.data.replace("Data", "data").replace(/\s/g, '').replace("-", "_");
 %>
     <%-dFieldPath%>.subscribeData('<%-dFieldInterfaceName%>', this.<%-dataPath%>);
 <%

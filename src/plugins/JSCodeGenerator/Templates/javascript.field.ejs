@@ -99,6 +99,7 @@ return this.field.getData(this.fieldDataName);
 
 
 // generated code
+var Fields = {};
 <%if("Fields" in sim)parseFields(sim.Fields, "Fields.")%>
 
 <%function parseFields(field, prefix){
@@ -113,7 +114,7 @@ return this.field.getData(this.fieldDataName);
 <%function parseFieldData(fieldData, field){
     var retString = null;
     for(var d in fieldData){
-        var dName = d.replace(/\s/g, '');%>
+        var dName = d.replace(/\s/g, '').replace("-", "_");%>
 <%-field%>.<%-dName%> = new ReferFieldData(<%-field%>, '<%-dName%>');
     <%
     }
@@ -125,7 +126,7 @@ return this.field.getData(this.fieldDataName);
             var retString = parseActionParams(actions[k]);
             if(retString === null)
                 retString = "";
-            var fnName = k.replace(/\s/g, '');
+            var fnName = k.replace(/\s/g, '').replace("-", "_");
 %>
 <%-prefix%><%-fnName%> = function(<%-retString%>){<%parseActionBodyForParam(actions[k])%>
     return this.triggerAction('<%-fnName%>', <%-retString%>);
@@ -140,9 +141,9 @@ return this.field.getData(this.fieldDataName);
             var d = action.Data[i];
             var dName = d.name;
             if(retString === null)
-                retString = dName.replace(/\s/g, '');
+                retString = dName.replace(/\s/g, '').replace("-", "_");
             else
-                retString += ", " + dName.replace(/\s/g, '');
+                retString += ", " + dName.replace(/\s/g, '').replace("-", "_");
         }
     }
     if("FieldData" in action) {
@@ -151,9 +152,9 @@ return this.field.getData(this.fieldDataName);
             var d = action.FieldData[i];
             var dName = "fd_" + d.name;
             if(retString === null)
-                retString = dName.replace(/\s/g, '');
+                retString = dName.replace(/\s/g, '').replace("-", "_");
             else
-                retString += ", " + dName.replace(/\s/g, '');
+                retString += ", " + dName.replace(/\s/g, '').replace("-", "_");
         }
     }
     if("ActionSignals" in action) {
@@ -162,9 +163,9 @@ return this.field.getData(this.fieldDataName);
             var d = action.ActionSignals[i];
             var dName = "signal_" + d;
             if(retString === null)
-                retString = dName.replace(/\s/g, '');
+                retString = dName.replace(/\s/g, '').replace("-", "_");
             else
-                retString += ", " + dName.replace(/\s/g, '');
+                retString += ", " + dName.replace(/\s/g, '').replace("-", "_");
         }
     }
     return retString;
@@ -176,7 +177,7 @@ return this.field.getData(this.fieldDataName);
         var i = 0;
         for(; i < action.Data.length; i++){
             var d = action.Data[i];
-            var dName = d.name.replace(/\s/g, '');
+            var dName = d.name.replace(/\s/g, '').replace("-", "_");
             var dType = d.type;
             if(dType !== null){
                 dType = dType.replace('DataTypes.','')
@@ -190,7 +191,7 @@ return this.field.getData(this.fieldDataName);
         var i = 0;
         for(; i < action.FieldData.length; i++){
             var d = action.FieldData[i];
-            var dName = "fd_" + d.name.replace(/\s/g, '');
+            var dName = "fd_" + d.name.replace(/\s/g, '').replace("-", "_");
             var dType = "ReferFieldData";
     %>
     if(!(<%-dName%> instanceof <%-dType%>)){

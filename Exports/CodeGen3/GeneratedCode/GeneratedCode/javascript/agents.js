@@ -7,6 +7,13 @@ var Canvas = function (name) {
     this.signals = new Signals();
     
     
+    this.mod_SpriteActions = new Canvas.SpriteActions();
+    this.mod_SpriteActions.init();
+    
+    Fields.FieldCanvas.FieldSprites.subscribeToInterface('CreateSprite', this.mod_SpriteActions.CreateSprite_refer);
+
+    Fields.FieldCanvas.FieldSprites.Group.subscribeToInterface('CreateGroup', this.mod_SpriteActions.CreateGroup_refer);
+
 };
 inheritsFrom(Canvas, Agent);
 Canvas.library = {};
@@ -22,24 +29,24 @@ Canvas.library.Text = function (name) {
 
 
     var course;
-    course = new Course(this, "CreateText", null, new this.CA_CreateText());
+    course = new Course(this, "CreateText", null, new this.CA_CreateText(this));
 
-    this.addCourse(CreateText);
+    this.addCourse(course);
     
-    Fields.FieldGameEngine.signals.subscribeSignal('SignalCreate', course);
-    course = new Course(this, "UpdateText", null, new this.CA_UpdateText());
+    Fields.FieldGameEngine.signals.subscribeSignal('SignalCreate', this.courses['CreateText']);
+    course = new Course(this, "UpdateText", null, new this.CA_UpdateText(this));
 
-    this.addCourse(UpdateText);
+    this.addCourse(course);
     
-    Fields.FieldGameEngine.signals.subscribeSignal('SignalUpdate', course);
+    Fields.FieldGameEngine.signals.subscribeSignal('SignalUpdate', this.courses['UpdateText']);
 
 };
 inheritsFrom(Canvas.library.Text, Agent);
-Canvas.library.Text.prototype.CA_UpdateText = function () {
+Canvas.library.Text.prototype.CA_UpdateText = function (self) {
 
-    var caData = {};
+    this.caData = {};
 
-    this.caData.DataText-type = this.data.DataText;
+    this.caData.DataText_type = self.data.DataText;
 
 
     this.res = {};
@@ -51,7 +58,7 @@ Canvas.library.Text.prototype.CA_UpdateText = function () {
 Canvas.library.Text.prototype.CA_UpdateText.prototype.trigger = function (course) {
 
     if(!this.res.UpdateTextView){
-        this.res.UpdateTextView = Fields.FieldCanvas.FieldTextView.Update TextView(this.caData.DataText-type);
+        this.res.UpdateTextView = Fields.FieldCanvas.FieldTextView.UpdateTextView(this.caData.DataText_type);
         if(!this.res.UpdateTextView)
             return false;
     }
@@ -59,11 +66,11 @@ Canvas.library.Text.prototype.CA_UpdateText.prototype.trigger = function (course
     return true;
 };
 
-Canvas.library.Text.prototype.CA_CreateText = function () {
+Canvas.library.Text.prototype.CA_CreateText = function (self) {
 
-    var caData = {};
+    this.caData = {};
 
-    this.caData.DataText-type = this.data.DataText;
+    this.caData.DataText_type = self.data.DataText;
 
 
     this.res = {};
@@ -75,7 +82,7 @@ Canvas.library.Text.prototype.CA_CreateText = function () {
 Canvas.library.Text.prototype.CA_CreateText.prototype.trigger = function (course) {
 
     if(!this.res.CreateTextView){
-        this.res.CreateTextView = Fields.FieldCanvas.FieldTextView.Create TextView(this.caData.DataText-type);
+        this.res.CreateTextView = Fields.FieldCanvas.FieldTextView.CreateTextView(this.caData.DataText_type);
         if(!this.res.CreateTextView)
             return false;
     }
@@ -96,41 +103,34 @@ Canvas.library.Sprite = function (name) {
 
     var course;
     course = new Course(this, "create sprite under group");
-    this.addCourse(create sprite under group);
+    this.addCourse(course);
     
-    course = new Course(this, "Create Group", null, new this.CA_CreateGroup());
+    course = new Course(this, "Create Group", null, new this.CA_CreateGroup(this));
     
-    this['create sprite under group'].addCourse(course);
+    this.courses['create sprite under group'].addCourse(course);
 
-    course = new Course(this, "Create Sprite", null, new this.CA_CreateSprite());
+    course = new Course(this, "Create Sprite", null, new this.CA_CreateSprite(this));
     
-    this['create sprite under group'].addCourse(course);
+    this.courses['create sprite under group'].addCourse(course);
 
-    course = new Course(this, "Create Sprite", null, new this.CA_CreateSprite());
+    course = new Course(this, "Create Sprite", null, new this.CA_CreateSprite(this));
 
-    this.addCourse(Create Sprite);
+    this.addCourse(course);
     
-    course = new Course(this, "Create Group", null, new this.CA_CreateGroup());
+    course = new Course(this, "Create Group", null, new this.CA_CreateGroup(this));
 
-    this.addCourse(Create Group);
+    this.addCourse(course);
     
 
-    this.mod_SpriteActions = new Canvas.library.Sprite.SpriteActions();
-    this.mod_SpriteActions.init();
-    
-    Fields.FieldCanvas.FieldSprites.subscribeToInterface('CreateSprite', this.mod_SpriteActions.CreateSprite-refer);
-
-    Fields.FieldCanvas.FieldSprites.subscribeData('DataSprite-type', this.data.DataSprite);
-
-    Fields.FieldCanvas.FieldSprites.Group.subscribeToInterface('CreateGroup', this.mod_SpriteActions.CreateGroup-refer);
+    Fields.FieldCanvas.FieldSprites.subscribeData('DataSprite_type', this.data.DataSprite);
 
 };
 inheritsFrom(Canvas.library.Sprite, Agent);
-Canvas.library.Sprite.prototype.CA_CreateGroup = function () {
+Canvas.library.Sprite.prototype.CA_CreateGroup = function (self) {
 
-    var caData = {};
+    this.caData = {};
 
-    this.caData.Group-type = this.data.DataSprite.Group;
+    this.caData.Group_type = self.data.DataSprite.Group;
 
     this.caSignals = {};
     this.caSignals.signal_Error = new Signal(Fields.FieldErrorHandler.signals, 'Critical Error');
@@ -145,7 +145,7 @@ Canvas.library.Sprite.prototype.CA_CreateGroup = function () {
 Canvas.library.Sprite.prototype.CA_CreateGroup.prototype.trigger = function (course) {
 
     if(!this.res.CreateGroup){
-        this.res.CreateGroup = Fields.FieldCanvas.FieldSprites.Group.Create Group(this.caData.Group-type, this.caSignals.Error);
+        this.res.CreateGroup = Fields.FieldCanvas.FieldSprites.Group.CreateGroup(this.caData.Group_type, this.caSignals.Error);
         if(!this.res.CreateGroup)
             return false;
     }
@@ -153,11 +153,11 @@ Canvas.library.Sprite.prototype.CA_CreateGroup.prototype.trigger = function (cou
     return true;
 };
 
-Canvas.library.Sprite.prototype.CA_CreateSprite = function () {
+Canvas.library.Sprite.prototype.CA_CreateSprite = function (self) {
 
-    var caData = {};
+    this.caData = {};
 
-    this.caData.DataSprite-type = this.data.DataSprite;
+    this.caData.DataSprite_type = self.data.DataSprite;
 
     this.caSignals = {};
     this.caSignals.signal_Error = new Signal(Fields.FieldErrorHandler.signals, 'Critical Error');
@@ -172,7 +172,7 @@ Canvas.library.Sprite.prototype.CA_CreateSprite = function () {
 Canvas.library.Sprite.prototype.CA_CreateSprite.prototype.trigger = function (course) {
 
     if(!this.res.CreateSprite){
-        this.res.CreateSprite = Fields.FieldCanvas.FieldSprites.CreateSprite(this.caData.DataSprite-type, null, this.caSignals.Error);
+        this.res.CreateSprite = Fields.FieldCanvas.FieldSprites.CreateSprite(this.caData.DataSprite_type, null, this.caSignals.Error);
         if(!this.res.CreateSprite)
             return false;
     }
@@ -262,7 +262,7 @@ var ErrorHandler = function (name) {
     
     var course;
     course = new Course(this, "Report Critical Error");
-    this.addCourse(Report Critical Error);
+    this.addCourse(course);
     
 
 };
@@ -275,40 +275,40 @@ var Debug = function (name) {
     
     var course;
     course = new Course(this, "SampleCourse");
-    this.addCourse(SampleCourse);
+    this.addCourse(course);
     
     course = new Course(this, "CourseComposite");
-    this['SampleCourse'].addCourse(course);
+    this.courses['SampleCourse'].addCourse(course);
 
     course = new Course(this, "Course1");
-    this['SampleCourse']['CourseComposite'].addCourse(course);
+    this.courses['SampleCourse'].childs['CourseComposite'].addCourse(course);
 
     course = new Course(this, "Course2");
-    this['SampleCourse']['CourseComposite'].addCourse(course);
+    this.courses['SampleCourse'].childs['CourseComposite'].addCourse(course);
 
     course = new Course(this, "SignalCreate-refer");
-    this['SampleCourse'].addCourse(course);
+    this.courses['SampleCourse'].addCourse(course);
 
     course = new Course(this, "Course");
-    this['SampleCourse'].addCourse(course);
+    this.courses['SampleCourse'].addCourse(course);
 
     course = new Course(this, "SignalUpdate-refer");
-    this['SampleCourse'].addCourse(course);
+    this.courses['SampleCourse'].addCourse(course);
 
     course = new Course(this, "Course");
-    this['SampleCourse'].addCourse(course);
+    this.courses['SampleCourse'].addCourse(course);
 
-    this.signals.subscribeSignal('DebugSignal', course);
-    Fields.FieldDebug.DebugChild.DebugChildChild.signals.subscribeSignal('DebugChildSignal', course);
+    this.signals.subscribeSignal('DebugSignal', this.courses['SampleCourse']);
+    Fields.FieldDebug.DebugChild.DebugChildChild.signals.subscribeSignal('DebugChildSignal', this.courses['SampleCourse']);
     course = new Course(this, "SampleCourse2");
-    this.addCourse(SampleCourse2);
+    this.addCourse(course);
     
-    Fields.FieldDebug.DebugChild.DebugChildChild.signals.subscribeSignal('DebugChildSignal', course);
-    course = new Course(this, "Show Stars Count", null, new this.CA_CountSubscribers());
+    Fields.FieldDebug.DebugChild.DebugChildChild.signals.subscribeSignal('DebugChildSignal', this.courses['SampleCourse2']);
+    course = new Course(this, "Show Stars Count", null, new this.CA_CountSubscribers(this));
 
-    this.addCourse(Show Stars Count);
+    this.addCourse(course);
     
-    Fields.FieldGameEngine.signals.subscribeSignal('SignalUpdate', course);
+    Fields.FieldGameEngine.signals.subscribeSignal('SignalUpdate', this.courses['Show Stars Count']);
 
     var child = null;
     var child = new Canvas.library.Text('Text');
@@ -319,21 +319,21 @@ var Debug = function (name) {
     this.mod_DebugSubscribers = new Debug.DebugSubscribers();
     this.mod_DebugSubscribers.init();
     
-    Fields.FieldDebug.subscribeToInterface('CountDataSubscribers', this.mod_DebugSubscribers.CountDataSubscribers-refer);
+    Fields.FieldDebug.subscribeToInterface('CountDataSubscribers', this.mod_DebugSubscribers.CountDataSubscribers_refer);
 
 };
 inheritsFrom(Debug, Agent);
-Debug.prototype.CA_CountSubscribers = function () {
+Debug.prototype.CA_CountSubscribers = function (self) {
 
-    var caData = {};
-    this.caData.CountText = this.childs.Text.data.DataText.Text;
+    this.caData = {};
+    this.caData.CountText = self.childs.Text.data.DataText.Text;
 
-    this.caData.Count = this.data.StarCount;
+    this.caData.Count = self.data.StarCount;
 
     this.caData.fd_InputWhichFieldData = Fields.FieldTestGame.Stars;
 
     this.caSignals = {};
-    this.caSignals.signal_CASampleSignal = new Signal(this.childs.Text.signals, 'TextSignal');
+    this.caSignals.signal_CASampleSignal = new Signal(self.childs.Text.signals, 'TextSignal');
 
 
     this.res = {};
