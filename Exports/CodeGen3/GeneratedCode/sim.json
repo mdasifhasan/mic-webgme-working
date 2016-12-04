@@ -618,8 +618,8 @@
       "name": "Test Game",
       "base": "Test Game",
       "childs": {
-        "Star1": {
-          "name": "Star1",
+        "Star2": {
+          "name": "Star2",
           "base": "Test Game.library.Star",
           "childs": {
             "Sprite": {
@@ -629,18 +629,6 @@
                 "DataSprite": {
                   "type": "Data",
                   "base": "DataSprite",
-                  "value": {
-                    "y": {
-                      "type": "Number",
-                      "value": 100,
-                      "name": "y"
-                    },
-                    "x": {
-                      "type": "Number",
-                      "value": 100,
-                      "name": "x"
-                    }
-                  },
                   "name": "DataSprite"
                 }
               },
@@ -745,9 +733,9 @@
             }
           }
         },
-        "Star2": {
-          "name": "Star2",
-          "base": "Test Game.library.Star",
+        "Platform": {
+          "name": "Platform",
+          "base": "Test Game.library.Platform",
           "childs": {
             "Sprite": {
               "name": "Sprite",
@@ -986,9 +974,309 @@
               }
             }
           }
+        },
+        "Star1": {
+          "name": "Star1",
+          "base": "Test Game.library.Star",
+          "childs": {
+            "Sprite": {
+              "name": "Sprite",
+              "base": "Canvas.library.Sprite",
+              "Data": {
+                "DataSprite": {
+                  "type": "Data",
+                  "base": "DataSprite",
+                  "value": {
+                    "y": {
+                      "type": "Number",
+                      "value": 100,
+                      "name": "y"
+                    },
+                    "x": {
+                      "type": "Number",
+                      "value": 100,
+                      "name": "x"
+                    }
+                  },
+                  "name": "DataSprite"
+                }
+              },
+              "Courses": {
+                "create sprite under group": {
+                  "childs": [
+                    {
+                      "name": "CreateGroup",
+                      "type": "Course",
+                      "courseAction": "Create Group"
+                    },
+                    {
+                      "name": "CreateSprite",
+                      "type": "Course",
+                      "courseAction": "Create Sprite"
+                    }
+                  ],
+                  "signals": [
+                    {
+                      "name": "SignalCreate",
+                      "type": "Field",
+                      "path": "Fields.FieldGameEngine.SignalCreate"
+                    }
+                  ],
+                  "courseAction": null
+                }
+              },
+              "CourseActions": {
+                "Create Group": {
+                  "data": {
+                    "Group-type": {
+                      "type": "DataTypes.Group",
+                      "value": "Data.DataSprite.Group"
+                    }
+                  },
+                  "CourseActionSignals": {
+                    "Error": {
+                      "Signal": {
+                        "name": "Critical Error",
+                        "type": "Field",
+                        "path": "Fields.FieldErrorHandler.Critical Error"
+                      }
+                    }
+                  },
+                  "fieldActions": [
+                    {
+                      "name": "Create Group",
+                      "field": "Fields.Create Group",
+                      "data": {
+                        "Group-type": {
+                          "type": "DataTypes.Group",
+                          "value": "Group-type"
+                        }
+                      },
+                      "ActionSignals": {
+                        "Error": {
+                          "CourseActionSignal": "Error"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "Create Sprite": {
+                  "data": {
+                    "DataSprite-type": {
+                      "type": "DataTypes.DataSprite",
+                      "value": "Data.DataSprite"
+                    }
+                  },
+                  "CourseActionSignals": {
+                    "Error": {
+                      "Signal": {
+                        "name": "Critical Error",
+                        "type": "Field",
+                        "path": "Fields.FieldErrorHandler.Critical Error"
+                      }
+                    }
+                  },
+                  "fieldActions": [
+                    {
+                      "name": "CreateSprite",
+                      "field": "Fields.CreateSprite",
+                      "data": {
+                        "DataSprite": {
+                          "type": "DataTypes.DataSprite",
+                          "value": "DataSprite-type"
+                        },
+                        "DataSprite2": {
+                          "type": "DataTypes.DataSprite",
+                          "value": null
+                        }
+                      },
+                      "ActionSignals": {
+                        "Error": {
+                          "CourseActionSignal": "Error"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
         }
       },
       "libraryAgents": {
+        "Platform": {
+          "name": "Platform",
+          "base": "Test Game.library.Platform",
+          "Bindings": {
+            "0": {
+              "0": {
+                "type": "Data",
+                "data": "childs.Sprite.Data.DataSprite",
+                "fieldName": "Stars",
+                "fieldData": "Fields.FieldTestGame.Stars"
+              }
+            }
+          },
+          "libraryAgents": {
+            "SampleAgent": {
+              "name": "SampleAgent",
+              "base": "Test Game.library.Platform.library.SampleAgent",
+              "libraryAgents": {
+                "SampleAgent2": {
+                  "name": "SampleAgent2",
+                  "base": "Test Game.library.Platform.library.SampleAgent.library.SampleAgent2"
+                }
+              }
+            }
+          },
+          "childs": {
+            "Sprite": {
+              "name": "Sprite",
+              "base": "Canvas.library.Sprite",
+              "Data": {
+                "DataSprite": {
+                  "type": "Data",
+                  "base": "DataSprite",
+                  "value": {
+                    "image name": {
+                      "type": "Text",
+                      "value": "ground",
+                      "name": "image name"
+                    },
+                    "y": {
+                      "type": "Number",
+                      "value": 580,
+                      "name": "y"
+                    },
+                    "Group": {
+                      "type": "Data",
+                      "base": "Group",
+                      "value": {
+                        "name": {
+                          "type": "Text",
+                          "value": "ground",
+                          "name": "name"
+                        }
+                      },
+                      "name": "Group"
+                    },
+                    "Physics": {
+                      "type": "Data",
+                      "base": "Physics",
+                      "value": {
+                        "immovable": {
+                          "type": "Boolean",
+                          "value": true,
+                          "name": "immovable"
+                        }
+                      },
+                      "name": "Physics"
+                    }
+                  },
+                  "name": "DataSprite"
+                }
+              },
+              "Courses": {
+                "create sprite under group": {
+                  "childs": [
+                    {
+                      "name": "CreateGroup",
+                      "type": "Course",
+                      "courseAction": "Create Group"
+                    },
+                    {
+                      "name": "CreateSprite",
+                      "type": "Course",
+                      "courseAction": "Create Sprite"
+                    }
+                  ],
+                  "signals": [
+                    {
+                      "name": "SignalCreate",
+                      "type": "Field",
+                      "path": "Fields.FieldGameEngine.SignalCreate"
+                    }
+                  ],
+                  "courseAction": null
+                }
+              },
+              "CourseActions": {
+                "Create Group": {
+                  "data": {
+                    "Group-type": {
+                      "type": "DataTypes.Group",
+                      "value": "Data.DataSprite.Group"
+                    }
+                  },
+                  "CourseActionSignals": {
+                    "Error": {
+                      "Signal": {
+                        "name": "Critical Error",
+                        "type": "Field",
+                        "path": "Fields.FieldErrorHandler.Critical Error"
+                      }
+                    }
+                  },
+                  "fieldActions": [
+                    {
+                      "name": "Create Group",
+                      "field": "Fields.Create Group",
+                      "data": {
+                        "Group-type": {
+                          "type": "DataTypes.Group",
+                          "value": "Group-type"
+                        }
+                      },
+                      "ActionSignals": {
+                        "Error": {
+                          "CourseActionSignal": "Error"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "Create Sprite": {
+                  "data": {
+                    "DataSprite-type": {
+                      "type": "DataTypes.DataSprite",
+                      "value": "Data.DataSprite"
+                    }
+                  },
+                  "CourseActionSignals": {
+                    "Error": {
+                      "Signal": {
+                        "name": "Critical Error",
+                        "type": "Field",
+                        "path": "Fields.FieldErrorHandler.Critical Error"
+                      }
+                    }
+                  },
+                  "fieldActions": [
+                    {
+                      "name": "CreateSprite",
+                      "field": "Fields.CreateSprite",
+                      "data": {
+                        "DataSprite": {
+                          "type": "DataTypes.DataSprite",
+                          "value": "DataSprite-type"
+                        },
+                        "DataSprite2": {
+                          "type": "DataTypes.DataSprite",
+                          "value": null
+                        }
+                      },
+                      "ActionSignals": {
+                        "Error": {
+                          "CourseActionSignal": "Error"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
         "Star": {
           "name": "Star",
           "base": "Test Game.library.Star",

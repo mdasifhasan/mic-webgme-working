@@ -188,14 +188,12 @@ var TestGame = function (name) {
     this.signals = new Signals();
     
     var child = null;
-    var child = new TestGame.library.Star('Star1');
-    this.addChild(child);
-    child.childs['Sprite'].data['DataSprite']['y'].value = 100;
-child.childs['Sprite'].data['DataSprite']['x'].value = 100;
-
-
-
     var child = new TestGame.library.Star('Star2');
+    this.addChild(child);
+    
+
+
+    var child = new TestGame.library.Platform('Platform');
     this.addChild(child);
     
 
@@ -207,9 +205,56 @@ child.childs['Sprite'].data['DataSprite']['x'].value = 300;
 
 
 
+    var child = new TestGame.library.Star('Star1');
+    this.addChild(child);
+    child.childs['Sprite'].data['DataSprite']['y'].value = 100;
+child.childs['Sprite'].data['DataSprite']['x'].value = 100;
+
+
+
 };
 inheritsFrom(TestGame, Agent);
 TestGame.library = {};
+TestGame.library.Platform = function (name) {
+    if(!name)
+        name = "Platform";
+    Agent.apply(this, [name]);
+    this.signals = new Signals();
+    
+    var child = null;
+    var child = new Canvas.library.Sprite('Sprite');
+    this.addChild(child);
+    child.data['DataSprite']['image name'].value = 'ground';
+child.data['DataSprite']['y'].value = 580;
+
+    child.data['DataSprite']['Group']['name'].value = 'ground';
+
+    child.data['DataSprite']['Physics']['immovable'].value = true;
+
+
+
+    Fields.FieldTestGame.subscribeData('Stars', this.childs.Sprite.data.DataSprite);
+
+};
+inheritsFrom(TestGame.library.Platform, Agent);
+TestGame.library.Platform.library = {};
+TestGame.library.Platform.library.SampleAgent = function (name) {
+    if(!name)
+        name = "SampleAgent";
+    Agent.apply(this, [name]);
+    this.signals = new Signals();
+    
+};
+inheritsFrom(TestGame.library.Platform.library.SampleAgent, Agent);
+TestGame.library.Platform.library.SampleAgent.library = {};
+TestGame.library.Platform.library.SampleAgent.library.SampleAgent2 = function (name) {
+    if(!name)
+        name = "SampleAgent2";
+    Agent.apply(this, [name]);
+    this.signals = new Signals();
+    
+};
+inheritsFrom(TestGame.library.Platform.library.SampleAgent.library.SampleAgent2, Agent);
 TestGame.library.Star = function (name) {
     if(!name)
         name = "Star";
