@@ -1,0 +1,1248 @@
+{
+  "name": "Simulation Example",
+  "DataTypes": {
+    "Physics": {
+      "type": "Data",
+      "base": "Data",
+      "value": {
+        "physics body": {
+          "type": "Object",
+          "objType": "object",
+          "value": null,
+          "name": "physics body"
+        },
+        "enable physics": {
+          "type": "Boolean",
+          "value": false,
+          "name": "enable physics"
+        }
+      },
+      "name": "Physics"
+    },
+    "DataSprite": {
+      "type": "Data",
+      "base": "Data",
+      "value": {
+        "image name": {
+          "type": "Text",
+          "value": "default",
+          "name": "image name"
+        },
+        "SpriteObject": {
+          "type": "Object",
+          "objType": "object",
+          "value": null,
+          "name": "SpriteObject"
+        },
+        "Group": {
+          "type": "Data",
+          "base": "Group",
+          "value": {
+            "name": {
+              "type": "Text",
+              "value": "default",
+              "name": "name"
+            },
+            "enable physics": {
+              "type": "Boolean",
+              "value": false,
+              "name": "enable physics"
+            },
+            "group object": {
+              "type": "Object",
+              "objType": "object",
+              "value": null,
+              "name": "group object"
+            }
+          },
+          "name": "Group"
+        },
+        "Physics": {
+          "type": "Data",
+          "base": "Physics",
+          "value": {
+            "physics body": {
+              "type": "Object",
+              "objType": "object",
+              "value": null,
+              "name": "physics body"
+            },
+            "enable physics": {
+              "type": "Boolean",
+              "value": false,
+              "name": "enable physics"
+            }
+          },
+          "name": "Physics"
+        },
+        "x": {
+          "type": "Number",
+          "value": 0,
+          "name": "x"
+        },
+        "y": {
+          "type": "Number",
+          "value": 0,
+          "name": "y"
+        }
+      },
+      "name": "DataSprite"
+    },
+    "DataText": {
+      "type": "Data",
+      "base": "Data",
+      "value": {
+        "Y": {
+          "type": "Number",
+          "value": 0,
+          "name": "Y"
+        },
+        "Text": {
+          "type": "Text",
+          "value": "",
+          "name": "Text"
+        },
+        "TextObject": {
+          "type": "Object",
+          "objType": "object",
+          "value": null,
+          "name": "TextObject"
+        },
+        "X": {
+          "type": "Number",
+          "value": 0,
+          "name": "X"
+        }
+      },
+      "name": "DataText"
+    },
+    "Group": {
+      "type": "Data",
+      "base": "Data",
+      "value": {
+        "name": {
+          "type": "Text",
+          "value": "default",
+          "name": "name"
+        },
+        "enable physics": {
+          "type": "Boolean",
+          "value": false,
+          "name": "enable physics"
+        },
+        "group object": {
+          "type": "Object",
+          "objType": "object",
+          "value": null,
+          "name": "group object"
+        }
+      },
+      "name": "Group"
+    }
+  },
+  "Fields": {
+    "FieldGameEngine": {},
+    "FieldDebug": {
+      "Fields": {
+        "DebugChild": {
+          "Fields": {
+            "DebugChildChild": {}
+          }
+        }
+      },
+      "Actions": {
+        "CountDataSubscribers": {
+          "Data": [
+            {
+              "name": "OutTotalCount",
+              "type": null
+            }
+          ],
+          "FieldData": [
+            {
+              "name": "IFieldData",
+              "type": null
+            }
+          ]
+        }
+      }
+    },
+    "FieldParse": {
+      "Actions": {
+        "NumberToString": {
+          "Data": [
+            {
+              "name": "Number-type",
+              "type": null
+            },
+            {
+              "name": "Text-type",
+              "type": null
+            }
+          ]
+        }
+      }
+    },
+    "FieldCanvas": {
+      "Fields": {
+        "FieldTextView": {
+          "Actions": {
+            "Create TextView": {
+              "Data": [
+                {
+                  "name": "DataText-type",
+                  "type": "DataTypes.DataText"
+                }
+              ]
+            },
+            "Update TextView": {
+              "Data": [
+                {
+                  "name": "DataText-type",
+                  "type": "DataTypes.DataText"
+                }
+              ]
+            }
+          }
+        },
+        "FieldSprites": {
+          "FieldData": {
+            "DataSprite-type": {
+              "type": "DataTypes.DataSprite"
+            },
+            "DataSprite 2": {
+              "type": "DataTypes.DataSprite"
+            }
+          },
+          "Actions": {
+            "CreateSprite": {
+              "Data": [
+                {
+                  "name": "DataSprite",
+                  "type": "DataTypes.DataSprite"
+                },
+                {
+                  "name": "DataSprite2",
+                  "type": "DataTypes.DataSprite"
+                }
+              ],
+              "ActionSignals": [
+                "Error"
+              ]
+            }
+          },
+          "Fields": {
+            "Group": {
+              "Actions": {
+                "Create Group": {
+                  "Data": [
+                    {
+                      "name": "Group-type",
+                      "type": "DataTypes.Group"
+                    }
+                  ],
+                  "ActionSignals": [
+                    "Error"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "FieldErrorHandler": {},
+    "FieldTestGame": {
+      "FieldData": {
+        "Stars": {
+          "type": "DataTypes.DataSprite"
+        }
+      }
+    }
+  },
+  "Agents": {
+    "Canvas": {
+      "name": "Canvas",
+      "base": "Canvas",
+      "libraryAgents": {
+        "Text": {
+          "name": "Text",
+          "base": "Canvas.library.Text",
+          "Courses": {
+            "CreateText": {
+              "signals": [
+                {
+                  "name": "SignalCreate",
+                  "type": "Field",
+                  "path": "Fields.FieldGameEngine.SignalCreate"
+                }
+              ],
+              "courseAction": "CreateText"
+            },
+            "UpdateText": {
+              "signals": [
+                {
+                  "name": "SignalUpdate",
+                  "type": "Field",
+                  "path": "Fields.FieldGameEngine.SignalUpdate"
+                }
+              ],
+              "courseAction": "UpdateText"
+            }
+          },
+          "CourseActions": {
+            "UpdateText": {
+              "data": {
+                "DataText-type": {
+                  "type": "DataTypes.DataText",
+                  "value": "Data.DataText"
+                }
+              },
+              "fieldActions": [
+                {
+                  "name": "Update TextView",
+                  "field": "Fields.FieldCanvas.FieldTextView.Update TextView",
+                  "data": {
+                    "DataText-type": {
+                      "type": "DataTypes.DataText",
+                      "value": "DataText-type"
+                    }
+                  }
+                }
+              ]
+            },
+            "CreateText": {
+              "data": {
+                "DataText-type": {
+                  "type": "DataTypes.DataText",
+                  "value": "Data.DataText"
+                }
+              },
+              "fieldActions": [
+                {
+                  "name": "Create TextView",
+                  "field": "Fields.FieldCanvas.FieldTextView.Create TextView",
+                  "data": {
+                    "DataText-type": {
+                      "type": "DataTypes.DataText",
+                      "value": "DataText-type"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "AgentSignals": [
+            "TextSignal"
+          ],
+          "Data": {
+            "DataText": {
+              "type": "Data",
+              "base": "DataText",
+              "name": "DataText"
+            }
+          }
+        },
+        "Sprite": {
+          "name": "Sprite",
+          "base": "Canvas.library.Sprite",
+          "Data": {
+            "DataSprite": {
+              "type": "Data",
+              "base": "DataSprite",
+              "name": "DataSprite"
+            }
+          },
+          "Modules": {
+            "SpriteActions": {
+              "name": "SpriteActions",
+              "Filename": "",
+              "ImplementationClass": "ModuleSpriteActions",
+              "Components": {
+                "CreateSprite-refer": {
+                  "fieldInterface": "Fields.FieldCanvas.FieldSprites.CreateSprite",
+                  "params": {
+                    "Data": [
+                      {
+                        "name": "DataSprite",
+                        "type": "DataTypes.DataSprite"
+                      },
+                      {
+                        "name": "DataSprite2",
+                        "type": "DataTypes.DataSprite"
+                      }
+                    ],
+                    "ActionSignals": [
+                      "Error"
+                    ]
+                  }
+                },
+                "Create Group-refer": {
+                  "fieldInterface": "Fields.FieldCanvas.FieldSprites.Group.Create Group",
+                  "params": {
+                    "Data": [
+                      {
+                        "name": "Group-type",
+                        "type": "DataTypes.Group"
+                      }
+                    ],
+                    "ActionSignals": [
+                      "Error"
+                    ]
+                  }
+                }
+              },
+              "init": {},
+              "genFileName": "Canvas.library.Sprite.SpriteActions"
+            }
+          },
+          "Bindings": {
+            "0": {
+              "0": {
+                "type": "Action",
+                "moduleName": "SpriteActions",
+                "componentName": "CreateSprite-refer",
+                "fieldName": "CreateSprite",
+                "fieldAction": "Fields.FieldCanvas.FieldSprites.CreateSprite"
+              },
+              "1": {
+                "type": "Data",
+                "data": "Data.DataSprite",
+                "fieldName": "DataSprite-type",
+                "fieldData": "Fields.FieldCanvas.FieldSprites.DataSprite-type"
+              },
+              "2": {
+                "type": "Action",
+                "moduleName": "SpriteActions",
+                "componentName": "Create Group-refer",
+                "fieldName": "Create Group",
+                "fieldAction": "Fields.FieldCanvas.FieldSprites.Group.Create Group"
+              }
+            }
+          },
+          "CourseActions": {
+            "Create Group": {
+              "data": {
+                "Group-type": {
+                  "type": "DataTypes.Group",
+                  "value": "Data.DataSprite.Group"
+                }
+              },
+              "CourseActionSignals": {
+                "Error": {
+                  "Signal": {
+                    "name": "Critical Error",
+                    "type": "Field",
+                    "path": "Fields.FieldErrorHandler.Critical Error"
+                  }
+                }
+              },
+              "fieldActions": [
+                {
+                  "name": "Create Group",
+                  "field": "Fields.FieldCanvas.FieldSprites.Group.Create Group",
+                  "data": {
+                    "Group-type": {
+                      "type": "DataTypes.Group",
+                      "value": "Group-type"
+                    }
+                  },
+                  "ActionSignals": {
+                    "Error": {
+                      "CourseActionSignal": "Error"
+                    }
+                  }
+                }
+              ]
+            },
+            "Create Sprite": {
+              "data": {
+                "DataSprite-type": {
+                  "type": "DataTypes.DataSprite",
+                  "value": "Data.DataSprite"
+                }
+              },
+              "CourseActionSignals": {
+                "Error": {
+                  "Signal": {
+                    "name": "Critical Error",
+                    "type": "Field",
+                    "path": "Fields.FieldErrorHandler.Critical Error"
+                  }
+                }
+              },
+              "fieldActions": [
+                {
+                  "name": "CreateSprite",
+                  "field": "Fields.FieldCanvas.FieldSprites.CreateSprite",
+                  "data": {
+                    "DataSprite": {
+                      "type": "DataTypes.DataSprite",
+                      "value": "DataSprite-type"
+                    },
+                    "DataSprite2": {
+                      "type": "DataTypes.DataSprite",
+                      "value": null
+                    }
+                  },
+                  "ActionSignals": {
+                    "Error": {
+                      "CourseActionSignal": "Error"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "Courses": {
+            "create sprite under group": {
+              "childs": [
+                {
+                  "name": "Create Group",
+                  "type": "Course",
+                  "courseAction": "Create Group"
+                },
+                {
+                  "name": "Create Sprite",
+                  "type": "Course",
+                  "courseAction": "Create Sprite"
+                }
+              ],
+              "courseAction": null
+            },
+            "Create Sprite": {
+              "courseAction": "Create Sprite"
+            },
+            "Create Group": {
+              "courseAction": "Create Group"
+            }
+          }
+        }
+      }
+    },
+    "Game Engine": {
+      "name": "Game Engine",
+      "base": "Game Engine",
+      "Modules": {
+        "GameEngine": {
+          "name": "GameEngine",
+          "Filename": "ModGameEngine",
+          "ImplementationClass": "ModuleGameEngine",
+          "init": {
+            "signals": {
+              "SignalUpdate": {
+                "name": "SignalUpdate",
+                "type": "Field",
+                "path": "Fields.FieldGameEngine.SignalUpdate"
+              },
+              "SignalCreate": {
+                "name": "SignalCreate",
+                "type": "Field",
+                "path": "Fields.FieldGameEngine.SignalCreate"
+              }
+            }
+          },
+          "genFileName": "ModGameEngine"
+        }
+      }
+    },
+    "Test Game": {
+      "name": "Test Game",
+      "base": "Test Game",
+      "childs": {
+        "Star2": {
+          "name": "Star2",
+          "base": "Test Game.library.Star",
+          "childs": {
+            "Sprite": {
+              "name": "Sprite",
+              "base": "Canvas.library.Sprite",
+              "Data": {
+                "DataSprite": {
+                  "type": "Data",
+                  "base": "DataSprite",
+                  "name": "DataSprite"
+                }
+              },
+              "Courses": {
+                "create sprite under group": {
+                  "childs": [
+                    {
+                      "name": "Create Group",
+                      "type": "Course",
+                      "courseAction": "Create Group"
+                    },
+                    {
+                      "name": "Create Sprite",
+                      "type": "Course",
+                      "courseAction": "Create Sprite"
+                    }
+                  ],
+                  "signals": [
+                    {
+                      "name": "SignalCreate",
+                      "type": "Field",
+                      "path": "Fields.FieldGameEngine.SignalCreate"
+                    }
+                  ],
+                  "courseAction": null
+                },
+                "Create Sprite": {
+                  "courseAction": "Create Sprite"
+                },
+                "Create Group": {
+                  "courseAction": "Create Group"
+                }
+              },
+              "CourseActions": {
+                "Create Group": {
+                  "data": {
+                    "Group-type": {
+                      "type": "DataTypes.Group",
+                      "value": "Data.DataSprite.Group"
+                    }
+                  },
+                  "CourseActionSignals": {
+                    "Error": {
+                      "Signal": {
+                        "name": "Critical Error",
+                        "type": "Field",
+                        "path": "Fields.FieldErrorHandler.Critical Error"
+                      }
+                    }
+                  },
+                  "fieldActions": [
+                    {
+                      "name": "Create Group",
+                      "field": "Fields.Create Group",
+                      "data": {
+                        "Group-type": {
+                          "type": "DataTypes.Group",
+                          "value": "Group-type"
+                        }
+                      },
+                      "ActionSignals": {
+                        "Error": {
+                          "CourseActionSignal": "Error"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "Create Sprite": {
+                  "data": {
+                    "DataSprite-type": {
+                      "type": "DataTypes.DataSprite",
+                      "value": "Data.DataSprite"
+                    }
+                  },
+                  "CourseActionSignals": {
+                    "Error": {
+                      "Signal": {
+                        "name": "Critical Error",
+                        "type": "Field",
+                        "path": "Fields.FieldErrorHandler.Critical Error"
+                      }
+                    }
+                  },
+                  "fieldActions": [
+                    {
+                      "name": "CreateSprite",
+                      "field": "Fields.CreateSprite",
+                      "data": {
+                        "DataSprite": {
+                          "type": "DataTypes.DataSprite",
+                          "value": "DataSprite-type"
+                        },
+                        "DataSprite2": {
+                          "type": "DataTypes.DataSprite",
+                          "value": null
+                        }
+                      },
+                      "ActionSignals": {
+                        "Error": {
+                          "CourseActionSignal": "Error"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "Star1": {
+          "name": "Star1",
+          "base": "Test Game.library.Star",
+          "childs": {
+            "Sprite": {
+              "name": "Sprite",
+              "base": "Canvas.library.Sprite",
+              "Data": {
+                "DataSprite": {
+                  "type": "Data",
+                  "base": "DataSprite",
+                  "value": {
+                    "y": {
+                      "type": "Number",
+                      "value": 100,
+                      "name": "y"
+                    },
+                    "x": {
+                      "type": "Number",
+                      "value": 100,
+                      "name": "x"
+                    },
+                    "Group": {
+                      "type": "Data",
+                      "base": "Group",
+                      "value": {
+                        "enable physics": {
+                          "type": "Boolean",
+                          "value": true,
+                          "name": "enable physics"
+                        }
+                      },
+                      "name": "Group"
+                    }
+                  },
+                  "name": "DataSprite"
+                }
+              },
+              "Courses": {
+                "create sprite under group": {
+                  "childs": [
+                    {
+                      "name": "Create Group",
+                      "type": "Course",
+                      "courseAction": "Create Group"
+                    },
+                    {
+                      "name": "Create Sprite",
+                      "type": "Course",
+                      "courseAction": "Create Sprite"
+                    }
+                  ],
+                  "signals": [
+                    {
+                      "name": "SignalCreate",
+                      "type": "Field",
+                      "path": "Fields.FieldGameEngine.SignalCreate"
+                    }
+                  ],
+                  "courseAction": null
+                },
+                "Create Sprite": {
+                  "courseAction": "Create Sprite"
+                },
+                "Create Group": {
+                  "courseAction": "Create Group"
+                }
+              },
+              "CourseActions": {
+                "Create Group": {
+                  "data": {
+                    "Group-type": {
+                      "type": "DataTypes.Group",
+                      "value": "Data.DataSprite.Group"
+                    }
+                  },
+                  "CourseActionSignals": {
+                    "Error": {
+                      "Signal": {
+                        "name": "Critical Error",
+                        "type": "Field",
+                        "path": "Fields.FieldErrorHandler.Critical Error"
+                      }
+                    }
+                  },
+                  "fieldActions": [
+                    {
+                      "name": "Create Group",
+                      "field": "Fields.Create Group",
+                      "data": {
+                        "Group-type": {
+                          "type": "DataTypes.Group",
+                          "value": "Group-type"
+                        }
+                      },
+                      "ActionSignals": {
+                        "Error": {
+                          "CourseActionSignal": "Error"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "Create Sprite": {
+                  "data": {
+                    "DataSprite-type": {
+                      "type": "DataTypes.DataSprite",
+                      "value": "Data.DataSprite"
+                    }
+                  },
+                  "CourseActionSignals": {
+                    "Error": {
+                      "Signal": {
+                        "name": "Critical Error",
+                        "type": "Field",
+                        "path": "Fields.FieldErrorHandler.Critical Error"
+                      }
+                    }
+                  },
+                  "fieldActions": [
+                    {
+                      "name": "CreateSprite",
+                      "field": "Fields.CreateSprite",
+                      "data": {
+                        "DataSprite": {
+                          "type": "DataTypes.DataSprite",
+                          "value": "DataSprite-type"
+                        },
+                        "DataSprite2": {
+                          "type": "DataTypes.DataSprite",
+                          "value": null
+                        }
+                      },
+                      "ActionSignals": {
+                        "Error": {
+                          "CourseActionSignal": "Error"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "libraryAgents": {
+        "Star": {
+          "name": "Star",
+          "base": "Test Game.library.Star",
+          "Bindings": {
+            "0": {
+              "0": {
+                "type": "Data",
+                "data": "childs.Sprite.Data.DataSprite",
+                "fieldName": "Stars",
+                "fieldData": "Fields.FieldTestGame.Stars"
+              }
+            }
+          },
+          "libraryAgents": {
+            "SampleAgent": {
+              "name": "SampleAgent",
+              "base": "Test Game.library.Star.library.SampleAgent",
+              "libraryAgents": {
+                "SampleAgent2": {
+                  "name": "SampleAgent2",
+                  "base": "Test Game.library.Star.library.SampleAgent.library.SampleAgent2"
+                }
+              }
+            }
+          },
+          "childs": {
+            "Sprite": {
+              "name": "Sprite",
+              "base": "Canvas.library.Sprite",
+              "Data": {
+                "DataSprite": {
+                  "type": "Data",
+                  "base": "DataSprite",
+                  "name": "DataSprite"
+                }
+              },
+              "Courses": {
+                "create sprite under group": {
+                  "childs": [
+                    {
+                      "name": "Create Group",
+                      "type": "Course",
+                      "courseAction": "Create Group"
+                    },
+                    {
+                      "name": "Create Sprite",
+                      "type": "Course",
+                      "courseAction": "Create Sprite"
+                    }
+                  ],
+                  "signals": [
+                    {
+                      "name": "SignalCreate",
+                      "type": "Field",
+                      "path": "Fields.FieldGameEngine.SignalCreate"
+                    }
+                  ],
+                  "courseAction": null
+                },
+                "Create Sprite": {
+                  "courseAction": "Create Sprite"
+                },
+                "Create Group": {
+                  "courseAction": "Create Group"
+                }
+              },
+              "CourseActions": {
+                "Create Group": {
+                  "data": {
+                    "Group-type": {
+                      "type": "DataTypes.Group",
+                      "value": "Data.DataSprite.Group"
+                    }
+                  },
+                  "CourseActionSignals": {
+                    "Error": {
+                      "Signal": {
+                        "name": "Critical Error",
+                        "type": "Field",
+                        "path": "Fields.FieldErrorHandler.Critical Error"
+                      }
+                    }
+                  },
+                  "fieldActions": [
+                    {
+                      "name": "Create Group",
+                      "field": "Fields.Create Group",
+                      "data": {
+                        "Group-type": {
+                          "type": "DataTypes.Group",
+                          "value": "Group-type"
+                        }
+                      },
+                      "ActionSignals": {
+                        "Error": {
+                          "CourseActionSignal": "Error"
+                        }
+                      }
+                    }
+                  ]
+                },
+                "Create Sprite": {
+                  "data": {
+                    "DataSprite-type": {
+                      "type": "DataTypes.DataSprite",
+                      "value": "Data.DataSprite"
+                    }
+                  },
+                  "CourseActionSignals": {
+                    "Error": {
+                      "Signal": {
+                        "name": "Critical Error",
+                        "type": "Field",
+                        "path": "Fields.FieldErrorHandler.Critical Error"
+                      }
+                    }
+                  },
+                  "fieldActions": [
+                    {
+                      "name": "CreateSprite",
+                      "field": "Fields.CreateSprite",
+                      "data": {
+                        "DataSprite": {
+                          "type": "DataTypes.DataSprite",
+                          "value": "DataSprite-type"
+                        },
+                        "DataSprite2": {
+                          "type": "DataTypes.DataSprite",
+                          "value": null
+                        }
+                      },
+                      "ActionSignals": {
+                        "Error": {
+                          "CourseActionSignal": "Error"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Error Handler": {
+      "name": "Error Handler",
+      "base": "Error Handler",
+      "Courses": {
+        "Report Critical Error": {
+          "courseAction": null
+        }
+      }
+    },
+    "Debug": {
+      "name": "Debug",
+      "base": "Debug",
+      "AgentSignals": [
+        "DebugSignal"
+      ],
+      "childs": {
+        "Text": {
+          "name": "Text",
+          "base": "Canvas.library.Text",
+          "Data": {
+            "DataText": {
+              "type": "Data",
+              "base": "DataText",
+              "name": "DataText"
+            }
+          },
+          "CourseActions": {
+            "UpdateText": {
+              "data": {
+                "DataText-type": {
+                  "type": "DataTypes.DataText",
+                  "value": "Data.DataText"
+                }
+              },
+              "fieldActions": [
+                {
+                  "name": "Update TextView",
+                  "field": "Fields.Update TextView",
+                  "data": {
+                    "DataText-type": {
+                      "type": "DataTypes.DataText",
+                      "value": "DataText-type"
+                    }
+                  }
+                }
+              ]
+            },
+            "CreateText": {
+              "data": {
+                "DataText-type": {
+                  "type": "DataTypes.DataText",
+                  "value": "Data.DataText"
+                }
+              },
+              "fieldActions": [
+                {
+                  "name": "Create TextView",
+                  "field": "Fields.Create TextView",
+                  "data": {
+                    "DataText-type": {
+                      "type": "DataTypes.DataText",
+                      "value": "DataText-type"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "AgentSignals": [
+            "TextSignal"
+          ],
+          "Courses": {
+            "CreateText": {
+              "signals": [
+                {
+                  "name": "SignalCreate",
+                  "type": "Field",
+                  "path": "Fields.FieldGameEngine.SignalCreate"
+                }
+              ],
+              "courseAction": "CreateText"
+            },
+            "UpdateText": {
+              "signals": [
+                {
+                  "name": "SignalUpdate",
+                  "type": "Field",
+                  "path": "Fields.FieldGameEngine.SignalUpdate"
+                }
+              ],
+              "courseAction": "UpdateText"
+            }
+          }
+        }
+      },
+      "Bindings": {
+        "0": {
+          "0": {
+            "type": "Action",
+            "moduleName": "DebugSubscribers",
+            "componentName": "CountDataSubscribers-refer",
+            "fieldName": "CountDataSubscribers",
+            "fieldAction": "Fields.FieldDebug.CountDataSubscribers"
+          }
+        }
+      },
+      "Courses": {
+        "SampleCourse": {
+          "childs": [
+            {
+              "name": "CourseComposite",
+              "type": "Course",
+              "courseAction": null,
+              "childs": [
+                {
+                  "name": "Course1",
+                  "type": "Course",
+                  "courseAction": null
+                },
+                {
+                  "name": "Course2",
+                  "type": "Course",
+                  "courseAction": null
+                }
+              ]
+            },
+            {
+              "name": "SignalCreate-refer",
+              "type": "FireSignal",
+              "isWait": false,
+              "signal": {
+                "name": "SignalCreate",
+                "type": "Field",
+                "path": "Fields.FieldGameEngine.SignalCreate"
+              }
+            },
+            {
+              "name": "Course",
+              "type": "Course",
+              "courseAction": null
+            },
+            {
+              "name": "SignalUpdate-refer",
+              "type": "WaitForSignal",
+              "signal": {
+                "name": "SignalUpdate",
+                "type": "Field",
+                "path": "Fields.FieldGameEngine.SignalUpdate"
+              }
+            },
+            {
+              "name": "Course",
+              "type": "Course",
+              "courseAction": null
+            }
+          ],
+          "signals": [
+            {
+              "name": "DebugSignal",
+              "type": "local",
+              "path": "AgentSignals.DebugSignal"
+            },
+            {
+              "name": "DebugChildSignal",
+              "type": "Field",
+              "path": "Fields.FieldDebug.DebugChild.DebugChildChild.DebugChildSignal"
+            }
+          ],
+          "courseAction": null
+        },
+        "SampleCourse2": {
+          "signals": [
+            {
+              "name": "DebugChildSignal",
+              "type": "Field",
+              "path": "Fields.FieldDebug.DebugChild.DebugChildChild.DebugChildSignal"
+            }
+          ],
+          "courseAction": null
+        },
+        "Show Stars Count": {
+          "signals": [
+            {
+              "name": "SignalUpdate",
+              "type": "Field",
+              "path": "Fields.FieldGameEngine.SignalUpdate"
+            }
+          ],
+          "courseAction": "Count Subscribers"
+        }
+      },
+      "Modules": {
+        "DebugSubscribers": {
+          "name": "DebugSubscribers",
+          "Filename": "",
+          "ImplementationClass": "",
+          "Components": {
+            "CountDataSubscribers-refer": {
+              "fieldInterface": "Fields.FieldDebug.CountDataSubscribers",
+              "params": {
+                "Data": [
+                  {
+                    "name": "OutTotalCount",
+                    "type": null
+                  }
+                ],
+                "FieldData": [
+                  {
+                    "name": "IFieldData",
+                    "type": null
+                  }
+                ]
+              }
+            }
+          },
+          "init": {},
+          "genFileName": "Debug.DebugSubscribers"
+        }
+      },
+      "CourseActions": {
+        "Count Subscribers": {
+          "data": {
+            "CountText": {
+              "type": null,
+              "value": "childs.Text.Data.DataText.Text"
+            },
+            "Count": {
+              "type": null,
+              "value": "Data.StarCount"
+            }
+          },
+          "FieldData": {
+            "InputWhichFieldData": {
+              "type": null,
+              "value": "Fields.FieldTestGame.Stars"
+            }
+          },
+          "CourseActionSignals": {
+            "CASampleSignal": {
+              "Signal": {
+                "name": "TextSignal",
+                "type": "local",
+                "path": "childs.Text.AgentSignals.TextSignal"
+              }
+            }
+          },
+          "fieldActions": [
+            {
+              "name": "CountDataSubscribers",
+              "field": "Fields.FieldDebug.CountDataSubscribers",
+              "data": {
+                "OutTotalCount": {
+                  "type": null,
+                  "value": "Count"
+                }
+              },
+              "FieldData": {
+                "WhichFieldData": {
+                  "type": null,
+                  "value": "InputWhichFieldData"
+                }
+              }
+            },
+            {
+              "name": "NumberToString",
+              "field": "Fields.FieldParse.NumberToString",
+              "data": {
+                "Number-type": {
+                  "type": null,
+                  "value": "Count"
+                },
+                "Text-type": {
+                  "type": null,
+                  "value": "CountText"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
