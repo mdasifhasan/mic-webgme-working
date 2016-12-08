@@ -446,9 +446,12 @@ define([
                 var name = self.core.getAttribute(node, "name");
                 // j.Signal = self.extractConnNode(node, nodes, true)
                 var valueNode = self.extractConnNodeFromParent(node, nodes, "ConnectSignal", true);
-                valueNode = self.core.getPointerPath(valueNode, 'refer');
-                // j.Signal = self.extractFieldDataAddress(nodes, valueNode);
-                j.Signal = self.extractSignalPath(nodes, nodes[valueNode], nodeAgent);
+                if(valueNode) {
+                    valueNode = self.core.getPointerPath(valueNode, 'refer');
+                    // j.Signal = self.extractFieldDataAddress(nodes, valueNode);
+                    j.Signal = self.extractSignalPath(nodes, nodes[valueNode], nodeAgent);
+                }else
+                    j.Signal = null;
                 ca.CourseActionSignals[name] = j;
                 return j;
             });

@@ -20,6 +20,51 @@ var Canvas = function (name) {
 };
 inheritsFrom(Canvas, Agent);
 Canvas.library = {};
+Canvas.library.Collider = function (name) {
+    if(!name)
+        name = "Collider";
+    Agent.apply(this, [name]);
+    this.signals = new Signals();
+    var course;
+    course = new Course(this, "CheckCollision", null, new this.CA_CheckCollision(this));
+
+    this.addCourse(course);
+    
+    Fields.FieldGameEngine.signals.subscribeSignal('SignalUpdate', this.courses['CheckCollision']);
+
+    this.mod_Collider = new Canvas.library.Collider.Collider();
+    this.mod_Collider.init();
+    
+    Fields.FieldCanvas.FieldCollision.subscribeToInterface('CheckOverlap', this.mod_Collider.CheckOverlap.bind(this.mod_Collider));
+
+    Fields.FieldCanvas.FieldCollision.subscribeToInterface('AddCollisionCheck', this.mod_Collider.AddCollisionCheck.bind(this.mod_Collider));
+
+    Fields.FieldCanvas.FieldCollision.subscribeToInterface('CheckCollision', this.mod_Collider.CheckCollision.bind(this.mod_Collider));
+
+};
+inheritsFrom(Canvas.library.Collider, Agent);
+Canvas.library.Collider.prototype.CA_CheckCollision = function (self) {
+
+
+    this.res = {};
+
+    this.res.CheckCollision = false;
+        
+};
+
+Canvas.library.Collider.prototype.CA_CheckCollision.prototype.trigger = function (course) {
+
+    if(!this.res.CheckCollision){
+        this.res.CheckCollision = Fields.FieldCanvas.FieldCollision.CheckCollision();
+        if(!this.res.CheckCollision)
+            return false;
+    }
+
+    for(var r in this.res)
+        this.res[r] = false;
+    return true;
+};
+
 Canvas.library.Sprite = function (name) {
     if(!name)
         name = "Sprite";
@@ -106,138 +151,18 @@ Canvas.library.Sprite.prototype.CA_CreateSprite.prototype.trigger = function (co
     return true;
 };
 
-Canvas.library.Text = function (name) {
+var ErrorHandler = function (name) {
     if(!name)
-        name = "Text";
-    Agent.apply(this, [name]);
-    this.signals = new Signals();
-    
-    this.data = {};
-    this.data['DataText'] = new DataText();
-    
-
-var course;
-    course = new Course(this, "CreateText", null, new this.CA_CreateText(this));
-
-    this.addCourse(course);
-    
-    Fields.FieldGameEngine.signals.subscribeSignal('SignalCreate', this.courses['CreateText']);
-    course = new Course(this, "UpdateText", null, new this.CA_UpdateText(this));
-
-    this.addCourse(course);
-    
-    Fields.FieldGameEngine.signals.subscribeSignal('SignalUpdate', this.courses['UpdateText']);
-
-};
-inheritsFrom(Canvas.library.Text, Agent);
-Canvas.library.Text.prototype.CA_UpdateText = function (self) {
-
-    this.caData = {};
-
-    this.caData.DataText_type = self.data.DataText;
-
-
-    this.res = {};
-
-    this.res.UpdateTextView = false;
-        
-};
-
-Canvas.library.Text.prototype.CA_UpdateText.prototype.trigger = function (course) {
-
-    if(!this.res.UpdateTextView){
-        this.res.UpdateTextView = Fields.FieldCanvas.FieldTextView.UpdateTextView(this.caData.DataText_type);
-        if(!this.res.UpdateTextView)
-            return false;
-    }
-
-    for(var r in this.res)
-        this.res[r] = false;
-    return true;
-};
-
-Canvas.library.Text.prototype.CA_CreateText = function (self) {
-
-    this.caData = {};
-
-    this.caData.DataText_type = self.data.DataText;
-
-
-    this.res = {};
-
-    this.res.CreateTextView = false;
-        
-};
-
-Canvas.library.Text.prototype.CA_CreateText.prototype.trigger = function (course) {
-
-    if(!this.res.CreateTextView){
-        this.res.CreateTextView = Fields.FieldCanvas.FieldTextView.CreateTextView(this.caData.DataText_type);
-        if(!this.res.CreateTextView)
-            return false;
-    }
-
-    for(var r in this.res)
-        this.res[r] = false;
-    return true;
-};
-
-Canvas.library.Collider = function (name) {
-    if(!name)
-        name = "Collider";
+        name = "ErrorHandler";
     Agent.apply(this, [name]);
     this.signals = new Signals();
     var course;
-    course = new Course(this, "CheckCollision", null, new this.CA_CheckCollision(this));
-
+    course = new Course(this, "Report Critical Error");
     this.addCourse(course);
     
-    Fields.FieldGameEngine.signals.subscribeSignal('SignalUpdate', this.courses['CheckCollision']);
-
-    this.mod_Collider = new Canvas.library.Collider.Collider();
-    this.mod_Collider.init();
-    
-    Fields.FieldCanvas.FieldCollision.subscribeToInterface('CheckOverlap', this.mod_Collider.CheckOverlap.bind(this.mod_Collider));
-
-    Fields.FieldCanvas.FieldCollision.subscribeToInterface('AddCollisionCheck', this.mod_Collider.AddCollisionCheck.bind(this.mod_Collider));
-
-    Fields.FieldCanvas.FieldCollision.subscribeToInterface('CheckCollision', this.mod_Collider.CheckCollision.bind(this.mod_Collider));
 
 };
-inheritsFrom(Canvas.library.Collider, Agent);
-Canvas.library.Collider.prototype.CA_CheckCollision = function (self) {
-
-
-    this.res = {};
-
-    this.res.CheckCollision = false;
-        
-};
-
-Canvas.library.Collider.prototype.CA_CheckCollision.prototype.trigger = function (course) {
-
-    if(!this.res.CheckCollision){
-        this.res.CheckCollision = Fields.FieldCanvas.FieldCollision.CheckCollision();
-        if(!this.res.CheckCollision)
-            return false;
-    }
-
-    for(var r in this.res)
-        this.res[r] = false;
-    return true;
-};
-
-var GameEngine = function (name) {
-    if(!name)
-        name = "GameEngine";
-    Agent.apply(this, [name]);
-    this.signals = new Signals();
-    
-    this.mod_GameEngine = new ModGameEngine();
-    this.mod_GameEngine.init(new Signal(Fields.FieldGameEngine.signals, 'SignalUpdate'), new Signal(Fields.FieldGameEngine.signals, 'SignalCreate'));
-    
-};
-inheritsFrom(GameEngine, Agent);
+inheritsFrom(ErrorHandler, Agent);
 var TestGame = function (name) {
     if(!name)
         name = "TestGame";
@@ -492,119 +417,17 @@ TestGame.library.Star = function (name) {
 
 };
 inheritsFrom(TestGame.library.Star, Agent);
-var ErrorHandler = function (name) {
+var GameEngine = function (name) {
     if(!name)
-        name = "ErrorHandler";
-    Agent.apply(this, [name]);
-    this.signals = new Signals();
-    var course;
-    course = new Course(this, "Report Critical Error");
-    this.addCourse(course);
-    
-
-};
-inheritsFrom(ErrorHandler, Agent);
-var Debug = function (name) {
-    if(!name)
-        name = "Debug";
+        name = "GameEngine";
     Agent.apply(this, [name]);
     this.signals = new Signals();
     
-    var child = null;
-    var child = new Canvas.library.Text('Text');
-    this.addChild(child);
+    this.mod_GameEngine = new ModGameEngine();
+    this.mod_GameEngine.init(new Signal(Fields.FieldGameEngine.signals, 'SignalUpdate'), new Signal(Fields.FieldGameEngine.signals, 'SignalCreate'));
     
-
-var course;
-    course = new Course(this, "SampleCourse");
-    this.addCourse(course);
-    
-    course = new Course(this, "CourseComposite");
-    this.courses['SampleCourse'].addCourse(course);
-
-    course = new Course(this, "Course1");
-    this.courses['SampleCourse'].childs['CourseComposite'].addCourse(course);
-
-    course = new Course(this, "Course11");
-    this.courses['SampleCourse'].childs['CourseComposite'].childs['Course1'].addCourse(course);
-
-    course = new Course(this, "Course12");
-    this.courses['SampleCourse'].childs['CourseComposite'].childs['Course1'].addCourse(course);
-
-    course = new Course(this, "Course2");
-    this.courses['SampleCourse'].childs['CourseComposite'].addCourse(course);
-
-    course = new Course(this, "SignalCreate-refer");
-    this.courses['SampleCourse'].addCourse(course);
-
-    course = new Course(this, "Course");
-    this.courses['SampleCourse'].addCourse(course);
-
-    course = new Course(this, "SignalUpdate-refer");
-    this.courses['SampleCourse'].addCourse(course);
-
-    course = new Course(this, "Course");
-    this.courses['SampleCourse'].addCourse(course);
-
-    this.signals.subscribeSignal('DebugSignal', this.courses['SampleCourse']);
-    Fields.FieldDebug.DebugChild.DebugChildChild.signals.subscribeSignal('DebugChildSignal', this.courses['SampleCourse']);
-    course = new Course(this, "SampleCourse2");
-    this.addCourse(course);
-    
-    Fields.FieldDebug.DebugChild.DebugChildChild.signals.subscribeSignal('DebugChildSignal', this.courses['SampleCourse2']);
-    course = new Course(this, "Show Stars Count", null, new this.CA_CountSubscribers(this));
-
-    this.addCourse(course);
-    
-    Fields.FieldGameEngine.signals.subscribeSignal('SignalUpdate', this.courses['Show Stars Count']);
-
-    this.mod_DebugSubscribers = new Debug.DebugSubscribers();
-    this.mod_DebugSubscribers.init();
-    
-    Fields.FieldDebug.subscribeToInterface('CountDataSubscribers', this.mod_DebugSubscribers.CountDataSubscribers_refer.bind(this.mod_DebugSubscribers));
-
 };
-inheritsFrom(Debug, Agent);
-Debug.prototype.CA_CountSubscribers = function (self) {
-
-    this.caData = {};
-    this.caData.CountText = self.childs.Text.data.DataText.Text;
-
-    this.caData.Count = self.data.StarCount;
-
-    this.caData.fd_InputWhichFieldData = Fields.FieldTestGame.Stars;
-
-    this.caSignals = {};
-    this.caSignals.CASampleSignal = new Signal(self.childs.Text.signals, 'TextSignal');
-
-
-    this.res = {};
-
-    this.res.CountDataSubscribers = false;
-        
-    this.res.NumberToString = false;
-        
-};
-
-Debug.prototype.CA_CountSubscribers.prototype.trigger = function (course) {
-
-    if(!this.res.CountDataSubscribers){
-        this.res.CountDataSubscribers = Fields.FieldDebug.CountDataSubscribers(this.caData.Count, this.caData.fd_InputWhichFieldData);
-        if(!this.res.CountDataSubscribers)
-            return false;
-    }
-
-    if(!this.res.NumberToString){
-        this.res.NumberToString = Fields.FieldParse.NumberToString(this.caData.Count, this.caData.CountText);
-        if(!this.res.NumberToString)
-            return false;
-    }
-
-    for(var r in this.res)
-        this.res[r] = false;
-    return true;
-};
-
+inheritsFrom(GameEngine, Agent);
 
 // end of generated code
 

@@ -106,19 +106,10 @@ return this.field.getData(this.fieldDataName);
 var Fields = {};
 
 Fields.FieldGameEngine = new Field('FieldGameEngine');
-Fields.FieldDebug = new Field('FieldDebug');
-Fields.FieldDebug.DebugChild = new Field('DebugChild');
-Fields.FieldDebug.DebugChild.DebugChildChild = new Field('DebugChildChild');
-Fields.FieldDebug.CountDataSubscribers = function(data_OutTotalCount, fd_IFieldData){
-    if(fd_IFieldData && !(fd_IFieldData instanceof ReferFieldData)){
-        throw {name:"Bad Parameter", message: "fd_IFieldData is not instance of ReferFieldData"};
-    }
-    return this.triggerAction('CountDataSubscribers', data_OutTotalCount, fd_IFieldData);
-};
-Fields.FieldParse = new Field('FieldParse');
-Fields.FieldParse.NumberToString = function(data_Number_type, data_Text_type){
-    return this.triggerAction('NumberToString', data_Number_type, data_Text_type);
-};
+Fields.FieldErrorHandler = new Field('FieldErrorHandler');
+Fields.FieldTestGame = new Field('FieldTestGame');
+Fields.FieldTestGame.Stars = new ReferFieldData(Fields.FieldTestGame, 'Stars');
+    
 Fields.FieldCanvas = new Field('FieldCanvas');
 Fields.FieldCanvas.FieldCollision = new Field('FieldCollision');
 Fields.FieldCanvas.FieldCollision.CheckOverlap = function(data_groupName, data_dataSprite, signal_overlap, signal_notOverlap){
@@ -168,21 +159,11 @@ Fields.FieldCanvas.FieldSprites.DataSprite2 = new ReferFieldData(Fields.FieldCan
     
 Fields.FieldCanvas.FieldTextView = new Field('FieldTextView');
 Fields.FieldCanvas.FieldTextView.CreateTextView = function(data_DataText_type){
-    if(data_DataText_type && !(data_DataText_type instanceof DataText)){
-        throw {name:"Bad Parameter", message: "data_DataText_type is not instance of DataText"};
-    }
     return this.triggerAction('CreateTextView', data_DataText_type);
 };
 Fields.FieldCanvas.FieldTextView.UpdateTextView = function(data_DataText_type){
-    if(data_DataText_type && !(data_DataText_type instanceof DataText)){
-        throw {name:"Bad Parameter", message: "data_DataText_type is not instance of DataText"};
-    }
     return this.triggerAction('UpdateTextView', data_DataText_type);
 };
-Fields.FieldErrorHandler = new Field('FieldErrorHandler');
-Fields.FieldTestGame = new Field('FieldTestGame');
-Fields.FieldTestGame.Stars = new ReferFieldData(Fields.FieldTestGame, 'Stars');
-    
 
 
 // end of generated code

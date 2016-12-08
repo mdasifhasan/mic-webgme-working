@@ -217,6 +217,8 @@ if("fieldActions" in cAction) {
 <%}
 }
 %>
+    for(var r in this.res)
+        this.res[r] = false;
     return true;
 };
 <%
@@ -271,10 +273,13 @@ for(var cas in action.CourseActionSignals){
             dSignalPath = signal.path.substr(0, signal.path.length - signal.name.length - 1) + ".signals";
             dSignalName = signal.name;
         }
-    }
+
 %>
     this.caSignals.<%-dName%> = new Signal(<%-dSignalPath%>, '<%-dSignalName%>');
+<%}else{%>
+    this.caSignals.<%-dName%> = null;
 <%}
+}
 }
 }%>
 

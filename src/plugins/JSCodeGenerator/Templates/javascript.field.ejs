@@ -68,18 +68,21 @@ this.interfaces[name].splice(this.interfaces[name].indexOf(fn), 1);
 return this;
 };
 
-Field.prototype.triggerAction = function (name, args) {
-console.log("Firing field action: ", name);
+Field.prototype.triggerAction = function () {
+//console.log("Firing field action rcvd arguments", arguments);
+var name = arguments[0];
+var args = Array.prototype.slice.call(arguments, 1);
+//console.log("Firing field action: ", name);
 if (!(name in this.interfaces)){
-console.log("No component subscribed to the interface: ", name, "of", this);
+//console.log("No component subscribed to the interface: ", name, "of", this);
 return true;
 }
 //console.log("Found field action: ", this.interfaces[name], " would Call with args:", args);
 var i,
 res = true;
 for (i = 0; i < this.interfaces[name].length; i++) {
-//console.log("calling function: ", this.interfaces[name][i]);
-res = res && this.interfaces[name][i](args);
+//console.log("calling function: ", this.interfaces[name][i], "with args:", args);
+res = res && this.interfaces[name][i].apply(this, args);
 }
 return res;
 };
@@ -97,7 +100,6 @@ return this.field.getData(this.fieldDataName, "random");
 ReferFieldData.prototype.all = function () {
 return this.field.getData(this.fieldDataName);
 };
-
 
 
 // generated code
@@ -130,10 +132,15 @@ var Fields = {};
                 retString = "";
             var fnName = k.replace(/\s/g, '').replace("-", "_");
 %>
-<%-prefix%><%-fnName%> = function(<%-retString%>){<%parseActionBodyForParam(actions[k])%>
+<%-prefix%><%-fnName%> = function(<%-retString%>){<%parseActionBodyForParam(actions[k])
+    if(retString !== ""){
+%>
     return this.triggerAction('<%-fnName%>', <%-retString%>);
+};<%}else{
+%>
+    return this.triggerAction('<%-fnName%>');
 };<%
-}}%>
+}}}%>
 
 <%function parseActionParams(action){
     var retString = null;
