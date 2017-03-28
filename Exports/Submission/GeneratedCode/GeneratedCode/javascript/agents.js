@@ -176,13 +176,6 @@ var TestGame = function (name) {
 
 
 
-    var child = new TestGame.library.Hero('Hero');
-    this.addChild(child);
-    child.childs['Sprite'].data['DataSprite']['x'].value = 10;
-child.childs['Sprite'].data['DataSprite']['y'].value = 400;
-
-
-
     var child = new TestGame.library.Platform('Ground');
     this.addChild(child);
     
@@ -194,6 +187,12 @@ child.childs['Sprite'].data['DataSprite']['y'].value = 400;
     this.addChild(child);
     child.childs['Sprite'].data['DataSprite']['y'].value = 300;
 child.childs['Sprite'].data['DataSprite']['x'].value = 300;
+
+
+
+    var child = new TestGame.library.Star('Star4');
+    this.addChild(child);
+    child.childs['Sprite'].data['DataSprite']['x'].value = 400;
 
 
 
@@ -209,15 +208,23 @@ child.childs['Sprite'].data['DataSprite']['x'].value = 200;
     
 
 
-    var child = new TestGame.library.Star('Star4');
+    var child = new TestGame.library.Star('Star');
     this.addChild(child);
-    child.childs['Sprite'].data['DataSprite']['x'].value = 400;
+    child.childs['Sprite'].data['DataSprite']['y'].value = 200;
+child.childs['Sprite'].data['DataSprite']['x'].value = 455;
 
 
 
     var child = new TestGame.library.Star('Star3');
     this.addChild(child);
     child.childs['Sprite'].data['DataSprite']['x'].value = 300;
+
+
+
+    var child = new TestGame.library.Hero('Hero');
+    this.addChild(child);
+    child.childs['Sprite'].data['DataSprite']['x'].value = 10;
+child.childs['Sprite'].data['DataSprite']['y'].value = 400;
 
 
 var course;
